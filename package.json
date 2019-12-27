@@ -4,7 +4,8 @@
   "description": "**Sidewind** is a light state management solution designed to work together with [Tailwind.css](https://tailwindcss.com) framework. The small addition allows you to add logic to HTML, and when combined with something like [posthtml](https://www.npmjs.com/package/posthtml), to develop your own components without using a framework like Angular, Svelte, React, or Vue.",
   "main": "index.js",
   "dependencies": {
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "string.prototype.replaceall": "^1.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",

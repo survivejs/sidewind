@@ -77,6 +77,13 @@ const commonConfig = merge({
           </head>
           <body>
             <main class="container mx-auto p-8">
+              <section data-state="{ 'toggled': false }">
+                <div>Toggled value: <span data-value="toggled" /></div>
+                <button class="btn btn-blue" data-bind="toggled" onclick="setState(this, !this.toggled)">
+                  Toggle value
+                </button>
+              </section>
+
               ${processMarkdown(
                 fs.readFileSync("./README.md", { encoding: "utf-8" })
               )}
