@@ -101,7 +101,7 @@ By design, the approach follows the principle of **progressive enhancement** and
     <input
       id="amount"
       type="number"
-      onchange="e => setState(this, { amount: e.target.value })"
+      oninput="e => setState(this, { amount: e.target.value })"
     />
   </div>
   <div>
@@ -109,7 +109,7 @@ By design, the approach follows the principle of **progressive enhancement** and
     <input
       id="interest"
       type="number"
-      onchange="e => setState(this, { interest: e.target.value })"
+      oninput="e => setState(this, { interest: e.target.value })"
     />
   </div>
   <div>Total: <span data-value="amount * interest" /></div>

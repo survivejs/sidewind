@@ -1,4 +1,4 @@
-import expressionEval from "expression-eval";
+import expressionEvaluator from "expression-eval";
 import replaceAll from "string.prototype.replaceall";
 
 function setState(el, newValue) {
@@ -66,9 +66,11 @@ function evaluateValueContainers(stateContainer, state) {
   for (let i = valueContainers.length; i--; ) {
     const valueContainer = valueContainers[i];
     const valueProperty = valueContainer.dataset.value;
+    const evaluatedValue = state[valueProperty]
+      ? state[valueProperty]
+      : evaluateExpression(valueProperty, state) || state;
 
-    valueContainer.innerHTML =
-      valueProperty === "state" ? state : state[valueProperty];
+    valueContainer.innerHTML = evaluatedValue;
   }
 }
 
@@ -91,23 +93,32 @@ function evaluateClasses(stateContainer, state) {
 
     if (dataAttributes.length > 0) {
       dataAttributes.forEach(({ name, value }) => {
-        try {
-          const result = expressionEval.compile(value)({ state });
-          const cssPropName = name
-            .split("-")
-            .slice(1)
-            .join("-");
+        const result = evaluateExpression(value, { state });
 
-          if (result) {
-            element.classList.add(cssPropName);
-          } else {
-            element.classList.remove(cssPropName);
-          }
-        } catch (err) {
-          console.error("Failed to evaluate", value, err);
+        if (typeof result === "undefined") {
+          return;
+        }
+
+        const cssPropName = name
+          .split("-")
+          .slice(1)
+          .join("-");
+
+        if (result) {
+          element.classList.add(cssPropName);
+        } else {
+          element.classList.remove(cssPropName);
         }
       });
     }
+  }
+}
+
+function evaluateExpression(expression, value) {
+  try {
+    return expressionEvaluator.compile(expression)(value);
+  } catch (err) {
+    console.error("Failed to evaluate", value, err);
   }
 }
 
