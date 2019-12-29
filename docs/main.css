@@ -517,6 +517,12 @@ code {
  * https://github.com/mozdevs/cssremedy/issues/14
  */
 
+
+svg {
+  display: block;
+  vertical-align: middle;
+}
+
 /**
  * Constrain images and videos to the parent width and preserve
  * their instrinsic aspect ratio.
@@ -693,6 +699,10 @@ pre {
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+.absolute {
+  position: absolute;
 }
 
 .table-fixed {
