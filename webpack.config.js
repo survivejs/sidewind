@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { highlightAuto } = require("highlight.js");
 const showdown = require("showdown");
 const decodeHTML = require("html-encoder-decoder").decode;
 const webpack = require("webpack");
@@ -24,7 +25,7 @@ const commonConfig = merge({
         },
       },
       {
-        test: /\.pcss$/,
+        test: /\.(css|pcss)$/,
         use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
     ],
@@ -113,8 +114,12 @@ function expandCode() {
         right = "</code></pre>",
         flags = "g",
         replacement = (_, match, left, right) => {
+          const decodedMatch = decodeHTML(match);
+
           // TODO: Generate code for tabs now
-          return left + match + right + decodeHTML(match);
+          return (
+            left + highlightAuto(decodedMatch).value + right + decodedMatch
+          );
         };
       return showdown.helper.replaceRecursiveRegExp(
         text,

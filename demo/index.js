@@ -1,5 +1,7 @@
 import expressionEval from "expression-eval";
 import replaceAll from "string.prototype.replaceall";
+
+import "highlight.js/styles/github.css";
 import "./index.pcss";
 
 evaluateState();
