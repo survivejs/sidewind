@@ -32,6 +32,14 @@
     "webpack-dev-server": "^3.10.1",
     "webpack-merge": "^4.2.2"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bebraw/sidewind.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bebraw/sidewind/issues"
+  },
+  "homepage": "https://bebraw.github.io/sidewind/",
   "scripts": {
     "build": "tsdx build",
     "site:build": "npm run webpack:build",
