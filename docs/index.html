@@ -181,7 +181,7 @@
       <span class="hljs-attr">data-value</span>=<span class="hljs-string">"interest"</span>
     /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Total: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">data-value</span>=<span class="hljs-string">"amount * interest"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Total: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">data-value</span>=<span class="hljs-string">"state.amount * state.interest"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span>
 </span></code></pre></div>
     <div data-hidden="state !== 'example'"><article
@@ -206,7 +206,7 @@
       data-value="interest"
     />
   </div>
-  <div>Total: <span data-value="amount * interest" /></div>
+  <div>Total: <span data-value="state.amount * state.interest" /></div>
 </article>
 </div>
   </div>
@@ -359,6 +359,12 @@
 </div>
   </div>
 </section>
+<h2 id="relatedapproaches">Related Approaches</h2>
+<ul>
+<li><a href="https://github.com/alpinejs/alpine">Alpine.js</a> - Similar yet more powerful API</li>
+</ul>
+<h2 id="license">License</h2>
+<p>MIT.</p>
       </main>
       <script src="main.js"></script>
     </body>
