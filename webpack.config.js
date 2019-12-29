@@ -117,7 +117,7 @@ function expandCode() {
           const example = decodeHTML(match);
           const code = left + highlightAuto(example).value + right;
 
-          return `<section data-state="'tabs'">
+          return `<section data-state="'code'">
   <nav class="flex flex-row justify-between">
     <div
       class="p-2 w-full"
