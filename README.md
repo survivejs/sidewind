@@ -143,3 +143,11 @@ By design, the approach follows the principle of **progressive enhancement** and
   </tbody>
 </table>
 ```
+
+## Related Approaches
+
+- [Alpine.js](https://github.com/alpinejs/alpine) - Similar yet more powerful API
+
+## License
+
+MIT.
