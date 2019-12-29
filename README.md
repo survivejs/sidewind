@@ -27,24 +27,33 @@ The basic idea of Sidewind is to leverage HTML data attributes to describe state
 
 ```html
 <section data-state="'animals'">
-  <nav>
+  <nav class="flex flex-row justify-between">
     <div
+      class="p-2 w-full"
       data-btn-muted="state !== 'animals'"
+      data-bg-gray-200="state === 'animals'"
       onclick="setState(this, 'animals')"
     >
       Animals
     </div>
     <div
+      class="p-2 w-full"
       data-btn-muted="state !== 'languages'"
+      data-bg-gray-200="state === 'languages'"
       onclick="setState(this, 'languages')"
     >
       Languages
     </div>
-    <div data-btn-muted="state !== 'colors'" onclick="setState(this, 'colors')">
+    <div
+      class="p-2 w-full"
+      data-btn-muted="state !== 'colors'"
+      data-bg-gray-200="state === 'colors'"
+      onclick="setState(this, 'colors')"
+    >
       Colors
     </div>
   </nav>
-  <div>
+  <div class="bg-gray-100 p-2">
     <div data-hidden="state !== 'animals'">Animals tab</div>
     <div data-hidden="state !== 'languages'">Languages tab</div>
     <div data-hidden="state !== 'colors'">Colors tab</div>
