@@ -125,16 +125,16 @@ By design, the approach follows the principle of **progressive enhancement** and
 ```html
 <table data-fetch="./demo/cars.json" class="table-fixed">
   <thead>
-    <tr>
-      <td>Brand</td>
-      <td>Color</td>
+    <tr class="bg-gray-200">
+      <td class="border p-2">Brand</td>
+      <td class="border p-2">Color</td>
     </tr>
   </thead>
   <tbody>
-    <template data-each="{ brand, color }">
+    <template data-each="brand, color">
       <tr>
-        <td data-value="brand"></td>
-        <td data-value="color"></td>
+        <td class="border p-2" data-bind="brand"></td>
+        <td class="border p-2" data-bind="color"></td>
       </tr>
     </template>
   </tbody>

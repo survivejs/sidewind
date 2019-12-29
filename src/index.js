@@ -14,11 +14,13 @@ function setState(el, newValue) {
 
   evaluateDOM(stateContainer, updatedState);
   evaluateState(stateContainer.querySelectorAll("[data-state]"));
+  evaluateEach(stateContainer.querySelectorAll("[data-each]"));
 }
 
 function initialize(global = window) {
   evaluateState(document.querySelectorAll("[data-state]"));
   evaluateFetch(document.querySelectorAll("[data-fetch]"));
+  evaluateEach(document.querySelectorAll("[data-each]"));
 
   global.setState = setState;
 }
@@ -53,28 +55,8 @@ function getDepth(element, depth = 0) {
 }
 
 function evaluateDOM(stateContainer, state) {
-  evaluateValueContainers(stateContainer, state);
+  evaluateValueContainers(stateContainer, state, "value");
   evaluateClasses(stateContainer, state);
-}
-
-function evaluateValueContainers(stateContainer, state) {
-  const valueContainers = stateContainer.querySelectorAll(
-    ":scope [data-value]"
-  );
-
-  for (let i = valueContainers.length; i--; ) {
-    const valueContainer = valueContainers[i];
-    const valueProperty = valueContainer.dataset.value;
-    const evaluatedValue = state[valueProperty]
-      ? state[valueProperty]
-      : evaluateExpression(valueProperty, state) || state;
-
-    if (valueContainer.localName === "input") {
-      valueContainer.value = evaluatedValue;
-    } else {
-      valueContainer.innerHTML = evaluatedValue;
-    }
-  }
 }
 
 function evaluateClasses(stateContainer, state) {
@@ -85,9 +67,13 @@ function evaluateClasses(stateContainer, state) {
     const dataAttributes = [...element.attributes].filter(
       v =>
         v.name.startsWith("data-") &&
-        !["data-each", "data-fetch", "data-state", "data-value"].includes(
-          v.name
-        )
+        ![
+          "data-bind",
+          "data-each",
+          "data-fetch",
+          "data-state",
+          "data-value",
+        ].includes(v.name)
     );
 
     if (dataAttributes.length > 0) {
@@ -130,10 +116,74 @@ function evaluateFetch(fetchContainers) {
       .then(response => response.json())
       .then(state => {
         fetchContainer.dataset.state = JSON.stringify(state);
+        fetchContainer.state = state;
       })
       .catch(err => {
         console.error(err);
       });
+  }
+}
+
+function evaluateEach(eachContainers) {
+  for (let i = eachContainers.length; i--; ) {
+    const eachContainer = eachContainers[i];
+    const { state } = eachContainer.closest("[data-state]");
+
+    if (state) {
+      const containerParent = eachContainer.parentNode;
+      const dataPattern = eachContainer.dataset.each;
+      const dataGetters = parseDataGetters(dataPattern);
+
+      while (containerParent.firstChild) {
+        containerParent.firstChild.remove();
+      }
+
+      state.forEach(item => {
+        const templateClone = document.importNode(eachContainer.content, true);
+
+        evaluateValueContainers(
+          templateClone,
+          getValues(item, dataGetters),
+          "bind"
+        );
+
+        containerParent.appendChild(templateClone);
+      });
+    }
+  }
+}
+
+function parseDataGetters(pattern) {
+  return pattern.split(",").map(part => part.trim());
+}
+
+function getValues(data, getters) {
+  const ret = {};
+
+  getters.forEach(getter => {
+    ret[getter] = data[getter];
+  });
+
+  return ret;
+}
+
+function evaluateValueContainers(stateContainer, state, valueKey) {
+  const valueContainers = stateContainer.querySelectorAll(
+    `:scope [data-${valueKey}]`
+  );
+
+  for (let i = valueContainers.length; i--; ) {
+    const valueContainer = valueContainers[i];
+    const valueProperty = valueContainer.dataset[valueKey];
+    const evaluatedValue = state[valueProperty]
+      ? state[valueProperty]
+      : evaluateExpression(valueProperty, state) || state;
+
+    if (valueContainer.localName === "input") {
+      valueContainer.value = evaluatedValue;
+    } else {
+      valueContainer.innerHTML = evaluatedValue;
+    }
   }
 }
 
