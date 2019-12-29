@@ -12,7 +12,7 @@ function setState(el, newValue) {
 
   el.state = updatedState;
 
-  stateContainer.dataset.value = JSON.stringify(updatedState);
+  stateContainer.dataset.state = JSON.stringify(updatedState);
 
   evaluateDOM(stateContainer, updatedState);
   evaluateState(stateContainer.querySelectorAll("[data-state]"));
