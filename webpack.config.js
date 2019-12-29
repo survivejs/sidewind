@@ -114,12 +114,33 @@ function expandCode() {
         right = "</code></pre>",
         flags = "g",
         replacement = (_, match, left, right) => {
-          const decodedMatch = decodeHTML(match);
+          const example = decodeHTML(match);
+          const code = left + highlightAuto(example).value + right;
 
-          // TODO: Generate code for tabs now
-          return (
-            left + highlightAuto(decodedMatch).value + right + decodedMatch
-          );
+          return `<section data-state="'tabs'">
+  <nav class="flex flex-row justify-between">
+    <div
+      class="p-2 w-full"
+      data-btn-muted="state !== 'code'"
+      data-bg-gray-200="state === 'code'"
+      onclick="setState(this, 'code')"
+    >
+      Code
+    </div>
+    <div
+      class="p-2 w-full"
+      data-btn-muted="state !== 'example'"
+      data-bg-gray-200="state === 'example'"
+      onclick="setState(this, 'example')"
+    >
+      Example
+    </div>
+  </nav>
+  <div class="bg-gray-100 p-2">
+    <div data-hidden="state !== 'code'">${code}</div>
+    <div data-hidden="state !== 'example'">${example}</div>
+  </div>
+</section>`;
         };
       return showdown.helper.replaceRecursiveRegExp(
         text,
