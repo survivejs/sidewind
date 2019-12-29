@@ -130,11 +130,13 @@ By design, the approach follows the principle of **progressive enhancement** and
       <td>Color</td>
     </tr>
   </thead>
-  <tbody data-each="{ brand, color }">
-    <tr>
-      <td data-value="brand"></td>
-      <td data-value="color"></td>
-    </tr>
+  <tbody>
+    <template data-each="{ brand, color }">
+      <tr>
+        <td data-value="brand"></td>
+        <td data-value="color"></td>
+      </tr>
+    </template>
   </tbody>
 </table>
 ```
