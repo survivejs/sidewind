@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const showdown = require("showdown");
+const decodeHTML = require("html-encoder-decoder").decode;
 const webpack = require("webpack");
 const merge = require("webpack-merge");
 const MiniHtmlWebpackPlugin = require("mini-html-webpack-plugin");
@@ -77,13 +78,6 @@ const commonConfig = merge({
           </head>
           <body>
             <main class="container mx-auto p-8">
-              <section data-state="{ 'toggled': false }">
-                <div>Toggled value: <span data-value="toggled" /></div>
-                <button class="btn btn-blue" data-bind="toggled" onclick="setState(this, !this.toggled)">
-                  Toggle value
-                </button>
-              </section>
-
               ${processMarkdown(
                 fs.readFileSync("./README.md", { encoding: "utf-8" })
               )}
@@ -104,11 +98,33 @@ function processMarkdown(input) {
     replace: `<${key} class="${classMap[key]}" $1>`,
   }));
   const convert = new showdown.Converter({
-    extensions: [...bindings],
+    extensions: [...bindings, expandCode()],
   });
 
   // TODO: Deal with the code sections
   return convert.makeHtml(input);
+}
+
+function expandCode() {
+  return {
+    type: "output",
+    filter(text) {
+      let left = "<pre><code\\b[^>]*>",
+        right = "</code></pre>",
+        flags = "g",
+        replacement = (_, match, left, right) => {
+          // TODO: Generate code for tabs now
+          return left + match + right + decodeHTML(match);
+        };
+      return showdown.helper.replaceRecursiveRegExp(
+        text,
+        replacement,
+        left,
+        right,
+        flags
+      );
+    },
+  };
 }
 
 class AddDependencyPlugin {

@@ -15,7 +15,8 @@ The basic idea of Sidewind is to leverage HTML data attributes to describe state
   <div>Toggled value: <span data-value="toggled" /></div>
   <button
     class="btn btn-blue"
-    onclick="setState(({ toggled }) => { toggled: !toggled })"
+    data-bind="toggled"
+    onclick="setState(this, !this.toggled)"
   >
     Toggle value
   </button>
@@ -25,31 +26,28 @@ The basic idea of Sidewind is to leverage HTML data attributes to describe state
 **Tabs:**
 
 ```html
-<section data-state="{ selectedTab: 'animals' }">
+<section data-state="'animals'">
   <nav>
     <div
-      data-btn-muted="selectedTab !== 'animals'"
-      onclick="setState({ selectedTab: 'animals' })"
+      data-btn-muted="state !== 'animals'"
+      onclick="setState(this, 'animals')"
     >
       Animals
     </div>
     <div
-      data-btn-muted="selectedTab !== 'languages'"
-      onclick="setState({ selectedTab: 'languages' })"
+      data-btn-muted="state !== 'languages'"
+      onclick="setState(this, 'languages')"
     >
       Languages
     </div>
-    <div
-      data-btn-muted="selectedTab !== 'colors'"
-      onclick="setState({ selectedTab: 'colors' })"
-    >
+    <div data-btn-muted="state !== 'colors'" onclick="setState(this, 'colors')">
       Colors
     </div>
   </nav>
   <div>
-    <div data-hidden="selectedTab !== 'animals'">Animals tab</div>
-    <div data-hidden="selectedTab !== 'languages'">Languages tab</div>
-    <div data-hidden="selectedTab !== 'colors'">Colors tab</div>
+    <div data-hidden="state !== 'animals'">Animals tab</div>
+    <div data-hidden="state !== 'languages'">Languages tab</div>
+    <div data-hidden="state !== 'colors'">Colors tab</div>
   </div>
 </section>
 ```
@@ -58,13 +56,15 @@ The basic idea of Sidewind is to leverage HTML data attributes to describe state
 
 ```html
 <article>
-  <section data-state="{ showDescription: false }">
-    <div onclick="setState({ showDescription: true })">Junior Engineer</div>
-    <div data-hidden="!showDescription">Junior engineer description</div>
+  <section data-state="false">
+    <div onclick="setState(this, !this.state)">
+      Junior Engineer
+    </div>
+    <div data-hidden="!this.state">Junior engineer description</div>
   </section>
-  <section data-state="{ showDescription: false }">
-    <div onclick="setState({ showDescription: true })">Senior Engineer</div>
-    <div data-hidden="!showDescription">Senior engineer description</div>
+  <section data-state="false">
+    <div onclick="setState(this, !this.state)">Senior Engineer</div>
+    <div data-hidden="!this.state">Senior engineer description</div>
   </section>
 </article>
 ```
@@ -72,13 +72,13 @@ The basic idea of Sidewind is to leverage HTML data attributes to describe state
 **Calculator:**
 
 ```html
-<article data-state="{ amount: 1000, interest: 1.2 }">
+<article data-state="{ 'amount': 1000, 'interest': 1.2 }">
   <div>
     <label for="amount">Amount</label>
     <input
       id="amount"
       type="number"
-      onchange="e => setState({ amount: e.target.value })"
+      onchange="e => setState(this, { amount: e.target.value })"
     />
   </div>
   <div>
@@ -86,7 +86,7 @@ The basic idea of Sidewind is to leverage HTML data attributes to describe state
     <input
       id="interest"
       type="number"
-      onchange="e => setState({ interest: e.target.value })"
+      onchange="e => setState(this, { interest: e.target.value })"
     />
   </div>
   <div>Total: <span data-value="amount * interest" /></div>

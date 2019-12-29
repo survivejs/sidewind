@@ -58,5 +58,11 @@ function evaluateValueContainers(stateContainer, state) {
 function parseState(element) {
   const { state } = element.dataset;
 
-  return JSON.parse(replaceAll(state, `'`, `"`));
+  try {
+    return JSON.parse(replaceAll(state, `'`, `"`));
+  } catch {
+    console.log("Failed to parse state: ", state);
+
+    return {};
+  }
 }
