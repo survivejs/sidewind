@@ -1,7 +1,7 @@
 {
   "name": "sidewind",
   "version": "0.0.0",
-  "description": "**Sidewind** is a light state management solution designed to work together with [Tailwind.css](https://tailwindcss.com) framework. The small addition allows you to add logic to HTML, and when combined with something like [posthtml](https://www.npmjs.com/package/posthtml), to develop your own components without using a framework like Angular, Svelte, React, or Vue.",
+  "description": "Sidewind - Tailwind but for state",
   "main": "./src",
   "dependencies": {
     "expression-eval": "^2.0.0",
@@ -33,7 +33,10 @@
     "webpack:build": "webpack --env production",
     "webpack:serve": "webpack-dev-server --env development"
   },
-  "keywords": [],
+  "keywords": [
+    "state-management",
+    "tailwind"
+  ],
   "author": "",
   "license": "MIT"
 }
