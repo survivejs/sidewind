@@ -42,6 +42,9 @@
     "webpack:build": "webpack --env production",
     "webpack:serve": "webpack-dev-server --env development"
   },
+  "files": [
+    "dist/*"
+  ],
   "keywords": [
     "state-management",
     "tailwind"
