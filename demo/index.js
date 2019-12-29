@@ -36,20 +36,8 @@ function evaluateState() {
 }
 
 function evaluateDOM(stateContainer, state) {
-  evaluateBindContainers(stateContainer, state);
   evaluateValueContainers(stateContainer, state);
   evaluateClasses(stateContainer, state);
-}
-
-function evaluateBindContainers(stateContainer, state) {
-  const bindContainers = stateContainer.querySelectorAll(":scope [data-bind]");
-
-  for (let i = bindContainers.length; i--; ) {
-    const bindContainer = bindContainers[i];
-    const bindProperty = bindContainer.dataset.bind;
-
-    bindContainer[bindProperty] = state[bindProperty];
-  }
 }
 
 function evaluateValueContainers(stateContainer, state) {
