@@ -1,5 +1,3 @@
-import expressionEvaluator from "expression-eval";
-
 type State = { [id: string]: any };
 type ExtendedHTMLElement = HTMLElement & {
   content: any;
@@ -94,7 +92,7 @@ function evaluateClasses(stateContainer: ExtendedHTMLElement, state: State) {
 
     if (dataAttributes.length > 0) {
       dataAttributes.forEach(({ name, value }) => {
-        const result = evaluateExpression(value, { state });
+        const result = evaluateExpression(value, state);
 
         if (typeof result === "undefined") {
           return;
@@ -112,14 +110,6 @@ function evaluateClasses(stateContainer: ExtendedHTMLElement, state: State) {
         }
       });
     }
-  }
-}
-
-function evaluateExpression(expression: string, value: State) {
-  try {
-    return expressionEvaluator.compile(expression)(value);
-  } catch (err) {
-    console.error("Failed to evaluate", value, err);
   }
 }
 
@@ -214,6 +204,14 @@ function evaluateValueContainers(
     } else {
       valueContainer.innerHTML = evaluatedValue;
     }
+  }
+}
+
+function evaluateExpression(expression: string, value: State) {
+  try {
+    return Function("state", `return ${expression}`)(value);
+  } catch (err) {
+    console.error("Failed to evaluate", value, err);
   }
 }
 

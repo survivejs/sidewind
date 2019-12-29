@@ -81,7 +81,7 @@ By design, the approach follows the principle of **progressive enhancement** and
       data-value="interest"
     />
   </div>
-  <div>Total: <span data-value="amount * interest" /></div>
+  <div>Total: <span data-value="state.amount * state.interest" /></div>
 </article>
 ```
 

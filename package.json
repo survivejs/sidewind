@@ -4,9 +4,7 @@
   "description": "Sidewind - Tailwind but for state",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
-  "dependencies": {
-    "expression-eval": "^2.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@types/jest": "^24.0.25",
     "autoprefixer": "^9.7.3",
