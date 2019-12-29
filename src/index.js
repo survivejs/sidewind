@@ -18,6 +18,7 @@ function setState(el, newValue) {
 
 function initialize(global = window) {
   evaluateState(document.querySelectorAll("[data-state]"));
+  evaluateFetch(document.querySelectorAll("[data-fetch]"));
 
   global.setState = setState;
 }
@@ -117,6 +118,22 @@ function evaluateExpression(expression, value) {
     return expressionEvaluator.compile(expression)(value);
   } catch (err) {
     console.error("Failed to evaluate", value, err);
+  }
+}
+
+function evaluateFetch(fetchContainers) {
+  for (let i = fetchContainers.length; i--; ) {
+    const fetchContainer = fetchContainers[i];
+    const fetchTarget = fetchContainer.dataset.fetch;
+
+    fetch(fetchTarget)
+      .then(response => response.json())
+      .then(state => {
+        fetchContainer.dataset.state = JSON.stringify(state);
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
 }
 
