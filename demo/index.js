@@ -1,3 +1,4 @@
+import expressionEval from "expression-eval";
 import replaceAll from "string.prototype.replaceall";
 import "./index.pcss";
 
@@ -7,12 +8,14 @@ function setState(el, newValue) {
   const bindProperty = el.dataset.bind;
   const stateContainer = el.closest("[data-state]");
   const state = parseState(stateContainer);
-  const updatedState = { ...state, [bindProperty]: newValue };
+  const updatedState =
+    typeof state === "object"
+      ? { ...state, [bindProperty]: newValue }
+      : newValue;
 
   stateContainer.dataset.value = JSON.stringify(updatedState);
 
-  evaluateBindContainers(stateContainer, updatedState);
-  evaluateValueContainers(stateContainer, updatedState);
+  evaluateDOM(stateContainer, updatedState);
 }
 
 window.setState = setState;
@@ -26,9 +29,14 @@ function evaluateState() {
 
     stateContainer.state = state;
 
-    evaluateBindContainers(stateContainer, state);
-    evaluateValueContainers(stateContainer, state);
+    evaluateDOM(stateContainer, state);
   }
+}
+
+function evaluateDOM(stateContainer, state) {
+  evaluateBindContainers(stateContainer, state);
+  evaluateValueContainers(stateContainer, state);
+  evaluateClasses(stateContainer, state);
 }
 
 function evaluateBindContainers(stateContainer, state) {
@@ -52,6 +60,39 @@ function evaluateValueContainers(stateContainer, state) {
     const valueProperty = valueContainer.dataset.value;
 
     valueContainer.innerHTML = state[valueProperty];
+  }
+}
+
+function evaluateClasses(stateContainer, state) {
+  const elements = stateContainer.querySelectorAll(":scope *");
+
+  for (let i = elements.length; i--; ) {
+    const element = elements[i];
+    const dataAttributes = [...element.attributes].filter(
+      v =>
+        v.name.startsWith("data-") &&
+        !["data-bind", "data-value"].includes(v.name)
+    );
+
+    if (dataAttributes.length > 0) {
+      dataAttributes.forEach(({ name, value }) => {
+        try {
+          const result = expressionEval.compile(value)({ state });
+          const cssPropName = name
+            .split("-")
+            .slice(1)
+            .join("-");
+
+          if (result) {
+            element.classList.add(cssPropName);
+          } else {
+            element.classList.remove(cssPropName);
+          }
+        } catch (err) {
+          console.error("Failed to evaluate", err, value);
+        }
+      });
+    }
   }
 }
 

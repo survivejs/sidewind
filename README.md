@@ -60,11 +60,11 @@ The basic idea of Sidewind is to leverage HTML data attributes to describe state
     <div onclick="setState(this, !this.state)">
       Junior Engineer
     </div>
-    <div data-hidden="!this.state">Junior engineer description</div>
+    <div data-hidden="!state">Junior engineer description</div>
   </section>
   <section data-state="false">
     <div onclick="setState(this, !this.state)">Senior Engineer</div>
-    <div data-hidden="!this.state">Senior engineer description</div>
+    <div data-hidden="!state">Senior engineer description</div>
   </section>
 </article>
 ```
