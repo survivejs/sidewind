@@ -40,7 +40,6 @@ const commonConfig = merge({
   },
   output: {
     path: PATHS.OUTPUT,
-    publicPath: "/",
   },
   plugins: [
     new CopyPlugin([{ from: PATHS.ASSETS, to: "assets" }]),
@@ -49,7 +48,6 @@ const commonConfig = merge({
     }),
     new MiniHtmlWebpackPlugin({
       filename: "index.html",
-      publicPath: "/",
       context: {
         title: "Sidewind",
         htmlAttributes: { lang: "en" },
