@@ -36,7 +36,7 @@
     "build": "tsdx build",
     "site:build": "npm run webpack:build",
     "start": "npm run webpack:serve",
-    "lint": "tsdx lint",
+    "lint": "tsdx lint demo src test",
     "test": "tsdx test",
     "prepare": "tsdx build",
     "webpack:build": "webpack --env production",
@@ -48,7 +48,7 @@
   ],
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "npm run lint"
     }
   },
   "author": "Juho Vepsäläinen",
