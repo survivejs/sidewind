@@ -61,7 +61,13 @@ function evaluateClasses(stateContainer, state) {
     const dataAttributes = [...element.attributes].filter(
       v =>
         v.name.startsWith("data-") &&
-        !["data-bind", "data-value"].includes(v.name)
+        ![
+          "data-bind",
+          "data-each",
+          "data-fetch",
+          "data-state",
+          "data-value",
+        ].includes(v.name)
     );
 
     if (dataAttributes.length > 0) {
@@ -79,7 +85,7 @@ function evaluateClasses(stateContainer, state) {
             element.classList.remove(cssPropName);
           }
         } catch (err) {
-          console.error("Failed to evaluate", err, value);
+          console.error("Failed to evaluate", value, err);
         }
       });
     }

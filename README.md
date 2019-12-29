@@ -99,7 +99,7 @@ By design, the approach follows the principle of **progressive enhancement** and
 **Table:**
 
 ```html
-<table data-state="fetch('./cars.json')" class="table-fixed">
+<table data-fetch="./cars.json" class="table-fixed">
   <thead>
     <tr>
       <td>Brand</td>
