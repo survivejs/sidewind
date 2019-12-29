@@ -19,44 +19,6 @@ By design, the approach follows the principle of **progressive enhancement** and
 </section>
 ```
 
-### Tabs
-
-```html
-<section data-state="'animals'">
-  <nav class="flex flex-row justify-between">
-    <div
-      class="p-2 w-full"
-      data-btn-muted="state !== 'animals'"
-      data-bg-gray-200="state === 'animals'"
-      onclick="setState(this, 'animals')"
-    >
-      Animals
-    </div>
-    <div
-      class="p-2 w-full"
-      data-btn-muted="state !== 'languages'"
-      data-bg-gray-200="state === 'languages'"
-      onclick="setState(this, 'languages')"
-    >
-      Languages
-    </div>
-    <div
-      class="p-2 w-full"
-      data-btn-muted="state !== 'colors'"
-      data-bg-gray-200="state === 'colors'"
-      onclick="setState(this, 'colors')"
-    >
-      Colors
-    </div>
-  </nav>
-  <div class="bg-gray-100 p-2">
-    <div data-hidden="state !== 'animals'">Animals tab</div>
-    <div data-hidden="state !== 'languages'">Languages tab</div>
-    <div data-hidden="state !== 'colors'">Colors tab</div>
-  </div>
-</section>
-```
-
 ### Accordion
 
 ```html
@@ -97,7 +59,10 @@ By design, the approach follows the principle of **progressive enhancement** and
 ### Calculator
 
 ```html
-<article data-state="{ 'amount': 1000, 'interest': 1.2 }">
+<article
+  class="flex flex-row justify-between md:max-w-md"
+  data-state="{ 'amount': 1000, 'interest': 1.2 }"
+>
   <div>
     <label for="amount">Amount</label>
     <input
@@ -118,6 +83,44 @@ By design, the approach follows the principle of **progressive enhancement** and
   </div>
   <div>Total: <span data-value="amount * interest" /></div>
 </article>
+```
+
+### Tabs
+
+```html
+<section data-state="'animals'">
+  <nav class="flex flex-row justify-between">
+    <div
+      class="p-2 w-full"
+      data-btn-muted="state !== 'animals'"
+      data-bg-gray-200="state === 'animals'"
+      onclick="setState(this, 'animals')"
+    >
+      Animals
+    </div>
+    <div
+      class="p-2 w-full"
+      data-btn-muted="state !== 'languages'"
+      data-bg-gray-200="state === 'languages'"
+      onclick="setState(this, 'languages')"
+    >
+      Languages
+    </div>
+    <div
+      class="p-2 w-full"
+      data-btn-muted="state !== 'colors'"
+      data-bg-gray-200="state === 'colors'"
+      onclick="setState(this, 'colors')"
+    >
+      Colors
+    </div>
+  </nav>
+  <div class="bg-gray-100 p-2">
+    <div data-hidden="state !== 'animals'">Animals tab</div>
+    <div data-hidden="state !== 'languages'">Languages tab</div>
+    <div data-hidden="state !== 'colors'">Colors tab</div>
+  </div>
+</section>
 ```
 
 ### Table
