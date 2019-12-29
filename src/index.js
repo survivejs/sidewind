@@ -68,7 +68,11 @@ function evaluateValueContainers(stateContainer, state) {
       ? state[valueProperty]
       : evaluateExpression(valueProperty, state) || state;
 
-    valueContainer.innerHTML = evaluatedValue;
+    if (valueContainer.localName === "input") {
+      valueContainer.value = evaluatedValue;
+    } else {
+      valueContainer.innerHTML = evaluatedValue;
+    }
   }
 }
 

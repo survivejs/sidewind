@@ -100,7 +100,7 @@ By design, the approach follows the principle of **progressive enhancement** and
     <label for="amount">Amount</label>
     <input
       id="amount"
-      type="number"
+      type="text"
       oninput="setState(this, { amount: this.value })"
       data-value="amount"
     />
@@ -109,7 +109,7 @@ By design, the approach follows the principle of **progressive enhancement** and
     <label for="interest">Interest</label>
     <input
       id="interest"
-      type="number"
+      type="text"
       oninput="setState(this, { interest: this.value })"
       data-value="interest"
     />
