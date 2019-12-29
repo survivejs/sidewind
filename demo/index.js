@@ -61,7 +61,8 @@ function evaluateValueContainers(stateContainer, state) {
     const valueContainer = valueContainers[i];
     const valueProperty = valueContainer.dataset.value;
 
-    valueContainer.innerHTML = state[valueProperty];
+    valueContainer.innerHTML =
+      valueProperty === "state" ? state : state[valueProperty];
   }
 }
 

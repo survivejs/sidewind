@@ -6,18 +6,12 @@ By design, the approach follows the principle of **progressive enhancement** and
 
 ## Examples
 
-The basic idea of Sidewind is to leverage HTML data attributes to describe state and to map from state to class names. These two ideas combined with DOM event handlers let you model state related logic as in the examples below.
-
 **Minimal example:**
 
 ```html
-<section data-state="{ 'toggled': false }">
-  <div>Toggled value: <span data-value="toggled" /></div>
-  <button
-    class="btn btn-blue"
-    data-bind="toggled"
-    onclick="setState(this, !this.toggled)"
-  >
+<section data-state="false">
+  <div>Toggled value: <span data-value="state" /></div>
+  <button class="btn btn-blue" onclick="setState(this, !this.state)">
     Toggle value
   </button>
 </section>
