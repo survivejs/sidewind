@@ -121,14 +121,14 @@ By design, the approach follows the principle of **progressive enhancement** and
 ### Table
 
 ```html
-<table data-fetch="./cars.json" class="table-fixed">
+<table data-fetch="./demo/cars.json" class="table-fixed">
   <thead>
     <tr>
       <td>Brand</td>
       <td>Color</td>
     </tr>
   </thead>
-  <tbody data-each="{ cars: { brand, color } }">
+  <tbody data-each="{ brand, color }">
     <tr>
       <td data-value="brand"></td>
       <td data-value="color"></td>
