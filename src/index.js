@@ -2,13 +2,11 @@ import expressionEvaluator from "expression-eval";
 import replaceAll from "string.prototype.replaceall";
 
 function setState(el, newValue) {
-  const bindProperty = el.dataset.bind;
   const stateContainer = el.closest("[data-state]");
   const state = parseState(stateContainer);
+
   const updatedState =
-    typeof state === "object"
-      ? { ...state, [bindProperty]: newValue }
-      : newValue;
+    typeof state === "object" ? { ...state, ...newValue } : newValue;
 
   el.state = updatedState;
 
@@ -82,13 +80,9 @@ function evaluateClasses(stateContainer, state) {
     const dataAttributes = [...element.attributes].filter(
       v =>
         v.name.startsWith("data-") &&
-        ![
-          "data-bind",
-          "data-each",
-          "data-fetch",
-          "data-state",
-          "data-value",
-        ].includes(v.name)
+        !["data-each", "data-fetch", "data-state", "data-value"].includes(
+          v.name
+        )
     );
 
     if (dataAttributes.length > 0) {
