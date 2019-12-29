@@ -178,7 +178,9 @@ module.exports = mode => {
       return merge(commonConfig, {
         mode,
         plugins: [
-          new AddDependencyPlugin({ path: "./README.md" }),
+          new AddDependencyPlugin({
+            path: path.join(__dirname, "./README.md"),
+          }),
           new webpack.HotModuleReplacementPlugin(),
         ],
       });
