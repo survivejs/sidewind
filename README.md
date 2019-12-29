@@ -123,7 +123,7 @@ By design, the approach follows the principle of **progressive enhancement** and
 ### Table
 
 ```html
-<table data-fetch="./demo/cars.json" class="table-fixed">
+<table data-fetch="./assets/cars.json" class="table-fixed">
   <thead>
     <tr class="bg-gray-200">
       <td class="border p-2">Brand</td>

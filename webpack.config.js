@@ -6,11 +6,13 @@ const showdown = require("showdown");
 const decodeHTML = require("html-encoder-decoder").decode;
 const webpack = require("webpack");
 const merge = require("webpack-merge");
+const CopyPlugin = require("copy-webpack-plugin");
 const MiniHtmlWebpackPlugin = require("mini-html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const PurgeCSSPlugin = require("purgecss-webpack-plugin");
 
 const PATHS = {
+  ASSETS: path.resolve(__dirname, "assets"),
   DEMO: path.resolve(__dirname, "demo"),
 };
 
@@ -32,6 +34,7 @@ const commonConfig = merge({
     ],
   },
   plugins: [
+    new CopyPlugin([{ from: PATHS.ASSETS, to: "assets" }]),
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
