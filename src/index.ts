@@ -1,3 +1,4 @@
+/* eslint no-new-func: 0 */
 type State = { [id: string]: any };
 type ExtendedHTMLElement = HTMLElement & {
   content: any;
