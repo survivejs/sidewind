@@ -22,16 +22,37 @@ function initialize(global = window) {
 }
 
 function initializeState() {
+  // It's important to perform state initialization parent-first since
+  // state is nested and shadowed by children.
   const stateContainers = document.querySelectorAll("[data-state]");
+  const stateContainerOrder = orderByParents(Array.from(stateContainers));
 
-  for (let i = stateContainers.length; i--; ) {
+  stateContainerOrder.forEach(i => {
+    console.log("i", i);
+
     const stateContainer = stateContainers[i];
     const state = parseState(stateContainer);
 
     stateContainer.state = state;
 
     evaluateDOM(stateContainer, state);
-  }
+  });
+}
+
+function orderByParents(elementsArray) {
+  // Note that sort mutates the original structure directly
+  return elementsArray
+    .map((element, i) => ({
+      i,
+      depth: getDepth(element),
+    }))
+    .sort((a, b) => a.depth - b.depth)
+    .map(({ i }) => i);
+}
+
+function getDepth(element, depth = 0) {
+  if (element.parentNode == null) return depth;
+  else return getDepth(element.parentNode, depth + 1);
 }
 
 function evaluateDOM(stateContainer, state) {
