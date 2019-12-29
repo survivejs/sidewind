@@ -22,6 +22,7 @@
     "purgecss-webpack-plugin": "^1.6.0",
     "showdown": "^1.9.1",
     "tailwindcss": "^1.1.4",
+    "temp": "^0.9.1",
     "webpack": "^4.41.4",
     "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.10.1",

@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const temp = require("temp");
 const { highlightAuto } = require("highlight.js");
 const showdown = require("showdown");
 const decodeHTML = require("html-encoder-decoder").decode;
@@ -69,23 +70,7 @@ const commonConfig = merge({
           publicPath,
         });
 
-        // TODO: Load markdown here
-        return `<!DOCTYPE html>
-        <html${htmlAttrs}>
-          <head>
-            <meta charset="UTF-8">
-            <title>${title}</title>
-            ${cssTags}
-          </head>
-          <body>
-            <main class="container mx-auto p-8">
-              ${processMarkdown(
-                fs.readFileSync("./README.md", { encoding: "utf-8" })
-              )}
-            </main>
-            ${jsTags}
-          </body>
-        </html>`;
+        return getHTML({ title, htmlAttrs, cssTags, jsTags });
       },
     }),
   ],
@@ -186,13 +171,15 @@ module.exports = mode => {
       });
     }
     case "production": {
+      const fileStream = temp.createWriteStream();
+      fileStream.write(getHTML());
+      fileStream.end();
+
       return merge(commonConfig, {
         mode,
         plugins: [
-          // TODO. How to handle since webpack will generate html
-          /*
           new PurgeCSSPlugin({
-            paths: [],
+            paths: [fileStream.path],
             extractors: [
               {
                 extractor: class TailwindExtractor {
@@ -204,9 +191,32 @@ module.exports = mode => {
               },
             ],
           }),
-          */
         ],
       });
     }
   }
 };
+
+function getHTML({
+  title = "",
+  htmlAttrs = "",
+  cssTags = "",
+  jsTags = "",
+} = {}) {
+  return `<!DOCTYPE html>
+  <html${htmlAttrs}>
+    <head>
+      <meta charset="UTF-8">
+      <title>${title}</title>
+      ${cssTags}
+    </head>
+    <body>
+      <main class="container mx-auto p-8">
+        ${processMarkdown(
+          fs.readFileSync("./README.md", { encoding: "utf-8" })
+        )}
+      </main>
+      ${jsTags}
+    </body>
+  </html>`;
+}
