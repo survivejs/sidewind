@@ -203,7 +203,7 @@ function evaluateValueContainers(
   );
 
   for (let i = valueContainers.length; i--; ) {
-    const valueContainer = <ExtendedHTMLElement>valueContainers[i];
+    const valueContainer = valueContainers[i] as ExtendedHTMLElement;
     const valueProperty = valueContainer.dataset[valueKey] || "";
     const evaluatedValue = state[valueProperty]
       ? state[valueProperty]
