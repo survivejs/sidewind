@@ -1,14 +1,30 @@
 import expressionEvaluator from "expression-eval";
-import replaceAll from "string.prototype.replaceall";
 
-function setState(el, newValue) {
-  const stateContainer = el.closest("[data-state]");
+type State = { [id: string]: any };
+type ExtendedHTMLElement = HTMLElement & {
+  content: any;
+  state: State;
+  value: any;
+};
+declare global {
+  interface Window {
+    setState: typeof setState;
+  }
+}
+
+function setState(element: ExtendedHTMLElement, newValue: any) {
+  const stateContainer = element.closest("[data-state]") as ExtendedHTMLElement;
+
+  if (!stateContainer) {
+    return;
+  }
+
   const state = parseState(stateContainer);
 
   const updatedState =
     typeof state === "object" ? { ...state, ...newValue } : newValue;
 
-  el.state = updatedState;
+  element.state = updatedState;
 
   stateContainer.dataset.state = JSON.stringify(updatedState);
 
@@ -25,7 +41,7 @@ function initialize(global = window) {
   global.setState = setState;
 }
 
-function evaluateState(stateContainers) {
+function evaluateState(stateContainers: NodeListOf<ExtendedHTMLElement>) {
   // It's important to perform state initialization parent-first since
   // state is nested and shadowed by children.
   const stateContainerOrder = orderByParents(Array.from(stateContainers));
@@ -38,7 +54,7 @@ function evaluateState(stateContainers) {
   });
 }
 
-function orderByParents(elementsArray) {
+function orderByParents(elementsArray: ExtendedHTMLElement[]) {
   // Note that sort mutates the original structure directly
   return elementsArray
     .map((element, i) => ({
@@ -49,22 +65,22 @@ function orderByParents(elementsArray) {
     .map(({ i }) => i);
 }
 
-function getDepth(element, depth = 0) {
+function getDepth(element: Node, depth = 0): number {
   if (element.parentNode == null) return depth;
   else return getDepth(element.parentNode, depth + 1);
 }
 
-function evaluateDOM(stateContainer, state) {
+function evaluateDOM(stateContainer: ExtendedHTMLElement, state: State) {
   evaluateValueContainers(stateContainer, state, "value");
   evaluateClasses(stateContainer, state);
 }
 
-function evaluateClasses(stateContainer, state) {
+function evaluateClasses(stateContainer: ExtendedHTMLElement, state: State) {
   const elements = stateContainer.querySelectorAll(":scope *");
 
   for (let i = elements.length; i--; ) {
     const element = elements[i];
-    const dataAttributes = [...element.attributes].filter(
+    const dataAttributes = Array.from(element.attributes).filter(
       v =>
         v.name.startsWith("data-") &&
         ![
@@ -99,7 +115,7 @@ function evaluateClasses(stateContainer, state) {
   }
 }
 
-function evaluateExpression(expression, value) {
+function evaluateExpression(expression: string, value: State) {
   try {
     return expressionEvaluator.compile(expression)(value);
   } catch (err) {
@@ -107,10 +123,14 @@ function evaluateExpression(expression, value) {
   }
 }
 
-function evaluateFetch(fetchContainers) {
+function evaluateFetch(fetchContainers: NodeListOf<ExtendedHTMLElement>) {
   for (let i = fetchContainers.length; i--; ) {
     const fetchContainer = fetchContainers[i];
     const fetchTarget = fetchContainer.dataset.fetch;
+
+    if (!fetchTarget) {
+      return;
+    }
 
     fetch(fetchTarget)
       .then(response => response.json())
@@ -124,21 +144,27 @@ function evaluateFetch(fetchContainers) {
   }
 }
 
-function evaluateEach(eachContainers) {
+function evaluateEach(eachContainers: NodeListOf<ExtendedHTMLElement>) {
   for (let i = eachContainers.length; i--; ) {
     const eachContainer = eachContainers[i];
-    const { state } = eachContainer.closest("[data-state]");
+    const { state }: { state: State } = eachContainer.closest(
+      "[data-state]"
+    ) as ExtendedHTMLElement;
 
     if (state) {
       const containerParent = eachContainer.parentNode;
       const dataPattern = eachContainer.dataset.each;
-      const dataGetters = parseDataGetters(dataPattern);
+      const dataGetters = parseDataGetters(dataPattern || "");
+
+      if (!containerParent) {
+        return;
+      }
 
       while (containerParent.firstChild) {
         containerParent.firstChild.remove();
       }
 
-      state.forEach(item => {
+      state.forEach((item: State) => {
         const templateClone = document.importNode(eachContainer.content, true);
 
         evaluateValueContainers(
@@ -153,12 +179,12 @@ function evaluateEach(eachContainers) {
   }
 }
 
-function parseDataGetters(pattern) {
+function parseDataGetters(pattern: string) {
   return pattern.split(",").map(part => part.trim());
 }
 
-function getValues(data, getters) {
-  const ret = {};
+function getValues(data: State, getters: string[]): { [id: string]: string } {
+  const ret: { [id: string]: string } = {};
 
   getters.forEach(getter => {
     ret[getter] = data[getter];
@@ -167,14 +193,18 @@ function getValues(data, getters) {
   return ret;
 }
 
-function evaluateValueContainers(stateContainer, state, valueKey) {
+function evaluateValueContainers(
+  stateContainer: HTMLElement,
+  state: { [id: string]: any },
+  valueKey: string
+) {
   const valueContainers = stateContainer.querySelectorAll(
     `:scope [data-${valueKey}]`
   );
 
   for (let i = valueContainers.length; i--; ) {
-    const valueContainer = valueContainers[i];
-    const valueProperty = valueContainer.dataset[valueKey];
+    const valueContainer = <ExtendedHTMLElement>valueContainers[i];
+    const valueProperty = valueContainer.dataset[valueKey] || "";
     const evaluatedValue = state[valueProperty]
       ? state[valueProperty]
       : evaluateExpression(valueProperty, state) || state;
@@ -187,11 +217,15 @@ function evaluateValueContainers(stateContainer, state, valueKey) {
   }
 }
 
-function parseState(element) {
+function parseState(element: HTMLElement) {
   const { state } = element.dataset;
 
+  if (!state) {
+    return;
+  }
+
   try {
-    return JSON.parse(replaceAll(state, `'`, `"`));
+    return JSON.parse(state.replace(/'/g, '"'));
   } catch {
     console.log("Failed to parse state: ", state);
 

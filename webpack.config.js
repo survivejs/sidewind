@@ -14,6 +14,8 @@ const PurgeCSSPlugin = require("purgecss-webpack-plugin");
 const PATHS = {
   ASSETS: path.resolve(__dirname, "assets"),
   DEMO: path.resolve(__dirname, "demo"),
+  SRC: path.resolve(__dirname, "src"),
+  OUTPUT: path.resolve(__dirname, "dist-site"),
 };
 
 const commonConfig = merge({
@@ -21,10 +23,10 @@ const commonConfig = merge({
   module: {
     rules: [
       {
-        test: /\.js$/,
-        include: PATHS.DEMO,
+        test: /\.ts$/,
+        include: [PATHS.DEMO, PATHS.SRC],
         use: {
-          loader: "babel-loader",
+          loader: "ts-loader",
         },
       },
       {
@@ -32,6 +34,12 @@ const commonConfig = merge({
         use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
     ],
+  },
+  resolve: {
+    extensions: [".ts", ".js"],
+  },
+  output: {
+    path: PATHS.OUTPUT,
   },
   plugins: [
     new CopyPlugin([{ from: PATHS.ASSETS, to: "assets" }]),
