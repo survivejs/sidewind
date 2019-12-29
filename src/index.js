@@ -13,18 +13,18 @@ function setState(el, newValue) {
   stateContainer.dataset.value = JSON.stringify(updatedState);
 
   evaluateDOM(stateContainer, updatedState);
+  evaluateState(stateContainer.querySelectorAll("[data-state]"));
 }
 
 function initialize(global = window) {
-  initializeState();
+  evaluateState(document.querySelectorAll("[data-state]"));
 
   global.setState = setState;
 }
 
-function initializeState() {
+function evaluateState(stateContainers) {
   // It's important to perform state initialization parent-first since
   // state is nested and shadowed by children.
-  const stateContainers = document.querySelectorAll("[data-state]");
   const stateContainerOrder = orderByParents(Array.from(stateContainers));
 
   stateContainerOrder.forEach(i => {
