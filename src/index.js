@@ -28,8 +28,6 @@ function initializeState() {
   const stateContainerOrder = orderByParents(Array.from(stateContainers));
 
   stateContainerOrder.forEach(i => {
-    console.log("i", i);
-
     const stateContainer = stateContainers[i];
     const state = parseState(stateContainer);
 
