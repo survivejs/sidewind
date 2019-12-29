@@ -6,7 +6,7 @@ By design, the approach follows the principle of **progressive enhancement** and
 
 ## Examples
 
-**Minimal example:**
+### Minimal example
 
 ```html
 <section data-state="false">
@@ -17,7 +17,7 @@ By design, the approach follows the principle of **progressive enhancement** and
 </section>
 ```
 
-**Tabs:**
+### Tabs
 
 ```html
 <section data-state="'animals'">
@@ -55,7 +55,7 @@ By design, the approach follows the principle of **progressive enhancement** and
 </section>
 ```
 
-**Accordion:**
+### Accordion
 
 ```html
 <article>
@@ -92,7 +92,7 @@ By design, the approach follows the principle of **progressive enhancement** and
 </article>
 ```
 
-**Calculator:**
+### Calculator
 
 ```html
 <article data-state="{ 'amount': 1000, 'interest': 1.2 }">
@@ -118,7 +118,7 @@ By design, the approach follows the principle of **progressive enhancement** and
 </article>
 ```
 
-**Table:**
+### Table
 
 ```html
 <table data-fetch="./cars.json" class="table-fixed">
