@@ -59,15 +59,35 @@ By design, the approach follows the principle of **progressive enhancement** and
 
 ```html
 <article>
-  <section data-state="false">
-    <div onclick="setState(this, !this.state)">
-      Junior Engineer
+  <section class="mb-2" data-state="false">
+    <div
+      class="flex flex-row justify-between"
+      onclick="setState(this, !this.state)"
+    >
+      <span>Junior Engineer</span>
+      <span class="arrow">
+        <span class="arrow-down" data-hidden="state">▼</span>
+        <span class="arrow-up" data-hidden="!state">▲</span>
+      </span>
     </div>
-    <div data-hidden="!state">Junior engineer description</div>
+    <div class="py-2 bg-gray-200" data-hidden="!state">
+      Junior engineer description
+    </div>
   </section>
   <section data-state="false">
-    <div onclick="setState(this, !this.state)">Senior Engineer</div>
-    <div data-hidden="!state">Senior engineer description</div>
+    <div
+      class="flex flex-row justify-between"
+      onclick="setState(this, !this.state)"
+    >
+      <span>Senior Engineer</span>
+      <span class="arrow">
+        <span class="arrow-down" data-hidden="state">▼</span>
+        <span class="arrow-up" data-hidden="!state">▲</span>
+      </span>
+    </div>
+    <div class="py-2 bg-gray-200" data-hidden="!state">
+      Senior engineer description
+    </div>
   </section>
 </article>
 ```
