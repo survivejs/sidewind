@@ -189,8 +189,10 @@ module.exports = mode => {
       return merge(commonConfig, {
         mode,
         plugins: [
+          // TODO. How to handle since webpack will generate html
+          /*
           new PurgeCSSPlugin({
-            paths: ["./index.html"],
+            paths: [],
             extractors: [
               {
                 extractor: class TailwindExtractor {
@@ -202,6 +204,7 @@ module.exports = mode => {
               },
             ],
           }),
+          */
         ],
       });
     }
