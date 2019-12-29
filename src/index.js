@@ -10,6 +10,8 @@ function setState(el, newValue) {
       ? { ...state, [bindProperty]: newValue }
       : newValue;
 
+  el.state = updatedState;
+
   stateContainer.dataset.value = JSON.stringify(updatedState);
 
   evaluateDOM(stateContainer, updatedState);
@@ -30,8 +32,6 @@ function evaluateState(stateContainers) {
   stateContainerOrder.forEach(i => {
     const stateContainer = stateContainers[i];
     const state = parseState(stateContainer);
-
-    stateContainer.state = state;
 
     evaluateDOM(stateContainer, state);
   });
