@@ -4,7 +4,7 @@
 
 Sidewind was designed to add interactivity to small sites and it's not a replacement for a full-blown framework. That said, if you don't need much (i.e. routing), it can be enough and it can possibly complement using a framework.
 
-By design, the approach follows the principle of **progressive enhancement** and you pages will be accessible without JavaScript.
+By design, the approach follows the principle of **progressive enhancement** and your pages will be accessible without JavaScript.
 
 ## Examples
 
