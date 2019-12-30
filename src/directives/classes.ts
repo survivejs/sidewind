@@ -6,20 +6,15 @@ function evaluateClasses(stateContainer: ExtendedHTMLElement, state: State) {
 
   for (let i = elements.length; i--; ) {
     const element = elements[i];
-    const dataAttributes = Array.from(element.attributes).filter(
+    const xAttributes = Array.from(element.attributes).filter(
       v =>
-        v.name.startsWith("data-") &&
-        ![
-          "data-bind",
-          "data-each",
-          "data-fetch",
-          "data-state",
-          "data-value",
-        ].includes(v.name)
+        v.name.startsWith("x-") &&
+        // TODO: Figure out a better way
+        !["x-bind", "x-each", "x-fetch", "x-state", "x-value"].includes(v.name)
     );
 
-    if (dataAttributes.length > 0) {
-      dataAttributes.forEach(({ name, value }) => {
+    if (xAttributes.length > 0) {
+      xAttributes.forEach(({ name, value }) => {
         const result = evaluateExpression(value, state);
 
         if (typeof result === "undefined") {

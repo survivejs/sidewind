@@ -3,7 +3,7 @@ import { ExtendedHTMLElement } from "../types";
 function evaluateFetch(fetchContainers: NodeListOf<ExtendedHTMLElement>) {
   for (let i = fetchContainers.length; i--; ) {
     const fetchContainer = fetchContainers[i];
-    const fetchTarget = fetchContainer.dataset.fetch;
+    const fetchTarget = fetchContainer.getAttribute("x-fetch");
 
     if (!fetchTarget) {
       return;
@@ -12,7 +12,7 @@ function evaluateFetch(fetchContainers: NodeListOf<ExtendedHTMLElement>) {
     fetch(fetchTarget)
       .then(response => response.json())
       .then(state => {
-        fetchContainer.dataset.state = JSON.stringify(state);
+        fetchContainer.setAttribute("x-state", JSON.stringify(state));
         fetchContainer.state = state;
       })
       .catch(err => {

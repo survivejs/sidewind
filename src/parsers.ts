@@ -1,5 +1,5 @@
 function parseState(element: HTMLElement) {
-  const { state } = element.dataset;
+  const state = element.getAttribute("x-state");
 
   if (!state) {
     return;

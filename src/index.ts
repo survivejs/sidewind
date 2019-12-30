@@ -15,7 +15,7 @@ declare global {
 }
 
 function setState(element: ExtendedHTMLElement, newValue: any) {
-  const stateContainer = element.closest("[data-state]") as ExtendedHTMLElement;
+  const stateContainer = element.closest("[x-state]") as ExtendedHTMLElement;
 
   if (!stateContainer) {
     return;
@@ -28,18 +28,18 @@ function setState(element: ExtendedHTMLElement, newValue: any) {
 
   element.state = updatedState;
 
-  stateContainer.dataset.state = JSON.stringify(updatedState);
+  stateContainer.setAttribute("x-state", JSON.stringify(updatedState));
 
-  evaluateValues(stateContainer, updatedState, "value");
+  evaluateValues(stateContainer, updatedState, "x-value");
   evaluateClasses(stateContainer, updatedState);
-  evaluateState(stateContainer.querySelectorAll("[data-state]"));
-  evaluateEach(stateContainer.querySelectorAll("[data-each]"));
+  evaluateState(stateContainer.querySelectorAll("[x-state]"));
+  evaluateEach(stateContainer.querySelectorAll("[x-each]"));
 }
 
 function initialize(global = window) {
-  evaluateState(document.querySelectorAll("[data-state]"));
-  evaluateFetch(document.querySelectorAll("[data-fetch]"));
-  evaluateEach(document.querySelectorAll("[data-each]"));
+  evaluateState(document.querySelectorAll("[x-state]"));
+  evaluateFetch(document.querySelectorAll("[x-fetch]"));
+  evaluateEach(document.querySelectorAll("[x-each]"));
 
   global.setState = setState;
 }

@@ -7,12 +7,12 @@ function evaluateValues(
   valueKey: string
 ) {
   const valueContainers = stateContainer.querySelectorAll(
-    `:scope [data-${valueKey}]`
+    `:scope [${valueKey}]`
   );
 
   for (let i = valueContainers.length; i--; ) {
     const valueContainer = valueContainers[i] as ExtendedHTMLElement;
-    const valueProperty = valueContainer.dataset[valueKey] || "";
+    const valueProperty = valueContainer.getAttribute(valueKey) || "";
     const evaluatedValue = state[valueProperty]
       ? state[valueProperty]
       : evaluateExpression(valueProperty, state) || state;

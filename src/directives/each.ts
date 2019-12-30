@@ -5,13 +5,14 @@ function evaluateEach(eachContainers: NodeListOf<ExtendedHTMLElement>) {
   for (let i = eachContainers.length; i--; ) {
     const eachContainer = eachContainers[i];
     const { state }: { state: State } = eachContainer.closest(
-      "[data-state]"
+      "[x-state]"
     ) as ExtendedHTMLElement;
 
     if (state) {
       const containerParent = eachContainer.parentNode;
-      const dataPattern = eachContainer.dataset.each;
-      const dataGetters = parseDataGetters(dataPattern || "");
+      const dataGetters = parseDataGetters(
+        eachContainer.getAttribute("x-each") || ""
+      );
 
       if (!containerParent) {
         return;
@@ -24,7 +25,7 @@ function evaluateEach(eachContainers: NodeListOf<ExtendedHTMLElement>) {
       state.forEach((item: State) => {
         const templateClone = document.importNode(eachContainer.content, true);
 
-        evaluateValues(templateClone, getValues(item, dataGetters), "bind");
+        evaluateValues(templateClone, getValues(item, dataGetters), "x-bind");
 
         containerParent.appendChild(templateClone);
       });

@@ -112,28 +112,28 @@ function expandCode() {
           const example = decodeHTML(match);
           const code = left + highlightAuto(example).value + right;
 
-          return `<section data-state="'code'">
+          return `<section x-state="'code'">
   <nav class="flex flex-row justify-between">
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'code'"
-      data-bg-gray-200="state === 'code'"
+      x-btn-muted="state !== 'code'"
+      x-bg-gray-200="state === 'code'"
       onclick="setState(this, 'code')"
     >
       Code
     </div>
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'example'"
-      data-bg-gray-200="state === 'example'"
+      x-btn-muted="state !== 'example'"
+      x-bg-gray-200="state === 'example'"
       onclick="setState(this, 'example')"
     >
       Example
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div data-hidden="state !== 'code'">${code}</div>
-    <div data-hidden="state !== 'example'">${example}</div>
+    <div x-hidden="state !== 'code'">${code}</div>
+    <div x-hidden="state !== 'example'">${example}</div>
   </div>
 </section>`;
         };

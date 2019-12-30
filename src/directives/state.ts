@@ -12,7 +12,7 @@ function evaluateState(stateContainers: NodeListOf<ExtendedHTMLElement>) {
     const stateContainer = stateContainers[i];
     const state = parseState(stateContainer);
 
-    evaluateValues(stateContainer, state, "value");
+    evaluateValues(stateContainer, state, "x-value");
     evaluateClasses(stateContainer, state);
   });
 }

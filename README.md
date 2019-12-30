@@ -11,8 +11,8 @@ By design, the approach follows the principle of **progressive enhancement** and
 ### Minimal example
 
 ```html
-<section data-state="false">
-  <div class="mb-2">Toggled value: <span data-value="state" /></div>
+<section x-state="false">
+  <div class="mb-2">Toggled value: <span x-value="state" /></div>
   <button class="btn btn-blue" onclick="setState(this, !this.state)">
     Toggle value
   </button>
@@ -23,33 +23,33 @@ By design, the approach follows the principle of **progressive enhancement** and
 
 ```html
 <article>
-  <section class="mb-2" data-state="false">
+  <section class="mb-2" x-state="false">
     <div
       class="flex flex-row justify-between"
       onclick="setState(this, !this.state)"
     >
       <span>Junior Engineer</span>
       <span class="arrow">
-        <span class="arrow-down" data-hidden="state">▼</span>
-        <span class="arrow-up" data-hidden="!state">▲</span>
+        <span class="arrow-down" x-hidden="state">▼</span>
+        <span class="arrow-up" x-hidden="!state">▲</span>
       </span>
     </div>
-    <div class="py-2 bg-gray-200" data-hidden="!state">
+    <div class="py-2 bg-gray-200" x-hidden="!state">
       Junior engineer description
     </div>
   </section>
-  <section data-state="false">
+  <section x-state="false">
     <div
       class="flex flex-row justify-between"
       onclick="setState(this, !this.state)"
     >
       <span>Senior Engineer</span>
       <span class="arrow">
-        <span class="arrow-down" data-hidden="state">▼</span>
-        <span class="arrow-up" data-hidden="!state">▲</span>
+        <span class="arrow-down" x-hidden="state">▼</span>
+        <span class="arrow-up" x-hidden="!state">▲</span>
       </span>
     </div>
-    <div class="py-2 bg-gray-200" data-hidden="!state">
+    <div class="py-2 bg-gray-200" x-hidden="!state">
       Senior engineer description
     </div>
   </section>
@@ -61,7 +61,7 @@ By design, the approach follows the principle of **progressive enhancement** and
 ```html
 <article
   class="flex flex-row justify-between md:max-w-md"
-  data-state="{ 'amount': 1000, 'interest': 1.2 }"
+  x-state="{ 'amount': 1000, 'interest': 1.2 }"
 >
   <div>
     <label for="amount">Amount</label>
@@ -69,7 +69,7 @@ By design, the approach follows the principle of **progressive enhancement** and
       id="amount"
       type="text"
       oninput="setState(this, { amount: this.value })"
-      data-value="amount"
+      x-value="amount"
     />
   </div>
   <div>
@@ -78,47 +78,47 @@ By design, the approach follows the principle of **progressive enhancement** and
       id="interest"
       type="text"
       oninput="setState(this, { interest: this.value })"
-      data-value="interest"
+      x-value="interest"
     />
   </div>
-  <div>Total: <span data-value="state.amount * state.interest" /></div>
+  <div>Total: <span x-value="state.amount * state.interest" /></div>
 </article>
 ```
 
 ### Tabs
 
 ```html
-<section data-state="'animals'">
+<section x-state="'animals'">
   <nav class="flex flex-row justify-between">
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'animals'"
-      data-bg-gray-200="state === 'animals'"
+      x-btn-muted="state !== 'animals'"
+      x-bg-gray-200="state === 'animals'"
       onclick="setState(this, 'animals')"
     >
       Animals
     </div>
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'languages'"
-      data-bg-gray-200="state === 'languages'"
+      x-btn-muted="state !== 'languages'"
+      x-bg-gray-200="state === 'languages'"
       onclick="setState(this, 'languages')"
     >
       Languages
     </div>
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'colors'"
-      data-bg-gray-200="state === 'colors'"
+      x-btn-muted="state !== 'colors'"
+      x-bg-gray-200="state === 'colors'"
       onclick="setState(this, 'colors')"
     >
       Colors
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div data-hidden="state !== 'animals'">Animals tab</div>
-    <div data-hidden="state !== 'languages'">Languages tab</div>
-    <div data-hidden="state !== 'colors'">Colors tab</div>
+    <div x-hidden="state !== 'animals'">Animals tab</div>
+    <div x-hidden="state !== 'languages'">Languages tab</div>
+    <div x-hidden="state !== 'colors'">Colors tab</div>
   </div>
 </section>
 ```
@@ -126,7 +126,7 @@ By design, the approach follows the principle of **progressive enhancement** and
 ### Table
 
 ```html
-<table data-fetch="./assets/cars.json" class="table-fixed">
+<table x-fetch="./assets/cars.json" class="table-fixed">
   <thead>
     <tr class="bg-gray-200">
       <td class="border p-2">Brand</td>
@@ -134,10 +134,10 @@ By design, the approach follows the principle of **progressive enhancement** and
     </tr>
   </thead>
   <tbody>
-    <template data-each="brand, color">
+    <template x-each="brand, color">
       <tr>
-        <td class="border p-2" data-bind="brand"></td>
-        <td class="border p-2" data-bind="color"></td>
+        <td class="border p-2" x-bind="brand"></td>
+        <td class="border p-2" x-bind="color"></td>
       </tr>
     </template>
   </tbody>
