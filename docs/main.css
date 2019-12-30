@@ -10,7 +10,6 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
 }
 
 .hljs-number,
-.hljs-literal,
 .hljs-template-variable,
 .hljs-tag .hljs-attr {
   color: #008080;
@@ -26,8 +25,8 @@ github.com style (c) Vasily Polovnyov <vast@whiteants.net>
   font-weight: normal;
 }
 
-.hljs-built_in {
-  color: #0086b3;
+.hljs-symbol {
+  color: #990073;
 }
 
 /**
@@ -679,6 +678,14 @@ pre {
           justify-content: space-between;
 }
 
+.list-inside {
+  list-style-position: inside;
+}
+
+.list-disc {
+  list-style-type: disc;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -711,6 +718,10 @@ pre {
 
 .table-fixed {
   table-layout: fixed;
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 .w-full {

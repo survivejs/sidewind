@@ -11,40 +11,40 @@
       <a href="https://github.com/bebraw/sidewind" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
       <main class="container mx-auto p-8">
         <h1 id="sidewindtailwindbutforstate">Sidewind - Tailwind but for state</h1>
-<p><strong>Sidewind</strong> is a light state management solution designed to work together with <a href="https://tailwindcss.com">Tailwind.css</a> framework. The small addition allows you to add logic to HTML, and when combined with something like <a href="https://www.npmjs.com/package/posthtml">posthtml</a>, to develop your own components without using a framework like Angular, Svelte, React, or Vue.</p>
+<p><strong>Sidewind</strong> is a light state management solution designed to work together with <a class="underline"  href="https://tailwindcss.com">Tailwind.css</a> framework. The small addition allows you to add logic to HTML, and when combined with something like <a href="https://www.npmjs.com/package/posthtml">posthtml</a>, to develop your own components without using a framework like Angular, Svelte, React, or Vue.</p>
 <p>Sidewind was designed to add interactivity to small sites and it's not a replacement for a full-blown framework. That said, if you don't need much (i.e. routing), it can be enough and it can possibly complement using a framework.</p>
 <p>By design, the approach follows the principle of <strong>progressive enhancement</strong> and your pages will be accessible without JavaScript.</p>
 <h2 id="examples">Examples</h2>
 <h3 id="minimalexample">Minimal example</h3>
-<section data-state="'code'">
+<section x-state="'code'">
   <nav class="flex flex-row justify-between">
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'code'"
-      data-bg-gray-200="state === 'code'"
+      x-btn-muted="state !== 'code'"
+      x-bg-gray-200="state === 'code'"
       onclick="setState(this, 'code')"
     >
       Code
     </div>
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'example'"
-      data-bg-gray-200="state === 'example'"
+      x-btn-muted="state !== 'example'"
+      x-bg-gray-200="state === 'example'"
       onclick="setState(this, 'example')"
     >
       Example
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div data-hidden="state !== 'code'"><pre><code class="html language-html"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">data-state</span>=<span class="hljs-string">"false"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Toggled value: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">data-value</span>=<span class="hljs-string">"state"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <div x-hidden="state !== 'code'"><pre><code class="html language-html"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"false"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>Toggled value: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-value</span>=<span class="hljs-string">"state"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-blue"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(this, !this.state)"</span>&gt;</span>
     Toggle value
   <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
 </code></pre></div>
-    <div data-hidden="state !== 'example'"><section data-state="false">
-  <div>Toggled value: <span data-value="state" /></div>
+    <div x-hidden="state !== 'example'"><section x-state="false">
+  <div class="mb-2">Toggled value: <span x-value="state" /></div>
   <button class="btn btn-blue" onclick="setState(this, !this.state)">
     Toggle value
   </button>
@@ -53,87 +53,87 @@
   </div>
 </section>
 <h3 id="accordion">Accordion</h3>
-<section data-state="'code'">
+<section x-state="'code'">
   <nav class="flex flex-row justify-between">
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'code'"
-      data-bg-gray-200="state === 'code'"
+      x-btn-muted="state !== 'code'"
+      x-bg-gray-200="state === 'code'"
       onclick="setState(this, 'code')"
     >
       Code
     </div>
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'example'"
-      data-bg-gray-200="state === 'example'"
+      x-btn-muted="state !== 'example'"
+      x-bg-gray-200="state === 'example'"
       onclick="setState(this, 'example')"
     >
       Example
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div data-hidden="state !== 'code'"><pre><code class="html language-html"><span class="hljs-tag">&lt;<span class="hljs-name">article</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span> <span class="hljs-attr">data-state</span>=<span class="hljs-string">"false"</span>&gt;</span>
+    <div x-hidden="state !== 'code'"><pre><code class="html language-html"><span class="hljs-tag">&lt;<span class="hljs-name">article</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"false"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span>
       <span class="hljs-attr">class</span>=<span class="hljs-string">"flex flex-row justify-between"</span>
       <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(this, !this.state)"</span>
     &gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Junior Engineer<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow-down"</span> <span class="hljs-attr">data-hidden</span>=<span class="hljs-string">"state"</span>&gt;</span>▼<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow-up"</span> <span class="hljs-attr">data-hidden</span>=<span class="hljs-string">"!state"</span>&gt;</span>▲<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow-down"</span> <span class="hljs-attr">x-hidden</span>=<span class="hljs-string">"state"</span>&gt;</span>▼<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow-up"</span> <span class="hljs-attr">x-hidden</span>=<span class="hljs-string">"!state"</span>&gt;</span>▲<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"py-2 bg-gray-200"</span> <span class="hljs-attr">data-hidden</span>=<span class="hljs-string">"!state"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"py-2 bg-gray-200"</span> <span class="hljs-attr">x-hidden</span>=<span class="hljs-string">"!state"</span>&gt;</span>
       Junior engineer description
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">data-state</span>=<span class="hljs-string">"false"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"false"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span>
       <span class="hljs-attr">class</span>=<span class="hljs-string">"flex flex-row justify-between"</span>
       <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(this, !this.state)"</span>
     &gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Senior Engineer<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow-down"</span> <span class="hljs-attr">data-hidden</span>=<span class="hljs-string">"state"</span>&gt;</span>▼<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow-up"</span> <span class="hljs-attr">data-hidden</span>=<span class="hljs-string">"!state"</span>&gt;</span>▲<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow-down"</span> <span class="hljs-attr">x-hidden</span>=<span class="hljs-string">"state"</span>&gt;</span>▼<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow-up"</span> <span class="hljs-attr">x-hidden</span>=<span class="hljs-string">"!state"</span>&gt;</span>▲<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"py-2 bg-gray-200"</span> <span class="hljs-attr">data-hidden</span>=<span class="hljs-string">"!state"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"py-2 bg-gray-200"</span> <span class="hljs-attr">x-hidden</span>=<span class="hljs-string">"!state"</span>&gt;</span>
       Senior engineer description
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span>
 </code></pre></div>
-    <div data-hidden="state !== 'example'"><article>
-  <section class="mb-2" data-state="false">
+    <div x-hidden="state !== 'example'"><article>
+  <section class="mb-2" x-state="false">
     <div
       class="flex flex-row justify-between"
       onclick="setState(this, !this.state)"
     >
       <span>Junior Engineer</span>
       <span class="arrow">
-        <span class="arrow-down" data-hidden="state">▼</span>
-        <span class="arrow-up" data-hidden="!state">▲</span>
+        <span class="arrow-down" x-hidden="state">▼</span>
+        <span class="arrow-up" x-hidden="!state">▲</span>
       </span>
     </div>
-    <div class="py-2 bg-gray-200" data-hidden="!state">
+    <div class="py-2 bg-gray-200" x-hidden="!state">
       Junior engineer description
     </div>
   </section>
-  <section data-state="false">
+  <section x-state="false">
     <div
       class="flex flex-row justify-between"
       onclick="setState(this, !this.state)"
     >
       <span>Senior Engineer</span>
       <span class="arrow">
-        <span class="arrow-down" data-hidden="state">▼</span>
-        <span class="arrow-up" data-hidden="!state">▲</span>
+        <span class="arrow-down" x-hidden="state">▼</span>
+        <span class="arrow-up" x-hidden="!state">▲</span>
       </span>
     </div>
-    <div class="py-2 bg-gray-200" data-hidden="!state">
+    <div class="py-2 bg-gray-200" x-hidden="!state">
       Senior engineer description
     </div>
   </section>
@@ -142,29 +142,29 @@
   </div>
 </section>
 <h3 id="calculator">Calculator</h3>
-<section data-state="'code'">
+<section x-state="'code'">
   <nav class="flex flex-row justify-between">
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'code'"
-      data-bg-gray-200="state === 'code'"
+      x-btn-muted="state !== 'code'"
+      x-bg-gray-200="state === 'code'"
       onclick="setState(this, 'code')"
     >
       Code
     </div>
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'example'"
-      data-bg-gray-200="state === 'example'"
+      x-btn-muted="state !== 'example'"
+      x-bg-gray-200="state === 'example'"
       onclick="setState(this, 'example')"
     >
       Example
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div data-hidden="state !== 'code'"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">article</span>
+    <div x-hidden="state !== 'code'"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">article</span>
   <span class="hljs-attr">class</span>=<span class="hljs-string">"flex flex-row justify-between md:max-w-md"</span>
-  <span class="hljs-attr">data-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ 'amount': 1000, 'interest': 1.2 }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
+  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ 'amount': 1000, 'interest': 1.2 }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
 &gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"amount"</span>&gt;</span>Amount<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
@@ -172,7 +172,7 @@
       <span class="hljs-attr">id</span>=<span class="hljs-string">"amount"</span>
       <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
       <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(this, </span></span></span><span class="hljs-template-variable">{ amount: this.value }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
-      <span class="hljs-attr">data-value</span>=<span class="hljs-string">"amount"</span>
+      <span class="hljs-attr">x-value</span>=<span class="hljs-string">"amount"</span>
     /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
@@ -181,15 +181,15 @@
       <span class="hljs-attr">id</span>=<span class="hljs-string">"interest"</span>
       <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
       <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(this, </span></span></span><span class="hljs-template-variable">{ interest: this.value }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
-      <span class="hljs-attr">data-value</span>=<span class="hljs-string">"interest"</span>
+      <span class="hljs-attr">x-value</span>=<span class="hljs-string">"interest"</span>
     /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Total: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">data-value</span>=<span class="hljs-string">"state.amount * state.interest"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Total: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-value</span>=<span class="hljs-string">"state.amount * state.interest"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span>
 </span></code></pre></div>
-    <div data-hidden="state !== 'example'"><article
+    <div x-hidden="state !== 'example'"><article
   class="flex flex-row justify-between md:max-w-md"
-  data-state="{ 'amount': 1000, 'interest': 1.2 }"
+  x-state="{ 'amount': 1000, 'interest': 1.2 }"
 >
   <div>
     <label for="amount">Amount</label>
@@ -197,7 +197,7 @@
       id="amount"
       type="text"
       oninput="setState(this, { amount: this.value })"
-      data-value="amount"
+      x-value="amount"
     />
   </div>
   <div>
@@ -206,127 +206,127 @@
       id="interest"
       type="text"
       oninput="setState(this, { interest: this.value })"
-      data-value="interest"
+      x-value="interest"
     />
   </div>
-  <div>Total: <span data-value="state.amount * state.interest" /></div>
+  <div>Total: <span x-value="state.amount * state.interest" /></div>
 </article>
 </div>
   </div>
 </section>
 <h3 id="tabs">Tabs</h3>
-<section data-state="'code'">
+<section x-state="'code'">
   <nav class="flex flex-row justify-between">
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'code'"
-      data-bg-gray-200="state === 'code'"
+      x-btn-muted="state !== 'code'"
+      x-bg-gray-200="state === 'code'"
       onclick="setState(this, 'code')"
     >
       Code
     </div>
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'example'"
-      data-bg-gray-200="state === 'example'"
+      x-btn-muted="state !== 'example'"
+      x-bg-gray-200="state === 'example'"
       onclick="setState(this, 'example')"
     >
       Example
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div data-hidden="state !== 'code'"><pre><code class="html language-html">&lt;section data-state=<span class="hljs-string">"'animals'"</span>&gt;
-  &lt;nav <span class="hljs-built_in">class</span>=<span class="hljs-string">"flex flex-row justify-between"</span>&gt;
+    <div x-hidden="state !== 'code'"><pre><code class="html language-html">&lt;section <span class="hljs-symbol">x</span>-state=<span class="hljs-string">"'animals'"</span>&gt;
+  &lt;nav class=<span class="hljs-string">"flex flex-row justify-between"</span>&gt;
     &lt;<span class="hljs-keyword">div</span>
-      <span class="hljs-built_in">class</span>=<span class="hljs-string">"p-2 w-full"</span>
-      data-btn-muted=<span class="hljs-string">"state !== 'animals'"</span>
-      data-bg-gray<span class="hljs-number">-200</span>=<span class="hljs-string">"state === 'animals'"</span>
+      class=<span class="hljs-string">"p-2 w-full"</span>
+      <span class="hljs-symbol">x</span>-btn-muted=<span class="hljs-string">"state !== 'animals'"</span>
+      <span class="hljs-symbol">x</span>-bg-gray<span class="hljs-number">-200</span>=<span class="hljs-string">"state === 'animals'"</span>
       onclick=<span class="hljs-string">"setState(this, 'animals')"</span>
     &gt;
       Animals
     &lt;/<span class="hljs-keyword">div</span>&gt;
     &lt;<span class="hljs-keyword">div</span>
-      <span class="hljs-built_in">class</span>=<span class="hljs-string">"p-2 w-full"</span>
-      data-btn-muted=<span class="hljs-string">"state !== 'languages'"</span>
-      data-bg-gray<span class="hljs-number">-200</span>=<span class="hljs-string">"state === 'languages'"</span>
+      class=<span class="hljs-string">"p-2 w-full"</span>
+      <span class="hljs-symbol">x</span>-btn-muted=<span class="hljs-string">"state !== 'languages'"</span>
+      <span class="hljs-symbol">x</span>-bg-gray<span class="hljs-number">-200</span>=<span class="hljs-string">"state === 'languages'"</span>
       onclick=<span class="hljs-string">"setState(this, 'languages')"</span>
     &gt;
       Languages
     &lt;/<span class="hljs-keyword">div</span>&gt;
     &lt;<span class="hljs-keyword">div</span>
-      <span class="hljs-built_in">class</span>=<span class="hljs-string">"p-2 w-full"</span>
-      data-btn-muted=<span class="hljs-string">"state !== 'colors'"</span>
-      data-bg-gray<span class="hljs-number">-200</span>=<span class="hljs-string">"state === 'colors'"</span>
+      class=<span class="hljs-string">"p-2 w-full"</span>
+      <span class="hljs-symbol">x</span>-btn-muted=<span class="hljs-string">"state !== 'colors'"</span>
+      <span class="hljs-symbol">x</span>-bg-gray<span class="hljs-number">-200</span>=<span class="hljs-string">"state === 'colors'"</span>
       onclick=<span class="hljs-string">"setState(this, 'colors')"</span>
     &gt;
       Colors
     &lt;/<span class="hljs-keyword">div</span>&gt;
   &lt;/nav&gt;
-  &lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"bg-gray-100 p-2"</span>&gt;
-    &lt;<span class="hljs-keyword">div</span> data-hidden=<span class="hljs-string">"state !== 'animals'"</span>&gt;Animals <span class="hljs-literal">tab</span>&lt;/<span class="hljs-keyword">div</span>&gt;
-    &lt;<span class="hljs-keyword">div</span> data-hidden=<span class="hljs-string">"state !== 'languages'"</span>&gt;Languages <span class="hljs-literal">tab</span>&lt;/<span class="hljs-keyword">div</span>&gt;
-    &lt;<span class="hljs-keyword">div</span> data-hidden=<span class="hljs-string">"state !== 'colors'"</span>&gt;Colors <span class="hljs-literal">tab</span>&lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;<span class="hljs-keyword">div</span> class=<span class="hljs-string">"bg-gray-100 p-2"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-symbol">x</span>-hidden=<span class="hljs-string">"state !== 'animals'"</span>&gt;Animals tab&lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-symbol">x</span>-hidden=<span class="hljs-string">"state !== 'languages'"</span>&gt;Languages tab&lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> <span class="hljs-symbol">x</span>-hidden=<span class="hljs-string">"state !== 'colors'"</span>&gt;Colors tab&lt;/<span class="hljs-keyword">div</span>&gt;
   &lt;/<span class="hljs-keyword">div</span>&gt;
 &lt;/section&gt;
 </code></pre></div>
-    <div data-hidden="state !== 'example'"><section data-state="'animals'">
+    <div x-hidden="state !== 'example'"><section x-state="'animals'">
   <nav class="flex flex-row justify-between">
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'animals'"
-      data-bg-gray-200="state === 'animals'"
+      x-btn-muted="state !== 'animals'"
+      x-bg-gray-200="state === 'animals'"
       onclick="setState(this, 'animals')"
     >
       Animals
     </div>
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'languages'"
-      data-bg-gray-200="state === 'languages'"
+      x-btn-muted="state !== 'languages'"
+      x-bg-gray-200="state === 'languages'"
       onclick="setState(this, 'languages')"
     >
       Languages
     </div>
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'colors'"
-      data-bg-gray-200="state === 'colors'"
+      x-btn-muted="state !== 'colors'"
+      x-bg-gray-200="state === 'colors'"
       onclick="setState(this, 'colors')"
     >
       Colors
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div data-hidden="state !== 'animals'">Animals tab</div>
-    <div data-hidden="state !== 'languages'">Languages tab</div>
-    <div data-hidden="state !== 'colors'">Colors tab</div>
+    <div x-hidden="state !== 'animals'">Animals tab</div>
+    <div x-hidden="state !== 'languages'">Languages tab</div>
+    <div x-hidden="state !== 'colors'">Colors tab</div>
   </div>
 </section>
 </div>
   </div>
 </section>
 <h3 id="table">Table</h3>
-<section data-state="'code'">
+<section x-state="'code'">
   <nav class="flex flex-row justify-between">
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'code'"
-      data-bg-gray-200="state === 'code'"
+      x-btn-muted="state !== 'code'"
+      x-bg-gray-200="state === 'code'"
       onclick="setState(this, 'code')"
     >
       Code
     </div>
     <div
       class="p-2 w-full"
-      data-btn-muted="state !== 'example'"
-      data-bg-gray-200="state === 'example'"
+      x-btn-muted="state !== 'example'"
+      x-bg-gray-200="state === 'example'"
       onclick="setState(this, 'example')"
     >
       Example
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div data-hidden="state !== 'code'"><pre><code class="html language-html">&lt;table data-fetch=<span class="hljs-string">"./assets/cars.json"</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"table-fixed"</span>&gt;
+    <div x-hidden="state !== 'code'"><pre><code class="html language-html">&lt;table x-fetch=<span class="hljs-string">"./assets/cars.json"</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"table-fixed"</span>&gt;
   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"bg-gray-200"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"border p-2"</span>&gt;</span>Brand<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
@@ -334,16 +334,16 @@
     <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span></span>
   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">data-each</span>=<span class="hljs-string">"brand, color"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"brand, color"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"border p-2"</span> <span class="hljs-attr">data-bind</span>=<span class="hljs-string">"brand"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"border p-2"</span> <span class="hljs-attr">data-bind</span>=<span class="hljs-string">"color"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"border p-2"</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"brand"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"border p-2"</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"color"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span></span>
 <span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span></span>
 </code></pre></div>
-    <div data-hidden="state !== 'example'"><table data-fetch="./assets/cars.json" class="table-fixed">
+    <div x-hidden="state !== 'example'"><table x-fetch="./assets/cars.json" class="table-fixed">
   <thead>
     <tr class="bg-gray-200">
       <td class="border p-2">Brand</td>
@@ -351,10 +351,10 @@
     </tr>
   </thead>
   <tbody>
-    <template data-each="brand, color">
+    <template x-each="brand, color">
       <tr>
-        <td class="border p-2" data-bind="brand"></td>
-        <td class="border p-2" data-bind="color"></td>
+        <td class="border p-2" x-bind="brand"></td>
+        <td class="border p-2" x-bind="color"></td>
       </tr>
     </template>
   </tbody>
@@ -363,8 +363,8 @@
   </div>
 </section>
 <h2 id="relatedapproaches">Related Approaches</h2>
-<ul>
-<li><a href="https://github.com/alpinejs/alpine">Alpine.js</a> - Similar yet more powerful API</li>
+<ul class="list-disc list-inside" >
+<li><a class="underline"  href="https://github.com/alpinejs/alpine">Alpine.js</a> - Similar yet more powerful API</li>
 </ul>
 <h2 id="license">License</h2>
 <p>MIT.</p>
