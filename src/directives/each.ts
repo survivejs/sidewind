@@ -22,13 +22,21 @@ function evaluateEach(eachContainers: NodeListOf<ExtendedHTMLElement>) {
         containerParent.firstChild.remove();
       }
 
-      state.forEach((item: BindState) => {
-        const templateClone = document.importNode(eachContainer.content, true);
+      if (Array.isArray(state)) {
+        state.forEach((item: BindState) => {
+          const templateClone = document.importNode(
+            eachContainer.content,
+            true
+          );
 
-        evaluateValues(templateClone, getValues(item, dataGetters), "x-bind");
+          evaluateValues(templateClone, getValues(item, dataGetters), "x-bind");
 
-        containerParent.appendChild(templateClone);
-      });
+          containerParent.appendChild(templateClone);
+        });
+      } else {
+        // TODO: Object case
+        console.log(state);
+      }
     }
   }
 }

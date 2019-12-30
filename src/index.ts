@@ -35,6 +35,7 @@ function setState(newValue: any) {
   element.state = updatedState;
 
   stateContainer.setAttribute("x-state", JSON.stringify(updatedState));
+  stateContainer.state = updatedState;
 
   evaluateValues(stateContainer, updatedState, "x-value");
   evaluateClasses(stateContainer, updatedState);
