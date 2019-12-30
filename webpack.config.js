@@ -87,7 +87,7 @@ const commonConfig = merge({
 });
 
 function processMarkdown(input) {
-  const classMap = {};
+  const classMap = { a: "underline", ul: "list-disc list-inside" };
   const bindings = Object.keys(classMap).map(key => ({
     type: "output",
     regex: new RegExp(`<${key}(.*)>`, "g"),
