@@ -92,33 +92,36 @@ By design, the approach follows the principle of **progressive enhancement** and
   <nav class="flex flex-row justify-between">
     <div
       class="p-2 w-full"
-      x-btn-muted="state !== 'animals'"
-      x-bg-gray-200="state === 'animals'"
+      x-case="animals"
+      x-on="bg-gray-200"
+      x-not="btn-muted"
       onclick="setState(this, 'animals')"
     >
       Animals
     </div>
     <div
       class="p-2 w-full"
-      x-btn-muted="state !== 'languages'"
-      x-bg-gray-200="state === 'languages'"
+      x-case="languages"
+      x-on="bg-gray-200"
+      x-not="btn-muted"
       onclick="setState(this, 'languages')"
     >
       Languages
     </div>
     <div
       class="p-2 w-full"
-      x-btn-muted="state !== 'colors'"
-      x-bg-gray-200="state === 'colors'"
+      x-case="colors"
+      x-on="bg-gray-200"
+      x-not="btn-muted"
       onclick="setState(this, 'colors')"
     >
       Colors
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div x-hidden="state !== 'animals'">Animals tab</div>
-    <div x-hidden="state !== 'languages'">Languages tab</div>
-    <div x-hidden="state !== 'colors'">Colors tab</div>
+    <div x-case="animals" x-not="hidden">Animals tab</div>
+    <div x-case="languages" x-not="hidden">Languages tab</div>
+    <div x-case="colors" x-not="hidden">Colors tab</div>
   </div>
 </section>
 ```

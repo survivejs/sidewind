@@ -116,24 +116,26 @@ function expandCode() {
   <nav class="flex flex-row justify-between">
     <div
       class="p-2 w-full"
-      x-btn-muted="state !== 'code'"
-      x-bg-gray-200="state === 'code'"
+      x-case="code"
+      x-on="bg-gray-200"
+      x-not="btn-muted"
       onclick="setState(this, 'code')"
     >
       Code
     </div>
     <div
       class="p-2 w-full"
-      x-btn-muted="state !== 'example'"
-      x-bg-gray-200="state === 'example'"
+      x-case="example"
+      x-on="bg-gray-200"
+      x-not="btn-muted"
       onclick="setState(this, 'example')"
     >
       Example
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div x-hidden="state !== 'code'">${code}</div>
-    <div x-hidden="state !== 'example'">${example}</div>
+    <div x-case="code" x-not="hidden">${code}</div>
+    <div x-case="example" x-not="hidden">${example}</div>
   </div>
 </section>`;
         };

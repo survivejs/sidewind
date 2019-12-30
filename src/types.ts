@@ -1,8 +1,9 @@
-type State = { [id: string]: any };
+type BindState = { [id: string]: any };
+type State = { [id: string]: any } | string;
 type ExtendedHTMLElement = HTMLElement & {
   content: any;
-  state: State;
+  state: BindState;
   value: any;
 };
 
-export { State, ExtendedHTMLElement };
+export { BindState, State, ExtendedHTMLElement };

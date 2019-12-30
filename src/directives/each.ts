@@ -1,10 +1,10 @@
-import { ExtendedHTMLElement, State } from "../types";
+import { BindState, ExtendedHTMLElement } from "../types";
 import evaluateValues from "./values";
 
 function evaluateEach(eachContainers: NodeListOf<ExtendedHTMLElement>) {
   for (let i = eachContainers.length; i--; ) {
     const eachContainer = eachContainers[i];
-    const { state }: { state: State } = eachContainer.closest(
+    const { state }: { state: BindState } = eachContainer.closest(
       "[x-state]"
     ) as ExtendedHTMLElement;
 
@@ -22,7 +22,7 @@ function evaluateEach(eachContainers: NodeListOf<ExtendedHTMLElement>) {
         containerParent.firstChild.remove();
       }
 
-      state.forEach((item: State) => {
+      state.forEach((item: BindState) => {
         const templateClone = document.importNode(eachContainer.content, true);
 
         evaluateValues(templateClone, getValues(item, dataGetters), "x-bind");
@@ -37,7 +37,10 @@ function parseDataGetters(pattern: string) {
   return pattern.split(",").map(part => part.trim());
 }
 
-function getValues(data: State, getters: string[]): { [id: string]: string } {
+function getValues(
+  data: BindState,
+  getters: string[]
+): { [id: string]: string } {
   const ret: { [id: string]: string } = {};
 
   getters.forEach(getter => {

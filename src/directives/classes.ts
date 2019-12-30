@@ -10,11 +10,38 @@ function evaluateClasses(stateContainer: ExtendedHTMLElement, state: State) {
       v =>
         v.name.startsWith("x-") &&
         // TODO: Figure out a better way
-        !["x-bind", "x-each", "x-fetch", "x-state", "x-value"].includes(v.name)
+        ![
+          "x-bind",
+          "x-case",
+          "x-each",
+          "x-fetch",
+          "x-state",
+          "x-value",
+        ].includes(v.name)
     );
 
     if (xAttributes.length > 0) {
       xAttributes.forEach(({ name, value }) => {
+        if (name === "x-on") {
+          if (element.getAttribute("x-case") === state) {
+            element.classList.add(value);
+          } else {
+            element.classList.remove(value);
+          }
+
+          return;
+        }
+
+        if (name === "x-not") {
+          if (element.getAttribute("x-case") !== state) {
+            element.classList.add(value);
+          } else {
+            element.classList.remove(value);
+          }
+
+          return;
+        }
+
         const result = evaluateExpression(value, state);
 
         if (typeof result === "undefined") {
