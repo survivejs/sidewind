@@ -23,7 +23,7 @@
       x-case="code"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'code')"
+      onclick="setState('code')"
     >
       Code
     </div>
@@ -32,7 +32,7 @@
       x-case="example"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'example')"
+      onclick="setState('example')"
     >
       Example
     </div>
@@ -40,14 +40,14 @@
   <div class="bg-gray-100 p-2">
     <div x-case="code" x-not="hidden"><pre><code class="html language-html"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"false"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>Toggled value: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-value</span>=<span class="hljs-string">"state"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-blue"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(this, !this.state)"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-blue"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(!this.state)"</span>&gt;</span>
     Toggle value
   <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
 </code></pre></div>
     <div x-case="example" x-not="hidden"><section x-state="false">
   <div class="mb-2">Toggled value: <span x-value="state" /></div>
-  <button class="btn btn-blue" onclick="setState(this, !this.state)">
+  <button class="btn btn-blue" onclick="setState(!this.state)">
     Toggle value
   </button>
 </section>
@@ -62,7 +62,7 @@
       x-case="code"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'code')"
+      onclick="setState('code')"
     >
       Code
     </div>
@@ -71,7 +71,7 @@
       x-case="example"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'example')"
+      onclick="setState('example')"
     >
       Example
     </div>
@@ -79,10 +79,7 @@
   <div class="bg-gray-100 p-2">
     <div x-case="code" x-not="hidden"><pre><code class="html language-html"><span class="hljs-tag">&lt;<span class="hljs-name">article</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"false"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>
-      <span class="hljs-attr">class</span>=<span class="hljs-string">"flex flex-row justify-between"</span>
-      <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(this, !this.state)"</span>
-    &gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"flex flex-row justify-between"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(!this.state)"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Junior Engineer<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow"</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow-down"</span> <span class="hljs-attr">x-hidden</span>=<span class="hljs-string">"state"</span>&gt;</span>▼<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
@@ -94,10 +91,7 @@
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"false"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>
-      <span class="hljs-attr">class</span>=<span class="hljs-string">"flex flex-row justify-between"</span>
-      <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(this, !this.state)"</span>
-    &gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"flex flex-row justify-between"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(!this.state)"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Senior Engineer<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow"</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"arrow-down"</span> <span class="hljs-attr">x-hidden</span>=<span class="hljs-string">"state"</span>&gt;</span>▼<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
@@ -112,10 +106,7 @@
 </code></pre></div>
     <div x-case="example" x-not="hidden"><article>
   <section class="mb-2" x-state="false">
-    <div
-      class="flex flex-row justify-between"
-      onclick="setState(this, !this.state)"
-    >
+    <div class="flex flex-row justify-between" onclick="setState(!this.state)">
       <span>Junior Engineer</span>
       <span class="arrow">
         <span class="arrow-down" x-hidden="state">▼</span>
@@ -127,10 +118,7 @@
     </div>
   </section>
   <section x-state="false">
-    <div
-      class="flex flex-row justify-between"
-      onclick="setState(this, !this.state)"
-    >
+    <div class="flex flex-row justify-between" onclick="setState(!this.state)">
       <span>Senior Engineer</span>
       <span class="arrow">
         <span class="arrow-down" x-hidden="state">▼</span>
@@ -153,7 +141,7 @@
       x-case="code"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'code')"
+      onclick="setState('code')"
     >
       Code
     </div>
@@ -162,7 +150,7 @@
       x-case="example"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'example')"
+      onclick="setState('example')"
     >
       Example
     </div>
@@ -177,7 +165,7 @@
     <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
       <span class="hljs-attr">id</span>=<span class="hljs-string">"amount"</span>
       <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
-      <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(this, </span></span></span><span class="hljs-template-variable">{ amount: this.value }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
+      <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ amount: this.value }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
       <span class="hljs-attr">x-value</span>=<span class="hljs-string">"amount"</span>
     /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
@@ -186,7 +174,7 @@
     <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
       <span class="hljs-attr">id</span>=<span class="hljs-string">"interest"</span>
       <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
-      <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(this, </span></span></span><span class="hljs-template-variable">{ interest: this.value }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
+      <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ interest: this.value }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
       <span class="hljs-attr">x-value</span>=<span class="hljs-string">"interest"</span>
     /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
@@ -202,7 +190,7 @@
     <input
       id="amount"
       type="text"
-      oninput="setState(this, { amount: this.value })"
+      oninput="setState({ amount: this.value })"
       x-value="amount"
     />
   </div>
@@ -211,7 +199,7 @@
     <input
       id="interest"
       type="text"
-      oninput="setState(this, { interest: this.value })"
+      oninput="setState({ interest: this.value })"
       x-value="interest"
     />
   </div>
@@ -228,7 +216,7 @@
       x-case="code"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'code')"
+      onclick="setState('code')"
     >
       Code
     </div>
@@ -237,7 +225,7 @@
       x-case="example"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'example')"
+      onclick="setState('example')"
     >
       Example
     </div>
@@ -250,7 +238,7 @@
       <span class="hljs-symbol">x</span>-<span class="hljs-keyword">case</span>=<span class="hljs-string">"animals"</span>
       <span class="hljs-symbol">x</span>-on=<span class="hljs-string">"bg-gray-200"</span>
       <span class="hljs-symbol">x</span>-<span class="hljs-keyword">not</span>=<span class="hljs-string">"btn-muted"</span>
-      onclick=<span class="hljs-string">"setState(this, 'animals')"</span>
+      onclick=<span class="hljs-string">"setState('animals')"</span>
     &gt;
       Animals
     &lt;/<span class="hljs-keyword">div</span>&gt;
@@ -259,7 +247,7 @@
       <span class="hljs-symbol">x</span>-<span class="hljs-keyword">case</span>=<span class="hljs-string">"languages"</span>
       <span class="hljs-symbol">x</span>-on=<span class="hljs-string">"bg-gray-200"</span>
       <span class="hljs-symbol">x</span>-<span class="hljs-keyword">not</span>=<span class="hljs-string">"btn-muted"</span>
-      onclick=<span class="hljs-string">"setState(this, 'languages')"</span>
+      onclick=<span class="hljs-string">"setState('languages')"</span>
     &gt;
       Languages
     &lt;/<span class="hljs-keyword">div</span>&gt;
@@ -268,7 +256,7 @@
       <span class="hljs-symbol">x</span>-<span class="hljs-keyword">case</span>=<span class="hljs-string">"colors"</span>
       <span class="hljs-symbol">x</span>-on=<span class="hljs-string">"bg-gray-200"</span>
       <span class="hljs-symbol">x</span>-<span class="hljs-keyword">not</span>=<span class="hljs-string">"btn-muted"</span>
-      onclick=<span class="hljs-string">"setState(this, 'colors')"</span>
+      onclick=<span class="hljs-string">"setState('colors')"</span>
     &gt;
       Colors
     &lt;/<span class="hljs-keyword">div</span>&gt;
@@ -287,7 +275,7 @@
       x-case="animals"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'animals')"
+      onclick="setState('animals')"
     >
       Animals
     </div>
@@ -296,7 +284,7 @@
       x-case="languages"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'languages')"
+      onclick="setState('languages')"
     >
       Languages
     </div>
@@ -305,7 +293,7 @@
       x-case="colors"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'colors')"
+      onclick="setState('colors')"
     >
       Colors
     </div>
@@ -327,7 +315,7 @@
       x-case="code"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'code')"
+      onclick="setState('code')"
     >
       Code
     </div>
@@ -336,7 +324,7 @@
       x-case="example"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'example')"
+      onclick="setState('example')"
     >
       Example
     </div>
