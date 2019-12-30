@@ -77,7 +77,7 @@ By design, the approach follows the principle of **progressive enhancement** and
   </div>
   <div>
     Total:
-    <span x-value="Math.round(state.amount * state.interest * 100)  / 100" />
+    <span x-value="Math.round(state.amount * state.interest * 100) / 100" />
   </div>
 </article>
 ```
