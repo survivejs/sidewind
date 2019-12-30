@@ -607,6 +607,10 @@ pre {
   margin-bottom: 0.5rem;
 }
 
+pre {
+  overflow: auto;
+}
+
 .btn {
   font-weight: 700;
   padding-top: 0.5rem;
