@@ -23,23 +23,19 @@ function evaluateClasses(stateContainer: ExtendedHTMLElement, state: State) {
     if (xAttributes.length > 0) {
       xAttributes.forEach(({ name, value }) => {
         if (name === "x-on") {
-          if (element.getAttribute("x-case") === state) {
-            element.classList.add(value);
-          } else {
-            element.classList.remove(value);
-          }
-
-          return;
+          return toggleClass(
+            element.getAttribute("x-case") === state,
+            element,
+            value
+          );
         }
 
         if (name === "x-not") {
-          if (element.getAttribute("x-case") !== state) {
-            element.classList.add(value);
-          } else {
-            element.classList.remove(value);
-          }
-
-          return;
+          return toggleClass(
+            element.getAttribute("x-case") !== state,
+            element,
+            value
+          );
         }
 
         const result = evaluateExpression(value, state);
@@ -53,13 +49,21 @@ function evaluateClasses(stateContainer: ExtendedHTMLElement, state: State) {
           .slice(1)
           .join("-");
 
-        if (result) {
-          element.classList.add(cssPropName);
-        } else {
-          element.classList.remove(cssPropName);
-        }
+        toggleClass(result, element, cssPropName);
       });
     }
+  }
+}
+
+function toggleClass(
+  condition: boolean,
+  element: Element,
+  cssPropName: string
+) {
+  if (condition) {
+    element.classList.add(cssPropName);
+  } else {
+    element.classList.remove(cssPropName);
   }
 }
 
