@@ -12,7 +12,7 @@ By design, the approach follows the principle of **progressive enhancement** and
 
 ```html
 <section data-state="false">
-  <div>Toggled value: <span data-value="state" /></div>
+  <div class="mb-2">Toggled value: <span data-value="state" /></div>
   <button class="btn btn-blue" onclick="setState(this, !this.state)">
     Toggle value
   </button>
