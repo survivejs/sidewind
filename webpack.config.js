@@ -119,7 +119,7 @@ function expandCode() {
       x-case="code"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'code')"
+      onclick="setState('code')"
     >
       Code
     </div>
@@ -128,7 +128,7 @@ function expandCode() {
       x-case="example"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'example')"
+      onclick="setState('example')"
     >
       Example
     </div>

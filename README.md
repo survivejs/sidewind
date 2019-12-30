@@ -13,7 +13,7 @@ By design, the approach follows the principle of **progressive enhancement** and
 ```html
 <section x-state="false">
   <div class="mb-2">Toggled value: <span x-value="state" /></div>
-  <button class="btn btn-blue" onclick="setState(this, !this.state)">
+  <button class="btn btn-blue" onclick="setState(!this.state)">
     Toggle value
   </button>
 </section>
@@ -24,10 +24,7 @@ By design, the approach follows the principle of **progressive enhancement** and
 ```html
 <article>
   <section class="mb-2" x-state="false">
-    <div
-      class="flex flex-row justify-between"
-      onclick="setState(this, !this.state)"
-    >
+    <div class="flex flex-row justify-between" onclick="setState(!this.state)">
       <span>Junior Engineer</span>
       <span class="arrow">
         <span class="arrow-down" x-hidden="state">▼</span>
@@ -39,10 +36,7 @@ By design, the approach follows the principle of **progressive enhancement** and
     </div>
   </section>
   <section x-state="false">
-    <div
-      class="flex flex-row justify-between"
-      onclick="setState(this, !this.state)"
-    >
+    <div class="flex flex-row justify-between" onclick="setState(!this.state)">
       <span>Senior Engineer</span>
       <span class="arrow">
         <span class="arrow-down" x-hidden="state">▼</span>
@@ -68,7 +62,7 @@ By design, the approach follows the principle of **progressive enhancement** and
     <input
       id="amount"
       type="text"
-      oninput="setState(this, { amount: this.value })"
+      oninput="setState({ amount: this.value })"
       x-value="amount"
     />
   </div>
@@ -77,7 +71,7 @@ By design, the approach follows the principle of **progressive enhancement** and
     <input
       id="interest"
       type="text"
-      oninput="setState(this, { interest: this.value })"
+      oninput="setState({ interest: this.value })"
       x-value="interest"
     />
   </div>
@@ -95,7 +89,7 @@ By design, the approach follows the principle of **progressive enhancement** and
       x-case="animals"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'animals')"
+      onclick="setState('animals')"
     >
       Animals
     </div>
@@ -104,7 +98,7 @@ By design, the approach follows the principle of **progressive enhancement** and
       x-case="languages"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'languages')"
+      onclick="setState('languages')"
     >
       Languages
     </div>
@@ -113,7 +107,7 @@ By design, the approach follows the principle of **progressive enhancement** and
       x-case="colors"
       x-on="bg-gray-200"
       x-not="btn-muted"
-      onclick="setState(this, 'colors')"
+      onclick="setState('colors')"
     >
       Colors
     </div>

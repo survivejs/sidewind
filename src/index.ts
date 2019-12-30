@@ -14,7 +14,13 @@ declare global {
   }
 }
 
-function setState(element: ExtendedHTMLElement, newValue: any) {
+function setState(newValue: any) {
+  const element = window.event && (window.event.target as ExtendedHTMLElement);
+
+  if (!element) {
+    return;
+  }
+
   const stateContainer = element.closest("[x-state]") as ExtendedHTMLElement;
 
   if (!stateContainer) {
