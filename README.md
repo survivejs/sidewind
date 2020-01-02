@@ -27,11 +27,11 @@ By design, the approach follows the principle of **progressive enhancement** and
     <div class="flex flex-row justify-between" onclick="setState(!this.state)">
       <span>Junior Engineer</span>
       <span class="arrow">
-        <span class="arrow-down" x-hidden="state">▼</span>
-        <span class="arrow-up" x-hidden="!state">▲</span>
+        <span class="arrow-down" x-on="hidden">▼</span>
+        <span class="arrow-up" x-off="hidden">▲</span>
       </span>
     </div>
-    <div class="py-2 bg-gray-200" x-hidden="!state">
+    <div class="py-2 bg-gray-200" x-off="hidden">
       Junior engineer description
     </div>
   </section>
@@ -39,11 +39,11 @@ By design, the approach follows the principle of **progressive enhancement** and
     <div class="flex flex-row justify-between" onclick="setState(!this.state)">
       <span>Senior Engineer</span>
       <span class="arrow">
-        <span class="arrow-down" x-hidden="state">▼</span>
-        <span class="arrow-up" x-hidden="!state">▲</span>
+        <span class="arrow-down" x-on="hidden">▼</span>
+        <span class="arrow-up" x-off="hidden">▲</span>
       </span>
     </div>
-    <div class="py-2 bg-gray-200" x-hidden="!state">
+    <div class="py-2 bg-gray-200" x-off="hidden">
       Senior engineer description
     </div>
   </section>
