@@ -118,7 +118,7 @@ function expandCode() {
       class="p-2 w-full"
       x-case="code"
       x-on="bg-gray-200"
-      x-not="btn-muted"
+      x-off="btn-muted"
       onclick="setState('code')"
     >
       Code
@@ -127,15 +127,15 @@ function expandCode() {
       class="p-2 w-full"
       x-case="example"
       x-on="bg-gray-200"
-      x-not="btn-muted"
+      x-off="btn-muted"
       onclick="setState('example')"
     >
       Example
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div x-case="code" x-not="hidden">${code}</div>
-    <div x-case="example" x-not="hidden">${example}</div>
+    <div x-case="code" x-off="hidden">${code}</div>
+    <div x-case="example" x-off="hidden">${example}</div>
   </div>
 </section>`;
         };

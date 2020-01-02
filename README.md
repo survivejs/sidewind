@@ -91,7 +91,7 @@ By design, the approach follows the principle of **progressive enhancement** and
       class="p-2 w-full"
       x-case="animals"
       x-on="bg-gray-200"
-      x-not="btn-muted"
+      x-off="btn-muted"
       onclick="setState('animals')"
     >
       Animals
@@ -100,7 +100,7 @@ By design, the approach follows the principle of **progressive enhancement** and
       class="p-2 w-full"
       x-case="languages"
       x-on="bg-gray-200"
-      x-not="btn-muted"
+      x-off="btn-muted"
       onclick="setState('languages')"
     >
       Languages
@@ -109,16 +109,16 @@ By design, the approach follows the principle of **progressive enhancement** and
       class="p-2 w-full"
       x-case="colors"
       x-on="bg-gray-200"
-      x-not="btn-muted"
+      x-off="btn-muted"
       onclick="setState('colors')"
     >
       Colors
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div x-case="animals" x-not="hidden">Animals tab</div>
-    <div x-case="languages" x-not="hidden">Languages tab</div>
-    <div x-case="colors" x-not="hidden">Colors tab</div>
+    <div x-case="animals" x-off="hidden">Animals tab</div>
+    <div x-case="languages" x-off="hidden">Languages tab</div>
+    <div x-case="colors" x-off="hidden">Colors tab</div>
   </div>
 </section>
 ```

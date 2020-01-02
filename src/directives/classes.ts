@@ -30,7 +30,7 @@ function evaluateClasses(stateContainer: ExtendedHTMLElement, state: State) {
           );
         }
 
-        if (name === "x-not") {
+        if (name === "x-off") {
           return toggleClass(
             element.getAttribute("x-case") !== state,
             element,
