@@ -42,7 +42,7 @@
     "build": "tsdx build",
     "site:build": "npm run webpack:build",
     "start": "npm run webpack:serve",
-    "lint": "tsdx lint demo/index.ts src/index.ts test",
+    "lint": "tsdx lint demo src test",
     "test": "tsdx test",
     "prepare": "tsdx build && npm run site:build",
     "webpack:build": "webpack --env production",
