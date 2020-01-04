@@ -27,6 +27,11 @@ const commonConfig = merge({
         include: [PATHS.DEMO, PATHS.SRC],
         use: {
           loader: "ts-loader",
+          options: {
+            compilerOptions: {
+              declaration: false,
+            },
+          },
         },
       },
       {
