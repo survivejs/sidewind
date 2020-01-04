@@ -1,6 +1,8 @@
 import { BindState, ExtendedHTMLElement } from "../types";
 import evaluateValues from "./values";
 
+type StringObject = { [id: string]: any };
+
 function evaluateEach(eachContainers: NodeListOf<ExtendedHTMLElement>) {
   for (let i = eachContainers.length; i--; ) {
     const eachContainer = eachContainers[i];
@@ -18,9 +20,12 @@ function evaluateEach(eachContainers: NodeListOf<ExtendedHTMLElement>) {
         return;
       }
 
+      // It would be better to diff for changes instead of replacing
+      // all nodes.
       while (containerParent.firstChild) {
         containerParent.firstChild.remove();
       }
+      containerParent.appendChild(eachContainer);
 
       if (Array.isArray(state)) {
         state.forEach((item: BindState) => {
@@ -34,8 +39,18 @@ function evaluateEach(eachContainers: NodeListOf<ExtendedHTMLElement>) {
           containerParent.appendChild(templateClone);
         });
       } else {
-        // TODO: Object case
-        console.log(state);
+        Object.values(getValues(state, dataGetters)).forEach(values =>
+          values.forEach((value: any) => {
+            const templateClone = document.importNode(
+              eachContainer.content,
+              true
+            );
+
+            evaluateValues(templateClone, value, "x-bind");
+
+            containerParent.appendChild(templateClone);
+          })
+        );
       }
     }
   }
@@ -45,11 +60,8 @@ function parseDataGetters(pattern: string) {
   return pattern.split(",").map(part => part.trim());
 }
 
-function getValues(
-  data: BindState,
-  getters: string[]
-): { [id: string]: string } {
-  const ret: { [id: string]: string } = {};
+function getValues(data: BindState, getters: string[]): StringObject {
+  const ret: StringObject = {};
 
   getters.forEach(getter => {
     ret[getter] = data[getter];

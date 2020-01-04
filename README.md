@@ -131,22 +131,26 @@ By design, the approach follows the principle of **progressive enhancement** and
   onsubmit="setState({ text: '', todos: this.state.todos.concat({ text: this.state.text }) })"
   action="javascript:"
 >
+  <div class="mb-2">
+    <label>
+      <span>Add Todo</span>
+      <input
+        id="text"
+        type="text"
+        oninput="setState({ text: this.value })"
+        x-value="text"
+      />
+    </label>
+    <button type="submit">Add</button>
+  </div>
+  <div class="mb-2">
+    <ul class="list-disc list-inside">
+      <template x-each="todos">
+        <li x-bind="text"></li>
+      </template>
+    </ul>
+  </div>
   <div x-value="todos"></div>
-  <label>
-    <span>Add Todo</span>
-    <input
-      id="text"
-      type="text"
-      oninput="setState({ text: this.value })"
-      x-value="text"
-    />
-  </label>
-  <button type="submit">Add</button>
-  <ul>
-    <template x-each="todos">
-      <li x-bind="text"></li>
-    </template>
-  </ul>
 </form>
 ```
 
