@@ -14,7 +14,7 @@ function evaluateValues(
   for (let i = valueContainers.length; i--; ) {
     const valueContainer = valueContainers[i] as ExtendedHTMLElement;
     const valueProperty = valueContainer.getAttribute(valueKey) || "";
-    const evaluatedValue = state[valueProperty]
+    const evaluatedValue = state.hasOwnProperty(valueProperty)
       ? state[valueProperty]
       : evaluateExpression(valueProperty, state) || state;
 

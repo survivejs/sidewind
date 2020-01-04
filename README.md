@@ -127,8 +127,8 @@ By design, the approach follows the principle of **progressive enhancement** and
 
 ```html
 <form
-  x-state="{ 'text': ' ', 'todos': [] }"
-  onsubmit="setState({ text: ' ', todos: this.state.todos.concat({ text: this.state.text }) })"
+  x-state="{ 'text': '', 'todos': [] }"
+  onsubmit="setState({ text: '', todos: this.state.todos.concat({ text: this.state.text }) })"
   action="javascript:"
 >
   <div x-value="todos"></div>
