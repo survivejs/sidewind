@@ -94,18 +94,31 @@ function processMarkdown(input) {
     replace: `<${key} class="${classMap[key]}" $1>`,
   }));
   const convert = new showdown.Converter({
-    extensions: [...bindings, expandCode()],
+    extensions: [
+      ...bindings,
+      expandCode(),
+      addHeaderAnchors("h2"),
+      addHeaderAnchors("h3"),
+    ],
   });
 
   // TODO: Deal with the code sections
   return convert.makeHtml(input);
 }
 
+function addHeaderAnchors(tag) {
+  return {
+    type: "output",
+    regex: new RegExp(`<${tag} id="(.*)">(.*)<\/${tag}>`, "g"),
+    replace: `<${tag} id="$1">$2<a class="ml-2 text-gray-200 hover:text-gray-800" href="#$1">#</a></${tag}>`,
+  };
+}
+
 function expandCode() {
   return {
     type: "output",
     filter(text) {
-      let left = "<pre><code\\b[^>]*>",
+      const left = "<pre><code\\b[^>]*>",
         right = "</code></pre>",
         flags = "g",
         replacement = (_, match, left, right) => {
