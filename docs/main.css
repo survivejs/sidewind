@@ -695,6 +695,14 @@ pre {
   margin-bottom: 0.5rem;
 }
 
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
 .max-w-md {
   max-width: 28rem;
 }
@@ -718,6 +726,14 @@ pre {
 
 .table-fixed {
   table-layout: fixed;
+}
+
+.text-gray-200 {
+  color: #edf2f7;
+}
+
+.text-gray-800 {
+  color: #2d3748;
 }
 
 .underline {
