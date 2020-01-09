@@ -12,7 +12,7 @@ function evaluateState(stateContainers: NodeListOf<ExtendedHTMLElement>) {
     const stateContainer = stateContainers[i];
     const state = parseState(stateContainer);
 
-    evaluateValues(stateContainer, state, "x-value");
+    evaluateValues(stateContainer, state, "x-value", "x-state");
     evaluateClasses(stateContainer, state);
   });
 }
@@ -28,8 +28,10 @@ function orderByParents(elementsArray: ExtendedHTMLElement[]) {
     .map(({ i }) => i);
 }
 
-function getDepth(element: Node, depth = 0): number {
-  return element.parentNode ? getDepth(element.parentNode, depth + 1) : depth;
+function getDepth(element: Element, depth = 0): number {
+  return element.parentElement
+    ? getDepth(element.parentElement, depth + 1)
+    : depth;
 }
 
 export default evaluateState;

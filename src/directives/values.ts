@@ -4,15 +4,24 @@ import { evaluateExpression } from "../evaluators";
 function evaluateValues(
   stateContainer: HTMLElement,
   state: { [id: string]: any },
-  valueKey: string
+  valueKey: string,
+  stateKey?: string
 ) {
   const valueContainers = stateContainer.querySelectorAll(
     `:scope [${valueKey}]`
   );
 
-  // TODO: Figure out how to evaluate values only between x-state scopes
   for (let i = valueContainers.length; i--; ) {
     const valueContainer = valueContainers[i] as ExtendedHTMLElement;
+    const valueParent = stateKey
+      ? getStateParent(valueContainer, stateKey)
+      : stateContainer;
+
+    // If value container is within another state container, skip it
+    if (valueParent !== stateContainer) {
+      return;
+    }
+
     const valueProperty = valueContainer.getAttribute(valueKey) || "";
     const evaluatedValue = state.hasOwnProperty(valueProperty)
       ? state[valueProperty]
@@ -27,6 +36,14 @@ function evaluateValues(
           : evaluatedValue;
     }
   }
+}
+
+function getStateParent(element: Element, stateKey: string): Element | null {
+  return element.parentElement
+    ? element.parentElement.hasAttribute(stateKey)
+      ? element.parentElement
+      : getStateParent(element.parentElement, stateKey)
+    : null;
 }
 
 export default evaluateValues;

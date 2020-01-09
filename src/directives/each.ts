@@ -3,17 +3,21 @@ import evaluateValues from "./values";
 
 type StringObject = { [id: string]: any };
 
-function evaluateEach(eachContainers: NodeListOf<ExtendedHTMLElement>) {
+function evaluateEach(
+  eachContainers: NodeListOf<ExtendedHTMLElement>,
+  eachKey: string,
+  stateKey: string
+) {
   for (let i = eachContainers.length; i--; ) {
     const eachContainer = eachContainers[i];
     const { state }: { state: BindState } = eachContainer.closest(
-      "[x-state]"
+      `[${stateKey}]`
     ) as ExtendedHTMLElement;
 
     if (state) {
       const containerParent = eachContainer.parentNode;
       const dataGetters = parseDataGetters(
-        eachContainer.getAttribute("x-each") || ""
+        eachContainer.getAttribute(eachKey) || ""
       );
 
       if (!containerParent) {
