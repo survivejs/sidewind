@@ -13,6 +13,8 @@ function evaluateFetch(fetchContainers: NodeListOf<ExtendedHTMLElement>) {
       .then(response => response.json())
       .then(state => {
         fetchContainer.setAttribute("x-state", JSON.stringify(state));
+
+        // x-each relies on this. Is this a good dependency to have?
         fetchContainer.state = state;
       })
       .catch(err => {

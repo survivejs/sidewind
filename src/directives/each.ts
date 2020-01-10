@@ -42,7 +42,7 @@ function evaluateEach(
 
           containerParent.appendChild(templateClone);
         });
-      } else {
+      } else if (typeof state === "object") {
         Object.values(getValues(state, dataGetters)).forEach(values =>
           values.forEach((value: any) => {
             const templateClone = document.importNode(

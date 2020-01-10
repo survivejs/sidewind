@@ -8,6 +8,9 @@ function evaluateState(stateContainers: NodeListOf<ExtendedHTMLElement>) {
     const stateContainer = stateContainers[i];
     const state = parseState(stateContainer);
 
+    // x-each relies on this. Is this a good dependency to have?
+    stateContainer.state = state;
+
     evaluateValues(stateContainer, state, "x-value", "x-state");
     evaluateClasses(stateContainer, state);
   }

@@ -6,20 +6,43 @@ Sidewind was designed to add interactivity to small sites and it's not a replace
 
 By design, the approach follows the principle of **progressive enhancement** and your pages will be accessible without JavaScript.
 
-## Examples
+## Directives
 
-### Minimal example
+Sidewind is composed of a collection of directives that operate on the DOM. I've documented them in detail below.
+
+### `x-state` and `x-value`
+
+`x-state` is a state container and the state is often used by other directives such as `x-value`. Consider the example below:
+
+```html
+<section x-state="false">Value: <span x-value="state" /></section>
+```
+
+The state can be manipulated using a global `setState`:
 
 ```html
 <section x-state="false">
-  <div class="mb-2">Toggled value: <span x-value="state" /></div>
+  <div class="mb-2">Value: <span x-value="state" /></div>
   <button class="btn btn-blue" onclick="setState(!this.state)">
     Toggle value
   </button>
 </section>
 ```
 
-### Accordion
+State can be a complex object:
+
+```html
+<article x-state="{ 'amount': 1000, 'interest': 1.2 }">
+  Total:
+  <span x-value="state.amount * state.interest" />
+</article>
+```
+
+> [The calculator example](#calculator) takes this idea further and shows how to handle user interaction.
+
+### `x-on`, and `x-off`
+
+Given Tailwind is an utility class based CSS approach for styling, Sidewind provides means for connecting state with classes. `x-on` and `x-off` allow you to set classes if state is either true (`x-on`) or false (`x-off`) as the accordion example below illustrates:
 
 ```html
 <article>
@@ -50,39 +73,9 @@ By design, the approach follows the principle of **progressive enhancement** and
 </article>
 ```
 
-### Calculator
+### `x-case`
 
-```html
-<article
-  class="flex flex-row justify-between md:max-w-md"
-  x-state="{ 'amount': 1000, 'interest': 1.2 }"
->
-  <div>
-    <label for="amount">Amount</label>
-    <input
-      id="amount"
-      type="text"
-      oninput="setState({ amount: this.value })"
-      x-value="amount"
-    />
-  </div>
-  <div>
-    <label for="interest">Interest</label>
-    <input
-      id="interest"
-      type="text"
-      oninput="setState({ interest: this.value })"
-      x-value="interest"
-    />
-  </div>
-  <div>
-    Total:
-    <span x-value="Math.round(state.amount * state.interest * 100) / 100" />
-  </div>
-</article>
-```
-
-### Tabs
+`x-case` has been designed to allow combining `x-on` and `x-off` with `switch/case` kind of matching:
 
 ```html
 <section x-state="'animals'">
@@ -121,6 +114,75 @@ By design, the approach follows the principle of **progressive enhancement** and
     <div x-case="colors" x-off="hidden">Colors tab</div>
   </div>
 </section>
+```
+
+### `x-each` and `x-bind`
+
+`x-each` allows iteration of a list. It has been designed to be used with a [template tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). To access values during iteration, use `x-bind` as below:
+
+```html
+<div
+  x-state="{ 'todos': [{ 'text': 'Wash dishes' }, { 'text': 'Eat carrots' }] }"
+>
+  <div class="mb-2">
+    <ul class="list-disc list-inside">
+      <template x-each="todos">
+        <li x-bind="text"></li>
+      </template>
+    </ul>
+  </div>
+  <div x-value="todos"></div>
+</div>
+```
+
+### `x-fetch`
+
+`x-fetch` wraps [fetch() API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to allow fetching data:
+
+```html
+<div x-fetch="./assets/cars.json" class="table-fixed">
+  <ul class="list-disc list-inside">
+    <template x-each="brand, color">
+      <li><span x-bind="brand"></span> - <span x-bind="color"></span></li>
+    </template>
+  </ul>
+</div>
+```
+
+## Examples
+
+The examples below combine directives to produce complex user interfaces and to handle specific use cases.
+
+### Calculator
+
+```html
+<article
+  class="flex flex-row justify-between md:max-w-md"
+  x-state="{ 'amount': 1000, 'interest': 1.2 }"
+>
+  <div>
+    <label for="amount">Amount</label>
+    <input
+      id="amount"
+      type="text"
+      oninput="setState({ amount: this.value })"
+      x-value="amount"
+    />
+  </div>
+  <div>
+    <label for="interest">Interest</label>
+    <input
+      id="interest"
+      type="text"
+      oninput="setState({ interest: this.value })"
+      x-value="interest"
+    />
+  </div>
+  <div>
+    Total:
+    <span x-value="Math.round(state.amount * state.interest * 100) / 100" />
+  </div>
+</article>
 ```
 
 ### TODO List
