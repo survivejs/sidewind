@@ -47,24 +47,31 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
 ```html
 <article>
   <section class="mb-2" x-state="false">
-    <div class="flex flex-row justify-between" onclick="setState(!this.state)">
+    <div
+      class="flex flex-row justify-between cursor-pointer"
+      onclick="setState(!this.state)"
+    >
       <span>Junior Engineer</span>
-      <span class="arrow">
-        <span class="arrow-down" x-on="hidden">▼</span>
-        <span class="arrow-up" x-off="hidden">▲</span>
-      </span>
+      <div>
+        <span x-on="hidden">▼</span>
+        <span x-off="hidden">▲</span>
+      </div>
     </div>
     <div class="py-2 bg-gray-200" x-off="hidden">
       Junior engineer description
     </div>
   </section>
+  <hr class="my-2" />
   <section x-state="false">
-    <div class="flex flex-row justify-between" onclick="setState(!this.state)">
+    <div
+      class="flex flex-row justify-between cursor-pointer"
+      onclick="setState(!this.state)"
+    >
       <span>Senior Engineer</span>
-      <span class="arrow">
-        <span class="arrow-down" x-on="hidden">▼</span>
-        <span class="arrow-up" x-off="hidden">▲</span>
-      </span>
+      <div>
+        <span x-on="hidden">▼</span>
+        <span x-off="hidden">▲</span>
+      </div>
     </div>
     <div class="py-2 bg-gray-200" x-off="hidden">
       Senior engineer description
