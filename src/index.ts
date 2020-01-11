@@ -3,6 +3,7 @@ import {
   evaluateClasses,
   evaluateEach,
   evaluateFetch,
+  evaluateInit,
   evaluateState,
   evaluateValues,
 } from "./directives";
@@ -48,9 +49,12 @@ function setState(newValue: any) {
 }
 
 function initialize(global = window) {
-  evaluateState(document.querySelectorAll("[x-state]"));
-  evaluateFetch(document.querySelectorAll("[x-fetch]"));
-  evaluateEach(document.querySelectorAll("[x-each]"), "x-each", "x-state");
+  global.onload = () => {
+    evaluateInit(document.querySelectorAll("[x-init]"), "x-init");
+    evaluateState(document.querySelectorAll("[x-state]"));
+    evaluateFetch(document.querySelectorAll("[x-fetch]"));
+    evaluateEach(document.querySelectorAll("[x-each]"), "x-each", "x-state");
+  };
 
   global.setState = setState;
 }

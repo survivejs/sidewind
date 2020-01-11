@@ -1,4 +1,4 @@
-import { ExtendedHTMLElement } from "../types";
+import { BindState, ExtendedHTMLElement } from "../types";
 import { evaluateExpression } from "../evaluators";
 
 function evaluateValues(
@@ -23,9 +23,17 @@ function evaluateValues(
     }
 
     const valueProperty = valueContainer.getAttribute(valueKey) || "";
-    const evaluatedValue = state.hasOwnProperty(valueProperty)
-      ? state[valueProperty]
-      : evaluateExpression(valueProperty, state) || state;
+
+    let evaluatedValue;
+
+    // DOM node case
+    if (state.nodeType) {
+      evaluatedValue = get(state, valueProperty);
+    } else {
+      evaluatedValue = state.hasOwnProperty(valueProperty)
+        ? state[valueProperty]
+        : evaluateExpression(valueProperty, state) || state;
+    }
 
     if (valueContainer.localName === "input") {
       valueContainer.value = evaluatedValue;
@@ -36,6 +44,17 @@ function evaluateValues(
           : evaluatedValue;
     }
   }
+}
+
+function get(object: BindState, keyString: string) {
+  const keys = keyString.split(".");
+  let ret = object;
+
+  keys.forEach(key => {
+    ret = ret[key];
+  });
+
+  return ret;
 }
 
 function getStateParent(element: Element, stateKey: string): Element | null {

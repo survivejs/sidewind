@@ -68,7 +68,13 @@ function getValues(data: BindState, getters: string[]): StringObject {
   const ret: StringObject = {};
 
   getters.forEach(getter => {
-    ret[getter] = data[getter];
+    const value = data[getter];
+
+    if (value._type === "query") {
+      ret[getter] = [].slice.call(document.querySelectorAll(value._value));
+    } else {
+      ret[getter] = value;
+    }
   });
 
   return ret;

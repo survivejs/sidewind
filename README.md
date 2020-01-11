@@ -40,6 +40,23 @@ State can be a complex object:
 
 > [The calculator example](#calculator) takes this idea further and shows how to handle user interaction.
 
+### `x-init`
+
+`x-init` complements `x-state` by allowing you to trigger JavaScript logic for initializing the state. It's executed only during the initial render of the page. It `document.querySelectorAll` through `$` alias.
+
+```html
+<nav x-init="{ headings: $('h2 .heading-text, h3 .heading-text') }">
+  <ul class="list-disc list-inside">
+    <template x-each="headings">
+      <li>
+        <span x-bind="parentNode.nodeName"></span> -
+        <span x-bind="textContent"></span>
+      </li>
+    </template>
+  </ul>
+</nav>
+```
+
 ### `x-on`, and `x-off`
 
 Given Tailwind is an utility class based CSS approach for styling, Sidewind provides means for connecting state with classes. `x-on` and `x-off` allow you to set classes if state is either true (`x-on`) or false (`x-off`) as the accordion example below illustrates:
