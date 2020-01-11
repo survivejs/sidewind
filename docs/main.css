@@ -93,6 +93,12 @@ h1 {
  * 2. Show the overflow in Edge and IE.
  */
 
+hr {
+  box-sizing: content-box; /* 1 */
+  height: 0; /* 1 */
+  overflow: visible; /* 2 */
+}
+
 /**
  * 1. Correct the inheritance and scaling of font size in all browsers.
  * 2. Correct the odd `em` font sizing in all browsers.
@@ -355,6 +361,7 @@ blockquote,
 h1,
 h2,
 h3,
+hr,
 p,
 pre {
   margin: 0;
@@ -424,6 +431,10 @@ html {
 /*
  * Ensure horizontal rules are visible by default
  */
+
+hr {
+  border-top-width: 1px;
+}
 
 /**
  * Undo the `border-style: none` reset that Normalize applies to images so that
@@ -655,6 +666,10 @@ pre {
   border-width: 1px;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .flex {
   display: -webkit-box;
   display: flex;
@@ -685,6 +700,11 @@ pre {
 
 .list-disc {
   list-style-type: disc;
+}
+
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .mx-auto {
