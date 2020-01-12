@@ -40,12 +40,10 @@ State can be a complex object:
 
 > [The calculator example](#calculator) takes this idea further and shows how to handle user interaction.
 
-### `x-init`
-
-`x-init` complements `x-state` by allowing you to trigger JavaScript logic for initializing the state. It's executed only during the initial render of the page. It `document.querySelectorAll` through `$` alias.
+`x-state` accepts complex JavaScript expressions as well and exposes `document.querySelectorAll` through `$` alias.
 
 ```html
-<nav x-init="{ headings: $('h2 .heading-text, h3 .heading-text') }">
+<nav x-state="{ headings: $('h2 .heading-text, h3 .heading-text') }">
   <ul class="list-disc list-inside">
     <template x-each="headings">
       <li>

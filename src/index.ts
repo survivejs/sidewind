@@ -3,11 +3,9 @@ import {
   evaluateClasses,
   evaluateEach,
   evaluateFetch,
-  evaluateInit,
   evaluateState,
   evaluateValues,
 } from "./directives";
-import { parseState } from "./parsers";
 
 declare global {
   interface Window {
@@ -28,8 +26,7 @@ function setState(newValue: any) {
     return;
   }
 
-  const state = parseState(stateContainer);
-
+  const state = stateContainer.state;
   const updatedState =
     typeof state === "object" ? { ...state, ...newValue } : newValue;
 
@@ -40,7 +37,7 @@ function setState(newValue: any) {
 
   evaluateValues(stateContainer, updatedState, "x-value", "x-state");
   evaluateClasses(stateContainer, updatedState);
-  evaluateState(stateContainer.querySelectorAll("[x-state]"));
+  evaluateState(stateContainer.querySelectorAll("[x-state]"), "x-state");
   evaluateEach(
     stateContainer.querySelectorAll("[x-each]"),
     "x-each",
@@ -50,8 +47,7 @@ function setState(newValue: any) {
 
 function initialize(global = window) {
   global.onload = () => {
-    evaluateInit(document.querySelectorAll("[x-init]"), "x-init");
-    evaluateState(document.querySelectorAll("[x-state]"));
+    evaluateState(document.querySelectorAll("[x-state]"), "x-state");
     evaluateFetch(document.querySelectorAll("[x-fetch]"));
     evaluateEach(document.querySelectorAll("[x-each]"), "x-each", "x-state");
   };

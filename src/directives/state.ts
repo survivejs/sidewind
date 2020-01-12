@@ -1,14 +1,18 @@
 import { ExtendedHTMLElement } from "../types";
-import { parseState } from "../parsers";
 import evaluateClasses from "./classes";
 import evaluateValues from "./values";
+import { evaluateExpression } from "../evaluators";
 
-function evaluateState(stateContainers: NodeListOf<ExtendedHTMLElement>) {
+function evaluateState(
+  stateContainers: NodeListOf<ExtendedHTMLElement>,
+  stateKey: string
+) {
   for (let i = stateContainers.length; i--; ) {
     const stateContainer = stateContainers[i];
-    const state = parseState(stateContainer);
 
-    // x-each relies on this. Is this a good dependency to have?
+    const stateProperty = stateContainer.getAttribute(stateKey) || "";
+    const state = evaluateExpression(stateProperty, {});
+
     stateContainer.state = state;
 
     evaluateValues(stateContainer, state, "x-value", "x-state");
