@@ -123,8 +123,7 @@
 <blockquote>
   <p><a class="underline"  href="#calculator">The calculator example</a> takes this idea further and shows how to handle user interaction.</p>
 </blockquote>
-<h3 id="xinit"><span class="heading-text"><code>x-init</code></span><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xinit">#</a></h3>
-<p><code>x-init</code> complements <code>x-state</code> by allowing you to trigger JavaScript logic for initializing the state. It's executed only during the initial render of the page. It <code>document.querySelectorAll</code> through <code>$</code> alias.</p>
+<p><code>x-state</code> accepts complex JavaScript expressions as well and exposes <code>document.querySelectorAll</code> through <code>$</code> alias.</p>
 <section class="mb-4" x-state="'code'">
   <nav class="flex flex-row justify-between">
     <div
@@ -147,7 +146,7 @@
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div x-case="code" x-off="hidden"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span> <span class="hljs-attr">x-init</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ headings: $('h2 .heading-text, h3 .heading-text') }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
+    <div x-case="code" x-off="hidden"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ headings: $('h2 .heading-text, h3 .heading-text') }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"headings"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
@@ -158,7 +157,7 @@
   <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
 </span></code></pre></div>
-    <div x-case="example" x-off="hidden"><nav x-init="{ headings: $('h2 .heading-text, h3 .heading-text') }">
+    <div x-case="example" x-off="hidden"><nav x-state="{ headings: $('h2 .heading-text, h3 .heading-text') }">
   <ul class="list-disc list-inside">
     <template x-each="headings">
       <li>
