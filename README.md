@@ -55,6 +55,21 @@ State can be a complex object:
 </nav>
 ```
 
+It's possible to use the standard [fetch() API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) on top of `x-state` for fetching data as it handles Promises for you internally:
+
+```html
+<div
+  x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }"
+  class="table-fixed"
+>
+  <ul class="list-disc list-inside">
+    <template x-each="cars">
+      <li><span x-bind="brand"></span> - <span x-bind="color"></span></li>
+    </template>
+  </ul>
+</div>
+```
+
 ### `x-on`, and `x-off`
 
 Given Tailwind is an utility class based CSS approach for styling, Sidewind provides means for connecting state with classes. `x-on` and `x-off` allow you to set classes if state is either true (`x-on`) or false (`x-off`) as the accordion example below illustrates:
@@ -154,20 +169,6 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
     </ul>
   </div>
   <div x-value="todos"></div>
-</div>
-```
-
-### `x-fetch`
-
-`x-fetch` wraps [fetch() API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to allow fetching data:
-
-```html
-<div x-fetch="./assets/cars.json" class="table-fixed">
-  <ul class="list-disc list-inside">
-    <template x-each="brand, color">
-      <li><span x-bind="brand"></span> - <span x-bind="color"></span></li>
-    </template>
-  </ul>
 </div>
 ```
 

@@ -2,7 +2,6 @@ import { ExtendedHTMLElement } from "./types";
 import {
   evaluateClasses,
   evaluateEach,
-  evaluateFetch,
   evaluateState,
   evaluateValues,
 } from "./directives";
@@ -48,7 +47,6 @@ function setState(newValue: any) {
 function initialize(global = window) {
   global.onload = () => {
     evaluateState(document.querySelectorAll("[x-state]"), "x-state");
-    evaluateFetch(document.querySelectorAll("[x-fetch]"));
     evaluateEach(document.querySelectorAll("[x-each]"), "x-each", "x-state");
   };
 

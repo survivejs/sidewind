@@ -43,17 +43,17 @@ function evaluateEach(
           containerParent.appendChild(templateClone);
         });
       } else if (typeof state === "object") {
-        Object.values(getValues(state, dataGetters)).forEach(values =>
-          values.forEach((value: any) => {
-            const templateClone = document.importNode(
-              eachContainer.content,
-              true
-            );
-
-            evaluateValues(templateClone, value, "x-bind");
-
-            containerParent.appendChild(templateClone);
-          })
+        Object.values(getValues(state, dataGetters)).forEach(
+          values =>
+            Array.isArray(values) &&
+            values.forEach((value: any) => {
+              const templateClone = document.importNode(
+                eachContainer.content,
+                true
+              );
+              evaluateValues(templateClone, value, "x-bind");
+              containerParent.appendChild(templateClone);
+            })
         );
       }
     }
