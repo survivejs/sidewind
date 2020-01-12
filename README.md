@@ -43,12 +43,12 @@ State can be a complex object:
 `x-state` accepts complex JavaScript expressions as well and exposes `document.querySelectorAll` through `$` alias.
 
 ```html
-<nav x-state="{ headings: $('h2 .heading-text, h3 .heading-text') }">
+<nav x-state="{ headings: $('h2, h3') }">
   <ul class="list-disc list-inside">
     <template x-each="headings">
       <li>
-        <span x-bind="parentNode.nodeName"></span> -
-        <span x-bind="textContent"></span>
+        <span x-bind="nodeName"></span> - <span x-bind="textContent"></span> -
+        <span x-bind="nextElementSibling.attributes.href.value"></span>
       </li>
     </template>
   </ul>

@@ -115,7 +115,7 @@ function addHeaderAnchors(tag) {
   return {
     type: "output",
     regex: new RegExp(`<${tag} id="(.*)">(.*)<\/${tag}>`, "g"),
-    replace: `<${tag} id="$1"><span class="heading-text">$2</span><a class="ml-2 text-gray-200 hover:text-gray-800" href="#$1">#</a></${tag}>`,
+    replace: `<${tag} class="inline" id="$1">$2</${tag}><a class="ml-2 text-gray-200 hover:text-gray-800" href="#$1">#</a>`,
   };
 }
 
