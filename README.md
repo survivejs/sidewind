@@ -55,6 +55,11 @@ State can be a complex object:
       <li>
         <span x-bind="nodeName"></span> - <span x-bind="textContent"></span> -
         <span x-bind="nextElementSibling.attributes.href.value"></span>
+        -
+        <a
+          x-attributes="{ href: nextElementSibling.attributes.href.value }"
+          x-bind="textContent"
+        ></a>
       </li>
     </template>
   </ul>
