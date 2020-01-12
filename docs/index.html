@@ -170,6 +170,53 @@
 </div>
   </div>
 </section>
+<p>It's possible to use the standard <a class="underline"  href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">fetch() API</a> on top of <code>x-state</code> for fetching data as it handles Promises for you internally:</p>
+<section class="mb-4" x-state="'code'">
+  <nav class="flex flex-row justify-between">
+    <div
+      class="p-2 w-full"
+      x-case="code"
+      x-on="bg-gray-200"
+      x-off="btn-muted"
+      onclick="setState('code')"
+    >
+      Code
+    </div>
+    <div
+      class="p-2 w-full"
+      x-case="example"
+      x-on="bg-gray-200"
+      x-off="btn-muted"
+      onclick="setState('example')"
+    >
+      Example
+    </div>
+  </nav>
+  <div class="bg-gray-100 p-2">
+    <div x-case="code" x-off="hidden"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>
+  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ cars: fetch('./assets/cars.json').then(res =&gt; res.json()) }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
+  <span class="hljs-attr">class</span>=<span class="hljs-string">"table-fixed"</span>
+&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"cars"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"brand"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"color"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</span></code></pre></div>
+    <div x-case="example" x-off="hidden"><div
+  x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }"
+  class="table-fixed"
+>
+  <ul class="list-disc list-inside">
+    <template x-each="cars">
+      <li><span x-bind="brand"></span> - <span x-bind="color"></span></li>
+    </template>
+  </ul>
+</div>
+</div>
+  </div>
+</section>
 <h3 id="xonandxoff"><span class="heading-text"><code>x-on</code>, and <code>x-off</code></span><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xonandxoff">#</a></h3>
 <p>Given Tailwind is an utility class based CSS approach for styling, Sidewind provides means for connecting state with classes. <code>x-on</code> and <code>x-off</code> allow you to set classes if state is either true (<code>x-on</code>) or false (<code>x-off</code>) as the accordion example below illustrates:</p>
 <section class="mb-4" x-state="'code'">
@@ -412,48 +459,6 @@
     </ul>
   </div>
   <div x-value="todos"></div>
-</div>
-</div>
-  </div>
-</section>
-<h3 id="xfetch"><span class="heading-text"><code>x-fetch</code></span><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xfetch">#</a></h3>
-<p><code>x-fetch</code> wraps <a class="underline"  href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">fetch() API</a> to allow fetching data:</p>
-<section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
-    <div
-      class="p-2 w-full"
-      x-case="code"
-      x-on="bg-gray-200"
-      x-off="btn-muted"
-      onclick="setState('code')"
-    >
-      Code
-    </div>
-    <div
-      class="p-2 w-full"
-      x-case="example"
-      x-on="bg-gray-200"
-      x-off="btn-muted"
-      onclick="setState('example')"
-    >
-      Example
-    </div>
-  </nav>
-  <div class="bg-gray-100 p-2">
-    <div x-case="code" x-off="hidden"><pre><code class="html language-html">&lt;div x-fetch=<span class="hljs-string">"./assets/cars.json"</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"table-fixed"</span>&gt;
-  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"brand, color"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"brand"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"color"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span>
-<span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-</code></pre></div>
-    <div x-case="example" x-off="hidden"><div x-fetch="./assets/cars.json" class="table-fixed">
-  <ul class="list-disc list-inside">
-    <template x-each="brand, color">
-      <li><span x-bind="brand"></span> - <span x-bind="color"></span></li>
-    </template>
-  </ul>
 </div>
 </div>
   </div>
