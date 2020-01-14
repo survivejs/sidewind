@@ -308,7 +308,6 @@ The examples below combine directives to produce complex user interfaces and to 
           x-bind="textContent"
           x-case="state.textContent === parent.closest.textContent"
           x-on="bg-gray-200"
-          x-off="btn-muted"
         >
         </a>
       </li>

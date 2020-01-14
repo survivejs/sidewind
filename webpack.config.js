@@ -246,10 +246,35 @@ function getHTML({
     </head>
     <body>
       ${githubCorner("https://github.com/bebraw/sidewind")}
-      <main class="container mx-auto p-8">
-        ${processMarkdown(
-          fs.readFileSync("./README.md", { encoding: "utf-8" })
-        )}
+      <main class="flex m-8">
+        <aside class="hidden md:inline md:w-1/3">
+          <nav
+            class="sticky top-0"
+            x-label="parent"
+            x-state="{ headings: $('h2, h3') }"
+            x-closest="{ closest: $('h2, h3') }"
+          >
+            <ul>
+              <template x-each="headings">
+                <li>
+                  <a
+                    x-attr
+                    x:href="nextElementSibling.attributes.href.value"
+                    x-bind="textContent"
+                    x-case="state.textContent === parent.closest.textContent"
+                    x-on="font-bold"
+                  >
+                  </a>
+                </li>
+              </template>
+            </ul>
+          </nav>
+        </aside>
+        <article class="md:w-2/3">
+          ${processMarkdown(
+            fs.readFileSync("./README.md", { encoding: "utf-8" })
+          )}
+        </article>
       </main>
       ${jsTags}
     </body>
