@@ -15,9 +15,6 @@ function evaluateEach(
 
     if (state) {
       const containerParent = eachContainer.parentNode;
-      const dataGetters = parseDataGetters(
-        eachContainer.getAttribute(eachKey) || ""
-      );
 
       if (!containerParent) {
         return;
@@ -31,7 +28,9 @@ function evaluateEach(
       containerParent.appendChild(eachContainer);
 
       if (typeof state === "object") {
-        Object.values(getValues(state, dataGetters)).forEach(
+        Object.values(
+          getValues(state, eachContainer.getAttribute(eachKey))
+        ).forEach(
           values =>
             Array.isArray(values) &&
             values.forEach((value: any) => {
@@ -54,24 +53,19 @@ function evaluateEach(
   }
 }
 
-function parseDataGetters(pattern: string) {
-  return pattern.split(",").map(part => part.trim());
-}
+function getValues(data: BindState, getter: string | null): StringObject {
+  if (!getter) {
+    return {};
+  }
 
-function getValues(data: BindState, getters: string[]): StringObject {
-  const ret: StringObject = {};
+  const value = data[getter];
 
-  getters.forEach(getter => {
-    const value = data[getter];
-
-    if (value._type === "query") {
-      ret[getter] = [].slice.call(document.querySelectorAll(value._value));
-    } else {
-      ret[getter] = value;
-    }
-  });
-
-  return ret;
+  return {
+    [getter]:
+      value._type === "query"
+        ? [].slice.call(document.querySelectorAll(value._value))
+        : value,
+  };
 }
 
 export default evaluateEach;
