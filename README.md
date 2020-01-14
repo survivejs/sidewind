@@ -58,9 +58,9 @@ State can be a complex object:
           x:href="nextElementSibling.attributes.href.value"
           x-bind="textContent"
         >
-          <span x-bind="nodeName"/> - <span x-bind="textContent"/> -
-          <span x-bind="nextElementSibling.attributes.href.value"
-        /></a>
+          <span x-bind="nodeName" /> - <span x-bind="textContent" /> -
+          <span x-bind="nextElementSibling.attributes.href.value" />
+        </a>
       </li>
     </template>
   </ul>
@@ -291,6 +291,30 @@ The examples below combine directives to produce complex user interfaces and to 
     </template>
   </tbody>
 </table>
+```
+
+## Table of Contents
+
+```html
+<nav x-state="{ headings: $('h2, h3') }" x-closest="{ closest: $('h2, h3') }">
+  <ul class="list-disc list-inside">
+    <template x-each="headings">
+      <li>
+        <a
+          x-attr
+          x:href="nextElementSibling.attributes.href.value"
+          x-bind="textContent"
+          x-case="textContent === closest.textContent"
+          x-on="bg-gray-200"
+          x-off="btn-muted"
+        >
+          <span x-bind="nodeName" /> - <span x-bind="textContent" /> -
+          <span x-bind="nextElementSibling.attributes.href.value" />
+        </a>
+      </li>
+    </template>
+  </ul>
+</nav>
 ```
 
 ## Related Approaches
