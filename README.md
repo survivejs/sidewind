@@ -68,10 +68,7 @@ State can be a complex object:
 It's possible to use the standard [fetch() API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) on top of `x-state` for fetching data as it handles Promises for you internally:
 
 ```html
-<div
-  x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }"
-  class="table-fixed"
->
+<div x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }">
   <ul class="list-disc list-inside">
     <template x-each="cars">
       <li><span x-bind="brand" /> - <span x-bind="color" /></li>
