@@ -1,4 +1,4 @@
-import { ExtendedHTMLElement } from "../types";
+import { BindState, ExtendedHTMLElement } from "../types";
 import evaluateExpression from "../evaluate-expression";
 import { getValues } from "../utils";
 import setState from "../set-state";
@@ -24,25 +24,31 @@ function evaluateClosest(
       JSON.stringify(state ? { ...state, ...emptyClosest } : emptyClosest)
     );
 
-    window.addEventListener("scroll", () => {
-      const elements = Array.from(getValues(closestState, key)[key]).map(
-        value => {
-          const element = value as HTMLElement;
-          const { top } = element.getBoundingClientRect();
-
-          return {
-            element,
-            top,
-          };
-        }
-      );
-      const closest = elements.reduce((a, b) =>
-        Math.abs(a.top) < Math.abs(b.top) ? a : b
-      );
-
-      setState({ [key]: closest.element }, closestContainer);
-    });
+    window.addEventListener("scroll", () =>
+      evaluateClosestValue(closestContainer, closestState, key)
+    );
   }
+}
+
+function evaluateClosestValue(
+  closestContainer: ExtendedHTMLElement,
+  closestState: BindState,
+  key: string
+) {
+  const elements = Array.from(getValues(closestState, key)[key]).map(value => {
+    const element = value as HTMLElement;
+    const { top } = element.getBoundingClientRect();
+
+    return {
+      element,
+      top,
+    };
+  });
+  const closest = elements.reduce((a, b) =>
+    Math.abs(a.top) < Math.abs(b.top) ? a : b
+  );
+
+  setState({ [key]: closest.element }, closestContainer);
 }
 
 export default evaluateClosest;
