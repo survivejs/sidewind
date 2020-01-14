@@ -11,21 +11,31 @@ function evaluateClosest(
   for (let i = closestContainers.length; i--; ) {
     const closestContainer = closestContainers[i] as ExtendedHTMLElement;
     const closestExpression = closestContainer.getAttribute(closestKey) || "";
-    const state = evaluateExpression(closestExpression, {});
-    const key = Object.keys(state)[0];
+    const closestState = evaluateExpression(closestExpression, {});
+    const key = Object.keys(closestState)[0];
+    const state = evaluateExpression(
+      closestContainer.getAttribute(stateKey) || "",
+      {}
+    );
+    const emptyClosest = { [key]: "" };
 
-    closestContainer.setAttribute(stateKey, `{ ${key}: ''}`);
+    closestContainer.setAttribute(
+      stateKey,
+      JSON.stringify(state ? { ...state, ...emptyClosest } : emptyClosest)
+    );
 
     document.onscroll = () => {
-      const elements = Array.from(getValues(state, key)[key]).map(value => {
-        const element = value as HTMLElement;
-        const { top } = element.getBoundingClientRect();
+      const elements = Array.from(getValues(closestState, key)[key]).map(
+        value => {
+          const element = value as HTMLElement;
+          const { top } = element.getBoundingClientRect();
 
-        return {
-          element,
-          top,
-        };
-      });
+          return {
+            element,
+            top,
+          };
+        }
+      );
       const closest = elements.reduce((a, b) =>
         Math.abs(a.top) < Math.abs(b.top) ? a : b
       );
