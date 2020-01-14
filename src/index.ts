@@ -34,20 +34,20 @@ function setState(newValue: any) {
   stateContainer.setAttribute("x-state", JSON.stringify(updatedState));
   stateContainer.state = updatedState;
 
-  evaluateValues(stateContainer, updatedState, "x-value", "x-state");
-  evaluateClasses(stateContainer, updatedState);
-  evaluateState(stateContainer.querySelectorAll("[x-state]"), "x-state");
   evaluateEach(
     stateContainer.querySelectorAll("[x-each]"),
     "x-each",
     "x-state"
   );
+  evaluateValues(stateContainer, updatedState, "x-value", "x-state");
+  evaluateClasses(stateContainer, updatedState);
+  evaluateState(stateContainer.querySelectorAll("[x-state]"), "x-state");
 }
 
 function initialize(global = window) {
   global.onload = () => {
-    evaluateState(document.querySelectorAll("[x-state]"), "x-state");
     evaluateEach(document.querySelectorAll("[x-each]"), "x-each", "x-state");
+    evaluateState(document.querySelectorAll("[x-state]"), "x-state");
   };
 
   global.setState = setState;

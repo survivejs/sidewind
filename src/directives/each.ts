@@ -30,20 +30,6 @@ function evaluateEach(
       }
       containerParent.appendChild(eachContainer);
 
-      /*if (Array.isArray(state)) {
-        state.forEach((item: BindState) => {
-          const templateClone = document.importNode(
-            eachContainer.content,
-            true
-          );
-
-          console.log("item", item);
-
-          // evaluateValues(templateClone, getValues(item, dataGetters), "x-bind");
-
-          containerParent.appendChild(templateClone);
-        });
-      } else*/
       if (typeof state === "object") {
         Object.values(getValues(state, dataGetters)).forEach(
           values =>
@@ -54,9 +40,10 @@ function evaluateEach(
                 true
               );
 
-              console.log("value", value);
-
-              // evaluateValues(templateClone, value, "x-bind");
+              templateClone.firstElementChild.setAttribute(
+                stateKey,
+                JSON.stringify(value).replace(/"/g, `'`)
+              );
 
               containerParent.appendChild(templateClone);
             })
