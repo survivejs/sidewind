@@ -11,4 +11,19 @@ function get(object: BindState, keyString: string) {
   return ret;
 }
 
-export { get };
+function getValues(data: BindState, getter: string | null): BindState {
+  if (!getter) {
+    return {};
+  }
+
+  const value = data[getter];
+
+  return {
+    [getter]:
+      value._type === "query"
+        ? [].slice.call(document.querySelectorAll(value._value))
+        : value,
+  };
+}
+
+export { get, getValues };

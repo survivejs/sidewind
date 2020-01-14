@@ -61,7 +61,7 @@ function initialize(global = window) {
       "x-each",
       "x-attr"
     );
-    evaluateClosest(document.querySelectorAll("[x-closest]"));
+    evaluateClosest(document.querySelectorAll("[x-closest]"), "x-closest");
   };
 
   global.setState = setState;
