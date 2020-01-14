@@ -24,7 +24,7 @@ function evaluateClosest(
       JSON.stringify(state ? { ...state, ...emptyClosest } : emptyClosest)
     );
 
-    document.onscroll = () => {
+    window.addEventListener("scroll", () => {
       const elements = Array.from(getValues(closestState, key)[key]).map(
         value => {
           const element = value as HTMLElement;
@@ -41,7 +41,7 @@ function evaluateClosest(
       );
 
       setState({ [key]: closest.element }, closestContainer);
-    };
+    });
   }
 }
 

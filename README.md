@@ -195,12 +195,10 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
 `x-closest` gives you access to the element closest to display top:
 
 ```html
-<div x-closest-disabled="{ closest: $('h2, h3') }">
+<div x-closest="{ closest: $('h2, h3') }">
   Closest heading: <span x-bind="closest.textContent" />
 </div>
 ```
-
-> TODO: Figure out why only one can be on page
 
 ## Examples
 
