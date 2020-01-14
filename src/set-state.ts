@@ -11,6 +11,7 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
   const eachKey = "x-each";
   const bindKey = "x-bind";
   const attrKey = "x-attr";
+  const labelKey = "x-label";
 
   if (!element) {
     element = window.event && (window.event.target as ExtendedHTMLElement);
@@ -43,14 +44,15 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     stateKey
   );
   evaluateBind(stateContainer, updatedState, bindKey, stateKey);
-  evaluateClasses(stateContainer, updatedState, stateKey);
   evaluateState(
     stateContainer.querySelectorAll(`[${stateKey}]`),
     stateKey,
     bindKey,
     eachKey,
-    attrKey
+    attrKey,
+    labelKey
   );
+  evaluateClasses(stateContainer, updatedState, stateKey, labelKey);
 }
 
 export default setState;

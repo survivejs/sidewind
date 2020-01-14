@@ -20,7 +20,8 @@ function initialize(global = window) {
       "x-state",
       "x-bind",
       "x-each",
-      "x-attr"
+      "x-attr",
+      "x-label"
     );
   };
 

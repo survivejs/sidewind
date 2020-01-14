@@ -40,6 +40,8 @@ function evaluateClosest(
         Math.abs(a.top) < Math.abs(b.top) ? a : b
       );
 
+      console.log(closestContainer, key, closest.element);
+
       setState({ [key]: closest.element }, closestContainer);
     };
   }

@@ -12,7 +12,8 @@ function evaluateState(
   stateKey: string,
   bindKey: string,
   eachKey: string,
-  attributeKey: string
+  attributeKey: string,
+  labelKey: string
 ) {
   for (let i = stateContainers.length; i--; ) {
     const stateContainer = stateContainers[i];
@@ -48,7 +49,7 @@ function evaluateState(
           stateKey
         );
         evaluateBind(stateContainer, newState, bindKey, stateKey);
-        evaluateClasses(stateContainer, newState, stateKey);
+        evaluateClasses(stateContainer, newState, stateKey, labelKey);
         evaluateAttributes(stateContainer, attributeKey, stateKey);
       });
 
@@ -56,7 +57,7 @@ function evaluateState(
     stateContainer.state = state;
 
     evaluateBind(stateContainer, state, bindKey, stateKey);
-    evaluateClasses(stateContainer, state, stateKey);
+    evaluateClasses(stateContainer, state, stateKey, labelKey);
     evaluateAttributes(stateContainer, attributeKey, stateKey);
   }
 }

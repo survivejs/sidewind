@@ -1,10 +1,11 @@
 import { BindState, State, ExtendedHTMLElement } from "../types";
-// import evaluateExpression from "../evaluate-expression";
+import evaluateExpression from "../evaluate-expression";
 
 function evaluateClasses(
   stateContainer: ExtendedHTMLElement,
   state: State,
-  stateKey: string
+  stateKey: string,
+  labelKey: string
 ) {
   const elements = stateContainer.querySelectorAll(":scope *");
 
@@ -19,18 +20,22 @@ function evaluateClasses(
         const caseAttribute = element.getAttribute("x-case");
 
         if (caseAttribute) {
-          // TODO: Combine labeled parent state to this state too!
           const { state }: { state: BindState } = element.closest(
             `[${stateKey}]`
           ) as ExtendedHTMLElement;
 
-          state &&
-            console.log(
-              state,
-              element,
-              caseAttribute
-              // evaluateExpression(caseAttribute, state)
+          if (typeof state === "object") {
+            const labeledState = getLabeledState(labelKey);
+
+            const combinedState = { ...labeledState, state };
+
+            const expressionResult = evaluateExpression(
+              caseAttribute,
+              combinedState
             );
+
+            state && console.log(expressionResult);
+          }
         }
 
         if (name === "x-on") {
@@ -55,6 +60,24 @@ function evaluateClasses(
       });
     }
   }
+}
+
+function getLabeledState(labelKey: string) {
+  const labeledStateContainers = document.querySelectorAll(`[${labelKey}]`);
+  const ret: BindState = {};
+
+  for (let i = labeledStateContainers.length; i--; ) {
+    const labeledStateContainer = labeledStateContainers[
+      i
+    ] as ExtendedHTMLElement;
+    const label = labeledStateContainer.getAttribute(labelKey);
+
+    if (label) {
+      ret[label] = labeledStateContainer.state;
+    }
+  }
+
+  return ret;
 }
 
 function toggleClass(
