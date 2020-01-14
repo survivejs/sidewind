@@ -220,8 +220,8 @@ module.exports = mode => {
                 extensions: ["html"],
               },
             ],
-            // TODO: Extract these from data attributes
-            whitelist: ["btn-muted", "btn-bg-gray-200", "hidden"],
+            // TODO: Eliminate this
+            whitelist: ["md:inline", "md:w-1/3", "md:w-2/3", "hidden"],
           }),
         ],
       });

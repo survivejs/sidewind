@@ -807,3 +807,18 @@ a {
  * @import "utilities/skew-transforms";
  */
 
+@media (min-width: 768px) {
+
+  .md\:inline {
+    display: inline;
+  }
+
+  .md\:w-1\/3 {
+    width: 33.333333%;
+  }
+
+  .md\:w-2\/3 {
+    width: 66.666667%;
+  }
+}
+
