@@ -58,9 +58,9 @@ State can be a complex object:
           x:href="nextElementSibling.attributes.href.value"
           x-bind="textContent"
         >
-          <span x-bind="nodeName"></span> - <span x-bind="textContent"></span> -
-          <span x-bind="nextElementSibling.attributes.href.value"></span
-        ></a>
+          <span x-bind="nodeName"/> - <span x-bind="textContent"/> -
+          <span x-bind="nextElementSibling.attributes.href.value"
+        /></a>
       </li>
     </template>
   </ul>
@@ -76,7 +76,7 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
 >
   <ul class="list-disc list-inside">
     <template x-each="cars">
-      <li><span x-bind="brand"></span> - <span x-bind="color"></span></li>
+      <li><span x-bind="brand" /> - <span x-bind="color" /></li>
     </template>
   </ul>
 </div>
@@ -138,7 +138,7 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
 
 ```html
 <section x-state="'animals'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="animals"
@@ -198,7 +198,7 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
 
 ```html
 <div x-closest="{ closest: $('h2, h3') }">
-  Closest heading: <span x-bind="closest.textContent"></span>
+  Closest heading: <span x-bind="closest.textContent" />
 </div>
 ```
 
@@ -247,7 +247,7 @@ The examples below combine directives to produce complex user interfaces and to 
   action="javascript:"
 >
   <div class="mb-2">
-    <label>
+    <label class="mr-2">
       <span>Add Todo</span>
       <input
         id="text"
@@ -256,7 +256,7 @@ The examples below combine directives to produce complex user interfaces and to 
         x-bind="text"
       />
     </label>
-    <button type="submit">Add</button>
+    <button class="btn btn-blue" type="submit">Add</button>
   </div>
   <div class="mb-2">
     <ul class="list-disc list-inside">

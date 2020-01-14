@@ -131,7 +131,7 @@ function expandCode() {
           const code = left + highlightAuto(example).value + right;
 
           return `<section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
