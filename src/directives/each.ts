@@ -1,6 +1,5 @@
 import { BindState, ExtendedHTMLElement } from "../types";
-
-type StringObject = { [id: string]: any };
+import { getValues } from "../utils";
 
 function evaluateEach(
   eachContainers: NodeListOf<ExtendedHTMLElement>,
@@ -51,21 +50,6 @@ function evaluateEach(
       }
     }
   }
-}
-
-function getValues(data: BindState, getter: string | null): StringObject {
-  if (!getter) {
-    return {};
-  }
-
-  const value = data[getter];
-
-  return {
-    [getter]:
-      value._type === "query"
-        ? [].slice.call(document.querySelectorAll(value._value))
-        : value,
-  };
 }
 
 export default evaluateEach;
