@@ -221,7 +221,13 @@ module.exports = mode => {
               },
             ],
             // TODO: Eliminate this
-            whitelist: ["md:inline", "md:w-1/3", "md:w-2/3", "hidden"],
+            whitelist: [
+              "md:inline",
+              "md:w-1/3",
+              "md:w-2/3",
+              "md:max-w-2xl",
+              "hidden",
+            ],
           }),
         ],
       });

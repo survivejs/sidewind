@@ -813,6 +813,10 @@ a {
     display: inline;
   }
 
+  .md\:max-w-2xl {
+    max-width: 42rem;
+  }
+
   .md\:w-1\/3 {
     width: 33.333333%;
   }
