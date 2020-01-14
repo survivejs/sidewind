@@ -57,6 +57,7 @@ State can be a complex object:
         <span x-bind="nextElementSibling.attributes.href.value"></span>
         -
         <a
+          x-attr
           x:href="nextElementSibling.attributes.href.value"
           x-bind="textContent"
         ></a>

@@ -1,5 +1,6 @@
 import { BindState, ExtendedHTMLElement } from "../types";
 import evaluateBind from "./bind";
+import evaluateAttributes from "./attributes";
 import evaluateClasses from "./classes";
 import evaluateEach from "./each";
 import { evaluateExpression } from "../evaluators";
@@ -10,7 +11,8 @@ function evaluateState(
   stateContainers: NodeListOf<ExtendedHTMLElement>,
   stateKey: string,
   bindKey: string,
-  eachKey: string
+  eachKey: string,
+  attributeKey: string
 ) {
   for (let i = stateContainers.length; i--; ) {
     const stateContainer = stateContainers[i];
@@ -47,6 +49,7 @@ function evaluateState(
         );
         evaluateBind(stateContainer, newState, bindKey, stateKey);
         evaluateClasses(stateContainer, newState);
+        evaluateAttributes(stateContainer, newState, attributeKey);
       });
 
     stateContainer.setAttribute(stateKey, JSON.stringify(state));
@@ -54,6 +57,7 @@ function evaluateState(
 
     evaluateBind(stateContainer, state, bindKey, stateKey);
     evaluateClasses(stateContainer, state);
+    evaluateAttributes(stateContainer, state, attributeKey);
   }
 }
 

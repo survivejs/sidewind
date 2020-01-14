@@ -1,6 +1,7 @@
 import { ExtendedHTMLElement } from "./types";
 import {
   evaluateBind,
+  evaluateAttributes,
   evaluateClasses,
   evaluateEach,
   evaluateState,
@@ -45,8 +46,10 @@ function setState(newValue: any) {
     stateContainer.querySelectorAll("[x-state]"),
     "x-state",
     "x-bind",
-    "x-each"
+    "x-each",
+    "x-attr"
   );
+  evaluateAttributes(stateContainer, updatedState, "x-attr");
 }
 
 function initialize(global = window) {
@@ -56,7 +59,8 @@ function initialize(global = window) {
       document.querySelectorAll("[x-state]"),
       "x-state",
       "x-bind",
-      "x-each"
+      "x-each",
+      "x-attr"
     );
   };
 
