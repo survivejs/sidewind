@@ -622,6 +622,10 @@ pre {
   overflow: auto;
 }
 
+a {
+  text-decoration: underline;
+}
+
 .btn {
   font-weight: 700;
   padding-top: 0.5rem;

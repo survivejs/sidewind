@@ -137,12 +137,12 @@
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div x-case="code" x-off="hidden"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">article</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ 'amount': 1000, 'interest': 1.2 }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
+    <div x-case="code" x-off="hidden"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">article</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ amount: 1000, interest: 1.2 }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
   Total:
   <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"state.amount * state.interest"</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span>
 </span></code></pre></div>
-    <div x-case="example" x-off="hidden"><article x-state="{ 'amount': 1000, 'interest': 1.2 }">
+    <div x-case="example" x-off="hidden"><article x-state="{ amount: 1000, interest: 1.2 }">
   Total:
   <span x-bind="state.amount * state.interest" />
 </article>
@@ -179,8 +179,14 @@
   <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"headings"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"nodeName"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"textContent"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> -
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"nextElementSibling.attributes.href.value"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">a</span>
+          <span class="hljs-attr">x-attr</span>
+          <span class="hljs-attr">x:href</span>=<span class="hljs-string">"nextElementSibling.attributes.href.value"</span>
+          <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"textContent"</span>
+        &gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"nodeName"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"textContent"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> -
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"nextElementSibling.attributes.href.value"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>
+        &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
@@ -190,8 +196,14 @@
   <ul class="list-disc list-inside">
     <template x-each="headings">
       <li>
-        <span x-bind="nodeName"></span> - <span x-bind="textContent"></span> -
-        <span x-bind="nextElementSibling.attributes.href.value"></span>
+        <a
+          x-attr
+          x:href="nextElementSibling.attributes.href.value"
+          x-bind="textContent"
+        >
+          <span x-bind="nodeName"></span> - <span x-bind="textContent"></span> -
+          <span x-bind="nextElementSibling.attributes.href.value"></span
+        ></a>
       </li>
     </template>
   </ul>
@@ -243,6 +255,40 @@
     </template>
   </ul>
 </div>
+</div>
+  </div>
+</section>
+<h3 class="inline" id="xattr"><code>x-attr</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xattr">#</a>
+<p>In addition to binding values, it's possible to bind attributes:</p>
+<section class="mb-4" x-state="'code'">
+  <nav class="flex flex-row justify-between">
+    <div
+      class="p-2 w-full"
+      x-case="code"
+      x-on="bg-gray-200"
+      x-off="btn-muted"
+      onclick="setState('code')"
+    >
+      Code
+    </div>
+    <div
+      class="p-2 w-full"
+      x-case="example"
+      x-on="bg-gray-200"
+      x-off="btn-muted"
+      onclick="setState('example')"
+    >
+      Example
+    </div>
+  </nav>
+  <div class="bg-gray-100 p-2">
+    <div x-case="code" x-off="hidden"><pre><code class="html language-html">&lt;<span class="hljs-keyword">section</span> <span class="hljs-keyword">x</span>-state=<span class="hljs-string">"{ target: 'https://survivejs.com' }"</span>&gt;
+  &lt;a <span class="hljs-keyword">x</span>-attr <span class="hljs-keyword">x</span>:href=<span class="hljs-string">"target"</span>&gt;Link <span class="hljs-keyword">target</span>&lt;/a&gt;
+&lt;/<span class="hljs-keyword">section</span>&gt;
+</code></pre></div>
+    <div x-case="example" x-off="hidden"><section x-state="{ target: 'https://survivejs.com' }">
+  <a x-attr x:href="target">Link target</a>
+</section>
 </div>
   </div>
 </section>
@@ -464,9 +510,7 @@
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div x-case="code" x-off="hidden"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>
-  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ 'todos': [{ 'text': 'Wash dishes' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">, </span></span></span><span class="hljs-template-variable">{ 'text': 'Eat carrots' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">] }"</span>
-&gt;</span>
+    <div x-case="code" x-off="hidden"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ todos: [{ 'text': 'Wash dishes' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">, </span></span></span><span class="hljs-template-variable">{ text: 'Eat carrots' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">] }"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"todos"</span>&gt;</span>
@@ -477,9 +521,7 @@
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"todos"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </span></code></pre></div>
-    <div x-case="example" x-off="hidden"><div
-  x-state="{ 'todos': [{ 'text': 'Wash dishes' }, { 'text': 'Eat carrots' }] }"
->
+    <div x-case="example" x-off="hidden"><div x-state="{ todos: [{ 'text': 'Wash dishes' }, { text: 'Eat carrots' }] }">
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
@@ -519,7 +561,7 @@
   <div class="bg-gray-100 p-2">
     <div x-case="code" x-off="hidden"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">article</span>
   <span class="hljs-attr">class</span>=<span class="hljs-string">"flex flex-row justify-between md:max-w-md"</span>
-  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ 'amount': 1000, 'interest': 1.2 }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
+  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ amount: 1000, interest: 1.2 }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
 &gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"amount"</span>&gt;</span>Amount<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
@@ -547,7 +589,7 @@
 </span></code></pre></div>
     <div x-case="example" x-off="hidden"><article
   class="flex flex-row justify-between md:max-w-md"
-  x-state="{ 'amount': 1000, 'interest': 1.2 }"
+  x-state="{ amount: 1000, interest: 1.2 }"
 >
   <div>
     <label for="amount">Amount</label>
@@ -599,7 +641,7 @@
   </nav>
   <div class="bg-gray-100 p-2">
     <div x-case="code" x-off="hidden"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>
-  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ 'text': '', 'todos': [] }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
+  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ text: '', todos: [] }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
   <span class="hljs-attr">onsubmit</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ text: '', todos: this.state.todos.concat({ text: this.state.text }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">) })"</span>
   <span class="hljs-attr">action</span>=<span class="hljs-string">"javascript:"</span>
 &gt;</span>
@@ -626,7 +668,7 @@
 <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
 </span></code></pre></div>
     <div x-case="example" x-off="hidden"><form
-  x-state="{ 'text': '', 'todos': [] }"
+  x-state="{ text: '', todos: [] }"
   onsubmit="setState({ text: '', todos: this.state.todos.concat({ text: this.state.text }) })"
   action="javascript:"
 >
