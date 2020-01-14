@@ -670,6 +670,10 @@ pre {
   cursor: pointer;
 }
 
+.inline {
+  display: inline;
+}
+
 .flex {
   display: -webkit-box;
   display: flex;
