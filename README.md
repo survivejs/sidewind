@@ -248,7 +248,10 @@ The examples below combine directives to produce complex user interfaces and to 
 ### Table
 
 ```html
-<table x-fetch="./assets/cars.json" class="table-fixed">
+<table
+  x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }"
+  class="table-fixed"
+>
   <thead>
     <tr class="bg-gray-200">
       <td class="border p-2">Brand</td>
@@ -256,7 +259,7 @@ The examples below combine directives to produce complex user interfaces and to 
     </tr>
   </thead>
   <tbody>
-    <template x-each="brand, color">
+    <template x-each="cars">
       <tr>
         <td class="border p-2" x-bind="brand"></td>
         <td class="border p-2" x-bind="color"></td>
