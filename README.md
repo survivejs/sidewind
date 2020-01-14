@@ -192,6 +192,16 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
 </div>
 ```
 
+### `x-closest`
+
+`x-closest` gives you access to the element closest to display top:
+
+```html
+<div x-closest="{ closest: $('h2, h3') }">
+  Closest heading: <span x-bind="closest"></span>
+</div>
+```
+
 ## Examples
 
 The examples below combine directives to produce complex user interfaces and to handle specific use cases.

@@ -2,6 +2,7 @@ import { ExtendedHTMLElement } from "./types";
 import {
   evaluateBind,
   evaluateClasses,
+  evaluateClosest,
   evaluateEach,
   evaluateState,
 } from "./directives";
@@ -60,6 +61,7 @@ function initialize(global = window) {
       "x-each",
       "x-attr"
     );
+    evaluateClosest(document.querySelectorAll("[x-closest]"));
   };
 
   global.setState = setState;
