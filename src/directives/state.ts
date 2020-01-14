@@ -3,7 +3,7 @@ import evaluateBind from "./bind";
 import evaluateAttributes from "./attributes";
 import evaluateClasses from "./classes";
 import evaluateEach from "./each";
-import { evaluateExpression } from "../evaluators";
+import evaluateExpression from "../evaluate-expression";
 
 type PromiseResult = { key: string; values: any };
 

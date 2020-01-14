@@ -1,5 +1,5 @@
 import { BindState, ExtendedHTMLElement } from "../types";
-import { evaluateExpression } from "../evaluators";
+import evaluateExpression from "../evaluate-expression";
 import { get } from "../utils";
 
 function evaluateAttributes(

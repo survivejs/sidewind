@@ -1,5 +1,5 @@
 import { ExtendedHTMLElement } from "../types";
-import { evaluateExpression } from "../evaluators";
+import evaluateExpression from "../evaluate-expression";
 import { getValues } from "../utils";
 import setState from "../set-state";
 

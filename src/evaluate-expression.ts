@@ -16,4 +16,4 @@ function evaluateExpression(expression: string, value: State) {
   }
 }
 
-export { evaluateExpression };
+export default evaluateExpression;
