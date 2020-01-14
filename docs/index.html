@@ -19,7 +19,7 @@
 <h3 class="inline" id="xstateandxbind"><code>x-state</code> and <code>x-bind</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xstateandxbind">#</a>
 <p><code>x-state</code> is a state container and the state is often used by other directives such as <code>x-bind</code>. Consider the example below:</p>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
@@ -48,7 +48,7 @@
 </section>
 <p><code>x-state</code> and <code>x-bind</code> can exist even within the same element:</p>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
@@ -77,7 +77,7 @@
 </section>
 <p>The state can be manipulated using a global <code>setState</code>:</p>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
@@ -116,7 +116,7 @@
 </section>
 <p>State can be a complex object:</p>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
@@ -154,7 +154,7 @@
 </blockquote>
 <p><code>x-state</code> accepts complex JavaScript expressions as well and exposes <code>document.querySelectorAll</code> through <code>$</code> alias.</p>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
@@ -184,9 +184,9 @@
           <span class="hljs-attr">x:href</span>=<span class="hljs-string">"nextElementSibling.attributes.href.value"</span>
           <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"textContent"</span>
         &gt;</span>
-          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"nodeName"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"textContent"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> -
-          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"nextElementSibling.attributes.href.value"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>
-        &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"nodeName"</span>/&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"textContent"</span>/&gt;</span> -
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"nextElementSibling.attributes.href.value"</span>
+        /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
@@ -201,9 +201,9 @@
           x:href="nextElementSibling.attributes.href.value"
           x-bind="textContent"
         >
-          <span x-bind="nodeName"></span> - <span x-bind="textContent"></span> -
-          <span x-bind="nextElementSibling.attributes.href.value"></span
-        ></a>
+          <span x-bind="nodeName"/> - <span x-bind="textContent"/> -
+          <span x-bind="nextElementSibling.attributes.href.value"
+        /></a>
       </li>
     </template>
   </ul>
@@ -213,7 +213,7 @@
 </section>
 <p>It's possible to use the standard <a class="underline"  href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">fetch() API</a> on top of <code>x-state</code> for fetching data as it handles Promises for you internally:</p>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
@@ -240,7 +240,7 @@
 &gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"cars"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"brand"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"color"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"brand"</span> /&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"color"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
@@ -251,7 +251,7 @@
 >
   <ul class="list-disc list-inside">
     <template x-each="cars">
-      <li><span x-bind="brand"></span> - <span x-bind="color"></span></li>
+      <li><span x-bind="brand" /> - <span x-bind="color" /></li>
     </template>
   </ul>
 </div>
@@ -261,7 +261,7 @@
 <h3 class="inline" id="xattr"><code>x-attr</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xattr">#</a>
 <p>In addition to binding values, it's possible to bind attributes:</p>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
@@ -295,7 +295,7 @@
 <h3 class="inline" id="xonandxoff"><code>x-on</code>, and <code>x-off</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xonandxoff">#</a>
 <p>Given Tailwind is an utility class based CSS approach for styling, Sidewind provides means for connecting state with classes. <code>x-on</code> and <code>x-off</code> allow you to set classes if state is either true (<code>x-on</code>) or false (<code>x-off</code>) as the accordion example below illustrates:</p>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
@@ -389,7 +389,7 @@
 <h3 class="inline" id="xcase"><code>x-case</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xcase">#</a>
 <p><code>x-case</code> has been designed to allow combining <code>x-on</code> and <code>x-off</code> with <code>switch/case</code> kind of matching:</p>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
@@ -411,7 +411,7 @@
   </nav>
   <div class="bg-gray-100 p-2">
     <div x-case="code" x-off="hidden"><pre><code class="html language-html">&lt;section <span class="hljs-symbol">x</span>-state=<span class="hljs-string">"'animals'"</span>&gt;
-  &lt;nav class=<span class="hljs-string">"flex flex-row justify-between"</span>&gt;
+  &lt;nav class=<span class="hljs-string">"flex flex-row justify-between cursor-pointer"</span>&gt;
     &lt;<span class="hljs-keyword">div</span>
       class=<span class="hljs-string">"p-2 w-full"</span>
       <span class="hljs-symbol">x</span>-<span class="hljs-keyword">case</span>=<span class="hljs-string">"animals"</span>
@@ -448,7 +448,7 @@
 &lt;/section&gt;
 </code></pre></div>
     <div x-case="example" x-off="hidden"><section x-state="'animals'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="animals"
@@ -489,7 +489,7 @@
 <h3 class="inline" id="xeach"><code>x-each</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xeach">#</a>
 <p><code>x-each</code> allows iteration of a list. It has been designed to be used with a <a class="underline"  href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">template tag</a>.</p>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
@@ -537,7 +537,7 @@
 <h3 class="inline" id="xclosest"><code>x-closest</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xclosest">#</a>
 <p><code>x-closest</code> gives you access to the element closest to display top:</p>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
@@ -559,11 +559,11 @@
   </nav>
   <div class="bg-gray-100 p-2">
     <div x-case="code" x-off="hidden"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-closest</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ closest: $('h2, h3') }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
-  Closest heading: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"closest.textContent"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  Closest heading: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"closest.textContent"</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </span></code></pre></div>
     <div x-case="example" x-off="hidden"><div x-closest="{ closest: $('h2, h3') }">
-  Closest heading: <span x-bind="closest.textContent"></span>
+  Closest heading: <span x-bind="closest.textContent" />
 </div>
 </div>
   </div>
@@ -572,7 +572,7 @@
 <p>The examples below combine directives to produce complex user interfaces and to handle specific use cases.</p>
 <h3 class="inline" id="calculator">Calculator</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#calculator">#</a>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
@@ -653,7 +653,7 @@
 </section>
 <h3 class="inline" id="todolist">TODO List</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#todolist">#</a>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
@@ -680,7 +680,7 @@
   <span class="hljs-attr">action</span>=<span class="hljs-string">"javascript:"</span>
 &gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mr-2"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Add Todo<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
         <span class="hljs-attr">id</span>=<span class="hljs-string">"text"</span>
@@ -689,7 +689,7 @@
         <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"text"</span>
       /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-blue"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
@@ -707,7 +707,7 @@
   action="javascript:"
 >
   <div class="mb-2">
-    <label>
+    <label class="mr-2">
       <span>Add Todo</span>
       <input
         id="text"
@@ -716,7 +716,7 @@
         x-bind="text"
       />
     </label>
-    <button type="submit">Add</button>
+    <button class="btn btn-blue" type="submit">Add</button>
   </div>
   <div class="mb-2">
     <ul class="list-disc list-inside">
@@ -732,7 +732,7 @@
 </section>
 <h3 class="inline" id="table">Table</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#table">#</a>
 <section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between">
+  <nav class="flex flex-row justify-between cursor-pointer">
     <div
       class="p-2 w-full"
       x-case="code"
