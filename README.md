@@ -198,7 +198,7 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
 
 ```html
 <div x-closest="{ closest: $('h2, h3') }">
-  Closest heading: <span x-bind="closest"></span>
+  Closest heading: <span x-bind="closest.textContent"></span>
 </div>
 ```
 

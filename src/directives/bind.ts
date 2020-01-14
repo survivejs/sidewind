@@ -36,8 +36,8 @@ function evaluateBind(
     if (state.nodeType) {
       evaluatedValue = get(state, bindProperty);
     } else {
-      evaluatedValue = state.hasOwnProperty(bindProperty)
-        ? state[bindProperty]
+      evaluatedValue = state.hasOwnProperty(bindProperty.split(".")[0])
+        ? get(state, bindProperty)
         : evaluateExpression(bindProperty, state) || state;
     }
 

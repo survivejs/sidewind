@@ -30,9 +30,7 @@ function evaluateClosest(
         Math.abs(a.top) < Math.abs(b.top) ? a : b
       );
 
-      // TODO: Allow bind to parse textContent properly so element
-      // can be passed
-      setState({ [key]: closest.element.textContent }, closestContainer);
+      setState({ [key]: closest.element }, closestContainer);
     };
   }
 }
