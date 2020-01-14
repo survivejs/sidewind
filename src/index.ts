@@ -1,54 +1,10 @@
-import { ExtendedHTMLElement } from "./types";
-import {
-  evaluateBind,
-  evaluateClasses,
-  evaluateClosest,
-  evaluateEach,
-  evaluateState,
-} from "./directives";
+import { evaluateClosest, evaluateEach, evaluateState } from "./directives";
+import setState from "./set-state";
 
 declare global {
   interface Window {
     setState: typeof setState;
   }
-}
-
-function setState(newValue: any) {
-  const element = window.event && (window.event.target as ExtendedHTMLElement);
-
-  if (!element) {
-    return;
-  }
-
-  const stateContainer = element.closest("[x-state]") as ExtendedHTMLElement;
-
-  if (!stateContainer) {
-    return;
-  }
-
-  const state = stateContainer.state;
-  const updatedState =
-    typeof state === "object" ? { ...state, ...newValue } : newValue;
-
-  element.state = updatedState;
-
-  stateContainer.setAttribute("x-state", JSON.stringify(updatedState));
-  stateContainer.state = updatedState;
-
-  evaluateEach(
-    stateContainer.querySelectorAll("[x-each]"),
-    "x-each",
-    "x-state"
-  );
-  evaluateBind(stateContainer, updatedState, "x-bind", "x-state");
-  evaluateClasses(stateContainer, updatedState);
-  evaluateState(
-    stateContainer.querySelectorAll("[x-state]"),
-    "x-state",
-    "x-bind",
-    "x-each",
-    "x-attr"
-  );
 }
 
 function initialize(global = window) {
