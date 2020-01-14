@@ -48,7 +48,7 @@ function evaluateState(
           stateKey
         );
         evaluateBind(stateContainer, newState, bindKey, stateKey);
-        evaluateClasses(stateContainer, newState);
+        evaluateClasses(stateContainer, newState, stateKey);
         evaluateAttributes(stateContainer, attributeKey, stateKey);
       });
 
@@ -56,7 +56,7 @@ function evaluateState(
     stateContainer.state = state;
 
     evaluateBind(stateContainer, state, bindKey, stateKey);
-    evaluateClasses(stateContainer, state);
+    evaluateClasses(stateContainer, state, stateKey);
     evaluateAttributes(stateContainer, attributeKey, stateKey);
   }
 }

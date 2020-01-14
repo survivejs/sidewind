@@ -294,7 +294,11 @@ The examples below combine directives to produce complex user interfaces and to 
 ## Table of Contents
 
 ```html
-<nav x-state="{ headings: $('h2, h3') }" x-closest="{ closest: $('h2, h3') }">
+<nav
+  x-label="parent"
+  x-state="{ headings: $('h2, h3') }"
+  x-closest="{ closest: $('h2, h3') }"
+>
   <ul class="list-disc list-inside">
     <template x-each="headings">
       <li>
@@ -302,7 +306,7 @@ The examples below combine directives to produce complex user interfaces and to 
           x-attr
           x:href="nextElementSibling.attributes.href.value"
           x-bind="textContent"
-          x-case="textContent === closest.textContent"
+          x-case="state.textContent === parent.closest.textContent"
           x-on="bg-gray-200"
           x-off="btn-muted"
         >
