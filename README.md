@@ -58,8 +58,6 @@ State can be a complex object:
           x:href="nextElementSibling.attributes.href.value"
           x-bind="textContent"
         >
-          <span x-bind="nodeName" /> - <span x-bind="textContent" /> -
-          <span x-bind="nextElementSibling.attributes.href.value" />
         </a>
       </li>
     </template>
@@ -308,8 +306,6 @@ The examples below combine directives to produce complex user interfaces and to 
           x-on="bg-gray-200"
           x-off="btn-muted"
         >
-          <span x-bind="nodeName" /> - <span x-bind="textContent" /> -
-          <span x-bind="nextElementSibling.attributes.href.value" />
         </a>
       </li>
     </template>
