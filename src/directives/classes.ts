@@ -1,5 +1,5 @@
+/* eslint no-new-func: 0 */
 import { BindState, ExtendedHTMLElement } from "../types";
-import evaluateExpression from "../evaluate-expression";
 
 function evaluateClasses(
   stateContainer: ExtendedHTMLElement,
@@ -45,14 +45,24 @@ function evaluateCase(
     if (typeof state === "object") {
       const labeledState = getLabeledState(labelKey);
 
-      const combinedState = { ...labeledState, state };
-
-      return evaluateExpression(caseAttribute, combinedState);
+      return evaluateCaseExpression(caseAttribute, { ...labeledState, state });
     } else {
       return caseAttribute === state;
     }
   } else {
     return typeof state === "boolean" && state;
+  }
+}
+
+// TODO: See if this can be combined with the general one
+function evaluateCaseExpression(expression: string, value: BindState) {
+  try {
+    return Function(
+      ...Object.keys(value),
+      `return ${expression}`
+    )(...Object.values(value));
+  } catch (err) {
+    console.error("Failed to evaluate", expression, value, err);
   }
 }
 

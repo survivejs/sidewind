@@ -306,7 +306,7 @@ The examples below combine directives to produce complex user interfaces and to 
           x-attr
           x:href="nextElementSibling.attributes.href.value"
           x-bind="textContent"
-          x-case="state.state.textContent === state.parent.closest.textContent"
+          x-case="state.textContent === parent.closest.textContent"
           x-on="bg-gray-200"
           x-off="btn-muted"
         >
