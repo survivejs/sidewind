@@ -10,25 +10,25 @@ By design, the approach follows the principle of **progressive enhancement** and
 
 Sidewind is composed of a collection of directives that operate on the DOM. I've documented them in detail below.
 
-### `x-state` and `x-value`
+### `x-state` and `x-bind`
 
-`x-state` is a state container and the state is often used by other directives such as `x-value`. Consider the example below:
+`x-state` is a state container and the state is often used by other directives such as `x-bind`. Consider the example below:
 
 ```html
-<section x-state="false">Value: <span x-value="state" /></section>
+<section x-state="false">Value: <span x-bind="state" /></section>
 ```
 
-`x-state` and `x-value` can exist even within the same element:
+`x-state` and `x-bind` can exist even within the same element:
 
 ```html
-<section>Value: <span x-state="false" x-value="state" /></section>
+<section>Value: <span x-state="false" x-bind="state" /></section>
 ```
 
 The state can be manipulated using a global `setState`:
 
 ```html
 <section x-state="false">
-  <div class="mb-2">Value: <span x-value="state" /></div>
+  <div class="mb-2">Value: <span x-bind="state" /></div>
   <button class="btn btn-blue" onclick="setState(!this.state)">
     Toggle value
   </button>
@@ -40,7 +40,7 @@ State can be a complex object:
 ```html
 <article x-state="{ 'amount': 1000, 'interest': 1.2 }">
   Total:
-  <span x-value="state.amount * state.interest" />
+  <span x-bind="state.amount * state.interest" />
 </article>
 ```
 
@@ -53,8 +53,8 @@ State can be a complex object:
   <ul class="list-disc list-inside">
     <template x-each="headings">
       <li>
-        <span x-value="nodeName"></span> - <span x-value="textContent"></span> -
-        <span x-value="nextElementSibling.attributes.href.value"></span>
+        <span x-bind="nodeName"></span> - <span x-bind="textContent"></span> -
+        <span x-bind="nextElementSibling.attributes.href.value"></span>
       </li>
     </template>
   </ul>
@@ -70,7 +70,7 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
 >
   <ul class="list-disc list-inside">
     <template x-each="cars">
-      <li><span x-value="brand"></span> - <span x-value="color"></span></li>
+      <li><span x-bind="brand"></span> - <span x-bind="color"></span></li>
     </template>
   </ul>
 </div>
@@ -170,11 +170,11 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x-value="text"></li>
+        <li x-bind="text"></li>
       </template>
     </ul>
   </div>
-  <div x-value="todos"></div>
+  <div x-bind="todos"></div>
 </div>
 ```
 
@@ -195,7 +195,7 @@ The examples below combine directives to produce complex user interfaces and to 
       id="amount"
       type="text"
       oninput="setState({ amount: this.value })"
-      x-value="amount"
+      x-bind="amount"
     />
   </div>
   <div>
@@ -204,12 +204,12 @@ The examples below combine directives to produce complex user interfaces and to 
       id="interest"
       type="text"
       oninput="setState({ interest: this.value })"
-      x-value="interest"
+      x-bind="interest"
     />
   </div>
   <div>
     Total:
-    <span x-value="Math.round(state.amount * state.interest * 100) / 100" />
+    <span x-bind="Math.round(state.amount * state.interest * 100) / 100" />
   </div>
 </article>
 ```
@@ -229,7 +229,7 @@ The examples below combine directives to produce complex user interfaces and to 
         id="text"
         type="text"
         oninput="setState({ text: this.value })"
-        x-value="text"
+        x-bind="text"
       />
     </label>
     <button type="submit">Add</button>
@@ -237,11 +237,11 @@ The examples below combine directives to produce complex user interfaces and to 
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x-value="text"></li>
+        <li x-bind="text"></li>
       </template>
     </ul>
   </div>
-  <div x-value="todos"></div>
+  <div x-bind="todos"></div>
 </form>
 ```
 
@@ -258,8 +258,8 @@ The examples below combine directives to produce complex user interfaces and to 
   <tbody>
     <template x-each="brand, color">
       <tr>
-        <td class="border p-2" x-value="brand"></td>
-        <td class="border p-2" x-value="color"></td>
+        <td class="border p-2" x-bind="brand"></td>
+        <td class="border p-2" x-bind="color"></td>
       </tr>
     </template>
   </tbody>

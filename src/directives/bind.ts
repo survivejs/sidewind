@@ -1,49 +1,49 @@
 import { BindState, ExtendedHTMLElement } from "../types";
 import { evaluateExpression } from "../evaluators";
 
-function evaluateValues(
+function evaluateBind(
   stateContainer: HTMLElement,
   state: { [id: string]: any },
-  valueKey: string,
+  bindKey: string,
   stateKey?: string
 ) {
-  const valueContainers = Array.from(
-    stateContainer.querySelectorAll(`:scope [${valueKey}]`)
+  const bindContainers = Array.from(
+    stateContainer.querySelectorAll(`:scope [${bindKey}]`)
   );
 
   // A state container can be a value container itself
-  if (stateContainer.hasAttribute(valueKey)) {
-    valueContainers.push(stateContainer);
+  if (stateContainer.hasAttribute(bindKey)) {
+    bindContainers.push(stateContainer);
   }
 
-  for (let i = valueContainers.length; i--; ) {
-    const valueContainer = valueContainers[i] as ExtendedHTMLElement;
-    const valueParent = stateKey
-      ? getStateParent(valueContainer, stateKey)
+  for (let i = bindContainers.length; i--; ) {
+    const bindContainer = bindContainers[i] as ExtendedHTMLElement;
+    const bindParent = stateKey
+      ? getStateParent(bindContainer, stateKey)
       : stateContainer;
 
     // If value container is within another state container, skip it
-    if (valueParent !== stateContainer) {
+    if (bindParent !== stateContainer) {
       return;
     }
 
-    const valueProperty = valueContainer.getAttribute(valueKey) || "";
+    const bindProperty = bindContainer.getAttribute(bindKey) || "";
 
     let evaluatedValue;
 
     // DOM node case
     if (state.nodeType) {
-      evaluatedValue = get(state, valueProperty);
+      evaluatedValue = get(state, bindProperty);
     } else {
-      evaluatedValue = state.hasOwnProperty(valueProperty)
-        ? state[valueProperty]
-        : evaluateExpression(valueProperty, state) || state;
+      evaluatedValue = state.hasOwnProperty(bindProperty)
+        ? state[bindProperty]
+        : evaluateExpression(bindProperty, state) || state;
     }
 
-    if (valueContainer.localName === "input") {
-      valueContainer.value = evaluatedValue;
+    if (bindContainer.localName === "input") {
+      bindContainer.value = evaluatedValue;
     } else {
-      valueContainer.innerHTML =
+      bindContainer.innerHTML =
         typeof evaluatedValue === "object"
           ? JSON.stringify(evaluatedValue, null, 2)
           : evaluatedValue;
@@ -75,4 +75,4 @@ function getStateParent(element: Element, stateKey: string): Element | null {
     : null;
 }
 
-export default evaluateValues;
+export default evaluateBind;

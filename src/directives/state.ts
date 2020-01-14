@@ -1,14 +1,16 @@
 import { BindState, ExtendedHTMLElement } from "../types";
+import evaluateBind from "./bind";
 import evaluateClasses from "./classes";
 import evaluateEach from "./each";
-import evaluateValues from "./values";
 import { evaluateExpression } from "../evaluators";
 
 type PromiseResult = { key: string; values: any };
 
 function evaluateState(
   stateContainers: NodeListOf<ExtendedHTMLElement>,
-  stateKey: string
+  stateKey: string,
+  bindKey: string,
+  eachKey: string
 ) {
   for (let i = stateContainers.length; i--; ) {
     const stateContainer = stateContainers[i];
@@ -39,18 +41,18 @@ function evaluateState(
         stateContainer.state = newState;
 
         evaluateEach(
-          stateContainer.querySelectorAll("[x-each]"),
-          "x-each",
-          "x-state"
+          stateContainer.querySelectorAll(`[${eachKey}]`),
+          eachKey,
+          stateKey
         );
-        evaluateValues(stateContainer, newState, "x-value", "x-state");
+        evaluateBind(stateContainer, newState, bindKey, stateKey);
         evaluateClasses(stateContainer, newState);
       });
 
     stateContainer.setAttribute(stateKey, JSON.stringify(state));
     stateContainer.state = state;
 
-    evaluateValues(stateContainer, state, "x-value", "x-state");
+    evaluateBind(stateContainer, state, bindKey, stateKey);
     evaluateClasses(stateContainer, state);
   }
 }

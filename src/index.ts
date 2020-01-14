@@ -1,9 +1,9 @@
 import { ExtendedHTMLElement } from "./types";
 import {
+  evaluateBind,
   evaluateClasses,
   evaluateEach,
   evaluateState,
-  evaluateValues,
 } from "./directives";
 
 declare global {
@@ -39,15 +39,25 @@ function setState(newValue: any) {
     "x-each",
     "x-state"
   );
-  evaluateValues(stateContainer, updatedState, "x-value", "x-state");
+  evaluateBind(stateContainer, updatedState, "x-bind", "x-state");
   evaluateClasses(stateContainer, updatedState);
-  evaluateState(stateContainer.querySelectorAll("[x-state]"), "x-state");
+  evaluateState(
+    stateContainer.querySelectorAll("[x-state]"),
+    "x-state",
+    "x-bind",
+    "x-each"
+  );
 }
 
 function initialize(global = window) {
   global.onload = () => {
     evaluateEach(document.querySelectorAll("[x-each]"), "x-each", "x-state");
-    evaluateState(document.querySelectorAll("[x-state]"), "x-state");
+    evaluateState(
+      document.querySelectorAll("[x-state]"),
+      "x-state",
+      "x-bind",
+      "x-each"
+    );
   };
 
   global.setState = setState;
