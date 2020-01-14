@@ -38,7 +38,7 @@ The state can be manipulated using a global `setState`:
 State can be a complex object:
 
 ```html
-<article x-state="{ 'amount': 1000, 'interest': 1.2 }">
+<article x-state="{ amount: 1000, interest: 1.2 }">
   Total:
   <span x-bind="state.amount * state.interest" />
 </article>
@@ -180,9 +180,7 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
 `x-each` allows iteration of a list. It has been designed to be used with a [template tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template).
 
 ```html
-<div
-  x-state="{ 'todos': [{ 'text': 'Wash dishes' }, { 'text': 'Eat carrots' }] }"
->
+<div x-state="{ todos: [{ 'text': 'Wash dishes' }, { text: 'Eat carrots' }] }">
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
@@ -203,7 +201,7 @@ The examples below combine directives to produce complex user interfaces and to 
 ```html
 <article
   class="flex flex-row justify-between md:max-w-md"
-  x-state="{ 'amount': 1000, 'interest': 1.2 }"
+  x-state="{ amount: 1000, interest: 1.2 }"
 >
   <div>
     <label for="amount">Amount</label>
@@ -234,7 +232,7 @@ The examples below combine directives to produce complex user interfaces and to 
 
 ```html
 <form
-  x-state="{ 'text': '', 'todos': [] }"
+  x-state="{ text: '', todos: [] }"
   onsubmit="setState({ text: '', todos: this.state.todos.concat({ text: this.state.text }) })"
   action="javascript:"
 >
