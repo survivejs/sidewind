@@ -6,11 +6,13 @@ import {
   evaluateState,
 } from "./directives";
 
-function setState(newValue: any) {
-  const element = window.event && (window.event.target as ExtendedHTMLElement);
-
+function setState(newValue: any, element?: ExtendedHTMLElement) {
   if (!element) {
-    return;
+    element = window.event && (window.event.target as ExtendedHTMLElement);
+
+    if (!element) {
+      return;
+    }
   }
 
   const stateContainer = element.closest("[x-state]") as ExtendedHTMLElement;

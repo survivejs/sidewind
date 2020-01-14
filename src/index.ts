@@ -10,6 +10,11 @@ declare global {
 function initialize(global = window) {
   global.onload = () => {
     evaluateEach(document.querySelectorAll("[x-each]"), "x-each", "x-state");
+    evaluateClosest(
+      document.querySelectorAll("[x-closest]"),
+      "x-closest",
+      "x-state"
+    );
     evaluateState(
       document.querySelectorAll("[x-state]"),
       "x-state",
@@ -17,7 +22,6 @@ function initialize(global = window) {
       "x-each",
       "x-attr"
     );
-    evaluateClosest(document.querySelectorAll("[x-closest]"), "x-closest");
   };
 
   global.setState = setState;
