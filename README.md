@@ -180,7 +180,7 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
 `x-each` allows iteration of a list. It has been designed to be used with a [template tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template).
 
 ```html
-<div x-state="{ todos: [{ 'text': 'Wash dishes' }, { text: 'Eat carrots' }] }">
+<div x-state="{ todos: [{ text: 'Wash dishes' }, { text: 'Eat carrots' }] }">
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
