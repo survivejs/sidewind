@@ -44,6 +44,7 @@ function evaluateEach(
                 stateKey,
                 JSON.stringify(value)
               );
+              templateClone.firstElementChild.state = value;
 
               containerParent.appendChild(templateClone);
             })

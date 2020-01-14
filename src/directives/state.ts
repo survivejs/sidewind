@@ -14,7 +14,7 @@ function evaluateState(
     const stateContainer = stateContainers[i];
 
     const stateProperty = stateContainer.getAttribute(stateKey) || "";
-    const state = evaluateExpression(stateProperty, {});
+    const state = stateContainer.state || evaluateExpression(stateProperty, {});
 
     let promises: Promise<PromiseResult>[] = [];
     Object.keys(state).forEach(key => {
