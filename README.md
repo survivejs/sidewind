@@ -53,15 +53,14 @@ State can be a complex object:
   <ul class="list-disc list-inside">
     <template x-each="headings">
       <li>
-        <span x-bind="nodeName"></span> - <span x-bind="textContent"></span> -
-        <span x-bind="nextElementSibling.attributes.href.value"></span>
-        -
         <a
           x-attr
           x:href="nextElementSibling.attributes.href.value"
           x-bind="textContent"
-          >Link</a
         >
+          <span x-bind="nodeName"></span> - <span x-bind="textContent"></span> -
+          <span x-bind="nextElementSibling.attributes.href.value"></span
+        ></a>
       </li>
     </template>
   </ul>
