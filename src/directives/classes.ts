@@ -1,9 +1,8 @@
-import { BindState, State, ExtendedHTMLElement } from "../types";
+import { BindState, ExtendedHTMLElement } from "../types";
 import evaluateExpression from "../evaluate-expression";
 
 function evaluateClasses(
   stateContainer: ExtendedHTMLElement,
-  state: State,
   stateKey: string,
   labelKey: string
 ) {
@@ -11,54 +10,49 @@ function evaluateClasses(
 
   for (let i = elements.length; i--; ) {
     const element = elements[i] as ExtendedHTMLElement;
-    const xAttributes = Array.from(element.attributes).filter(v =>
-      v.name.startsWith("x-")
-    );
 
-    if (xAttributes.length > 0) {
-      xAttributes.forEach(({ name, value }) => {
-        const caseAttribute = element.getAttribute("x-case");
+    Array.from(element.attributes).forEach(({ name, value }) => {
+      if (name === "x-on") {
+        return toggleClass(
+          evaluateCase(element, stateKey, labelKey),
+          element,
+          value
+        );
+      }
 
-        if (caseAttribute) {
-          const { state }: { state: BindState } = element.closest(
-            `[${stateKey}]`
-          ) as ExtendedHTMLElement;
+      if (name === "x-off") {
+        return toggleClass(
+          !evaluateCase(element, stateKey, labelKey),
+          element,
+          value
+        );
+      }
+    });
+  }
+}
 
-          if (typeof state === "object") {
-            const labeledState = getLabeledState(labelKey);
+function evaluateCase(
+  element: ExtendedHTMLElement,
+  stateKey: string,
+  labelKey: string
+) {
+  const caseAttribute = element.getAttribute("x-case");
+  const { state }: { state: BindState } = element.closest(
+    `[${stateKey}]`
+  ) as ExtendedHTMLElement;
 
-            const combinedState = { ...labeledState, state };
+  if (caseAttribute) {
+    if (typeof state === "object") {
+      const labeledState = getLabeledState(labelKey);
 
-            const expressionResult = evaluateExpression(
-              caseAttribute,
-              combinedState
-            );
+      const combinedState = { ...labeledState, state };
 
-            state && console.log(expressionResult);
-          }
-        }
-
-        if (name === "x-on") {
-          return toggleClass(
-            caseAttribute
-              ? caseAttribute === state
-              : typeof state === "boolean" && state,
-            element,
-            value
-          );
-        }
-
-        if (name === "x-off") {
-          return toggleClass(
-            caseAttribute
-              ? caseAttribute !== state
-              : typeof state === "boolean" && !state,
-            element,
-            value
-          );
-        }
-      });
+      return evaluateExpression(caseAttribute, combinedState);
+    } else {
+      return caseAttribute === state;
     }
+  } else {
+    return typeof state === "boolean" && state;
   }
 }
 
