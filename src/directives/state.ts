@@ -35,17 +35,19 @@ function evaluateState(
 
         const newState = { ...stateContainer.state, ...promisedState };
 
+        stateContainer.setAttribute(stateKey, JSON.stringify(newState));
         stateContainer.state = newState;
 
-        evaluateValues(stateContainer, newState, "x-value", "x-state");
-        evaluateClasses(stateContainer, newState);
         evaluateEach(
           stateContainer.querySelectorAll("[x-each]"),
           "x-each",
           "x-state"
         );
+        evaluateValues(stateContainer, newState, "x-value", "x-state");
+        evaluateClasses(stateContainer, newState);
       });
 
+    stateContainer.setAttribute(stateKey, JSON.stringify(state));
     stateContainer.state = state;
 
     evaluateValues(stateContainer, state, "x-value", "x-state");

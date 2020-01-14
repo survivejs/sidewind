@@ -42,7 +42,7 @@ function evaluateEach(
 
               templateClone.firstElementChild.setAttribute(
                 stateKey,
-                JSON.stringify(value).replace(/"/g, `'`)
+                JSON.stringify(value)
               );
 
               containerParent.appendChild(templateClone);
