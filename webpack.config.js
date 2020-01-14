@@ -270,7 +270,7 @@ function getHTML({
             </ul>
           </nav>
         </aside>
-        <article class="md:w-2/3">
+        <article class="md:w-2/3 md:max-w-2xl">
           ${processMarkdown(
             fs.readFileSync("./README.md", { encoding: "utf-8" })
           )}
