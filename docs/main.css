@@ -595,11 +595,6 @@ object {
 
 /* Custom CSS should go here */
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 h1 {
   font-size: 2.25rem;
   padding-top: 0.5rem;
@@ -702,6 +697,10 @@ a {
           justify-content: space-between;
 }
 
+.font-bold {
+  font-weight: 700;
+}
+
 .list-inside {
   list-style-position: inside;
 }
@@ -710,14 +709,13 @@ a {
   list-style-type: disc;
 }
 
+.m-8 {
+  margin: 2rem;
+}
+
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .mr-2 {
@@ -740,12 +738,12 @@ a {
   max-width: 28rem;
 }
 
-.p-2 {
-  padding: 0.5rem;
+.max-w-2xl {
+  max-width: 42rem;
 }
 
-.p-8 {
-  padding: 2rem;
+.p-2 {
+  padding: 0.5rem;
 }
 
 .py-2 {
@@ -755,6 +753,15 @@ a {
 
 .absolute {
   position: absolute;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}
+
+.top-0 {
+  top: 0;
 }
 
 .table-fixed {
@@ -771,6 +778,14 @@ a {
 
 .underline {
   text-decoration: underline;
+}
+
+.w-1 {
+  width: 0.25rem;
+}
+
+.w-2 {
+  width: 0.5rem;
 }
 
 .w-full {
