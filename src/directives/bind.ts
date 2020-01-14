@@ -1,5 +1,6 @@
-import { BindState, ExtendedHTMLElement } from "../types";
+import { ExtendedHTMLElement } from "../types";
 import { evaluateExpression } from "../evaluators";
+import { get } from "../utils";
 
 function evaluateBind(
   stateContainer: HTMLElement,
@@ -49,17 +50,6 @@ function evaluateBind(
           : evaluatedValue;
     }
   }
-}
-
-function get(object: BindState, keyString: string) {
-  const keys = keyString.split(".");
-  let ret = object;
-
-  keys.forEach(key => {
-    ret = ret[key];
-  });
-
-  return ret;
 }
 
 function getStateParent(element: Element, stateKey: string): Element | null {

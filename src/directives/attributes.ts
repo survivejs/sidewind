@@ -1,38 +1,46 @@
 import { BindState, ExtendedHTMLElement } from "../types";
 import { evaluateExpression } from "../evaluators";
+import { get } from "../utils";
 
 function evaluateAttributes(
   stateContainer: HTMLElement,
-  state: BindState,
-  attributeKey: string
+  attributeKey: string,
+  stateKey: string
 ) {
   const attributeContainers = stateContainer.querySelectorAll(
     `:scope [${attributeKey}]`
   );
 
-  // TODO: If inside x-each, handle differently!
-  // TODO: Same for x-bind. That should become x-value
   for (let i = attributeContainers.length; i--; ) {
     const attributeContainer = attributeContainers[i] as ExtendedHTMLElement;
     const attributes = Array.from(attributeContainer.attributes);
+    const { state }: { state: BindState } = attributeContainer.closest(
+      `[${stateKey}]`
+    ) as ExtendedHTMLElement;
 
     attributes.forEach(attribute => {
       const prefix = "x:";
       const attributeName = attribute.nodeName;
 
       if (attributeName.startsWith(prefix)) {
-        const value = attribute.value;
+        const attributeProperty = attribute.value;
         const targetName = attributeName.split(prefix).filter(Boolean)[0];
 
-        attributeContainer.setAttribute(
-          targetName,
-          evaluateExpression(value, state)
-        );
+        let evaluatedValue;
+
+        // DOM node case
+        if (state.nodeType) {
+          evaluatedValue = get(state, attributeProperty);
+        } else {
+          evaluatedValue = state.hasOwnProperty(attributeProperty)
+            ? state[attributeProperty]
+            : evaluateExpression(attributeProperty, state) || state;
+        }
+
+        attributeContainer.setAttribute(targetName, evaluatedValue);
       }
     });
   }
-
-  // 2. Evaluate value based on stateContainer.state
 }
 
 export default evaluateAttributes;

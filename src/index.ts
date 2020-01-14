@@ -1,7 +1,6 @@
 import { ExtendedHTMLElement } from "./types";
 import {
   evaluateBind,
-  evaluateAttributes,
   evaluateClasses,
   evaluateEach,
   evaluateState,
@@ -49,7 +48,6 @@ function setState(newValue: any) {
     "x-each",
     "x-attr"
   );
-  evaluateAttributes(stateContainer, updatedState, "x-attr");
 }
 
 function initialize(global = window) {

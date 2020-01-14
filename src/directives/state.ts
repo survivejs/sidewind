@@ -49,7 +49,7 @@ function evaluateState(
         );
         evaluateBind(stateContainer, newState, bindKey, stateKey);
         evaluateClasses(stateContainer, newState);
-        evaluateAttributes(stateContainer, newState, attributeKey);
+        evaluateAttributes(stateContainer, attributeKey, stateKey);
       });
 
     stateContainer.setAttribute(stateKey, JSON.stringify(state));
@@ -57,7 +57,7 @@ function evaluateState(
 
     evaluateBind(stateContainer, state, bindKey, stateKey);
     evaluateClasses(stateContainer, state);
-    evaluateAttributes(stateContainer, state, attributeKey);
+    evaluateAttributes(stateContainer, attributeKey, stateKey);
   }
 }
 

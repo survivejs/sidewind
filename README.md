@@ -60,7 +60,8 @@ State can be a complex object:
           x-attr
           x:href="nextElementSibling.attributes.href.value"
           x-bind="textContent"
-        ></a>
+          >Link</a
+        >
       </li>
     </template>
   </ul>
