@@ -82,6 +82,16 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
 </div>
 ```
 
+### `x-attr`
+
+In addition to binding values, it's possible to bind attributes:
+
+```html
+<section x-state="{ target: 'https://survivejs.com' }">
+  <a x-attr x:href="target">Link target</a>
+</section>
+```
+
 ### `x-on`, and `x-off`
 
 Given Tailwind is an utility class based CSS approach for styling, Sidewind provides means for connecting state with classes. `x-on` and `x-off` allow you to set classes if state is either true (`x-on`) or false (`x-off`) as the accordion example below illustrates:
