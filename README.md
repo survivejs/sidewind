@@ -18,6 +18,12 @@ Sidewind is composed of a collection of directives that operate on the DOM. I've
 <section x-state="false">Value: <span x-value="state" /></section>
 ```
 
+`x-state` and `x-value` can exist even within the same element:
+
+```html
+<section>Value: <span x-state="false" x-value="state" /></section>
+```
+
 The state can be manipulated using a global `setState`:
 
 ```html
@@ -47,8 +53,8 @@ State can be a complex object:
   <ul class="list-disc list-inside">
     <template x-each="headings">
       <li>
-        <span x-bind="nodeName"></span> - <span x-bind="textContent"></span> -
-        <span x-bind="nextElementSibling.attributes.href.value"></span>
+        <span x-value="nodeName"></span> - <span x-value="textContent"></span> -
+        <span x-value="nextElementSibling.attributes.href.value"></span>
       </li>
     </template>
   </ul>
@@ -64,7 +70,7 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
 >
   <ul class="list-disc list-inside">
     <template x-each="cars">
-      <li><span x-bind="brand"></span> - <span x-bind="color"></span></li>
+      <li><span x-value="brand"></span> - <span x-value="color"></span></li>
     </template>
   </ul>
 </div>
@@ -153,9 +159,9 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
 </section>
 ```
 
-### `x-each` and `x-bind`
+### `x-each`
 
-`x-each` allows iteration of a list. It has been designed to be used with a [template tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template). To access values during iteration, use `x-bind` as below:
+`x-each` allows iteration of a list. It has been designed to be used with a [template tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template).
 
 ```html
 <div
@@ -164,7 +170,7 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x-bind="text"></li>
+        <li x-value="text"></li>
       </template>
     </ul>
   </div>
@@ -231,7 +237,7 @@ The examples below combine directives to produce complex user interfaces and to 
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x-bind="text"></li>
+        <li x-value="text"></li>
       </template>
     </ul>
   </div>
@@ -252,8 +258,8 @@ The examples below combine directives to produce complex user interfaces and to 
   <tbody>
     <template x-each="brand, color">
       <tr>
-        <td class="border p-2" x-bind="brand"></td>
-        <td class="border p-2" x-bind="color"></td>
+        <td class="border p-2" x-value="brand"></td>
+        <td class="border p-2" x-value="color"></td>
       </tr>
     </template>
   </tbody>

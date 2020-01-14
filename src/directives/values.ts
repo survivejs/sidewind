@@ -7,9 +7,14 @@ function evaluateValues(
   valueKey: string,
   stateKey?: string
 ) {
-  const valueContainers = stateContainer.querySelectorAll(
-    `:scope [${valueKey}]`
+  const valueContainers = Array.from(
+    stateContainer.querySelectorAll(`:scope [${valueKey}]`)
   );
+
+  // A state container can be a value container itself
+  if (stateContainer.hasAttribute(valueKey)) {
+    valueContainers.push(stateContainer);
+  }
 
   for (let i = valueContainers.length; i--; ) {
     const valueContainer = valueContainers[i] as ExtendedHTMLElement;
@@ -58,6 +63,11 @@ function get(object: BindState, keyString: string) {
 }
 
 function getStateParent(element: Element, stateKey: string): Element | null {
+  // A state container can be a value container itself
+  if (element.hasAttribute(stateKey)) {
+    return element;
+  }
+
   return element.parentElement
     ? element.parentElement.hasAttribute(stateKey)
       ? element.parentElement

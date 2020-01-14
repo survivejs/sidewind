@@ -1,5 +1,4 @@
 import { BindState, ExtendedHTMLElement } from "../types";
-import evaluateValues from "./values";
 
 type StringObject = { [id: string]: any };
 
@@ -31,18 +30,21 @@ function evaluateEach(
       }
       containerParent.appendChild(eachContainer);
 
-      if (Array.isArray(state)) {
+      /*if (Array.isArray(state)) {
         state.forEach((item: BindState) => {
           const templateClone = document.importNode(
             eachContainer.content,
             true
           );
 
-          evaluateValues(templateClone, getValues(item, dataGetters), "x-bind");
+          console.log("item", item);
+
+          // evaluateValues(templateClone, getValues(item, dataGetters), "x-bind");
 
           containerParent.appendChild(templateClone);
         });
-      } else if (typeof state === "object") {
+      } else*/
+      if (typeof state === "object") {
         Object.values(getValues(state, dataGetters)).forEach(
           values =>
             Array.isArray(values) &&
@@ -51,7 +53,11 @@ function evaluateEach(
                 eachContainer.content,
                 true
               );
-              evaluateValues(templateClone, value, "x-bind");
+
+              console.log("value", value);
+
+              // evaluateValues(templateClone, value, "x-bind");
+
               containerParent.appendChild(templateClone);
             })
         );
