@@ -203,6 +203,12 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
 <img x-intersect="{ src: './assets/logo.png' }" x-attr x:src="src" />
 ```
 
+### `x-interval`
+
+```html
+<div x-interval="{ time: new Date().toString() }" x-bind="time" />
+```
+
 ## Examples
 
 The examples below combine directives to produce complex user interfaces and to handle specific use cases.

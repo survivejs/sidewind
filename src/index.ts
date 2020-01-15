@@ -2,6 +2,7 @@ import {
   evaluateClosest,
   evaluateEach,
   evaluateIntersect,
+  evaluateInterval,
   evaluateState,
 } from "./directives";
 import setState from "./set-state";
@@ -22,6 +23,11 @@ function initialize(global = window) {
     evaluateIntersect(
       document.querySelectorAll("[x-intersect]"),
       "x-intersect",
+      "x-state"
+    );
+    evaluateInterval(
+      document.querySelectorAll("[x-interval]"),
+      "x-interval",
       "x-state"
     );
     evaluateState(
