@@ -1,4 +1,9 @@
-import { evaluateClosest, evaluateEach, evaluateState } from "./directives";
+import {
+  evaluateClosest,
+  evaluateEach,
+  evaluateIntersect,
+  evaluateState,
+} from "./directives";
 import setState from "./set-state";
 
 declare global {
@@ -12,6 +17,11 @@ function initialize(global = window) {
     evaluateClosest(
       document.querySelectorAll("[x-closest]"),
       "x-closest",
+      "x-state"
+    );
+    evaluateIntersect(
+      document.querySelectorAll("[x-intersect]"),
+      "x-intersect",
       "x-state"
     );
     evaluateState(

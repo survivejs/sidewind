@@ -197,6 +197,12 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
 </div>
 ```
 
+### `x-intersect`
+
+```html
+<img x-intersect="{ src: './assets/logo.png' }" x-attr x:src="src" />
+```
+
 ## Examples
 
 The examples below combine directives to produce complex user interfaces and to handle specific use cases.

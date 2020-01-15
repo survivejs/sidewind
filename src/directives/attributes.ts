@@ -7,9 +7,14 @@ function evaluateAttributes(
   attributeKey: string,
   stateKey: string
 ) {
-  const attributeContainers = stateContainer.querySelectorAll(
-    `:scope [${attributeKey}]`
+  const attributeContainers = Array.from(
+    stateContainer.querySelectorAll(`:scope [${attributeKey}]`)
   );
+
+  // A state container can be an attribute container itself
+  if (stateContainer.hasAttribute(attributeKey)) {
+    attributeContainers.push(stateContainer);
+  }
 
   for (let i = attributeContainers.length; i--; ) {
     const attributeContainer = attributeContainers[i] as ExtendedHTMLElement;

@@ -1,5 +1,6 @@
 import { ExtendedHTMLElement } from "./types";
 import {
+  evaluateAttributes,
   evaluateBind,
   evaluateClasses,
   evaluateEach,
@@ -10,7 +11,7 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
   const stateKey = "x-state";
   const eachKey = "x-each";
   const bindKey = "x-bind";
-  const attrKey = "x-attr";
+  const attributeKey = "x-attr";
   const labelKey = "x-label";
 
   if (!element) {
@@ -49,10 +50,11 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     stateKey,
     bindKey,
     eachKey,
-    attrKey,
+    attributeKey,
     labelKey
   );
   evaluateClasses(stateContainer, stateKey, labelKey);
+  evaluateAttributes(stateContainer, attributeKey, stateKey);
 }
 
 export default setState;
