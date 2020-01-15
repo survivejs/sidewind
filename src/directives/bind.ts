@@ -1,5 +1,5 @@
+/* eslint no-new-func: 0 */
 import { BindState, ExtendedHTMLElement } from "../types";
-// import evaluateExpression from "../evaluate-expression";
 import { get, getLabeledState } from "../utils";
 
 function evaluateBind(
