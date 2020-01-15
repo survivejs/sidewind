@@ -164,6 +164,10 @@ small {
  * Remove the border on images inside links in IE 10.
  */
 
+img {
+  border-style: none;
+}
+
 /* Forms
    ========================================================================== */
 
@@ -446,6 +450,10 @@ hr {
  * https://github.com/tailwindcss/tailwindcss/issues/362
  */
 
+img {
+  border-style: solid;
+}
+
 input::-webkit-input-placeholder {
   color: #a0aec0;
 }
@@ -527,7 +535,7 @@ code {
  * https://github.com/mozdevs/cssremedy/issues/14
  */
 
-
+img,
 svg,
 object {
   display: block;
@@ -540,6 +548,11 @@ object {
  *
  * https://github.com/mozdevs/cssremedy/issues/14
  */
+
+img {
+  max-width: 100%;
+  height: auto;
+}
 
 /**
  * This injects any component classes registered by plugins.

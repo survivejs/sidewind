@@ -254,10 +254,7 @@
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div x-case="code" x-off="hidden"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>
-  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ cars: fetch('./assets/cars.json').then(res =&gt; res.json()) }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
-  <span class="hljs-attr">class</span>=<span class="hljs-string">"table-fixed"</span>
-&gt;</span>
+    <div x-case="code" x-off="hidden"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ cars: fetch('./assets/cars.json').then(res =&gt; res.json()) }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"cars"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"brand"</span> /&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-bind</span>=<span class="hljs-string">"color"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
@@ -265,10 +262,7 @@
   <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </span></code></pre></div>
-    <div x-case="example" x-off="hidden"><div
-  x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }"
-  class="table-fixed"
->
+    <div x-case="example" x-off="hidden"><div x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }">
   <ul class="list-disc list-inside">
     <template x-each="cars">
       <li><span x-bind="brand" /> - <span x-bind="color" /></li>
@@ -585,6 +579,35 @@
     <div x-case="example" x-off="hidden"><div x-closest="{ closest: $('h2, h3') }">
   Closest heading: <span x-bind="closest.textContent" />
 </div>
+</div>
+  </div>
+</section>
+<h3 class="inline" id="xintersect"><code>x-intersect</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xintersect">#</a>
+<section class="mb-4" x-state="'code'">
+  <nav class="flex flex-row justify-between cursor-pointer">
+    <div
+      class="p-2 w-full"
+      x-case="code"
+      x-on="bg-gray-200"
+      x-off="btn-muted"
+      onclick="setState('code')"
+    >
+      Code
+    </div>
+    <div
+      class="p-2 w-full"
+      x-case="example"
+      x-on="bg-gray-200"
+      x-off="btn-muted"
+      onclick="setState('example')"
+    >
+      Example
+    </div>
+  </nav>
+  <div class="bg-gray-100 p-2">
+    <div x-case="code" x-off="hidden"><pre><code class="html language-html">&lt;img <span class="hljs-symbol">x</span>-intersect=<span class="hljs-string">"{ src: './assets/logo.png' }"</span> <span class="hljs-symbol">x</span>-attr <span class="hljs-symbol">x</span>:src=<span class="hljs-string">"src"</span> /&gt;
+</code></pre></div>
+    <div x-case="example" x-off="hidden"><img x-intersect="{ src: './assets/logo.png' }" x-attr x:src="src" />
 </div>
   </div>
 </section>
