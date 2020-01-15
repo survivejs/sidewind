@@ -44,7 +44,7 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     eachKey,
     stateKey
   );
-  evaluateBind(stateContainer, updatedState, bindKey, stateKey);
+  evaluateBind(stateContainer, updatedState, bindKey, labelKey, stateKey);
   evaluateState(
     stateContainer.querySelectorAll(`[${stateKey}]`),
     stateKey,

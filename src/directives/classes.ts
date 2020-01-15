@@ -1,5 +1,6 @@
 /* eslint no-new-func: 0 */
 import { BindState, ExtendedHTMLElement } from "../types";
+import { getLabeledState } from "../utils";
 
 function evaluateClasses(
   stateContainer: ExtendedHTMLElement,
@@ -43,7 +44,7 @@ function evaluateCase(
 
   if (caseAttribute) {
     if (typeof state === "object") {
-      const labeledState = getLabeledState(labelKey);
+      const labeledState = getLabeledState(element, labelKey);
 
       return evaluateCaseExpression(caseAttribute, { ...labeledState, state });
     } else {
@@ -64,24 +65,6 @@ function evaluateCaseExpression(expression: string, value: BindState) {
   } catch (err) {
     console.error("Failed to evaluate", expression, value, err);
   }
-}
-
-function getLabeledState(labelKey: string) {
-  const labeledStateContainers = document.querySelectorAll(`[${labelKey}]`);
-  const ret: BindState = {};
-
-  for (let i = labeledStateContainers.length; i--; ) {
-    const labeledStateContainer = labeledStateContainers[
-      i
-    ] as ExtendedHTMLElement;
-    const label = labeledStateContainer.getAttribute(labelKey);
-
-    if (label) {
-      ret[label] = labeledStateContainer.state;
-    }
-  }
-
-  return ret;
 }
 
 function toggleClass(

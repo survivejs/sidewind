@@ -15,9 +15,12 @@ function evaluateState(
   attributeKey: string,
   labelKey: string
 ) {
-  for (let i = stateContainers.length; i--; ) {
-    const stateContainer = stateContainers[i];
+  // It's important to evaluate state containers from root to bottom
+  // for nested state to work predictably.
+  const stateContainerOrder = orderByParents(Array.from(stateContainers));
 
+  stateContainerOrder.forEach(i => {
+    const stateContainer = stateContainers[i];
     const stateProperty = stateContainer.getAttribute(stateKey) || "";
     const state = stateContainer.state || evaluateExpression(stateProperty, {});
 
@@ -48,7 +51,7 @@ function evaluateState(
           eachKey,
           stateKey
         );
-        evaluateBind(stateContainer, newState, bindKey, stateKey);
+        evaluateBind(stateContainer, newState, bindKey, labelKey, stateKey);
         evaluateClasses(stateContainer, stateKey, labelKey);
         evaluateAttributes(stateContainer, attributeKey, stateKey);
       });
@@ -56,10 +59,25 @@ function evaluateState(
     stateContainer.setAttribute(stateKey, JSON.stringify(state));
     stateContainer.state = state;
 
-    evaluateBind(stateContainer, state, bindKey, stateKey);
+    evaluateBind(stateContainer, state, bindKey, labelKey, stateKey);
     evaluateClasses(stateContainer, stateKey, labelKey);
     evaluateAttributes(stateContainer, attributeKey, stateKey);
-  }
+  });
+}
+
+function orderByParents(elementsArray: ExtendedHTMLElement[]) {
+  // Note that sort mutates the original structure directly
+  return elementsArray
+    .map((element, i) => ({
+      i,
+      depth: getDepth(element),
+    }))
+    .sort((a, b) => a.depth - b.depth)
+    .map(({ i }) => i);
+}
+
+function getDepth(element: Node, depth = 0): number {
+  return element.parentNode ? getDepth(element.parentNode, depth + 1) : depth;
 }
 
 export default evaluateState;

@@ -187,6 +187,18 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
 </div>
 ```
 
+### `x-label`
+
+`x-label` gives access to parent state and it's useful for sharing information between scopes in one direction.
+
+```html
+<div x-label="i18n" x-state="{ hello: 'Terve' }">
+  <div x-state="{ world: 'World' }">
+    <span x-bind="i18n.hello + ' ' + state.world" />
+  </div>
+</div>
+```
+
 ### `x-closest`
 
 `x-closest` gives you access to the element closest to display top:

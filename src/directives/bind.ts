@@ -1,11 +1,12 @@
-import { ExtendedHTMLElement } from "../types";
-import evaluateExpression from "../evaluate-expression";
-import { get } from "../utils";
+import { BindState, ExtendedHTMLElement } from "../types";
+// import evaluateExpression from "../evaluate-expression";
+import { get, getLabeledState } from "../utils";
 
 function evaluateBind(
   stateContainer: HTMLElement,
   state: { [id: string]: any },
   bindKey: string,
+  labelKey: string,
   stateKey?: string
 ) {
   const bindContainers = Array.from(
@@ -36,9 +37,12 @@ function evaluateBind(
     if (state.nodeType) {
       evaluatedValue = get(state, bindProperty);
     } else {
+      const labeledState = getLabeledState(bindContainer, labelKey);
+
       evaluatedValue = state.hasOwnProperty(bindProperty.split(".")[0])
         ? get(state, bindProperty)
-        : evaluateExpression(bindProperty, state) || state;
+        : evaluateCaseExpression(bindProperty, { ...labeledState, state }) ||
+          state;
     }
 
     if (bindContainer.localName === "input") {
@@ -49,6 +53,18 @@ function evaluateBind(
           ? JSON.stringify(evaluatedValue, null, 2)
           : evaluatedValue;
     }
+  }
+}
+
+// TODO: Combine with the other evaluators + add support for $
+function evaluateCaseExpression(expression: string, value: BindState) {
+  try {
+    return Function(
+      ...Object.keys(value),
+      `return ${expression}`
+    )(...Object.values(value));
+  } catch (err) {
+    console.error("Failed to evaluate", expression, value, err);
   }
 }
 

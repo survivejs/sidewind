@@ -33,6 +33,11 @@ function evaluateAttributes(
 
         let evaluatedValue;
 
+        // TODO: Figure out why this can happen
+        if (!state) {
+          return;
+        }
+
         // DOM node case
         if (state.nodeType) {
           evaluatedValue = get(state, attributeProperty);
