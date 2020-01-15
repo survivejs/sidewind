@@ -35,7 +35,7 @@
         </aside>
         <article class="md:w-2/3 md:max-w-2xl">
           <h1 id="sidewindtailwindbutforstate">Sidewind - Tailwind but for state</h1>
-<p><strong>Sidewind</strong> is a light (~6k minified) state management solution designed to work together with <a class="underline"  href="https://tailwindcss.com">Tailwind.css</a> framework. The small addition allows you to add logic to HTML, and when combined with something like <a href="https://www.npmjs.com/package/posthtml">posthtml</a>, to develop your own components without using a framework like Angular, Svelte, React, or Vue.</p>
+<p><strong>Sidewind</strong> is a light (~7k minified) state management solution designed to work together with <a class="underline"  href="https://tailwindcss.com">Tailwind.css</a> framework. The small addition allows you to add logic to HTML, and when combined with something like <a href="https://www.npmjs.com/package/posthtml">posthtml</a>, to develop your own components without using a framework like Angular, Svelte, React, or Vue.</p>
 <p>Sidewind was designed to add interactivity to small sites and it's not a replacement for a full-blown framework. That said, if you don't need much (i.e. routing), it can be enough and it can possibly complement using a framework.</p>
 <p>By design, the approach follows the principle of <strong>progressive enhancement</strong> and your pages will be accessible without JavaScript.</p>
 <h2 class="inline" id="directives">Directives</h2><a class="ml-2 text-gray-200 hover:text-gray-800" href="#directives">#</a>
@@ -608,6 +608,35 @@
     <div x-case="code" x-off="hidden"><pre><code class="html language-html">&lt;img <span class="hljs-symbol">x</span>-intersect=<span class="hljs-string">"{ src: './assets/logo.png' }"</span> <span class="hljs-symbol">x</span>-attr <span class="hljs-symbol">x</span>:src=<span class="hljs-string">"src"</span> /&gt;
 </code></pre></div>
     <div x-case="example" x-off="hidden"><img x-intersect="{ src: './assets/logo.png' }" x-attr x:src="src" />
+</div>
+  </div>
+</section>
+<h3 class="inline" id="xinterval"><code>x-interval</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xinterval">#</a>
+<section class="mb-4" x-state="'code'">
+  <nav class="flex flex-row justify-between cursor-pointer">
+    <div
+      class="p-2 w-full"
+      x-case="code"
+      x-on="bg-gray-200"
+      x-off="btn-muted"
+      onclick="setState('code')"
+    >
+      Code
+    </div>
+    <div
+      class="p-2 w-full"
+      x-case="example"
+      x-on="bg-gray-200"
+      x-off="btn-muted"
+      onclick="setState('example')"
+    >
+      Example
+    </div>
+  </nav>
+  <div class="bg-gray-100 p-2">
+    <div x-case="code" x-off="hidden"><pre><code class="html language-html">&lt;<span class="hljs-keyword">div</span> <span class="hljs-symbol">x</span>-interval=<span class="hljs-string">"{ time: new Date().toString() }"</span> <span class="hljs-symbol">x</span>-bind=<span class="hljs-string">"time"</span> /&gt;
+</code></pre></div>
+    <div x-case="example" x-off="hidden"><div x-interval="{ time: new Date().toString() }" x-bind="time" />
 </div>
   </div>
 </section>
