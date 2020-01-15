@@ -1,5 +1,6 @@
 import { BindState, ExtendedHTMLElement } from "../types";
 import { getValues } from "../utils";
+import setState from "../set-state";
 
 function evaluateEach(
   eachContainers: NodeListOf<ExtendedHTMLElement>,
@@ -37,14 +38,12 @@ function evaluateEach(
                 eachContainer.content,
                 true
               );
+              const firstChild = templateClone.firstElementChild;
 
-              templateClone.firstElementChild.setAttribute(
-                stateKey,
-                JSON.stringify(value)
-              );
-              templateClone.firstElementChild.state = value;
-
+              firstChild.setAttribute(stateKey, JSON.stringify(value));
               containerParent.appendChild(templateClone);
+
+              setState(value, firstChild);
             })
         );
       }

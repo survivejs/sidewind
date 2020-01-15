@@ -22,18 +22,7 @@ function initialize(global = window) {
       "x-attr",
       "x-label"
     );
-
-    // Since x-each generates x-state, re-evaluation is needed
-    // TODO: Figure out a way to simplify
     evaluateEach(document.querySelectorAll("[x-each]"), "x-each", "x-state");
-    evaluateState(
-      document.querySelectorAll("[x-state]"),
-      "x-state",
-      "x-bind",
-      "x-each",
-      "x-attr",
-      "x-label"
-    );
   };
 
   global.setState = setState;
