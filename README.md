@@ -102,46 +102,6 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 </section>
 ```
 
-### `x-on`, and `x-off`
-
-Given Tailwind is an utility class based CSS approach for styling, Sidewind provides means for connecting state with classes. `x-on` and `x-off` allow you to set classes if state is either true (`x-on`) or false (`x-off`) as the accordion example below illustrates:
-
-```html
-<article>
-  <section class="mb-2" x-state="false">
-    <div
-      class="flex flex-row justify-between cursor-pointer"
-      onclick="setState(!this.state)"
-    >
-      <span>Junior Engineer</span>
-      <div>
-        <span x-on="hidden">▼</span>
-        <span x-off="hidden">▲</span>
-      </div>
-    </div>
-    <div class="py-2 bg-gray-200" x-off="hidden">
-      Junior engineer description
-    </div>
-  </section>
-  <hr class="my-2" />
-  <section x-state="false">
-    <div
-      class="flex flex-row justify-between cursor-pointer"
-      onclick="setState(!this.state)"
-    >
-      <span>Senior Engineer</span>
-      <div>
-        <span x-on="hidden">▼</span>
-        <span x-off="hidden">▲</span>
-      </div>
-    </div>
-    <div class="py-2 bg-gray-200" x-off="hidden">
-      Senior engineer description
-    </div>
-  </section>
-</article>
-```
-
 ### `x-case`
 
 `x-case` has been designed to allow combining `x-on` and `x-off` with `switch/case` kind of matching:
@@ -327,7 +287,45 @@ The examples below combine directives to produce complex user interfaces and to 
 </table>
 ```
 
-## Table of Contents
+### Accordion
+
+```html
+<article>
+  <section class="mb-2" x-state="false">
+    <div
+      class="flex flex-row justify-between cursor-pointer"
+      onclick="setState(!this.state)"
+    >
+      <span>Junior Engineer</span>
+      <div>
+        <span x-attr x:class="state && 'hidden'">▼</span>
+        <span x-attr x:class="!state && 'hidden'">▲</span>
+      </div>
+    </div>
+    <div class="py-2 bg-gray-200" x-attr x:class="!state && 'hidden'">
+      Junior engineer description
+    </div>
+  </section>
+  <hr class="my-2" />
+  <section x-state="false">
+    <div
+      class="flex flex-row justify-between cursor-pointer"
+      onclick="setState(!this.state)"
+    >
+      <span>Senior Engineer</span>
+      <div>
+        <span x-attr x:class="state && 'hidden'">▼</span>
+        <span x-attr x:class="!state && 'hidden'">▲</span>
+      </div>
+    </div>
+    <div class="py-2 bg-gray-200" x-attr x:class="!state && 'hidden'">
+      Senior engineer description
+    </div>
+  </section>
+</article>
+```
+
+### Table of Contents
 
 ```html
 <nav
