@@ -11,10 +11,9 @@ function evaluateInterval(
     const intervalContainer = intervalContainers[i] as ExtendedHTMLElement;
     const intervalExpression =
       intervalContainer.getAttribute(intervalKey) || "";
-    const intervalState = evaluateExpression(intervalExpression, {});
+    const intervalState = evaluateExpression(intervalExpression);
     const state = evaluateExpression(
-      intervalContainer.getAttribute(stateKey) || "",
-      {}
+      intervalContainer.getAttribute(stateKey) || ""
     );
 
     intervalContainer.setAttribute(
@@ -24,7 +23,7 @@ function evaluateInterval(
 
     // TODO: Expose delay parameter somehow (needs a convention)
     setInterval(() => {
-      setState(evaluateExpression(intervalExpression, {}), intervalContainer);
+      setState(evaluateExpression(intervalExpression), intervalContainer);
     }, 1000);
   }
 }

@@ -14,8 +14,7 @@ function evaluateClosest(
     const closestState = evaluateExpression(closestExpression, {});
     const key = Object.keys(closestState)[0];
     const state = evaluateExpression(
-      closestContainer.getAttribute(stateKey) || "",
-      {}
+      closestContainer.getAttribute(stateKey) || ""
     );
     const emptyClosest = { [key]: "" };
 

@@ -22,7 +22,7 @@ function evaluateState(
   stateContainerOrder.forEach(i => {
     const stateContainer = stateContainers[i];
     const stateProperty = stateContainer.getAttribute(stateKey) || "";
-    const state = stateContainer.state || evaluateExpression(stateProperty, {});
+    const state = stateContainer.state || evaluateExpression(stateProperty);
 
     let promises: Promise<PromiseResult>[] = [];
     Object.keys(state).forEach(key => {

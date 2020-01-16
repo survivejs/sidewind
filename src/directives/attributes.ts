@@ -44,7 +44,7 @@ function evaluateAttributes(
         } else {
           evaluatedValue = state.hasOwnProperty(attributeProperty)
             ? state[attributeProperty]
-            : evaluateExpression(attributeProperty, state) || state;
+            : evaluateExpression(attributeProperty, { state }) || state;
         }
 
         attributeContainer.setAttribute(targetName, evaluatedValue);

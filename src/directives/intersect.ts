@@ -16,8 +16,7 @@ function evaluateIntersect(
     const intersectState = evaluateExpression(intersectExpression, {});
     const key = Object.keys(intersectState)[0];
     const state = evaluateExpression(
-      intersectContainer.getAttribute(stateKey) || "",
-      {}
+      intersectContainer.getAttribute(stateKey) || ""
     );
     const emptyIntersect = { [key]: "" };
 

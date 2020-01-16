@@ -1,13 +1,13 @@
 /* eslint no-new-func: 0 */
-import { State } from "./types";
+import { BindState } from "./types";
 
-function evaluateExpression(expression: string, value: State) {
+function evaluateExpression(expression: string, value: BindState = {}) {
   try {
     return Function(
-      "state",
+      ...Object.keys(value),
       "$",
       `return ${expression}`
-    )(value, (_value: any) => ({
+    )(...Object.values(value), (_value: any) => ({
       _type: "query",
       _value,
     }));
