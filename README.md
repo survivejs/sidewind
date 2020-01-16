@@ -49,20 +49,18 @@ State can be a complex object:
 `x-state` accepts complex JavaScript expressions as well and exposes `document.querySelectorAll` through `$` alias.
 
 ```html
-<nav x-state="{ headings: $('h2, h3') }">
-  <ul class="list-disc list-inside">
-    <template x-each="headings">
-      <li>
-        <a
-          x-attr
-          x:href="nextElementSibling.attributes.href.value"
-          x-bind="textContent"
-        >
-        </a>
-      </li>
-    </template>
-  </ul>
-</nav>
+<ul x-state="{ headings: $('h2') }">
+  <template x-each="headings">
+    <li>
+      <a
+        x-attr
+        x:href="nextElementSibling.attributes.href.value"
+        x-bind="textContent"
+      >
+      </a>
+    </li>
+  </template>
+</ul>
 ```
 
 It's possible to use the standard [fetch() API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) on top of `x-state` for fetching data as it handles Promises for you internally:
@@ -137,7 +135,7 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
     <div
       class="p-2 w-full"
       x-case="animals"
-      x-on="bg-gray-200"
+      x-on="bg-gray-400"
       x-off="btn-muted"
       onclick="setState('animals')"
     >
@@ -146,7 +144,7 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
     <div
       class="p-2 w-full"
       x-case="languages"
-      x-on="bg-gray-200"
+      x-on="bg-gray-400"
       x-off="btn-muted"
       onclick="setState('languages')"
     >
@@ -155,7 +153,7 @@ Given Tailwind is an utility class based CSS approach for styling, Sidewind prov
     <div
       class="p-2 w-full"
       x-case="colors"
-      x-on="bg-gray-200"
+      x-on="bg-gray-400"
       x-off="btn-muted"
       onclick="setState('colors')"
     >
