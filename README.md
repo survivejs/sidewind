@@ -102,49 +102,6 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 </section>
 ```
 
-### `x-case`
-
-`x-case` has been designed to allow combining `x-on` and `x-off` with `switch/case` kind of matching:
-
-```html
-<section x-state="'animals'">
-  <nav class="flex flex-row justify-between cursor-pointer">
-    <div
-      class="p-2 w-full"
-      x-case="animals"
-      x-on="bg-gray-400"
-      x-off="btn-muted"
-      onclick="setState('animals')"
-    >
-      Animals
-    </div>
-    <div
-      class="p-2 w-full"
-      x-case="languages"
-      x-on="bg-gray-400"
-      x-off="btn-muted"
-      onclick="setState('languages')"
-    >
-      Languages
-    </div>
-    <div
-      class="p-2 w-full"
-      x-case="colors"
-      x-on="bg-gray-400"
-      x-off="btn-muted"
-      onclick="setState('colors')"
-    >
-      Colors
-    </div>
-  </nav>
-  <div class="bg-gray-100 p-2">
-    <div x-case="animals" x-off="hidden">Animals tab</div>
-    <div x-case="languages" x-off="hidden">Languages tab</div>
-    <div x-case="colors" x-off="hidden">Colors tab</div>
-  </div>
-</section>
-```
-
 ### `x-each`
 
 `x-each` allows iteration of a list. It has been designed to be used with a [template tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template).
@@ -323,6 +280,75 @@ The examples below combine directives to produce complex user interfaces and to 
     </div>
   </section>
 </article>
+```
+
+### Tabs
+
+```html
+<section x-state="'animals'">
+  <nav class="flex flex-row justify-between cursor-pointer">
+    <div
+      x-attr
+      x:class="[
+        'p-2',
+        'w-full',
+        state === 'animals' ? 'bg-gray-400' : 'btn-muted'
+      ]"
+      class="p-2 w-full"
+      onclick="setState('animals')"
+    >
+      Animals
+    </div>
+    <div
+      x-attr
+      x:class="[
+        'p-2',
+        'w-full',
+        state === 'languages' ? 'bg-gray-400' : 'btn-muted'
+      ]"
+      onclick="setState('languages')"
+    >
+      Languages
+    </div>
+    <div
+      x-attr
+      x:class="[
+        'p-2',
+        'w-full',
+        state === 'colors' ? 'bg-gray-400' : 'btn-muted'
+      ]"
+      onclick="setState('colors')"
+    >
+      Colors
+    </div>
+  </nav>
+  <div class="bg-gray-100 p-2">
+    <div
+      x-attr
+      x:class="[
+        state !== 'animals' && 'hidden'
+      ]"
+    >
+      Animals tab
+    </div>
+    <div
+      x-attr
+      x:class="[
+        state !== 'languages' && 'hidden'
+      ]"
+    >
+      Languages tab
+    </div>
+    <div
+      x-attr
+      x:class="[
+        state !== 'colors' && 'hidden'
+      ]"
+    >
+      Colors tab
+    </div>
+  </div>
+</section>
 ```
 
 ### Table of Contents
