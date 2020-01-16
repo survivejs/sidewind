@@ -94,8 +94,7 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
     x:href="target"
     x:class="[
       'p-2',
-      state.target === 'https://survivejs.com' && 'bg-gray-400',
-      'foo' === 'bar' && 'ml-2'
+      state.target === 'https://survivejs.com' && 'bg-gray-400'
     ]"
     >Link target</a
   >
