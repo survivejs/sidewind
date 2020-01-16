@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const temp = require("temp");
+const glob = require("glob");
 const { highlightAuto } = require("highlight.js");
 const showdown = require("showdown");
 const decodeHTML = require("html-encoder-decoder").decode;
@@ -201,15 +202,15 @@ module.exports = mode => {
       });
     }
     case "production": {
-      const fileStream = temp.createWriteStream();
-      fileStream.write(getHTML());
-      fileStream.end();
+      const htmlDir = temp.mkdirSync(".templates");
+
+      fs.writeFileSync(path.join(htmlDir, "index.html"), getHTML());
 
       return merge(commonConfig, {
         mode,
         plugins: [
           new PurgeCSSPlugin({
-            paths: [fileStream.path],
+            paths: glob.sync(`${htmlDir}/**/*.html`),
             extractors: [
               {
                 extractor: class TailwindExtractor {
@@ -219,14 +220,6 @@ module.exports = mode => {
                 },
                 extensions: ["html"],
               },
-            ],
-            // TODO: Eliminate this
-            whitelist: [
-              "md:inline",
-              "md:w-1/3",
-              "md:w-2/3",
-              "md:max-w-2xl",
-              "hidden",
             ],
           }),
         ],
@@ -276,7 +269,7 @@ function getHTML({
             </ul>
           </nav>
         </aside>
-        <article class="md:w-2/3 md:max-w-2xl">
+        <article class="w-full md:w-2/3 md:max-w-2xl">
           ${processMarkdown(
             fs.readFileSync("./README.md", { encoding: "utf-8" })
           )}

@@ -536,8 +536,7 @@ code {
  */
 
 img,
-svg,
-object {
+svg {
   display: block;
   vertical-align: middle;
 }
@@ -747,14 +746,6 @@ a {
   margin-bottom: 1rem;
 }
 
-.max-w-md {
-  max-width: 28rem;
-}
-
-.max-w-2xl {
-  max-width: 42rem;
-}
-
 .p-2 {
   padding: 0.5rem;
 }
@@ -785,20 +776,12 @@ a {
   color: #edf2f7;
 }
 
-.text-gray-800 {
+.hover\:text-gray-800:hover {
   color: #2d3748;
 }
 
 .underline {
   text-decoration: underline;
-}
-
-.w-1 {
-  width: 0.25rem;
-}
-
-.w-2 {
-  width: 0.5rem;
 }
 
 .w-full {
@@ -824,6 +807,10 @@ a {
 
   .md\:inline {
     display: inline;
+  }
+
+  .md\:max-w-md {
+    max-width: 28rem;
   }
 
   .md\:max-w-2xl {
