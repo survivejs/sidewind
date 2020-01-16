@@ -54,7 +54,7 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     labelKey
   );
   evaluateClasses(stateContainer, stateKey, labelKey);
-  evaluateAttributes(stateContainer, attributeKey, stateKey);
+  evaluateAttributes(stateContainer, attributeKey, stateKey, labelKey);
 }
 
 export default setState;

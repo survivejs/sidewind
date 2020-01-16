@@ -1,11 +1,12 @@
 import { BindState, ExtendedHTMLElement } from "../types";
 import evaluateExpression from "../evaluate-expression";
-import { get } from "../utils";
+import { get, getLabeledState } from "../utils";
 
 function evaluateAttributes(
   stateContainer: HTMLElement,
   attributeKey: string,
-  stateKey: string
+  stateKey: string,
+  labelKey: string
 ) {
   const attributeContainers = Array.from(
     stateContainer.querySelectorAll(`:scope [${attributeKey}]`)
@@ -42,12 +43,22 @@ function evaluateAttributes(
         if (state.nodeType) {
           evaluatedValue = get(state, attributeProperty);
         } else {
+          const labeledState = getLabeledState(attributeContainer, labelKey);
+
           evaluatedValue = state.hasOwnProperty(attributeProperty)
             ? state[attributeProperty]
-            : evaluateExpression(attributeProperty, { state }) || state;
+            : evaluateExpression(attributeProperty, {
+                ...labeledState,
+                state,
+              }) || state;
         }
 
-        attributeContainer.setAttribute(targetName, evaluatedValue);
+        attributeContainer.setAttribute(
+          targetName,
+          Array.isArray(evaluatedValue)
+            ? evaluatedValue.filter(Boolean).join(" ")
+            : evaluatedValue
+        );
       }
     });
   }

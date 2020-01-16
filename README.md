@@ -85,6 +85,23 @@ In addition to binding values, it's possible to bind attributes:
 </section>
 ```
 
+For classes, it's possible to pass an array to evaluate to produce multiple classes based on expressions:
+
+```html
+<section x-state="{ target: 'https://survivejs.com' }">
+  <a
+    x-attr
+    x:href="target"
+    x:class="[
+      'p-2',
+      state.target === 'https://survivejs.com' && 'bg-gray-400',
+      'foo' === 'bar' && 'ml-2'
+    ]"
+    >Link target</a
+  >
+</section>
+```
+
 ### `x-on`, and `x-off`
 
 Given Tailwind is an utility class based CSS approach for styling, Sidewind provides means for connecting state with classes. `x-on` and `x-off` allow you to set classes if state is either true (`x-on`) or false (`x-off`) as the accordion example below illustrates:
@@ -325,14 +342,21 @@ The examples below combine directives to produce complex user interfaces and to 
           x-attr
           x:href="nextElementSibling.attributes.href.value"
           x-bind="textContent"
-          x-case="state.textContent === parent.closest.textContent"
-          x-on="bg-gray-200"
         >
         </a>
       </li>
     </template>
   </ul>
 </nav>
+```
+
+**TODO:**
+
+```
+x:class="[
+  state.textContent === parent.closest.textContent && 'bg-gray-200',
+  state.tagName === 'H3' && 'ml-2'
+]"
 ```
 
 ## Related Approaches
