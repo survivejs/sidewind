@@ -1,32 +1,33 @@
 /*
 
-github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+Dracula Theme v1.2.0
+
+https://github.com/zenorocha/dracula-theme
+
+Copyright 2015, All rights reserved
+
+Code licensed under the MIT license
+http://zenorocha.mit-license.org
+
+@author Ãverton Ribeiro <nuxlli@gmail.com>
+@author Zeno Rocha <hi@zenorocha.com>
 
 */
 
 .hljs-keyword {
-  color: #333;
-  font-weight: bold;
+  color: #8be9fd;
 }
 
-
-.hljs-template-variable,
-.hljs-tag .hljs-attr {
-  color: #008080;
+.hljs-string,
+.hljs-name,
+.hljs-symbol,
+.hljs-template-variable {
+  color: #f1fa8c;
 }
 
-.hljs-string {
-  color: #d14;
-}
-
-.hljs-tag,
+.hljs-keyword,
 .hljs-name {
-  color: #000080;
-  font-weight: normal;
-}
-
-.hljs-symbol {
-  color: #990073;
+  font-weight: bold;
 }
 
 /**
@@ -620,8 +621,7 @@ h3 {
   font-size: 1.5rem;
 }
 
-p,
-pre {
+p {
   margin-bottom: 0.5rem;
 }
 
@@ -671,6 +671,24 @@ a {
 
 .bg-gray-200 {
   background-color: #edf2f7;
+}
+
+.bg-gray-400 {
+  background-color: #cbd5e0;
+}
+
+.bg-gray-800 {
+  background-color: #2d3748;
+}
+
+.rounded-t-lg {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.rounded-b-lg {
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
 }
 
 .border {
@@ -750,6 +768,10 @@ a {
   padding: 0.5rem;
 }
 
+.p-4 {
+  padding: 1rem;
+}
+
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -770,6 +792,10 @@ a {
 
 .table-fixed {
   table-layout: fixed;
+}
+
+.text-white {
+  color: #fff;
 }
 
 .text-gray-200 {
