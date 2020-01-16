@@ -131,31 +131,9 @@ function expandCode() {
           const example = decodeHTML(match);
           const code = left + highlightAuto(example).value + right;
 
-          return `<section class="mb-4" x-state="'code'">
-  <nav class="flex flex-row justify-between cursor-pointer">
-    <div
-      class="p-2 w-full"
-      x-case="code"
-      x-on="bg-gray-200"
-      x-off="btn-muted"
-      onclick="setState('code')"
-    >
-      Code
-    </div>
-    <div
-      class="p-2 w-full"
-      x-case="example"
-      x-on="bg-gray-200"
-      x-off="btn-muted"
-      onclick="setState('example')"
-    >
-      Example
-    </div>
-  </nav>
-  <div class="bg-gray-100 p-2">
-    <div x-case="code" x-off="hidden">${code}</div>
-    <div x-case="example" x-off="hidden">${example}</div>
-  </div>
+          return `<section class="mb-4">
+    <div class="p-4 bg-gray-800 text-white">${code}</div>
+    <div class="p-4 bg-gray-200">${example}</div>
 </section>`;
         };
       return showdown.helper.replaceRecursiveRegExp(
