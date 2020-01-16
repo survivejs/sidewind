@@ -1,7 +1,6 @@
 import { BindState, ExtendedHTMLElement } from "../types";
 import evaluateBind from "./bind";
 import evaluateAttributes from "./attributes";
-import evaluateClasses from "./classes";
 import evaluateEach from "./each";
 import evaluateExpression from "../evaluate-expression";
 
@@ -52,7 +51,6 @@ function evaluateState(
           stateKey
         );
         evaluateBind(stateContainer, newState, bindKey, labelKey, stateKey);
-        evaluateClasses(stateContainer, stateKey, labelKey);
         evaluateAttributes(stateContainer, attributeKey, stateKey, labelKey);
       });
 
@@ -60,7 +58,6 @@ function evaluateState(
     stateContainer.state = state;
 
     evaluateBind(stateContainer, state, bindKey, labelKey, stateKey);
-    evaluateClasses(stateContainer, stateKey, labelKey);
     evaluateAttributes(stateContainer, attributeKey, stateKey, labelKey);
   });
 }

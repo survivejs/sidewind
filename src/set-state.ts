@@ -2,7 +2,6 @@ import { ExtendedHTMLElement } from "./types";
 import {
   evaluateAttributes,
   evaluateBind,
-  evaluateClasses,
   evaluateEach,
   evaluateState,
 } from "./directives";
@@ -53,7 +52,6 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     attributeKey,
     labelKey
   );
-  evaluateClasses(stateContainer, stateKey, labelKey);
   evaluateAttributes(stateContainer, attributeKey, stateKey, labelKey);
 }
 
