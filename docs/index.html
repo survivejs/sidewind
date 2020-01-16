@@ -150,27 +150,25 @@
 </section>
 <p>For classes, it's possible to pass an array to evaluate to produce multiple classes based on expressions:</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;section x-state=<span class="hljs-string">"{ target: 'https://survivejs.com' }"</span>&gt;
-  &lt;a
-    x-attr
-    x:href=<span class="hljs-string">"target"</span>
-    x:class=<span class="hljs-string">"[</span>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ target: 'https://survivejs.com' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">a</span>
+    <span class="hljs-attr">x-attr</span>
+    <span class="hljs-attr">x:href</span>=<span class="hljs-string">"target"</span>
+    <span class="hljs-attr">x:class</span>=<span class="hljs-string">"[
       'p-2',
-      state.target === 'https://survivejs.com' <span class="hljs-meta">&amp;&amp; 'bg-gray-400',</span>
-      'foo' === 'bar' <span class="hljs-meta">&amp;&amp; 'ml-2'</span>
-    ]<span class="hljs-string">"</span>
-    &gt;Link target&lt;/a
-  &gt;
-&lt;/section&gt;
-</code></pre></div>
+      state.target === 'https://survivejs.com' &amp;&amp; 'bg-gray-400'
+    ]"</span>
+    &gt;</span>Link target<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>
+  &gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+</span></code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><section x-state="{ target: 'https://survivejs.com' }">
   <a
     x-attr
     x:href="target"
     x:class="[
       'p-2',
-      state.target === 'https://survivejs.com' && 'bg-gray-400',
-      'foo' === 'bar' && 'ml-2'
+      state.target === 'https://survivejs.com' && 'bg-gray-400'
     ]"
     >Link target</a
   >
