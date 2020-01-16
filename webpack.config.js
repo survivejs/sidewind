@@ -132,8 +132,8 @@ function expandCode() {
           const code = left + highlightAuto(example).value + right;
 
           return `<section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white">${code}</div>
-    <div class="p-4 bg-gray-200">${example}</div>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg">${code}</div>
+    <div class="p-4 bg-gray-200 rounded-b-lg">${example}</div>
 </section>`;
         };
       return showdown.helper.replaceRecursiveRegExp(
