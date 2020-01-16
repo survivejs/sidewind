@@ -25,6 +25,11 @@ http://zenorocha.mit-license.org
   color: #f1fa8c;
 }
 
+.hljs-comment,
+.hljs-meta {
+  color: #6272a4;
+}
+
 .hljs-keyword,
 .hljs-name {
   font-weight: bold;
