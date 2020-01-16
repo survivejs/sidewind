@@ -228,7 +228,7 @@ The examples below combine directives to produce complex user interfaces and to 
   class="table-fixed"
 >
   <thead>
-    <tr class="bg-gray-200">
+    <tr class="bg-gray-400">
       <td class="border p-2">Brand</td>
       <td class="border p-2">Color</td>
     </tr>
