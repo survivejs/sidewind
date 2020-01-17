@@ -149,7 +149,10 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 ### `x-interval`
 
 ```html
-<div x-interval="{ time: new Date().toString() }" x-bind="time" />
+<div
+  x-interval="{ delay: 1000, state: { time: new Date().toString() } }"
+  x-bind="time"
+/>
 ```
 
 ## Examples
