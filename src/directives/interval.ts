@@ -16,6 +16,7 @@ function evaluateInterval(
       intervalContainer.getAttribute(stateKey) || ""
     );
     const intervalState = intervalParameters.state;
+    const intervalOptions = intervalParameters.options || { delay: 1000 };
 
     intervalContainer.setAttribute(
       stateKey,
@@ -24,7 +25,7 @@ function evaluateInterval(
 
     setInterval(() => {
       setState(evaluateExpression(intervalExpression).state, intervalContainer);
-    }, intervalParameters.delay);
+    }, intervalOptions.delay);
   }
 }
 
