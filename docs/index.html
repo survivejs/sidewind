@@ -21,7 +21,6 @@
               <template x-each="headings">
                 <li>
                   <a
-                    x-attr
                     x:href="state.nextElementSibling.attributes.href.value"
                     x:="state.textContent"
                     x:class="[
@@ -43,31 +42,31 @@
 <h2 class="inline" id="directives">Directives</h2><a class="ml-2 text-gray-200 hover:text-gray-800" href="#directives">#</a>
 <p>Sidewind is composed of a collection of directives that operate on the DOM. I've documented them in detail below.</p>
 <h3 class="inline" id="xstateandx"><code>x-state</code> and <code>x:</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xstateandx">#</a>
-<p><code>x-state</code> is a state container and the state is often used by other directives such as <code>x:</code>. Consider the example below:</p>
+<p><code>x-state</code> is a state container and the state is often used by other directives. <code>x:</code> is used for binding values. Consider the example below:</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;<span class="hljs-keyword">section</span> <span class="hljs-keyword">x</span>-state=<span class="hljs-string">"false"</span>&gt;Value: &lt;span <span class="hljs-keyword">x</span>-attr <span class="hljs-keyword">x</span>:=<span class="hljs-string">"state"</span> /&gt;&lt;/<span class="hljs-keyword">section</span>&gt;
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;<span class="hljs-keyword">section</span> <span class="hljs-keyword">x</span>-state=<span class="hljs-string">"false"</span>&gt;Value: &lt;span <span class="hljs-keyword">x</span>:=<span class="hljs-string">"state"</span> /&gt;&lt;/<span class="hljs-keyword">section</span>&gt;
 </code></pre></div>
-    <div class="p-4 bg-gray-200 rounded-b-lg"><section x-state="false">Value: <span x-attr x:="state" /></section>
+    <div class="p-4 bg-gray-200 rounded-b-lg"><section x-state="false">Value: <span x:="state" /></section>
 </div>
 </section>
 <p><code>x-state</code> and <code>x:</code> can exist even within the same element:</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;<span class="hljs-keyword">section</span>&gt;Value: &lt;span <span class="hljs-keyword">x</span>-state=<span class="hljs-string">"false"</span> <span class="hljs-keyword">x</span>-attr <span class="hljs-keyword">x</span>:=<span class="hljs-string">"state"</span> /&gt;&lt;/<span class="hljs-keyword">section</span>&gt;
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;<span class="hljs-keyword">section</span>&gt;Value: &lt;span <span class="hljs-keyword">x</span>-state=<span class="hljs-string">"false"</span> <span class="hljs-keyword">x</span>:=<span class="hljs-string">"state"</span> /&gt;&lt;/<span class="hljs-keyword">section</span>&gt;
 </code></pre></div>
-    <div class="p-4 bg-gray-200 rounded-b-lg"><section>Value: <span x-state="false" x-attr x:="state" /></section>
+    <div class="p-4 bg-gray-200 rounded-b-lg"><section>Value: <span x-state="false" x:="state" /></section>
 </div>
 </section>
 <p>The state can be manipulated using a global <code>setState</code>:</p>
 <section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"false"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>Value: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>Value: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-blue"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(!this.state)"</span>&gt;</span>
     Toggle value
   <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
 </code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><section x-state="false">
-  <div class="mb-2">Value: <span x-attr x:="state" /></div>
+  <div class="mb-2">Value: <span x:="state" /></div>
   <button class="btn btn-blue" onclick="setState(!this.state)">
     Toggle value
   </button>
@@ -77,11 +76,11 @@
 <p>State can be a complex object:</p>
 <section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">article</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ amount: 1000, interest: 1.2 }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
-  Total: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.amount * state.interest"</span> /&gt;</span>
+  Total: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.amount * state.interest"</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span>
 </span></code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><article x-state="{ amount: 1000, interest: 1.2 }">
-  Total: <span x-attr x:="state.amount * state.interest" />
+  Total: <span x:="state.amount * state.interest" />
 </article>
 </div>
 </section>
@@ -94,7 +93,6 @@
   <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"headings"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">a</span>
-        <span class="hljs-attr">x-attr</span>
         <span class="hljs-attr">x:href</span>=<span class="hljs-string">"state.nextElementSibling.attributes.href.value"</span>
         <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.textContent"</span>
       &gt;</span>
@@ -107,7 +105,6 @@
   <template x-each="headings">
     <li>
       <a
-        x-attr
         x:href="state.nextElementSibling.attributes.href.value"
         x:="state.textContent"
       >
@@ -122,7 +119,7 @@
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ cars: fetch('./assets/cars.json').then(res =&gt; res.json()) }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"cars"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"brand"</span> /&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"color"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"brand"</span> /&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"color"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
@@ -130,21 +127,21 @@
     <div class="p-4 bg-gray-200 rounded-b-lg"><div x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }">
   <ul class="list-disc list-inside">
     <template x-each="cars">
-      <li><span x-attr x:="brand" /> - <span x-attr x:="color" /></li>
+      <li><span x:="brand" /> - <span x:="color" /></li>
     </template>
   </ul>
 </div>
 </div>
 </section>
-<h3 class="inline" id="xattr"><code>x-attr</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xattr">#</a>
-<p>In addition to binding values, it's possible to bind attributes:</p>
+<h3 class="inline" id="xwithattributes"><code>x:</code> with Attributes</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xwithattributes">#</a>
+<p>In addition to binding values, it's possible to bind attributes with <code>x:</code>:</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;<span class="hljs-keyword">section</span> <span class="hljs-keyword">x</span>-state=<span class="hljs-string">"{ target: 'https://survivejs.com' }"</span>&gt;
-  &lt;a <span class="hljs-keyword">x</span>-attr <span class="hljs-keyword">x</span>:href=<span class="hljs-string">"target"</span>&gt;Link <span class="hljs-keyword">target</span>&lt;/a&gt;
-&lt;/<span class="hljs-keyword">section</span>&gt;
-</code></pre></div>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ target: 'https://survivejs.com' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">x:href</span>=<span class="hljs-string">"target"</span>&gt;</span>Link target<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+</span></code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><section x-state="{ target: 'https://survivejs.com' }">
-  <a x-attr x:href="target">Link target</a>
+  <a x:href="target">Link target</a>
 </section>
 </div>
 </section>
@@ -152,7 +149,6 @@
 <section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ target: 'https://survivejs.com' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">a</span>
-    <span class="hljs-attr">x-attr</span>
     <span class="hljs-attr">x:href</span>=<span class="hljs-string">"target"</span>
     <span class="hljs-attr">x:class</span>=<span class="hljs-string">"[
       'p-2',
@@ -164,7 +160,6 @@
 </span></code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><section x-state="{ target: 'https://survivejs.com' }">
   <a
-    x-attr
     x:href="target"
     x:class="[
       'p-2',
@@ -182,22 +177,22 @@
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"todos"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"text"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"text"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"todos"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"todos"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </span></code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><div x-state="{ todos: [{ text: 'Wash dishes' }, { text: 'Eat carrots' }] }">
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x-attr x:="text"></li>
+        <li x:="text"></li>
       </template>
     </ul>
   </div>
-  <div x-attr x:="todos"></div>
+  <div x:="todos"></div>
 </div>
 </div>
 </section>
@@ -206,13 +201,13 @@
 <section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;<span class="hljs-keyword">div</span> <span class="hljs-symbol">x</span>-label=<span class="hljs-string">"i18n"</span> <span class="hljs-symbol">x</span>-state=<span class="hljs-string">"{ hello: 'Terve' }"</span>&gt;
   &lt;<span class="hljs-keyword">div</span> <span class="hljs-symbol">x</span>-state=<span class="hljs-string">"{ world: 'World' }"</span>&gt;
-    &lt;span <span class="hljs-symbol">x</span>-attr <span class="hljs-symbol">x</span>:=<span class="hljs-string">"i18n.hello + ' ' + state.world"</span> /&gt;
+    &lt;span <span class="hljs-symbol">x</span>:=<span class="hljs-string">"i18n.hello + ' ' + state.world"</span> /&gt;
   &lt;/<span class="hljs-keyword">div</span>&gt;
 &lt;/<span class="hljs-keyword">div</span>&gt;
 </code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><div x-label="i18n" x-state="{ hello: 'Terve' }">
   <div x-state="{ world: 'World' }">
-    <span x-attr x:="i18n.hello + ' ' + state.world" />
+    <span x:="i18n.hello + ' ' + state.world" />
   </div>
 </div>
 </div>
@@ -222,24 +217,24 @@
 <h3 class="inline" id="xclosest"><code>x-closest</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xclosest">#</a>
 <p><code>x-closest</code> gives you access to the element closest to display top within the selected elements:</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;<span class="hljs-keyword">div</span> <span class="hljs-symbol">x</span>-closest=<span class="hljs-string">"{ state: { closest: $('h2, h3') } }"</span>&gt;
-  Closest heading: &lt;span <span class="hljs-symbol">x</span>-attr <span class="hljs-symbol">x</span>:=<span class="hljs-string">"state.closest.textContent"</span> /&gt;
-&lt;/<span class="hljs-keyword">div</span>&gt;
-</code></pre></div>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-closest</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ state: { closest: $('h2, h3') }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string"> }"</span>&gt;</span>
+  Closest heading: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.closest.textContent"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</span></code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><div x-closest="{ state: { closest: $('h2, h3') } }">
-  Closest heading: <span x-attr x:="state.closest.textContent" />
+  Closest heading: <span x:="state.closest.textContent" />
 </div>
 </div>
 </section>
 <h3 class="inline" id="xintersect"><code>x-intersect</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xintersect">#</a>
 <p><code>x-intersect</code> triggers when the element is visible at the viewport. See <a class="underline"  href="https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver">IntersectionObserver documentation</a> for available options.</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;<span class="hljs-keyword">div</span> <span class="hljs-symbol">x</span>-intersect=<span class="hljs-string">"{ state: { intersected: new Date().toString() } }"</span>&gt;
-  Intersected at &lt;span <span class="hljs-symbol">x</span>-attr <span class="hljs-symbol">x</span>:=<span class="hljs-string">"intersected"</span> /&gt;
-&lt;/<span class="hljs-keyword">div</span>&gt;
-</code></pre></div>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-intersect</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ state: { intersected: new Date().toString() }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string"> }"</span>&gt;</span>
+  Intersected at <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"intersected"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</span></code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><div x-intersect="{ state: { intersected: new Date().toString() } }">
-  Intersected at <span x-attr x:="intersected" />
+  Intersected at <span x:="intersected" />
 </div>
 </div>
 </section>
@@ -247,13 +242,11 @@
 <section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="hljs-string">&lt;img</span>
   <span class="hljs-string">x-intersect="{</span> <span class="hljs-attr">options:</span> <span class="hljs-string">{</span> <span class="hljs-attr">once:</span> <span class="hljs-literal">true</span> <span class="hljs-string">},</span> <span class="hljs-attr">state:</span> <span class="hljs-string">{</span> <span class="hljs-attr">src:</span> <span class="hljs-string">'./assets/logo.png'</span> <span class="hljs-string">}</span> <span class="hljs-string">}"</span>
-  <span class="hljs-string">x-attr</span>
   <span class="hljs-string">x:src="src"</span>
 <span class="hljs-string">/&gt;</span>
 </code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><img
   x-intersect="{ options: { once: true }, state: { src: './assets/logo.png' } }"
-  x-attr
   x:src="src"
 />
 </div>
@@ -262,10 +255,10 @@
 <p><code>x-interval</code> wraps <a class="underline"  href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval">setInterval</a> and exposes its <code>delay</code> parameters. When triggered, it sets state.</p>
 <section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-interval</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ options: { delay: 1000 }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">, state: </span></span></span><span class="hljs-template-variable">{ time: new
-Date().toString() }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string"> }"</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"time"</span> /&gt;</span>
+Date().toString() }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string"> }"</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"time"</span> /&gt;</span>
 </span></code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><div x-interval="{ options: { delay: 1000 }, state: { time: new
-Date().toString() } }" x-attr x:="time" />
+Date().toString() } }" x:="time" />
 </div>
 </section>
 <h2 class="inline" id="examples">Examples</h2><a class="ml-2 text-gray-200 hover:text-gray-800" href="#examples">#</a>
@@ -279,16 +272,15 @@ Date().toString() } }" x-attr x:="time" />
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"amount"</span>&gt;</span>Amount<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"amount"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ amount: this.value }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
-    <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"amount"</span> /&gt;</span>
+    <span class="hljs-attr">x:</span>=<span class="hljs-string">"amount"</span> /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"interest"</span>&gt;</span>Interest<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"interest"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ interest: this.value
-    }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"interest"</span> /&gt;</span>
+    }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"interest"</span> /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-    Total: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"Math.round(state.amount * state.interest * 100) /
-    100"</span> /&gt;</span>
+    Total: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"Math.round(state.amount * state.interest * 100) / 100"</span> /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span>
 </span></code></pre></div>
@@ -299,16 +291,15 @@ Date().toString() } }" x-attr x:="time" />
   <div class="mb-2">
     <label for="amount">Amount</label>
     <input id="amount" type="text" oninput="setState({ amount: this.value })"
-    x-attr x:="amount" />
+    x:="amount" />
   </div>
   <div class="mb-2">
     <label for="interest">Interest</label>
     <input id="interest" type="text" oninput="setState({ interest: this.value
-    })" x-attr x:="interest" />
+    })" x:="interest" />
   </div>
   <div>
-    Total: <span x-attr x:="Math.round(state.amount * state.interest * 100) /
-    100" />
+    Total: <span x:="Math.round(state.amount * state.interest * 100) / 100" />
   </div>
 </article>
 </div>
@@ -324,18 +315,18 @@ Date().toString() } }" x-attr x:="time" />
     <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mr-2"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Add Todo<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ text: this.value }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
-      <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"text"</span> /&gt;</span>
+      <span class="hljs-attr">x:</span>=<span class="hljs-string">"text"</span> /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-blue"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"todos"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"text"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"text"</span> /&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"todos"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"todos"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
 </span></code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><form
@@ -347,18 +338,18 @@ Date().toString() } }" x-attr x:="time" />
     <label class="mr-2">
       <span>Add Todo</span>
       <input id="text" type="text" oninput="setState({ text: this.value })"
-      x-attr x:="text" />
+      x:="text" />
     </label>
     <button class="btn btn-blue" type="submit">Add</button>
   </div>
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x-attr x:="text"></li>
+        <li x:="text" />
       </template>
     </ul>
   </div>
-  <div x-attr x:="todos"></div>
+  <div x:="todos"></div>
 </form>
 </div>
 </section>
@@ -377,8 +368,8 @@ Date().toString() } }" x-attr x:="time" />
   <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"cars"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"border p-2"</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"brand"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"border p-2"</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"color"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"border p-2"</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"brand"</span> /&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"border p-2"</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"color"</span>
+        /&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
@@ -397,8 +388,8 @@ Date().toString() } }" x-attr x:="time" />
   <tbody>
     <template x-each="cars">
       <tr>
-        <td class="border p-2" x-attr x:="brand"></td>
-        <td class="border p-2" x-attr x:="color"></td>
+        <td class="border p-2" x:="brand" /> <td class="border p-2" x:="color"
+        />
       </tr>
     </template>
   </tbody>
@@ -415,11 +406,11 @@ Date().toString() } }" x-attr x:="time" />
     &gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Junior Engineer<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"state &amp;&amp; 'hidden'"</span>&gt;</span>▼<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>▲<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"state &amp;&amp; 'hidden'"</span>&gt;</span>▼<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>▲<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"py-2 bg-gray-200"</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"py-2 bg-gray-200"</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>
       Junior engineer description
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
@@ -431,11 +422,11 @@ Date().toString() } }" x-attr x:="time" />
     &gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Senior Engineer<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"state &amp;&amp; 'hidden'"</span>&gt;</span>▼<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>▲<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"state &amp;&amp; 'hidden'"</span>&gt;</span>▼<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>▲<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"py-2 bg-gray-200"</span> <span class="hljs-attr">x-attr</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"py-2 bg-gray-200"</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>
       Senior engineer description
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
@@ -449,11 +440,11 @@ Date().toString() } }" x-attr x:="time" />
     >
       <span>Junior Engineer</span>
       <div>
-        <span x-attr x:class="state && 'hidden'">▼</span>
-        <span x-attr x:class="!state && 'hidden'">▲</span>
+        <span x:class="state && 'hidden'">▼</span>
+        <span x:class="!state && 'hidden'">▲</span>
       </div>
     </div>
-    <div class="py-2 bg-gray-200" x-attr x:class="!state && 'hidden'">
+    <div class="py-2 bg-gray-200" x:class="!state && 'hidden'">
       Junior engineer description
     </div>
   </section>
@@ -465,11 +456,11 @@ Date().toString() } }" x-attr x:="time" />
     >
       <span>Senior Engineer</span>
       <div>
-        <span x-attr x:class="state && 'hidden'">▼</span>
-        <span x-attr x:class="!state && 'hidden'">▲</span>
+        <span x:class="state && 'hidden'">▼</span>
+        <span x:class="!state && 'hidden'">▲</span>
       </div>
     </div>
-    <div class="py-2 bg-gray-200" x-attr x:class="!state && 'hidden'">
+    <div class="py-2 bg-gray-200" x:class="!state && 'hidden'">
       Senior engineer description
     </div>
   </section>
@@ -478,87 +469,65 @@ Date().toString() } }" x-attr x:="time" />
 </section>
 <h3 class="inline" id="tabs">Tabs</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#tabs">#</a>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;section <span class="hljs-keyword">x</span>-state=<span class="hljs-string">"'animals'"</span>&gt;
-  &lt;nav class=<span class="hljs-string">"flex flex-row justify-between cursor-pointer"</span>&gt;
-    &lt;div
-      <span class="hljs-keyword">x</span>-attr
-      <span class="hljs-keyword">x</span>:class=<span class="hljs-comment">"[</span>
-        <span class="hljs-string">'p-2'</span>,
-        <span class="hljs-string">'w-full'</span>,
-        state === <span class="hljs-string">'animals'</span> ? <span class="hljs-string">'bg-gray-400'</span> : <span class="hljs-string">'btn-muted'</span>
-      ]<span class="hljs-comment">"</span>
-      class=<span class="hljs-string">"p-2 w-full"</span>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;section x-state=<span class="hljs-string">"'animals'"</span>&gt;
+  &lt;nav <span class="hljs-built_in">class</span>=<span class="hljs-string">"flex flex-row justify-between cursor-pointer"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span>
+      x:<span class="hljs-built_in">class</span>=<span class="hljs-string">"[
+        'p-2',
+        'w-full',
+        state === 'animals' ? 'bg-gray-400' : 'btn-muted'
+      ]"</span>
       onclick=<span class="hljs-string">"setState('animals')"</span>
     &gt;
       Animals
-    &lt;/div&gt;
-    &lt;div
-      <span class="hljs-keyword">x</span>-attr
-      <span class="hljs-keyword">x</span>:class=<span class="hljs-comment">"[</span>
-        <span class="hljs-string">'p-2'</span>,
-        <span class="hljs-string">'w-full'</span>,
-        state === <span class="hljs-string">'languages'</span> ? <span class="hljs-string">'bg-gray-400'</span> : <span class="hljs-string">'btn-muted'</span>
-      ]<span class="hljs-comment">"</span>
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span>
+      x:<span class="hljs-built_in">class</span>=<span class="hljs-string">"[
+        'p-2',
+        'w-full',
+        state === 'languages' ? 'bg-gray-400' : 'btn-muted'
+      ]"</span>
       onclick=<span class="hljs-string">"setState('languages')"</span>
     &gt;
       Languages
-    &lt;/div&gt;
-    &lt;div
-      <span class="hljs-keyword">x</span>-attr
-      <span class="hljs-keyword">x</span>:class=<span class="hljs-comment">"[</span>
-        <span class="hljs-string">'p-2'</span>,
-        <span class="hljs-string">'w-full'</span>,
-        state === <span class="hljs-string">'colors'</span> ? <span class="hljs-string">'bg-gray-400'</span> : <span class="hljs-string">'btn-muted'</span>
-      ]<span class="hljs-comment">"</span>
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span>
+      x:<span class="hljs-built_in">class</span>=<span class="hljs-string">"[
+        'p-2',
+        'w-full',
+        state === 'colors' ? 'bg-gray-400' : 'btn-muted'
+      ]"</span>
       onclick=<span class="hljs-string">"setState('colors')"</span>
     &gt;
       Colors
-    &lt;/div&gt;
+    &lt;/<span class="hljs-keyword">div</span>&gt;
   &lt;/nav&gt;
-  &lt;div class=<span class="hljs-string">"bg-gray-100 p-2"</span>&gt;
-    &lt;div
-      <span class="hljs-keyword">x</span>-attr
-      <span class="hljs-keyword">x</span>:class=<span class="hljs-comment">"[</span>
-        state !== <span class="hljs-string">'animals'</span> &amp;&amp; <span class="hljs-string">'hidden'</span>
-      ]<span class="hljs-comment">"</span>
-    &gt;
-      Animals <span class="hljs-keyword">tab</span>
-    &lt;/div&gt;
-    &lt;div
-      <span class="hljs-keyword">x</span>-attr
-      <span class="hljs-keyword">x</span>:class=<span class="hljs-comment">"[</span>
-        state !== <span class="hljs-string">'languages'</span> &amp;&amp; <span class="hljs-string">'hidden'</span>
-      ]<span class="hljs-comment">"</span>
-    &gt;
-      Languages <span class="hljs-keyword">tab</span>
-    &lt;/div&gt;
-    &lt;div
-      <span class="hljs-keyword">x</span>-attr
-      <span class="hljs-keyword">x</span>:class=<span class="hljs-comment">"[</span>
-        state !== <span class="hljs-string">'colors'</span> &amp;&amp; <span class="hljs-string">'hidden'</span>
-      ]<span class="hljs-comment">"</span>
-    &gt;
-      Colors <span class="hljs-keyword">tab</span>
-    &lt;/div&gt;
-  &lt;/div&gt;
+  &lt;<span class="hljs-keyword">div</span> <span class="hljs-built_in">class</span>=<span class="hljs-string">"bg-gray-100 p-2"</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> x:<span class="hljs-built_in">class</span>=<span class="hljs-string">"state !== 'animals' &amp;&amp; 'hidden'"</span>&gt;
+      Animals <span class="hljs-literal">tab</span>
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> x:<span class="hljs-built_in">class</span>=<span class="hljs-string">"state !== 'languages' &amp;&amp; 'hidden'"</span>&gt;
+      Languages <span class="hljs-literal">tab</span>
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+    &lt;<span class="hljs-keyword">div</span> x:<span class="hljs-built_in">class</span>=<span class="hljs-string">"state !== 'colors' &amp;&amp; 'hidden'"</span>&gt;
+      Colors <span class="hljs-literal">tab</span>
+    &lt;/<span class="hljs-keyword">div</span>&gt;
+  &lt;/<span class="hljs-keyword">div</span>&gt;
 &lt;/section&gt;
 </code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><section x-state="'animals'">
   <nav class="flex flex-row justify-between cursor-pointer">
     <div
-      x-attr
       x:class="[
         'p-2',
         'w-full',
         state === 'animals' ? 'bg-gray-400' : 'btn-muted'
       ]"
-      class="p-2 w-full"
       onclick="setState('animals')"
     >
       Animals
     </div>
     <div
-      x-attr
       x:class="[
         'p-2',
         'w-full',
@@ -569,7 +538,6 @@ Date().toString() } }" x-attr x:="time" />
       Languages
     </div>
     <div
-      x-attr
       x:class="[
         'p-2',
         'w-full',
@@ -581,28 +549,13 @@ Date().toString() } }" x-attr x:="time" />
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div
-      x-attr
-      x:class="[
-        state !== 'animals' && 'hidden'
-      ]"
-    >
+    <div x:class="state !== 'animals' && 'hidden'">
       Animals tab
     </div>
-    <div
-      x-attr
-      x:class="[
-        state !== 'languages' && 'hidden'
-      ]"
-    >
+    <div x:class="state !== 'languages' && 'hidden'">
       Languages tab
     </div>
-    <div
-      x-attr
-      x:class="[
-        state !== 'colors' && 'hidden'
-      ]"
-    >
+    <div x:class="state !== 'colors' && 'hidden'">
       Colors tab
     </div>
   </div>
@@ -620,7 +573,6 @@ Date().toString() } }" x-attr x:="time" />
     <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"headings"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">a</span>
-          <span class="hljs-attr">x-attr</span>
           <span class="hljs-attr">x:href</span>=<span class="hljs-string">"state.nextElementSibling.attributes.href.value"</span>
           <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.textContent"</span>
           <span class="hljs-attr">x:class</span>=<span class="hljs-string">"[
@@ -643,7 +595,6 @@ Date().toString() } }" x-attr x:="time" />
     <template x-each="headings">
       <li>
         <a
-          x-attr
           x:href="state.nextElementSibling.attributes.href.value"
           x:="state.textContent"
           x:class="[
