@@ -32,7 +32,7 @@ function evaluateAttributes(
     const { state }: { state: BindState } = closestStateContainer;
 
     attributes.forEach(attribute => {
-      const prefix = "x:";
+      const prefix = valueKey;
       const attributeName = attribute.nodeName;
 
       if (attributeName.startsWith(prefix)) {
