@@ -54,7 +54,7 @@ State can be a complex object:
     <li>
       <a
         x-attr
-        x:href="nextElementSibling.attributes.href.value"
+        x:href="state.nextElementSibling.attributes.href.value"
         x-bind="textContent"
       >
       </a>
@@ -386,8 +386,9 @@ The examples below combine directives to produce complex user interfaces and to 
       <li>
         <a
           x-attr
-          x:href="nextElementSibling.attributes.href.value"
+          x:href="state.nextElementSibling.attributes.href.value"
           x-bind="textContent"
+          x:class="state.textContent === parent.closest.textContent && 'font-bold'"
         >
         </a>
       </li>

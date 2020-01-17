@@ -1,6 +1,6 @@
 import { BindState, ExtendedHTMLElement } from "../types";
 import evaluateExpression from "../evaluate-expression";
-import { get, getLabeledState } from "../utils";
+import { getLabeledState } from "../utils";
 
 function evaluateAttributes(
   stateContainer: HTMLElement,
@@ -31,22 +31,13 @@ function evaluateAttributes(
       if (attributeName.startsWith(prefix)) {
         const attributeProperty = attribute.value;
         const targetName = attributeName.split(prefix).filter(Boolean)[0];
-
-        let evaluatedValue;
-
-        // DOM node case
-        if (state.nodeType) {
-          evaluatedValue = get(state, attributeProperty);
-        } else {
-          const labeledState = getLabeledState(attributeContainer, labelKey);
-
-          evaluatedValue = state.hasOwnProperty(attributeProperty)
-            ? state[attributeProperty]
-            : evaluateExpression(attributeProperty, {
-                ...labeledState,
-                state,
-              }) || state;
-        }
+        const labeledState = getLabeledState(attributeContainer, labelKey);
+        const evaluatedValue = state.hasOwnProperty(attributeProperty)
+          ? state[attributeProperty]
+          : evaluateExpression(attributeProperty, {
+              ...labeledState,
+              state,
+            }) || state;
 
         attributeContainer.setAttribute(
           targetName,

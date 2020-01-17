@@ -236,10 +236,8 @@ function getHTML({
                 <li>
                   <a
                     x-attr
-                    x:href="nextElementSibling.attributes.href.value"
+                    x:href="state.nextElementSibling.attributes.href.value"
                     x-bind="textContent"
-                    x-case="state.textContent === parent.closest.textContent"
-                    x-on="font-bold"
                   >
                   </a>
                 </li>
