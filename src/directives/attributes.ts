@@ -32,12 +32,11 @@ function evaluateAttributes(
     const { state }: { state: BindState } = closestStateContainer;
 
     attributes.forEach(attribute => {
-      const prefix = valueKey;
       const attributeName = attribute.nodeName;
 
-      if (attributeName.startsWith(prefix)) {
+      if (attributeName.startsWith(valueKey)) {
         const attributeProperty = attribute.value;
-        const targetName = attributeName.split(prefix).filter(Boolean)[0];
+        const targetName = attributeName.split(valueKey).filter(Boolean)[0];
         const labeledState = getLabeledState(attributeContainer, labelKey);
         const evaluatedValue = state.hasOwnProperty(attributeProperty)
           ? state[attributeProperty]

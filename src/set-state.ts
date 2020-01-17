@@ -1,6 +1,7 @@
 import { ExtendedHTMLElement } from "./types";
 import { evaluateAttributes, evaluateEach, evaluateState } from "./directives";
 import directiveKeys from "./directive-keys";
+import generateAttributeKeys from "./generate-attribute-keys";
 
 function setState(newValue: any, element?: ExtendedHTMLElement) {
   if (!element) {
@@ -31,6 +32,11 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
   );
   stateContainer.state = updatedState;
 
+  generateAttributeKeys(
+    [stateContainer],
+    directiveKeys.attribute,
+    directiveKeys.value
+  );
   evaluateEach(
     stateContainer.querySelectorAll(`[${directiveKeys.each}]`),
     directiveKeys.each,
@@ -40,16 +46,16 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     stateContainer.querySelectorAll(`[${directiveKeys.state}]`),
     directiveKeys.state,
     directiveKeys.each,
-    directiveKeys.attr,
+    directiveKeys.attribute,
     directiveKeys.label,
-    directiveKeys.x
+    directiveKeys.value
   );
   evaluateAttributes(
     stateContainer,
-    directiveKeys.attr,
+    directiveKeys.attribute,
     directiveKeys.state,
     directiveKeys.label,
-    directiveKeys.x
+    directiveKeys.value
   );
 }
 
