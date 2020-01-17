@@ -381,29 +381,23 @@ The examples below combine directives to produce complex user interfaces and to 
   x-state="{ headings: $('h2, h3') }"
   x-closest="{ state: { closest: $('h2, h3') } }"
 >
-  <ul class="list-disc list-inside">
+  <ul>
     <template x-each="headings">
       <li>
         <a
           x-attr
           x:href="state.nextElementSibling.attributes.href.value"
           x-bind="textContent"
-          x:class="state.textContent === parent.closest.textContent && 'font-bold'"
+          x:class="[
+            state.textContent === parent.closest.textContent && 'font-bold',
+            state.tagName === 'H3' && 'ml-2'
+          ]"
         >
         </a>
       </li>
     </template>
   </ul>
 </nav>
-```
-
-**TODO:**
-
-```
-x:class="[
-  state.textContent === parent.closest.textContent && 'bg-gray-200',
-  state.tagName === 'H3' && 'ml-2'
-]"
 ```
 
 ## Related Approaches
