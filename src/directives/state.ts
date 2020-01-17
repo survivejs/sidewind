@@ -1,5 +1,4 @@
 import { BindState, ExtendedHTMLElement } from "../types";
-import evaluateBind from "./bind";
 import evaluateAttributes from "./attributes";
 import evaluateEach from "./each";
 import evaluateExpression from "../evaluate-expression";
@@ -9,7 +8,6 @@ type PromiseResult = { key: string; values: any };
 function evaluateState(
   stateContainers: NodeListOf<ExtendedHTMLElement>,
   stateKey: string,
-  bindKey: string,
   eachKey: string,
   attributeKey: string,
   labelKey: string,
@@ -51,7 +49,6 @@ function evaluateState(
           eachKey,
           stateKey
         );
-        evaluateBind(stateContainer, newState, bindKey, labelKey, stateKey);
         evaluateAttributes(
           stateContainer,
           attributeKey,
@@ -64,7 +61,6 @@ function evaluateState(
     stateContainer.setAttribute(stateKey, JSON.stringify(state));
     stateContainer.state = state;
 
-    evaluateBind(stateContainer, state, bindKey, labelKey, stateKey);
     evaluateAttributes(
       stateContainer,
       attributeKey,

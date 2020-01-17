@@ -1,15 +1,9 @@
 import { ExtendedHTMLElement } from "./types";
-import {
-  evaluateAttributes,
-  evaluateBind,
-  evaluateEach,
-  evaluateState,
-} from "./directives";
+import { evaluateAttributes, evaluateEach, evaluateState } from "./directives";
 
 function setState(newValue: any, element?: ExtendedHTMLElement) {
   const stateKey = "x-state";
   const eachKey = "x-each";
-  const bindKey = "x-bind";
   const attributeKey = "x-attr";
   const labelKey = "x-label";
   const valueKey = "x:";
@@ -44,11 +38,9 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     eachKey,
     stateKey
   );
-  evaluateBind(stateContainer, updatedState, bindKey, labelKey, stateKey);
   evaluateState(
     stateContainer.querySelectorAll(`[${stateKey}]`),
     stateKey,
-    bindKey,
     eachKey,
     attributeKey,
     labelKey,

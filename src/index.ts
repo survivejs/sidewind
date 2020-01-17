@@ -33,7 +33,6 @@ function initialize(global = window) {
     evaluateState(
       document.querySelectorAll("[x-state]"),
       "x-state",
-      "x-bind",
       "x-each",
       "x-attr",
       "x-label",

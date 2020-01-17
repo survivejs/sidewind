@@ -1,5 +1,4 @@
 export { default as evaluateAttributes } from "./attributes";
-export { default as evaluateBind } from "./bind";
 export { default as evaluateClosest } from "./closest";
 export { default as evaluateEach } from "./each";
 export { default as evaluateIntersect } from "./intersect";
