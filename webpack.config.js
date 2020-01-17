@@ -237,7 +237,7 @@ function getHTML({
                   <a
                     x-attr
                     x:href="state.nextElementSibling.attributes.href.value"
-                    x-bind="textContent"
+                    x:="state.textContent"
                     x:class="[
                       state.textContent === parent.closest.textContent && 'font-bold',
                       state.tagName === 'H3' && 'ml-2'

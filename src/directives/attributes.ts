@@ -21,9 +21,15 @@ function evaluateAttributes(
   for (let i = attributeContainers.length; i--; ) {
     const attributeContainer = attributeContainers[i] as ExtendedHTMLElement;
     const attributes = Array.from(attributeContainer.attributes);
-    const { state }: { state: BindState } = attributeContainer.closest(
+    const closestStateContainer = attributeContainer.closest(
       `[${stateKey}]`
     ) as ExtendedHTMLElement;
+
+    if (stateContainer !== closestStateContainer) {
+      continue;
+    }
+
+    const { state }: { state: BindState } = closestStateContainer;
 
     attributes.forEach(attribute => {
       const prefix = "x:";
