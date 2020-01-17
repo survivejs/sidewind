@@ -235,7 +235,6 @@ function getHTML({
               <template x-each="headings">
                 <li>
                   <a
-                    x-attr
                     x:href="state.nextElementSibling.attributes.href.value"
                     x:="state.textContent"
                     x:class="[

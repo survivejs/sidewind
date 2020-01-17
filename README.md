@@ -12,23 +12,23 @@ Sidewind is composed of a collection of directives that operate on the DOM. I've
 
 ### `x-state` and `x:`
 
-`x-state` is a state container and the state is often used by other directives such as `x:`. Consider the example below:
+`x-state` is a state container and the state is often used by other directives. `x:` is used for binding values. Consider the example below:
 
 ```html
-<section x-state="false">Value: <span x-attr x:="state" /></section>
+<section x-state="false">Value: <span x:="state" /></section>
 ```
 
 `x-state` and `x:` can exist even within the same element:
 
 ```html
-<section>Value: <span x-state="false" x-attr x:="state" /></section>
+<section>Value: <span x-state="false" x:="state" /></section>
 ```
 
 The state can be manipulated using a global `setState`:
 
 ```html
 <section x-state="false">
-  <div class="mb-2">Value: <span x-attr x:="state" /></div>
+  <div class="mb-2">Value: <span x:="state" /></div>
   <button class="btn btn-blue" onclick="setState(!this.state)">
     Toggle value
   </button>
@@ -39,7 +39,7 @@ State can be a complex object:
 
 ```html
 <article x-state="{ amount: 1000, interest: 1.2 }">
-  Total: <span x-attr x:="state.amount * state.interest" />
+  Total: <span x:="state.amount * state.interest" />
 </article>
 ```
 
@@ -52,7 +52,6 @@ State can be a complex object:
   <template x-each="headings">
     <li>
       <a
-        x-attr
         x:href="state.nextElementSibling.attributes.href.value"
         x:="state.textContent"
       >
@@ -68,19 +67,19 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
 <div x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }">
   <ul class="list-disc list-inside">
     <template x-each="cars">
-      <li><span x-attr x:="brand" /> - <span x-attr x:="color" /></li>
+      <li><span x:="brand" /> - <span x:="color" /></li>
     </template>
   </ul>
 </div>
 ```
 
-### `x-attr`
+### `x:` with Attributes
 
-In addition to binding values, it's possible to bind attributes:
+In addition to binding values, it's possible to bind attributes with `x:`:
 
 ```html
 <section x-state="{ target: 'https://survivejs.com' }">
-  <a x-attr x:href="target">Link target</a>
+  <a x:href="target">Link target</a>
 </section>
 ```
 
@@ -89,7 +88,6 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 ```html
 <section x-state="{ target: 'https://survivejs.com' }">
   <a
-    x-attr
     x:href="target"
     x:class="[
       'p-2',
@@ -109,11 +107,11 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x-attr x:="text"></li>
+        <li x:="text"></li>
       </template>
     </ul>
   </div>
-  <div x-attr x:="todos"></div>
+  <div x:="todos"></div>
 </div>
 ```
 
@@ -124,7 +122,7 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 ```html
 <div x-label="i18n" x-state="{ hello: 'Terve' }">
   <div x-state="{ world: 'World' }">
-    <span x-attr x:="i18n.hello + ' ' + state.world" />
+    <span x:="i18n.hello + ' ' + state.world" />
   </div>
 </div>
 ```
@@ -139,7 +137,7 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
 
 ```html
 <div x-closest="{ state: { closest: $('h2, h3') } }">
-  Closest heading: <span x-attr x:="state.closest.textContent" />
+  Closest heading: <span x:="state.closest.textContent" />
 </div>
 ```
 
@@ -149,7 +147,7 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
 
 ```html
 <div x-intersect="{ state: { intersected: new Date().toString() } }">
-  Intersected at <span x-attr x:="intersected" />
+  Intersected at <span x:="intersected" />
 </div>
 ```
 
@@ -158,7 +156,6 @@ In addition to the standard options, there's an `once` flag that when set causes
 ```html
 <img
   x-intersect="{ options: { once: true }, state: { src: './assets/logo.png' } }"
-  x-attr
   x:src="src"
 />
 ```
@@ -169,7 +166,7 @@ In addition to the standard options, there's an `once` flag that when set causes
 
 ```html
 <div x-interval="{ options: { delay: 1000 }, state: { time: new
-Date().toString() } }" x-attr x:="time" />
+Date().toString() } }" x:="time" />
 ```
 
 ## Examples
@@ -186,16 +183,15 @@ The examples below combine directives to produce complex user interfaces and to 
   <div class="mb-2">
     <label for="amount">Amount</label>
     <input id="amount" type="text" oninput="setState({ amount: this.value })"
-    x-attr x:="amount" />
+    x:="amount" />
   </div>
   <div class="mb-2">
     <label for="interest">Interest</label>
     <input id="interest" type="text" oninput="setState({ interest: this.value
-    })" x-attr x:="interest" />
+    })" x:="interest" />
   </div>
   <div>
-    Total: <span x-attr x:="Math.round(state.amount * state.interest * 100) /
-    100" />
+    Total: <span x:="Math.round(state.amount * state.interest * 100) / 100" />
   </div>
 </article>
 ```
@@ -212,18 +208,18 @@ The examples below combine directives to produce complex user interfaces and to 
     <label class="mr-2">
       <span>Add Todo</span>
       <input id="text" type="text" oninput="setState({ text: this.value })"
-      x-attr x:="text" />
+      x:="text" />
     </label>
     <button class="btn btn-blue" type="submit">Add</button>
   </div>
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x-attr x:="text"></li>
+        <li x:="text" />
       </template>
     </ul>
   </div>
-  <div x-attr x:="todos"></div>
+  <div x:="todos"></div>
 </form>
 ```
 
@@ -243,8 +239,8 @@ The examples below combine directives to produce complex user interfaces and to 
   <tbody>
     <template x-each="cars">
       <tr>
-        <td class="border p-2" x-attr x:="brand"></td>
-        <td class="border p-2" x-attr x:="color"></td>
+        <td class="border p-2" x:="brand" /> <td class="border p-2" x:="color"
+        />
       </tr>
     </template>
   </tbody>
@@ -262,11 +258,11 @@ The examples below combine directives to produce complex user interfaces and to 
     >
       <span>Junior Engineer</span>
       <div>
-        <span x-attr x:class="state && 'hidden'">▼</span>
-        <span x-attr x:class="!state && 'hidden'">▲</span>
+        <span x:class="state && 'hidden'">▼</span>
+        <span x:class="!state && 'hidden'">▲</span>
       </div>
     </div>
-    <div class="py-2 bg-gray-200" x-attr x:class="!state && 'hidden'">
+    <div class="py-2 bg-gray-200" x:class="!state && 'hidden'">
       Junior engineer description
     </div>
   </section>
@@ -278,11 +274,11 @@ The examples below combine directives to produce complex user interfaces and to 
     >
       <span>Senior Engineer</span>
       <div>
-        <span x-attr x:class="state && 'hidden'">▼</span>
-        <span x-attr x:class="!state && 'hidden'">▲</span>
+        <span x:class="state && 'hidden'">▼</span>
+        <span x:class="!state && 'hidden'">▲</span>
       </div>
     </div>
-    <div class="py-2 bg-gray-200" x-attr x:class="!state && 'hidden'">
+    <div class="py-2 bg-gray-200" x:class="!state && 'hidden'">
       Senior engineer description
     </div>
   </section>
@@ -295,19 +291,16 @@ The examples below combine directives to produce complex user interfaces and to 
 <section x-state="'animals'">
   <nav class="flex flex-row justify-between cursor-pointer">
     <div
-      x-attr
       x:class="[
         'p-2',
         'w-full',
         state === 'animals' ? 'bg-gray-400' : 'btn-muted'
       ]"
-      class="p-2 w-full"
       onclick="setState('animals')"
     >
       Animals
     </div>
     <div
-      x-attr
       x:class="[
         'p-2',
         'w-full',
@@ -318,7 +311,6 @@ The examples below combine directives to produce complex user interfaces and to 
       Languages
     </div>
     <div
-      x-attr
       x:class="[
         'p-2',
         'w-full',
@@ -330,28 +322,13 @@ The examples below combine directives to produce complex user interfaces and to 
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div
-      x-attr
-      x:class="[
-        state !== 'animals' && 'hidden'
-      ]"
-    >
+    <div x:class="state !== 'animals' && 'hidden'">
       Animals tab
     </div>
-    <div
-      x-attr
-      x:class="[
-        state !== 'languages' && 'hidden'
-      ]"
-    >
+    <div x:class="state !== 'languages' && 'hidden'">
       Languages tab
     </div>
-    <div
-      x-attr
-      x:class="[
-        state !== 'colors' && 'hidden'
-      ]"
-    >
+    <div x:class="state !== 'colors' && 'hidden'">
       Colors tab
     </div>
   </div>
@@ -370,7 +347,6 @@ The examples below combine directives to produce complex user interfaces and to 
     <template x-each="headings">
       <li>
         <a
-          x-attr
           x:href="state.nextElementSibling.attributes.href.value"
           x:="state.textContent"
           x:class="[
