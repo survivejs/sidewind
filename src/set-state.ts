@@ -1,13 +1,8 @@
 import { ExtendedHTMLElement } from "./types";
 import { evaluateAttributes, evaluateEach, evaluateState } from "./directives";
+import directiveKeys from "./directive-keys";
 
 function setState(newValue: any, element?: ExtendedHTMLElement) {
-  const stateKey = "x-state";
-  const eachKey = "x-each";
-  const attributeKey = "x-attr";
-  const labelKey = "x-label";
-  const valueKey = "x:";
-
   if (!element) {
     element = window.event && (window.event.target as ExtendedHTMLElement);
 
@@ -17,7 +12,7 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
   }
 
   const stateContainer = element.closest(
-    `[${stateKey}]`
+    `[${directiveKeys.state}]`
   ) as ExtendedHTMLElement;
 
   if (!stateContainer) {
@@ -30,28 +25,31 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
 
   element.state = updatedState;
 
-  stateContainer.setAttribute(stateKey, JSON.stringify(updatedState));
+  stateContainer.setAttribute(
+    directiveKeys.state,
+    JSON.stringify(updatedState)
+  );
   stateContainer.state = updatedState;
 
   evaluateEach(
-    stateContainer.querySelectorAll(`[${eachKey}]`),
-    eachKey,
-    stateKey
+    stateContainer.querySelectorAll(`[${directiveKeys.each}]`),
+    directiveKeys.each,
+    directiveKeys.state
   );
   evaluateState(
-    stateContainer.querySelectorAll(`[${stateKey}]`),
-    stateKey,
-    eachKey,
-    attributeKey,
-    labelKey,
-    valueKey
+    stateContainer.querySelectorAll(`[${directiveKeys.state}]`),
+    directiveKeys.state,
+    directiveKeys.each,
+    directiveKeys.attr,
+    directiveKeys.label,
+    directiveKeys.x
   );
   evaluateAttributes(
     stateContainer,
-    attributeKey,
-    stateKey,
-    labelKey,
-    valueKey
+    directiveKeys.attr,
+    directiveKeys.state,
+    directiveKeys.label,
+    directiveKeys.x
   );
 }
 

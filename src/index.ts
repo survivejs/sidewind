@@ -6,6 +6,7 @@ import {
   evaluateState,
 } from "./directives";
 import setState from "./set-state";
+import directiveKeys from "./directive-keys";
 
 declare global {
   interface Window {
@@ -16,29 +17,33 @@ declare global {
 function initialize(global = window) {
   global.onload = () => {
     evaluateClosest(
-      document.querySelectorAll("[x-closest]"),
-      "x-closest",
-      "x-state"
+      document.querySelectorAll(`[${directiveKeys.closest}]`),
+      directiveKeys.closest,
+      directiveKeys.state
     );
     evaluateIntersect(
-      document.querySelectorAll("[x-intersect]"),
-      "x-intersect",
-      "x-state"
+      document.querySelectorAll(`[${directiveKeys.intersect}]`),
+      directiveKeys.intersect,
+      directiveKeys.state
     );
     evaluateInterval(
-      document.querySelectorAll("[x-interval]"),
-      "x-interval",
-      "x-state"
+      document.querySelectorAll(`[${directiveKeys.interval}]`),
+      directiveKeys.interval,
+      directiveKeys.state
     );
     evaluateState(
-      document.querySelectorAll("[x-state]"),
-      "x-state",
-      "x-each",
-      "x-attr",
-      "x-label",
-      "x:"
+      document.querySelectorAll(`[${directiveKeys.state}]`),
+      directiveKeys.state,
+      directiveKeys.each,
+      directiveKeys.attr,
+      directiveKeys.label,
+      directiveKeys.x
     );
-    evaluateEach(document.querySelectorAll("[x-each]"), "x-each", "x-state");
+    evaluateEach(
+      document.querySelectorAll(`[${directiveKeys.each}]`),
+      directiveKeys.each,
+      directiveKeys.state
+    );
   };
 
   global.setState = setState;
