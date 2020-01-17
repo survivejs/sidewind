@@ -130,6 +130,10 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 </div>
 ```
 
+## Sources
+
+Sources wrap browser state within a reactive stream that's then mapped to a state.
+
 ### `x-closest`
 
 `x-closest` gives you access to the element closest to display top:
@@ -142,11 +146,27 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 
 ### `x-intersect`
 
+`x-intersect` triggers when the element is visible at the viewport. See [IntersectionObserver documentation](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver) for available options.
+
 ```html
-<img x-intersect="{ src: './assets/logo.png' }" x-attr x:src="src" />
+<div x-intersect="{ state: { intersected: new Date().toString() } }">
+  Intersected at <span x-bind="intersected" />
+</div>
+```
+
+In addition to the standard options, there's an `once` flag that when set causes the state to be set only once. The behavior is useful for implementing patterns such as lazy loading.
+
+```html
+<img
+  x-intersect="{ options: { once: true }, state: { src: './assets/logo.png' } }"
+  x-attr
+  x:src="src"
+/>
 ```
 
 ### `x-interval`
+
+`x-interval` wraps [setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval) and exposes its `delay` parameters. When triggered, it sets state.
 
 ```html
 <div

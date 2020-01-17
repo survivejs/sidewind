@@ -13,7 +13,9 @@ function evaluateIntersect(
     const intersectContainer = intersectContainers[i] as ExtendedHTMLElement;
     const intersectExpression =
       intersectContainer.getAttribute(intersectKey) || "";
-    const intersectState = evaluateExpression(intersectExpression, {});
+    const intersectParameters = evaluateExpression(intersectExpression, {});
+    const intersectState = intersectParameters.state;
+    const intersectOptions = intersectParameters.options || {};
     const key = Object.keys(intersectState)[0];
     const state = evaluateExpression(
       intersectContainer.getAttribute(stateKey) || ""
@@ -28,7 +30,7 @@ function evaluateIntersect(
     let triggered = false;
     const observer = new IntersectionObserver(
       entries => {
-        if (triggered) {
+        if (intersectOptions.once && triggered) {
           return;
         }
 
@@ -43,11 +45,15 @@ function evaluateIntersect(
 
         triggered = true;
 
-        setState(intersectState, intersectContainer);
+        setState(
+          evaluateExpression(intersectExpression).state,
+          intersectContainer
+        );
       },
       {
         rootMargin: "0px",
         threshold: 1.0,
+        ...intersectOptions,
       }
     );
     observer.observe(intersectContainer);
