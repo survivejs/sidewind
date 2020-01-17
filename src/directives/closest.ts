@@ -11,7 +11,8 @@ function evaluateClosest(
   for (let i = closestContainers.length; i--; ) {
     const closestContainer = closestContainers[i] as ExtendedHTMLElement;
     const closestExpression = closestContainer.getAttribute(closestKey) || "";
-    const closestState = evaluateExpression(closestExpression, {});
+    const closestParameters = evaluateExpression(closestExpression);
+    const closestState = closestParameters.state;
     const key = Object.keys(closestState)[0];
     const state = evaluateExpression(
       closestContainer.getAttribute(stateKey) || ""
@@ -24,7 +25,11 @@ function evaluateClosest(
     );
 
     window.addEventListener("scroll", () =>
-      evaluateClosestValue(closestContainer, closestState, key)
+      evaluateClosestValue(
+        closestContainer,
+        evaluateExpression(closestExpression).state,
+        key
+      )
     );
   }
 }

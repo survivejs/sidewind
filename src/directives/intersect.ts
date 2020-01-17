@@ -13,7 +13,7 @@ function evaluateIntersect(
     const intersectContainer = intersectContainers[i] as ExtendedHTMLElement;
     const intersectExpression =
       intersectContainer.getAttribute(intersectKey) || "";
-    const intersectParameters = evaluateExpression(intersectExpression, {});
+    const intersectParameters = evaluateExpression(intersectExpression);
     const intersectState = intersectParameters.state;
     const intersectOptions = intersectParameters.options || {};
     const key = Object.keys(intersectState)[0];

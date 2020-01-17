@@ -136,10 +136,10 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
 
 ### `x-closest`
 
-`x-closest` gives you access to the element closest to display top:
+`x-closest` gives you access to the element closest to display top within the selected elements:
 
 ```html
-<div x-closest="{ closest: $('h2, h3') }">
+<div x-closest="{ state: { closest: $('h2, h3') } }">
   Closest heading: <span x-bind="closest.textContent" />
 </div>
 ```
@@ -379,7 +379,7 @@ The examples below combine directives to produce complex user interfaces and to 
 <nav
   x-label="parent"
   x-state="{ headings: $('h2, h3') }"
-  x-closest="{ closest: $('h2, h3') }"
+  x-closest="{ state: { closest: $('h2, h3') } }"
 >
   <ul class="list-disc list-inside">
     <template x-each="headings">
