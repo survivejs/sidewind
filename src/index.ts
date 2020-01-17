@@ -36,7 +36,8 @@ function initialize(global = window) {
       "x-bind",
       "x-each",
       "x-attr",
-      "x-label"
+      "x-label",
+      "x:"
     );
     evaluateEach(document.querySelectorAll("[x-each]"), "x-each", "x-state");
   };

@@ -12,6 +12,7 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
   const bindKey = "x-bind";
   const attributeKey = "x-attr";
   const labelKey = "x-label";
+  const valueKey = "x:";
 
   if (!element) {
     element = window.event && (window.event.target as ExtendedHTMLElement);
@@ -50,9 +51,16 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     bindKey,
     eachKey,
     attributeKey,
-    labelKey
+    labelKey,
+    valueKey
   );
-  evaluateAttributes(stateContainer, attributeKey, stateKey, labelKey);
+  evaluateAttributes(
+    stateContainer,
+    attributeKey,
+    stateKey,
+    labelKey,
+    valueKey
+  );
 }
 
 export default setState;

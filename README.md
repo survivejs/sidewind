@@ -10,25 +10,25 @@ By design, the approach follows the principle of **progressive enhancement** and
 
 Sidewind is composed of a collection of directives that operate on the DOM. I've documented them in detail below.
 
-### `x-state` and `x-bind`
+### `x-state` and `x:`
 
 `x-state` is a state container and the state is often used by other directives such as `x-bind`. Consider the example below:
 
 ```html
-<section x-state="false">Value: <span x-bind="state" /></section>
+<section x-state="false">Value: <span x-attr x:="state" /></section>
 ```
 
 `x-state` and `x-bind` can exist even within the same element:
 
 ```html
-<section>Value: <span x-state="false" x-bind="state" /></section>
+<section>Value: <span x-state="false" x-attr x:="state" /></section>
 ```
 
 The state can be manipulated using a global `setState`:
 
 ```html
 <section x-state="false">
-  <div class="mb-2">Value: <span x-bind="state" /></div>
+  <div class="mb-2">Value: <span x-attr x:="state" /></div>
   <button class="btn btn-blue" onclick="setState(!this.state)">
     Toggle value
   </button>

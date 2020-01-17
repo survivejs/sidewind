@@ -12,7 +12,8 @@ function evaluateState(
   bindKey: string,
   eachKey: string,
   attributeKey: string,
-  labelKey: string
+  labelKey: string,
+  valueKey: string
 ) {
   // It's important to evaluate state containers from root to bottom
   // for nested state to work predictably.
@@ -51,14 +52,26 @@ function evaluateState(
           stateKey
         );
         evaluateBind(stateContainer, newState, bindKey, labelKey, stateKey);
-        evaluateAttributes(stateContainer, attributeKey, stateKey, labelKey);
+        evaluateAttributes(
+          stateContainer,
+          attributeKey,
+          stateKey,
+          labelKey,
+          valueKey
+        );
       });
 
     stateContainer.setAttribute(stateKey, JSON.stringify(state));
     stateContainer.state = state;
 
     evaluateBind(stateContainer, state, bindKey, labelKey, stateKey);
-    evaluateAttributes(stateContainer, attributeKey, stateKey, labelKey);
+    evaluateAttributes(
+      stateContainer,
+      attributeKey,
+      stateKey,
+      labelKey,
+      valueKey
+    );
   });
 }
 
