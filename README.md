@@ -160,10 +160,10 @@ The examples below combine directives to produce complex user interfaces and to 
 
 ```html
 <article
-  class="flex flex-row justify-between md:max-w-md"
+  class="flex flex-col md:flex-row justify-between md:max-w-md"
   x-state="{ amount: 1000, interest: 1.2 }"
 >
-  <div>
+  <div class="mb-2">
     <label for="amount">Amount</label>
     <input
       id="amount"
@@ -172,7 +172,7 @@ The examples below combine directives to produce complex user interfaces and to 
       x-bind="amount"
     />
   </div>
-  <div>
+  <div class="mb-2">
     <label for="interest">Interest</label>
     <input
       id="interest"
