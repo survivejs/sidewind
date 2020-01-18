@@ -38,6 +38,11 @@ function evaluateAttributes(
         const attributeProperty = attribute.value;
         const targetName = attributeName.split(valueKey).filter(Boolean)[0];
         const labeledState = getLabeledState(attributeContainer, labelKey);
+
+        if (state === null) {
+          return;
+        }
+
         const evaluatedValue = state.hasOwnProperty(attributeProperty)
           ? state[attributeProperty]
           : evaluateExpression(attributeProperty, {

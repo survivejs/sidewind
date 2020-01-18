@@ -40,7 +40,8 @@ function evaluateEach(
               );
               const firstChild = templateClone.firstElementChild;
 
-              firstChild.setAttribute(stateKey, JSON.stringify(value));
+              firstChild.state = value;
+              firstChild.setAttribute(stateKey, "");
               containerParent.appendChild(templateClone);
 
               setState(value, firstChild);
