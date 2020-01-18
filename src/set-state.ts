@@ -23,11 +23,15 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
   }
 
   const state = stateContainer.state;
+  const updatedState = isObject(state) ? { ...state, ...newValue } : newValue;
+
+  element.state = updatedState;
+  stateContainer.state = updatedState;
 
   let promises: Promise<PromiseResult>[] = [];
-  typeof state === "object" &&
-    Object.keys(state).forEach(key => {
-      const v = state[key];
+  isObject(updatedState) &&
+    Object.keys(updatedState).forEach(key => {
+      const v = updatedState[key];
 
       if (v.then) {
         promises.push(v.then((values: any) => ({ key, values })));
@@ -60,14 +64,6 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
       );
     });
 
-  const updatedState =
-    typeof state === "object" && state && !state.nodeName
-      ? { ...state, ...newValue }
-      : newValue;
-
-  element.state = updatedState;
-  stateContainer.state = updatedState;
-
   generateAttributeKeys(
     [stateContainer],
     directiveKeys.attribute,
@@ -89,6 +85,10 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     directiveKeys.label,
     directiveKeys.value
   );
+}
+
+function isObject(obj: any) {
+  return typeof obj === "object" && obj && !obj.nodeName;
 }
 
 export default setState;
