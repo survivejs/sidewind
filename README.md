@@ -361,6 +361,23 @@ The examples below combine directives to produce complex user interfaces and to 
 </nav>
 ```
 
+### Loading a Partial
+
+```html
+<div x-state="null">
+  <button
+    onmouseover="setState(fetch('./assets/partial.html').then(res => res.text()))"
+  >
+    Show Partial
+  </button>
+  <span x:="state.status === 'loading'">Loading...</span>
+  <span x:="state" />
+</div>
+```
+
+> TODO: How to make sure onmouseover triggers only once in a neat way? -> https://stackoverflow.com/a/32895668/228885 -> ... ; this.onmouseover = null;
+> TODO: Let setState support Promises like x-state
+
 ## Related Approaches
 
 - [Alpine.js](https://github.com/alpinejs/alpine) provides a similar yet more broad API closer to Angular than Sidewind.
