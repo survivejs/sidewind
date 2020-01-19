@@ -364,6 +364,8 @@ The examples below combine directives to produce complex user interfaces and to 
 ## Related Approaches
 
 - [Alpine.js](https://github.com/alpinejs/alpine) provides a similar yet more broad API closer to Angular than Sidewind.
+- [Svelte](https://svelte.dev) implements a compiler based approach.
+- [Vue](https://vuejs.org), and especially Vue 3, allows similar usage in the frontend as Sidewind.
 
 ## License
 
