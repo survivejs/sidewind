@@ -43,21 +43,16 @@ function evaluateAttributes(
           return;
         }
 
-        const evaluatedValue = state.hasOwnProperty(attributeProperty)
-          ? state[attributeProperty]
-          : evaluateExpression(attributeProperty, {
-              ...labeledState,
-              state,
-            }) || state;
+        const evaluatedValue = evaluateExpression(attributeProperty, {
+          ...labeledState,
+          state,
+        });
 
         if (attributeName === valueKey) {
           if (attributeContainer.localName === "input") {
             attributeContainer.value = evaluatedValue;
           } else {
-            attributeContainer.innerHTML =
-              typeof evaluatedValue === "object"
-                ? JSON.stringify(evaluatedValue, null, 2)
-                : evaluatedValue;
+            attributeContainer.innerHTML = evaluatedValue;
           }
         } else {
           attributeContainer.setAttribute(

@@ -28,18 +28,30 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
   element.state = updatedState;
   stateContainer.state = updatedState;
 
-  let promises: Promise<PromiseResult>[] = [];
+  let promises: { key: string; promise: Promise<PromiseResult> }[] = [];
   isObject(updatedState) &&
     Object.keys(updatedState).forEach(key => {
       const v = updatedState[key];
 
-      if (v.then) {
-        promises.push(v.then((values: any) => ({ key, values })));
+      if (v && v.then) {
+        promises.push({
+          key,
+          promise: v.then((values: any) => ({ key, values })),
+        });
       }
     });
 
-  promises.length > 0 &&
-    Promise.all(promises).then(values => {
+  if (promises.length > 0) {
+    const newState: BindState = {};
+
+    promises.forEach(({ key }) => {
+      newState[key] = { status: "loading" };
+    });
+
+    stateContainer.state = { ...stateContainer.state, ...newState };
+    evaluate(stateContainer);
+
+    Promise.all(promises.map(({ promise }) => promise)).then(values => {
       const promisedState: BindState = {};
 
       values.forEach(({ key, values }: PromiseResult) => {
@@ -49,26 +61,19 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
       const newState = { ...stateContainer.state, ...promisedState };
 
       stateContainer.state = newState;
-
-      evaluateEach(
-        stateContainer.querySelectorAll(`[${directiveKeys.each}]`),
-        directiveKeys.each,
-        directiveKeys.state
-      );
-      evaluateAttributes(
-        stateContainer,
-        directiveKeys.attribute,
-        directiveKeys.state,
-        directiveKeys.label,
-        directiveKeys.value
-      );
+      evaluate(stateContainer);
     });
+  }
 
   generateAttributeKeys(
     [stateContainer],
     directiveKeys.attribute,
     directiveKeys.value
   );
+  evaluate(stateContainer);
+}
+
+function evaluate(stateContainer: ExtendedHTMLElement) {
   evaluateEach(
     stateContainer.querySelectorAll(`[${directiveKeys.each}]`),
     directiveKeys.each,

@@ -67,7 +67,7 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
 <div x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }">
   <ul class="list-disc list-inside">
     <template x-each="cars">
-      <li><span x:="brand" /> - <span x:="color" /></li>
+      <li><span x:="state.brand" /> - <span x:="state.color" /></li>
     </template>
   </ul>
 </div>
@@ -79,7 +79,7 @@ In addition to binding values, it's possible to bind attributes with `x:`:
 
 ```html
 <section x-state="{ target: 'https://survivejs.com' }">
-  <a x:href="target">Link target</a>
+  <a x:href="state.target">Link target</a>
 </section>
 ```
 
@@ -88,7 +88,7 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 ```html
 <section x-state="{ target: 'https://survivejs.com' }">
   <a
-    x:href="target"
+    x:href="state.target"
     x:class="[
       'p-2',
       state.target === 'https://survivejs.com' && 'bg-gray-400'
@@ -107,11 +107,11 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x:="text"></li>
+        <li x:="state.text"></li>
       </template>
     </ul>
   </div>
-  <div x:="todos"></div>
+  <div x:="JSON.stringify(state.todos, null, 2)"></div>
 </div>
 ```
 
@@ -147,7 +147,7 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
 
 ```html
 <div x-intersect="{ state: { intersected: new Date().toString() } }">
-  Intersected at <span x:="intersected" />
+  Intersected at <span x:="state.intersected" />
 </div>
 ```
 
@@ -156,7 +156,7 @@ In addition to the standard options, there's an `once` flag that when set causes
 ```html
 <img
   x-intersect="{ options: { once: true }, state: { src: './assets/logo.png' } }"
-  x:src="src"
+  x:src="state.src"
 />
 ```
 
@@ -166,7 +166,7 @@ In addition to the standard options, there's an `once` flag that when set causes
 
 ```html
 <div x-interval="{ options: { delay: 1000 }, state: { time: new
-Date().toString() } }" x:="time" />
+Date().toString() } }" x:="state.time" />
 ```
 
 ## Examples
@@ -183,12 +183,12 @@ The examples below combine directives to produce complex user interfaces and to 
   <div class="mb-2">
     <label for="amount">Amount</label>
     <input id="amount" type="text" oninput="setState({ amount: this.value })"
-    x:="amount" />
+    x:="state.amount" />
   </div>
   <div class="mb-2">
     <label for="interest">Interest</label>
     <input id="interest" type="text" oninput="setState({ interest: this.value
-    })" x:="interest" />
+    })" x:="state.interest" />
   </div>
   <div>
     Total: <span x:="Math.round(state.amount * state.interest * 100) / 100" />
@@ -208,18 +208,18 @@ The examples below combine directives to produce complex user interfaces and to 
     <label class="mr-2">
       <span>Add Todo</span>
       <input id="text" type="text" oninput="setState({ text: this.value })"
-      x:="text" />
+      x:="state.text" />
     </label>
     <button class="btn btn-blue" type="submit">Add</button>
   </div>
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x:="text" />
+        <li x:="state.text" />
       </template>
     </ul>
   </div>
-  <div x:="todos"></div>
+  <div x:="JSON.stringify(state.todos, null, 2)"></div>
 </form>
 ```
 
@@ -239,8 +239,8 @@ The examples below combine directives to produce complex user interfaces and to 
   <tbody>
     <template x-each="cars">
       <tr>
-        <td class="border p-2" x:="brand" /> <td class="border p-2" x:="color"
-        />
+        <td class="border p-2" x:="state.brand" /> <td class="border p-2"
+        x:="state.color" />
       </tr>
     </template>
   </tbody>
@@ -364,19 +364,16 @@ The examples below combine directives to produce complex user interfaces and to 
 ### Loading a Partial
 
 ```html
-<div x-state="null">
+<div x-state="{ partial: { status: null } }">
   <button
-    onmouseover="setState(fetch('./assets/partial.html').then(res => res.text()))"
+    onmouseover="setState({ partial: fetch('./assets/partial.html').then(res => res.text()) })"
   >
     Show Partial
   </button>
-  <span x:="state.status === 'loading'">Loading...</span>
-  <span x:="state" />
+  <span x:="state.partial.status === 'loading' ? 'Loading...' : ''"></span>
+  <span x:="state.partial.status !== null ? state.partial : ''"></span>
 </div>
 ```
-
-> TODO: How to make sure onmouseover triggers only once in a neat way? -> https://stackoverflow.com/a/32895668/228885 -> ... ; this.onmouseover = null;
-> TODO: Let setState support Promises like x-state
 
 ## Related Approaches
 
