@@ -258,11 +258,17 @@ The examples below combine directives to produce complex user interfaces and to 
     >
       <span>Junior Engineer</span>
       <div>
-        <span x:class="state && 'hidden'">▼</span>
-        <span x:class="!state && 'hidden'">▲</span>
+        <span x:class="state && 'hidden'">+</span>
+        <span x:class="!state && 'hidden'">-</span>
       </div>
     </div>
-    <div class="py-2 bg-gray-200" x:class="!state && 'hidden'">
+    <div
+      x:class="[
+        'py-2',
+        'text-gray-600',
+        !state && 'hidden'
+      ]"
+    >
       Junior engineer description
     </div>
   </section>
@@ -274,11 +280,17 @@ The examples below combine directives to produce complex user interfaces and to 
     >
       <span>Senior Engineer</span>
       <div>
-        <span x:class="state && 'hidden'">▼</span>
-        <span x:class="!state && 'hidden'">▲</span>
+        <span x:class="state && 'hidden'">+</span>
+        <span x:class="!state && 'hidden'">-</span>
       </div>
     </div>
-    <div class="py-2 bg-gray-200" x:class="!state && 'hidden'">
+    <div
+      x:class="[
+        'py-2',
+        'text-gray-600',
+        !state && 'hidden'
+      ]"
+    >
       Senior engineer description
     </div>
   </section>
