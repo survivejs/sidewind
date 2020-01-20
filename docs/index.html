@@ -406,11 +406,17 @@ Date().toString() } }" x:="state.time" />
     &gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Junior Engineer<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"state &amp;&amp; 'hidden'"</span>&gt;</span>▼<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>▲<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"state &amp;&amp; 'hidden'"</span>&gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>-<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"py-2 bg-gray-200"</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>
+      <span class="hljs-attr">x:class</span>=<span class="hljs-string">"[
+        'py-2',
+        'text-gray-600',
+        !state &amp;&amp; 'hidden'
+      ]"</span>
+    &gt;</span>
       Junior engineer description
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
@@ -422,11 +428,17 @@ Date().toString() } }" x:="state.time" />
     &gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Senior Engineer<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"state &amp;&amp; 'hidden'"</span>&gt;</span>▼<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>▲<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"state &amp;&amp; 'hidden'"</span>&gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>-<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"py-2 bg-gray-200"</span> <span class="hljs-attr">x:class</span>=<span class="hljs-string">"!state &amp;&amp; 'hidden'"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span>
+      <span class="hljs-attr">x:class</span>=<span class="hljs-string">"[
+        'py-2',
+        'text-gray-600',
+        !state &amp;&amp; 'hidden'
+      ]"</span>
+    &gt;</span>
       Senior engineer description
     <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
@@ -440,11 +452,17 @@ Date().toString() } }" x:="state.time" />
     >
       <span>Junior Engineer</span>
       <div>
-        <span x:class="state && 'hidden'">▼</span>
-        <span x:class="!state && 'hidden'">▲</span>
+        <span x:class="state && 'hidden'">+</span>
+        <span x:class="!state && 'hidden'">-</span>
       </div>
     </div>
-    <div class="py-2 bg-gray-200" x:class="!state && 'hidden'">
+    <div
+      x:class="[
+        'py-2',
+        'text-gray-600',
+        !state && 'hidden'
+      ]"
+    >
       Junior engineer description
     </div>
   </section>
@@ -456,11 +474,17 @@ Date().toString() } }" x:="state.time" />
     >
       <span>Senior Engineer</span>
       <div>
-        <span x:class="state && 'hidden'">▼</span>
-        <span x:class="!state && 'hidden'">▲</span>
+        <span x:class="state && 'hidden'">+</span>
+        <span x:class="!state && 'hidden'">-</span>
       </div>
     </div>
-    <div class="py-2 bg-gray-200" x:class="!state && 'hidden'">
+    <div
+      x:class="[
+        'py-2',
+        'text-gray-600',
+        !state && 'hidden'
+      ]"
+    >
       Senior engineer description
     </div>
   </section>
@@ -635,6 +659,8 @@ Date().toString() } }" x:="state.time" />
 <h2 class="inline" id="relatedapproaches">Related Approaches</h2><a class="ml-2 text-gray-200 hover:text-gray-800" href="#relatedapproaches">#</a>
 <ul class="list-disc list-inside" >
 <li><a class="underline"  href="https://github.com/alpinejs/alpine">Alpine.js</a> provides a similar yet more broad API closer to Angular than Sidewind.</li>
+<li><a class="underline"  href="https://amp.dev/documentation/components/amp-bind/">amp-bind</a> implementes data binding and expressions.</li>
+<li><a class="underline"  href="https://mavo.io">Mavo</a> implements a DSL on top of HTML for light interactivity.</li>
 <li><a class="underline"  href="https://svelte.dev">Svelte</a> implements a compiler based approach.</li>
 <li><a class="underline"  href="https://vuejs.org">Vue</a>, and especially Vue 3, allows similar usage in the frontend as Sidewind.</li>
 </ul>

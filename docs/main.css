@@ -810,6 +810,10 @@ a {
   color: #edf2f7;
 }
 
+.text-gray-600 {
+  color: #718096;
+}
+
 .hover\:text-gray-800:hover {
   color: #2d3748;
 }
