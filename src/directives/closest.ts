@@ -48,6 +48,11 @@ function evaluateClosestValue(
       top,
     };
   });
+
+  if (!elements || elements.length < 1) {
+    return;
+  }
+
   const closest = elements.reduce((a, b) =>
     Math.abs(a.top) < Math.abs(b.top) ? a : b
   );
