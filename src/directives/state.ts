@@ -2,10 +2,11 @@ import { DirectiveParameters, ExtendedHTMLElement } from "../types";
 
 function stateDirective({
   element,
-  parameters,
+  expression,
+  evaluate,
   setState,
 }: DirectiveParameters) {
-  setState(element.state || parameters, element);
+  setState(element.state || evaluate(expression), element);
 }
 stateDirective.resolveElements = (elements: NodeListOf<Element>) =>
   orderByParents(Array.from(elements as NodeListOf<ExtendedHTMLElement>));

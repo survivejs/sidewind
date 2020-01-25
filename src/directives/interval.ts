@@ -4,9 +4,11 @@ import evaluateExpression from "../evaluate-expression";
 function intervalDirective({
   element,
   expression,
-  parameters: { options, state },
+  evaluate,
   setState,
 }: DirectiveParameters) {
+  const { options, state } = evaluate(expression);
+
   // TODO: Eliminate somehow - should setState handle this?
   const initialState = evaluateExpression(
     element.getAttribute("x-state") || ""

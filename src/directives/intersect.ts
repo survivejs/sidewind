@@ -1,18 +1,16 @@
 import { DirectiveParameters } from "../types";
-import evaluateExpression from "../evaluate-expression";
 
 function intersectDirective({
   element,
   expression,
-  parameters: { options = {}, state },
+  evaluate,
   setState,
 }: DirectiveParameters) {
+  const { options = {}, state } = evaluate(expression);
   // TODO: Eliminate somehow - should setState handle this?
   const key = Object.keys(state)[0];
   const emptyIntersect = { [key]: "" };
-  const initialState = evaluateExpression(
-    element.getAttribute("x-state") || ""
-  );
+  const initialState = evaluate(element.getAttribute("x-state") || "");
   element.setAttribute(
     "x-state",
     JSON.stringify(
@@ -38,7 +36,7 @@ function intersectDirective({
 
       triggered = true;
 
-      setState(evaluateExpression(expression).state, element);
+      setState(evaluate(expression).state, element);
     },
     {
       rootMargin: "0px",

@@ -1,3 +1,4 @@
+import evaluateExpression from "./evaluate-expression";
 import setState from "./set-state";
 
 type BindState = { [id: string]: any };
@@ -10,7 +11,7 @@ type ExtendedHTMLElement = HTMLElement & {
 type DirectiveParameters = {
   element: ExtendedHTMLElement;
   expression: any;
-  parameters: any;
+  evaluate: typeof evaluateExpression;
   setState: typeof setState;
 };
 

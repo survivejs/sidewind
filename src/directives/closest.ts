@@ -1,19 +1,17 @@
 import { BindState, DirectiveParameters, ExtendedHTMLElement } from "../types";
-import evaluateExpression from "../evaluate-expression";
 import { getValues } from "../utils";
 
 function closestDirective({
   element,
   expression,
-  parameters: { state },
+  evaluate,
   setState,
 }: DirectiveParameters) {
+  const { state } = evaluate(expression);
   const key = Object.keys(state)[0];
 
   // TODO: Eliminate somehow - should setState handle this?
-  const initialState = evaluateExpression(
-    element.getAttribute("x-state") || ""
-  );
+  const initialState = evaluate(element.getAttribute("x-state") || "");
   element.setAttribute(
     "x-state",
     JSON.stringify(
@@ -22,12 +20,7 @@ function closestDirective({
   );
 
   window.addEventListener("scroll", () =>
-    evaluateClosestValue(
-      element,
-      evaluateExpression(expression).state,
-      key,
-      setState
-    )
+    evaluateClosestValue(element, evaluate(expression).state, key, setState)
   );
 }
 
