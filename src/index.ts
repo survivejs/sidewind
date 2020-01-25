@@ -1,11 +1,12 @@
 import {
-  evaluateClosest,
+  closestDirective,
   evaluateIntersect,
   evaluateInterval,
   evaluateState,
 } from "./directives";
-import setState from "./set-state";
 import directiveKeys from "./directive-keys";
+import setState from "./set-state";
+import createDirective from "./create-directive";
 
 declare global {
   interface Window {
@@ -15,11 +16,7 @@ declare global {
 
 function initialize(global = window) {
   global.onload = () => {
-    evaluateClosest(
-      document.querySelectorAll(`[${directiveKeys.closest}]`),
-      directiveKeys.closest,
-      directiveKeys.state
-    );
+    createDirective("x-closest", closestDirective);
     evaluateIntersect(
       document.querySelectorAll(`[${directiveKeys.intersect}]`),
       directiveKeys.intersect,

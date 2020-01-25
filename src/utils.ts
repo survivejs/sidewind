@@ -55,6 +55,12 @@ function getValues(data: BindState, getter: string | null): BindState {
 
   const value = data[getter];
 
+  if (!value) {
+    console.error("Failed to get value", data, getter);
+
+    return {};
+  }
+
   return {
     [getter]:
       value._type === "query"

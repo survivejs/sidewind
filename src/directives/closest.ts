@@ -1,43 +1,38 @@
-import { BindState, ExtendedHTMLElement } from "../types";
+import { BindState, DirectiveParameters, ExtendedHTMLElement } from "../types";
 import evaluateExpression from "../evaluate-expression";
 import { getValues } from "../utils";
-import setState from "../set-state";
 
-function evaluateClosest(
-  closestContainers: NodeListOf<ExtendedHTMLElement>,
-  closestKey: string,
-  stateKey: string
-) {
-  for (let i = closestContainers.length; i--; ) {
-    const closestContainer = closestContainers[i] as ExtendedHTMLElement;
-    const closestExpression = closestContainer.getAttribute(closestKey) || "";
-    const closestParameters = evaluateExpression(closestExpression);
-    const closestState = closestParameters.state;
-    const key = Object.keys(closestState)[0];
-    const state = evaluateExpression(
-      closestContainer.getAttribute(stateKey) || ""
-    );
-    const emptyClosest = { [key]: "" };
+function closestDirective({
+  element,
+  expression,
+  parameters,
+  setState,
+}: DirectiveParameters) {
+  const closestState = parameters.state;
+  const key = Object.keys(closestState)[0];
 
-    closestContainer.setAttribute(
-      stateKey,
-      JSON.stringify(state ? { ...state, ...emptyClosest } : emptyClosest)
-    );
+  // TODO: Eliminate somehow - should setState handle this?
+  const state = evaluateExpression(element.getAttribute("x-state") || "");
+  element.setAttribute(
+    "x-state",
+    JSON.stringify(state ? { ...state, [key]: "" } : { [key]: "" })
+  );
 
-    window.addEventListener("scroll", () =>
-      evaluateClosestValue(
-        closestContainer,
-        evaluateExpression(closestExpression).state,
-        key
-      )
-    );
-  }
+  window.addEventListener("scroll", () =>
+    evaluateClosestValue(
+      element,
+      evaluateExpression(expression).state,
+      key,
+      setState
+    )
+  );
 }
 
 function evaluateClosestValue(
   closestContainer: ExtendedHTMLElement,
   closestState: BindState,
-  key: string
+  key: string,
+  setState: DirectiveParameters["setState"]
 ) {
   const elements = Array.from(getValues(closestState, key)[key]).map(value => {
     const element = value as HTMLElement;
@@ -60,4 +55,4 @@ function evaluateClosestValue(
   setState({ [key]: closest.element }, closestContainer);
 }
 
-export default evaluateClosest;
+export default closestDirective;

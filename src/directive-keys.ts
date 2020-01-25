@@ -1,6 +1,5 @@
 const directiveKeys = {
   attribute: "x-attr",
-  closest: "x-closest",
   each: "x-each",
   intersect: "x-intersect",
   interval: "x-interval",
