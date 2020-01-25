@@ -1,6 +1,6 @@
-import { BindState, ExtendedHTMLElement } from "./types";
+import { ExtendedHTMLElement } from "./types";
 
-type PromiseResult = { key: string; values: any };
+// type PromiseResult = { key: string; values: any };
 
 function setState(newValue: any, element?: ExtendedHTMLElement) {
   if (!element) {
@@ -22,9 +22,13 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
   const state = stateContainer.state;
   const updatedState = isObject(state) ? { ...state, ...newValue } : newValue;
 
+  console.log(newValue, element, element.state);
+
   element.state = updatedState;
   stateContainer.state = updatedState;
 
+  // TODO: Push to another directive
+  /*
   let promises: { key: string; promise: Promise<PromiseResult> }[] = [];
   isObject(updatedState) &&
     Object.keys(updatedState).forEach(key => {
@@ -61,6 +65,7 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
       // evaluate(stateContainer);
     });
   }
+  */
 
   // evaluate(stateContainer);
 }

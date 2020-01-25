@@ -166,9 +166,9 @@ In addition to the standard options, there's an `once` flag that when set causes
 
 ```html
 <div
-  x-interval="{ options: { delay: 1000 }, state: { time: new
+  disabled-x-interval="{ options: { delay: 1000 }, state: { time: new
 Date().toString() } }"
-  x="state.time"
+  disabled-x="state.time"
 />
 ```
 
