@@ -5,6 +5,7 @@ import {
   intervalDirective,
   intersectDirective,
   stateDirective,
+  valueDirective,
 } from "./directives";
 import setState from "./set-state";
 import createDirective from "./create-directive";
@@ -23,6 +24,7 @@ function initialize(global = window) {
     createDirective("x-state", stateDirective);
     createDirective("x-each", eachDirective);
     createDirective("x-attr", attributesDirective);
+    createDirective("x", valueDirective);
   };
 
   global.setState = setState;

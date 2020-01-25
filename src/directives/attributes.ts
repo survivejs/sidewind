@@ -8,39 +8,30 @@ function attributesDirective({ element }: DirectiveParameters) {
     `[x-state]`
   ) as ExtendedHTMLElement;
   const { state }: { state: BindState } = closestStateContainer;
-  const valueKey = "x:";
+  const attributeKey = "x:";
 
   attributes.forEach(attribute => {
     const attributeName = attribute.nodeName;
 
-    if (attributeName.startsWith(valueKey)) {
-      const attributeProperty = attribute.value;
-      const targetName = attributeName.split(valueKey).filter(Boolean)[0];
+    if (attributeName.startsWith(attributeKey)) {
+      const targetName = attributeName.split(attributeKey).filter(Boolean)[0];
       const labeledState = getLabeledState(element, "x-label");
 
       if (state === null) {
         return;
       }
 
-      const evaluatedValue = evaluateExpression(attributeProperty, {
+      const evaluatedValue = evaluateExpression(attribute.value, {
         ...labeledState,
         state,
       });
 
-      if (attributeName === valueKey) {
-        if (element.localName === "input") {
-          element.value = evaluatedValue;
-        } else {
-          element.innerHTML = evaluatedValue;
-        }
-      } else {
-        element.setAttribute(
-          targetName,
-          Array.isArray(evaluatedValue)
-            ? evaluatedValue.filter(Boolean).join(" ")
-            : evaluatedValue
-        );
-      }
+      element.setAttribute(
+        targetName,
+        Array.isArray(evaluatedValue)
+          ? evaluatedValue.filter(Boolean).join(" ")
+          : evaluatedValue
+      );
     }
   });
 }

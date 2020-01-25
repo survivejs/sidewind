@@ -4,3 +4,4 @@ export { default as eachDirective } from "./each";
 export { default as intersectDirective } from "./intersect";
 export { default as intervalDirective } from "./interval";
 export { default as stateDirective } from "./state";
+export { default as valueDirective } from "./value";

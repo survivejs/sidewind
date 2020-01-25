@@ -10,25 +10,25 @@ By design, the approach follows the principle of **progressive enhancement** and
 
 Sidewind is composed of a collection of directives that operate on the DOM. I've documented them in detail below.
 
-### `x-state` and `x:`
+### `x-state` and `x`
 
-`x-state` is a state container and the state is often used by other directives. `x:` is used for binding values. Consider the example below:
+`x-state` is a state container and the state is often used by other directives. `x` is used for binding values. Consider the example below:
 
 ```html
-<section x-state="false">Value: <span x:="state" /></section>
+<section x-state="false">Value: <span x="state" /></section>
 ```
 
-`x-state` and `x:` can exist even within the same element:
+`x-state` and `x` can exist even within the same element:
 
 ```html
-<section>Value: <span x-state="false" x:="state" /></section>
+<section>Value: <span x-state="false" x="state" /></section>
 ```
 
 The state can be manipulated using a global `setState`:
 
 ```html
 <section x-state="false">
-  <div class="mb-2">Value: <span x:="state" /></div>
+  <div class="mb-2">Value: <span x="state" /></div>
   <button class="btn btn-blue" onclick="setState(!this.state)">
     Toggle value
   </button>
@@ -39,7 +39,7 @@ State can be a complex object:
 
 ```html
 <article x-state="{ amount: 1000, interest: 1.2 }">
-  Total: <span x:="state.amount * state.interest" />
+  Total: <span x="state.amount * state.interest" />
 </article>
 ```
 
@@ -53,7 +53,7 @@ State can be a complex object:
     <li>
       <a
         x:href="state.nextElementSibling.attributes.href.value"
-        x:="state.textContent"
+        x="state.textContent"
       >
       </a>
     </li>
@@ -67,15 +67,15 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
 <div x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }">
   <ul class="list-disc list-inside">
     <template x-each="cars">
-      <li><span x:="state.brand" /> - <span x:="state.color" /></li>
+      <li><span x="state.brand" /> - <span x="state.color" /></li>
     </template>
   </ul>
 </div>
 ```
 
-### `x:` with Attributes
+### `x` with Attributes
 
-In addition to binding values, it's possible to bind attributes with `x:`:
+In addition to binding values, it's possible to bind attributes with `x`:
 
 ```html
 <section x-state="{ target: 'https://survivejs.com' }">
@@ -107,11 +107,11 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x:="state.text"></li>
+        <li x="state.text"></li>
       </template>
     </ul>
   </div>
-  <div x:="JSON.stringify(state.todos, null, 2)"></div>
+  <div x="JSON.stringify(state.todos, null, 2)"></div>
 </div>
 ```
 
@@ -122,7 +122,7 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 ```html
 <div x-label="i18n" x-state="{ hello: 'Terve' }">
   <div x-state="{ world: 'World' }">
-    <span x:="i18n.hello + ' ' + state.world" />
+    <span x="i18n.hello + ' ' + state.world" />
   </div>
 </div>
 ```
@@ -137,7 +137,7 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
 
 ```html
 <div x-closest="{ state: { closest: $('h2, h3') } }">
-  Closest heading: <span x:="state.closest.textContent" />
+  Closest heading: <span x="state.closest.textContent" />
 </div>
 ```
 
@@ -147,7 +147,7 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
 
 ```html
 <div x-intersect="{ state: { intersected: new Date().toString() } }">
-  Intersected at <span x:="state.intersected" />
+  Intersected at <span x="state.intersected" />
 </div>
 ```
 
@@ -165,8 +165,11 @@ In addition to the standard options, there's an `once` flag that when set causes
 `x-interval` wraps [setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval) and exposes its `delay` parameters. When triggered, it sets state.
 
 ```html
-<div x-interval="{ options: { delay: 1000 }, state: { time: new
-Date().toString() } }" x:="state.time" />
+<div
+  x-interval="{ options: { delay: 1000 }, state: { time: new
+Date().toString() } }"
+  x="state.time"
+/>
 ```
 
 ## Examples
@@ -182,16 +185,25 @@ The examples below combine directives to produce complex user interfaces and to 
 >
   <div class="mb-2">
     <label for="amount">Amount</label>
-    <input id="amount" type="text" oninput="setState({ amount: this.value })"
-    x:="state.amount" />
+    <input
+      id="amount"
+      type="text"
+      oninput="setState({ amount: this.value })"
+      x="state.amount"
+    />
   </div>
   <div class="mb-2">
     <label for="interest">Interest</label>
-    <input id="interest" type="text" oninput="setState({ interest: this.value
-    })" x:="state.interest" />
+    <input
+      id="interest"
+      type="text"
+      oninput="setState({ interest: this.value
+    })"
+      x="state.interest"
+    />
   </div>
   <div>
-    Total: <span x:="Math.round(state.amount * state.interest * 100) / 100" />
+    Total: <span x="Math.round(state.amount * state.interest * 100) / 100" />
   </div>
 </article>
 ```
@@ -207,19 +219,23 @@ The examples below combine directives to produce complex user interfaces and to 
   <div class="mb-2">
     <label class="mr-2">
       <span>Add Todo</span>
-      <input id="text" type="text" oninput="setState({ text: this.value })"
-      x:="state.text" />
+      <input
+        id="text"
+        type="text"
+        oninput="setState({ text: this.value })"
+        x="state.text"
+      />
     </label>
     <button class="btn btn-blue" type="submit">Add</button>
   </div>
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x:="state.text" />
+        <li x="state.text" />
       </template>
     </ul>
   </div>
-  <div x:="JSON.stringify(state.todos, null, 2)"></div>
+  <div x="JSON.stringify(state.todos, null, 2)"></div>
 </form>
 ```
 
@@ -239,8 +255,8 @@ The examples below combine directives to produce complex user interfaces and to 
   <tbody>
     <template x-each="cars">
       <tr>
-        <td class="border p-2" x:="state.brand" /> <td class="border p-2"
-        x:="state.color" />
+        <td class="border p-2" x="state.brand" />
+        <td class="border p-2" x="state.color" />
       </tr>
     </template>
   </tbody>
@@ -360,7 +376,7 @@ The examples below combine directives to produce complex user interfaces and to 
       <li>
         <a
           x:href="state.nextElementSibling.attributes.href.value"
-          x:="state.textContent"
+          x="state.textContent"
           x:class="[
             state.textContent === parent.closest.textContent && 'font-bold',
             state.tagName === 'H3' && 'ml-2'
@@ -382,8 +398,8 @@ The examples below combine directives to produce complex user interfaces and to 
   >
     Show Partial
   </button>
-  <span x:="state.partial.status === 'loading' ? 'Loading...' : ''"></span>
-  <span x:="state.partial.status !== null ? state.partial : ''"></span>
+  <span x="state.partial.status === 'loading' ? 'Loading...' : ''"></span>
+  <span x="state.partial.status !== null ? state.partial : ''"></span>
 </div>
 ```
 
