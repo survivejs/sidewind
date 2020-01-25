@@ -1,7 +1,7 @@
 /* eslint no-new-func: 0 */
 import { BindState } from "./types";
 
-function evaluateExpression(expression: string, value: BindState = {}) {
+function evaluate(expression: string, value: BindState = {}) {
   try {
     return Function(
       ...Object.keys(value),
@@ -16,4 +16,4 @@ function evaluateExpression(expression: string, value: BindState = {}) {
   }
 }
 
-export default evaluateExpression;
+export default evaluate;

@@ -1,4 +1,4 @@
-import evaluateExpression from "./evaluate-expression";
+import evaluate from "./evaluate";
 import getState from "./get-state";
 import setState from "./set-state";
 
@@ -12,7 +12,7 @@ type ExtendedHTMLElement = HTMLElement & {
 type DirectiveParameters = {
   element: ExtendedHTMLElement;
   expression: any;
-  evaluate: typeof evaluateExpression;
+  evaluate: typeof evaluate;
   getState: typeof getState;
   setState: typeof setState;
 };

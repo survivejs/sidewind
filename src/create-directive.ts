@@ -1,5 +1,5 @@
 import { DirectiveFunction, ExtendedHTMLElement } from "./types";
-import evaluate from "./evaluate-expression";
+import evaluate from "./evaluate";
 import getState from "./get-state";
 import setState from "./set-state";
 
