@@ -13,12 +13,16 @@ type DirectiveParameters = {
   parameters: any;
   setState: typeof setState;
 };
-type DirectiveType = (args: DirectiveParameters) => any;
+
+interface DirectiveFunction {
+  (args: DirectiveParameters): void;
+  resolveElements?: (elements: NodeListOf<Element>) => ExtendedHTMLElement[];
+}
 
 export {
   BindState,
   State,
   ExtendedHTMLElement,
   DirectiveParameters,
-  DirectiveType,
+  DirectiveFunction,
 };

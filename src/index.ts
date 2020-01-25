@@ -1,10 +1,9 @@
 import {
   closestDirective,
-  evaluateState,
   intervalDirective,
   intersectDirective,
+  stateDirective,
 } from "./directives";
-import directiveKeys from "./directive-keys";
 import setState from "./set-state";
 import createDirective from "./create-directive";
 
@@ -19,10 +18,7 @@ function initialize(global = window) {
     createDirective("x-closest", closestDirective);
     createDirective("x-interval", intervalDirective);
     createDirective("x-intersect", intersectDirective);
-    evaluateState(
-      document.querySelectorAll(`[${directiveKeys.state}]`),
-      directiveKeys.state
-    );
+    createDirective("x-state", stateDirective);
   };
 
   global.setState = setState;
