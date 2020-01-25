@@ -1,5 +1,6 @@
-import { evaluateDirective, setState } from "../src";
 import {
+  evaluateDirective,
+  setState,
   attributesDirective,
   closestDirective,
   eachDirective,
@@ -7,7 +8,7 @@ import {
   intersectDirective,
   stateDirective,
   valueDirective,
-} from "../src/directives";
+} from "../src";
 
 import "highlight.js/styles/dracula.css";
 import "./index.pcss";
