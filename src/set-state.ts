@@ -1,5 +1,4 @@
 import { BindState, ExtendedHTMLElement } from "./types";
-import directiveKeys from "./directive-keys";
 import generateAttributeKeys from "./generate-attribute-keys";
 
 type PromiseResult = { key: string; values: any };
@@ -13,9 +12,9 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     }
   }
 
-  let stateContainer = element.hasAttribute(directiveKeys.state)
+  let stateContainer = element.hasAttribute("x-state")
     ? element
-    : (element.closest(`[${directiveKeys.state}]`) as ExtendedHTMLElement);
+    : (element.closest(`[x-state]`) as ExtendedHTMLElement);
 
   if (!stateContainer) {
     return;
@@ -64,11 +63,8 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     });
   }
 
-  generateAttributeKeys(
-    [stateContainer],
-    directiveKeys.attribute,
-    directiveKeys.value
-  );
+  // TODO: Push to the right place
+  generateAttributeKeys([stateContainer], "x-attr", "x:");
   // evaluate(stateContainer);
 }
 
