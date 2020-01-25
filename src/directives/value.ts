@@ -1,19 +1,12 @@
-import { BindState, DirectiveParameters, ExtendedHTMLElement } from "../types";
-import evaluateExpression from "../evaluate-expression";
-import { getLabeledState } from "../utils";
+import { DirectiveParameters } from "../types";
 
-function valueDirective({ element, expression }: DirectiveParameters) {
-  // TODO: Common pattern, set up getState
-  const closestStateContainer = element.closest(
-    `[x-state]`
-  ) as ExtendedHTMLElement;
-  const { state }: { state: BindState } = closestStateContainer;
-  const labeledState = getLabeledState(element, "x-label");
-
-  const evaluatedValue = evaluateExpression(expression, {
-    ...labeledState,
-    state,
-  });
+function valueDirective({
+  element,
+  expression,
+  evaluate,
+  getState,
+}: DirectiveParameters) {
+  const evaluatedValue = evaluate(expression, getState(element));
 
   if (element.localName === "input") {
     element.value = evaluatedValue;

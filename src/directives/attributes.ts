@@ -1,13 +1,8 @@
-import { BindState, DirectiveParameters, ExtendedHTMLElement } from "../types";
+import { DirectiveParameters, ExtendedHTMLElement } from "../types";
 import evaluateExpression from "../evaluate-expression";
-import { getLabeledState } from "../utils";
 
-function attributesDirective({ element }: DirectiveParameters) {
+function attributesDirective({ element, getState }: DirectiveParameters) {
   const attributes = Array.from(element.attributes);
-  const closestStateContainer = element.closest(
-    `[x-state]`
-  ) as ExtendedHTMLElement;
-  const { state }: { state: BindState } = closestStateContainer;
   const attributeKey = "x:";
 
   attributes.forEach(attribute => {
@@ -15,16 +10,11 @@ function attributesDirective({ element }: DirectiveParameters) {
 
     if (attributeName.startsWith(attributeKey)) {
       const targetName = attributeName.split(attributeKey).filter(Boolean)[0];
-      const labeledState = getLabeledState(element, "x-label");
 
-      if (state === null) {
-        return;
-      }
-
-      const evaluatedValue = evaluateExpression(attribute.value, {
-        ...labeledState,
-        state,
-      });
+      const evaluatedValue = evaluateExpression(
+        attribute.value,
+        getState(element)
+      );
 
       element.setAttribute(
         targetName,

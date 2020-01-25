@@ -1,5 +1,6 @@
 import { DirectiveFunction, ExtendedHTMLElement } from "./types";
 import evaluate from "./evaluate-expression";
+import getState from "./get-state";
 import setState from "./set-state";
 
 function createDirective(name: string, directive: DirectiveFunction) {
@@ -12,7 +13,7 @@ function createDirective(name: string, directive: DirectiveFunction) {
     const element = elements[i] as ExtendedHTMLElement;
     const expression = element.getAttribute(name) || "";
 
-    directive({ element, expression, evaluate, setState });
+    directive({ element, expression, evaluate, getState, setState });
   }
 }
 
