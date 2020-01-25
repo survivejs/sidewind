@@ -3,7 +3,7 @@ import evaluate from "./evaluate";
 import getState from "./get-state";
 import setState from "./set-state";
 
-function createDirective(name: string, directive: DirectiveFunction) {
+function evaluateDirective(name: string, directive: DirectiveFunction) {
   const elements = document.querySelectorAll(`[${name}]`);
   const resolvedElements = directive.resolveElements
     ? directive.resolveElements(elements)
@@ -17,4 +17,4 @@ function createDirective(name: string, directive: DirectiveFunction) {
   }
 }
 
-export default createDirective;
+export default evaluateDirective;

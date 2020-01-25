@@ -8,7 +8,7 @@ import {
   valueDirective,
 } from "./directives";
 import setState from "./set-state";
-import createDirective from "./create-directive";
+import evaluateDirective from "./evaluate-directive";
 
 declare global {
   interface Window {
@@ -16,17 +16,21 @@ declare global {
   }
 }
 
-function initialize(global = window) {
-  global.onload = () => {
-    createDirective("x-closest", closestDirective);
-    createDirective("x-interval", intervalDirective);
-    createDirective("x-intersect", intersectDirective);
-    createDirective("x-state", stateDirective);
-    createDirective("x-each", eachDirective);
-    createDirective("x-attr", attributesDirective);
-    createDirective("x", valueDirective);
-  };
+function evaluateDirectives() {
+  evaluateDirective("x-closest", closestDirective);
+  evaluateDirective("x-interval", intervalDirective);
+  evaluateDirective("x-intersect", intersectDirective);
+  evaluateDirective("x-state", stateDirective);
+  evaluateDirective("x-each", eachDirective);
+  evaluateDirective("x-attr", attributesDirective);
+  evaluateDirective("x", valueDirective);
+}
 
+function initialize(global = window) {
+  global.onload = evaluateDirectives;
+
+  // TODO: Pass evaluateDirectives + figure out how setState would
+  // work internally (avoid recursion)
   global.setState = setState;
 }
 
