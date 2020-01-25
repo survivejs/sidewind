@@ -1,7 +1,10 @@
 import { DirectiveParameters, ExtendedHTMLElement } from "../types";
-import evaluateExpression from "../evaluate-expression";
 
-function attributesDirective({ element, getState }: DirectiveParameters) {
+function attributesDirective({
+  element,
+  evaluate,
+  getState,
+}: DirectiveParameters) {
   const attributes = Array.from(element.attributes);
   const attributeKey = "x:";
 
@@ -11,10 +14,7 @@ function attributesDirective({ element, getState }: DirectiveParameters) {
     if (attributeName.startsWith(attributeKey)) {
       const targetName = attributeName.split(attributeKey).filter(Boolean)[0];
 
-      const evaluatedValue = evaluateExpression(
-        attribute.value,
-        getState(element)
-      );
+      const evaluatedValue = evaluate(attribute.value, getState(element));
 
       element.setAttribute(
         targetName,

@@ -1,5 +1,4 @@
 import { DirectiveParameters } from "../types";
-import evaluateExpression from "../evaluate-expression";
 
 function intervalDirective({
   element,
@@ -10,16 +9,14 @@ function intervalDirective({
   const { options, state } = evaluate(expression);
 
   // TODO: Eliminate somehow - should setState handle this?
-  const initialState = evaluateExpression(
-    element.getAttribute("x-state") || ""
-  );
+  const initialState = evaluate(element.getAttribute("x-state") || "");
   element.setAttribute(
     "x-state",
     JSON.stringify(initialState ? { ...initialState, ...state } : state)
   );
 
   setInterval(() => {
-    setState(evaluateExpression(expression).state, element);
+    setState(evaluate(expression).state, element);
   }, options.delay || 1000);
 }
 
