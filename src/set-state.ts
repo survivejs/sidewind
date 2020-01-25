@@ -1,5 +1,4 @@
 import { BindState, ExtendedHTMLElement } from "./types";
-import generateAttributeKeys from "./generate-attribute-keys";
 
 type PromiseResult = { key: string; values: any };
 
@@ -63,8 +62,6 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     });
   }
 
-  // TODO: Push to the right place
-  generateAttributeKeys([stateContainer], "x-attr", "x:");
   // evaluate(stateContainer);
 }
 

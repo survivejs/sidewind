@@ -45,4 +45,20 @@ function attributesDirective({ element }: DirectiveParameters) {
   });
 }
 
+// TODO
+attributesDirective.init = generateAttributeKeys;
+
+function generateAttributeKeys(stateContainers: ExtendedHTMLElement[]) {
+  stateContainers.forEach(stateContainer =>
+    Array.from(stateContainer.querySelectorAll("*"))
+      .concat(stateContainer)
+      .forEach(element => {
+        const attributes = Array.from(element.attributes);
+
+        attributes.some(attribute => attribute.name.startsWith("x:")) &&
+          element.setAttribute("x-attr", "");
+      })
+  );
+}
+
 export default attributesDirective;
