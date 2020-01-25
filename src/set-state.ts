@@ -1,5 +1,4 @@
 import { BindState, ExtendedHTMLElement } from "./types";
-import { evaluateEach } from "./directives";
 import directiveKeys from "./directive-keys";
 import generateAttributeKeys from "./generate-attribute-keys";
 
@@ -49,7 +48,7 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     });
 
     stateContainer.state = { ...stateContainer.state, ...newState };
-    evaluate(stateContainer);
+    // evaluate(stateContainer);
 
     Promise.all(promises.map(({ promise }) => promise)).then(values => {
       const promisedState: BindState = {};
@@ -61,7 +60,7 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
       const newState = { ...stateContainer.state, ...promisedState };
 
       stateContainer.state = newState;
-      evaluate(stateContainer);
+      // evaluate(stateContainer);
     });
   }
 
@@ -70,15 +69,7 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     directiveKeys.attribute,
     directiveKeys.value
   );
-  evaluate(stateContainer);
-}
-
-function evaluate(stateContainer: ExtendedHTMLElement) {
-  evaluateEach(
-    stateContainer.querySelectorAll(`[${directiveKeys.each}]`),
-    directiveKeys.each,
-    directiveKeys.state
-  );
+  // evaluate(stateContainer);
 }
 
 function isObject(obj: any) {

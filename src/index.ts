@@ -1,6 +1,7 @@
 import {
   attributesDirective,
   closestDirective,
+  eachDirective,
   intervalDirective,
   intersectDirective,
   stateDirective,
@@ -20,6 +21,7 @@ function initialize(global = window) {
     createDirective("x-interval", intervalDirective);
     createDirective("x-intersect", intersectDirective);
     createDirective("x-state", stateDirective);
+    createDirective("x-each", eachDirective);
     createDirective("x-attr", attributesDirective);
   };
 

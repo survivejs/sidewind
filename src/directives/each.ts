@@ -1,55 +1,43 @@
-import { BindState, ExtendedHTMLElement } from "../types";
+import { BindState, DirectiveParameters, ExtendedHTMLElement } from "../types";
 import { getValues } from "../utils";
 import setState from "../set-state";
 
-function evaluateEach(
-  eachContainers: NodeListOf<ExtendedHTMLElement>,
-  eachKey: string,
-  stateKey: string
-) {
-  for (let i = eachContainers.length; i--; ) {
-    const eachContainer = eachContainers[i];
-    const { state }: { state: BindState } = eachContainer.closest(
-      `[${stateKey}]`
-    ) as ExtendedHTMLElement;
+function eachDirective({ element, expression }: DirectiveParameters) {
+  const { state }: { state: BindState } = element.closest(
+    `[x-state]`
+  ) as ExtendedHTMLElement;
 
-    if (state) {
-      const containerParent = eachContainer.parentNode;
+  if (state) {
+    const containerParent = element.parentNode;
 
-      if (!containerParent) {
-        return;
-      }
+    if (!containerParent) {
+      return;
+    }
 
-      // It would be better to diff for changes instead of replacing
-      // all nodes.
-      while (containerParent.firstChild) {
-        containerParent.firstChild.remove();
-      }
-      containerParent.appendChild(eachContainer);
+    // It would be better to diff for changes instead of replacing
+    // all nodes.
+    while (containerParent.firstChild) {
+      containerParent.firstChild.remove();
+    }
+    containerParent.appendChild(element);
 
-      if (typeof state === "object") {
-        Object.values(
-          getValues(state, eachContainer.getAttribute(eachKey))
-        ).forEach(
-          values =>
-            Array.isArray(values) &&
-            values.forEach((value: any) => {
-              const templateClone = document.importNode(
-                eachContainer.content,
-                true
-              );
-              const firstChild = templateClone.firstElementChild;
+    if (typeof state === "object") {
+      Object.values(getValues(state, expression)).forEach(
+        values =>
+          Array.isArray(values) &&
+          values.forEach((value: any) => {
+            const templateClone = document.importNode(element.content, true);
+            const firstChild = templateClone.firstElementChild;
 
-              firstChild.state = value;
-              firstChild.setAttribute(stateKey, "");
-              containerParent.appendChild(templateClone);
+            firstChild.state = value;
+            firstChild.setAttribute("x-state", "");
+            containerParent.appendChild(templateClone);
 
-              setState(value, firstChild);
-            })
-        );
-      }
+            setState(value, firstChild);
+          })
+      );
     }
   }
 }
 
-export default evaluateEach;
+export default eachDirective;
