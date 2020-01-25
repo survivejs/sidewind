@@ -24,6 +24,9 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
 
   console.log(newValue, element, element.state);
 
+  // TODO: If newValue is a function, pass previous state to it
+  // and extract value
+
   element.state = updatedState;
   stateContainer.state = updatedState;
 

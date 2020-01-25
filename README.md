@@ -29,7 +29,7 @@ The state can be manipulated using a global `setState`:
 ```html
 <section x-state="false">
   <div class="mb-2">Value: <span x="state" /></div>
-  <button class="btn btn-blue" onclick="setState(!this.state)">
+  <button class="btn btn-blue" onclick="setState(toggled => !toggled)">
     Toggle value
   </button>
 </section>
@@ -270,7 +270,7 @@ The examples below combine directives to produce complex user interfaces and to 
   <section class="mb-2" x-state="false">
     <div
       class="flex flex-row justify-between cursor-pointer"
-      onclick="setState(!this.state)"
+      onclick="setState(visible => !visible)"
     >
       <span>Junior Engineer</span>
       <div>
@@ -292,7 +292,7 @@ The examples below combine directives to produce complex user interfaces and to 
   <section x-state="false">
     <div
       class="flex flex-row justify-between cursor-pointer"
-      onclick="setState(!this.state)"
+      onclick="setState(visible => !visible)"
     >
       <span>Senior Engineer</span>
       <div>
@@ -390,6 +390,8 @@ The examples below combine directives to produce complex user interfaces and to 
 ```
 
 ### Loading a Partial
+
+> TODO: Rethink the API
 
 ```html
 <div x-state="{ partial: { status: null } }">
