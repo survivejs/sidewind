@@ -1,70 +1,48 @@
-import { BindState, ExtendedHTMLElement } from "../types";
+import { BindState, DirectiveParameters, ExtendedHTMLElement } from "../types";
 import evaluateExpression from "../evaluate-expression";
 import { getLabeledState } from "../utils";
 
-function evaluateAttributes(
-  stateContainer: HTMLElement,
-  attributeKey: string,
-  stateKey: string,
-  labelKey: string,
-  valueKey: string
-) {
-  const attributeContainers = Array.from(
-    stateContainer.querySelectorAll(`:scope [${attributeKey}]`)
-  );
+function attributesDirective({ element }: DirectiveParameters) {
+  const attributes = Array.from(element.attributes);
+  const closestStateContainer = element.closest(
+    `[x-state]`
+  ) as ExtendedHTMLElement;
+  const { state }: { state: BindState } = closestStateContainer;
+  const valueKey = "x:";
 
-  // A state container can be an attribute container itself
-  if (stateContainer.hasAttribute(attributeKey)) {
-    attributeContainers.push(stateContainer);
-  }
+  attributes.forEach(attribute => {
+    const attributeName = attribute.nodeName;
 
-  for (let i = attributeContainers.length; i--; ) {
-    const attributeContainer = attributeContainers[i] as ExtendedHTMLElement;
-    const attributes = Array.from(attributeContainer.attributes);
-    const closestStateContainer = attributeContainer.closest(
-      `[${stateKey}]`
-    ) as ExtendedHTMLElement;
+    if (attributeName.startsWith(valueKey)) {
+      const attributeProperty = attribute.value;
+      const targetName = attributeName.split(valueKey).filter(Boolean)[0];
+      const labeledState = getLabeledState(element, "x-label");
 
-    if (stateContainer !== closestStateContainer) {
-      continue;
-    }
-
-    const { state }: { state: BindState } = closestStateContainer;
-
-    attributes.forEach(attribute => {
-      const attributeName = attribute.nodeName;
-
-      if (attributeName.startsWith(valueKey)) {
-        const attributeProperty = attribute.value;
-        const targetName = attributeName.split(valueKey).filter(Boolean)[0];
-        const labeledState = getLabeledState(attributeContainer, labelKey);
-
-        if (state === null) {
-          return;
-        }
-
-        const evaluatedValue = evaluateExpression(attributeProperty, {
-          ...labeledState,
-          state,
-        });
-
-        if (attributeName === valueKey) {
-          if (attributeContainer.localName === "input") {
-            attributeContainer.value = evaluatedValue;
-          } else {
-            attributeContainer.innerHTML = evaluatedValue;
-          }
-        } else {
-          attributeContainer.setAttribute(
-            targetName,
-            Array.isArray(evaluatedValue)
-              ? evaluatedValue.filter(Boolean).join(" ")
-              : evaluatedValue
-          );
-        }
+      if (state === null) {
+        return;
       }
-    });
-  }
+
+      const evaluatedValue = evaluateExpression(attributeProperty, {
+        ...labeledState,
+        state,
+      });
+
+      if (attributeName === valueKey) {
+        if (element.localName === "input") {
+          element.value = evaluatedValue;
+        } else {
+          element.innerHTML = evaluatedValue;
+        }
+      } else {
+        element.setAttribute(
+          targetName,
+          Array.isArray(evaluatedValue)
+            ? evaluatedValue.filter(Boolean).join(" ")
+            : evaluatedValue
+        );
+      }
+    }
+  });
 }
 
-export default evaluateAttributes;
+export default attributesDirective;

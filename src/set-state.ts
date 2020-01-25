@@ -1,5 +1,5 @@
 import { BindState, ExtendedHTMLElement } from "./types";
-import { evaluateAttributes, evaluateEach } from "./directives";
+import { evaluateEach } from "./directives";
 import directiveKeys from "./directive-keys";
 import generateAttributeKeys from "./generate-attribute-keys";
 
@@ -79,13 +79,14 @@ function evaluate(stateContainer: ExtendedHTMLElement) {
     directiveKeys.each,
     directiveKeys.state
   );
+  /*
   evaluateAttributes(
     stateContainer,
     directiveKeys.attribute,
     directiveKeys.state,
     directiveKeys.label,
     directiveKeys.value
-  );
+  );*/
 }
 
 function isObject(obj: any) {

@@ -1,4 +1,5 @@
 import {
+  attributesDirective,
   closestDirective,
   intervalDirective,
   intersectDirective,
@@ -19,6 +20,7 @@ function initialize(global = window) {
     createDirective("x-interval", intervalDirective);
     createDirective("x-intersect", intersectDirective);
     createDirective("x-state", stateDirective);
+    createDirective("x-attr", attributesDirective);
   };
 
   global.setState = setState;
