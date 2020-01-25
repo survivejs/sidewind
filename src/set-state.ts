@@ -79,14 +79,6 @@ function evaluate(stateContainer: ExtendedHTMLElement) {
     directiveKeys.each,
     directiveKeys.state
   );
-  /*
-  evaluateAttributes(
-    stateContainer,
-    directiveKeys.attribute,
-    directiveKeys.state,
-    directiveKeys.label,
-    directiveKeys.value
-  );*/
 }
 
 function isObject(obj: any) {
