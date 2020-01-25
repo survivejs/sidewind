@@ -5,17 +5,20 @@ import { getValues } from "../utils";
 function closestDirective({
   element,
   expression,
-  parameters,
+  parameters: { state },
   setState,
 }: DirectiveParameters) {
-  const closestState = parameters.state;
-  const key = Object.keys(closestState)[0];
+  const key = Object.keys(state)[0];
 
   // TODO: Eliminate somehow - should setState handle this?
-  const state = evaluateExpression(element.getAttribute("x-state") || "");
+  const initialState = evaluateExpression(
+    element.getAttribute("x-state") || ""
+  );
   element.setAttribute(
     "x-state",
-    JSON.stringify(state ? { ...state, [key]: "" } : { [key]: "" })
+    JSON.stringify(
+      initialState ? { ...initialState, [key]: "" } : { [key]: "" }
+    )
   );
 
   window.addEventListener("scroll", () =>
