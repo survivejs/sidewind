@@ -8,21 +8,21 @@
       <link href="main.css" rel="stylesheet">
     </head>
     <body>
-      <a href="https://github.com/bebraw/sidewind" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+      <a href="https://github.com/bebraw/sidewind" class="github-corner fixed top-0 right-0" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
       <main class="flex m-8">
         <aside class="hidden md:inline md:w-1/3">
           <nav
             class="sticky top-0"
             x-label="parent"
-            x-state="{ headings: $('h2, h3') }"
-            x-closest="{ state: { closest: $('h2, h3') } }"
+            x-state="{ closest: {}, headings: Array.from(document.querySelectorAll('h2, h3')) }"
+            x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
           >
             <ul>
               <template x-each="headings">
                 <li>
                   <a
                     x:href="state.nextElementSibling.attributes.href.value"
-                    x:="state.textContent"
+                    x="state.textContent"
                     x:class="[
                       state.textContent === parent.closest.textContent && 'font-bold',
                       state.tagName === 'H3' && 'ml-2'
@@ -41,33 +41,33 @@
 <p>By design, the approach follows the principle of <strong>progressive enhancement</strong> and your pages will be accessible without JavaScript.</p>
 <h2 class="inline" id="directives">Directives</h2><a class="ml-2 text-gray-200 hover:text-gray-800" href="#directives">#</a>
 <p>Sidewind is composed of a collection of directives that operate on the DOM. I've documented them in detail below.</p>
-<h3 class="inline" id="xstateandx"><code>x-state</code> and <code>x:</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xstateandx">#</a>
-<p><code>x-state</code> is a state container and the state is often used by other directives. <code>x:</code> is used for binding values. Consider the example below:</p>
+<h3 class="inline" id="xstateandx"><code>x-state</code> and <code>x</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xstateandx">#</a>
+<p><code>x-state</code> is a state container and the state is often used by other directives. <code>x</code> is used for binding values. Consider the example below:</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;<span class="hljs-keyword">section</span> <span class="hljs-keyword">x</span>-state=<span class="hljs-string">"false"</span>&gt;Value: &lt;span <span class="hljs-keyword">x</span>:=<span class="hljs-string">"state"</span> /&gt;&lt;/<span class="hljs-keyword">section</span>&gt;
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;<span class="hljs-keyword">section</span> <span class="hljs-keyword">x</span>-state=<span class="hljs-string">"false"</span>&gt;Value: &lt;span <span class="hljs-keyword">x</span>=<span class="hljs-string">"state"</span> /&gt;&lt;/<span class="hljs-keyword">section</span>&gt;
 </code></pre></div>
-    <div class="p-4 bg-gray-200 rounded-b-lg"><section x-state="false">Value: <span x:="state" /></section>
+    <div class="p-4 bg-gray-200 rounded-b-lg"><section x-state="false">Value: <span x="state" /></section>
 </div>
 </section>
-<p><code>x-state</code> and <code>x:</code> can exist even within the same element:</p>
+<p><code>x-state</code> and <code>x</code> can exist even within the same element:</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;<span class="hljs-keyword">section</span>&gt;Value: &lt;span <span class="hljs-keyword">x</span>-state=<span class="hljs-string">"false"</span> <span class="hljs-keyword">x</span>:=<span class="hljs-string">"state"</span> /&gt;&lt;/<span class="hljs-keyword">section</span>&gt;
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;<span class="hljs-keyword">section</span>&gt;Value: &lt;span <span class="hljs-keyword">x</span>-state=<span class="hljs-string">"false"</span> <span class="hljs-keyword">x</span>=<span class="hljs-string">"state"</span> /&gt;&lt;/<span class="hljs-keyword">section</span>&gt;
 </code></pre></div>
-    <div class="p-4 bg-gray-200 rounded-b-lg"><section>Value: <span x-state="false" x:="state" /></section>
+    <div class="p-4 bg-gray-200 rounded-b-lg"><section>Value: <span x-state="false" x="state" /></section>
 </div>
 </section>
 <p>The state can be manipulated using a global <code>setState</code>:</p>
 <section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"false"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>Value: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-blue"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(!this.state)"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>Value: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"state"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-blue"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(v =&gt; !v)"</span>&gt;</span>
     Toggle value
   <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
 </code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><section x-state="false">
-  <div class="mb-2">Value: <span x:="state" /></div>
-  <button class="btn btn-blue" onclick="setState(!this.state)">
+  <div class="mb-2">Value: <span x="state" /></div>
+  <button class="btn btn-blue" onclick="setState(v => !v)">
     Toggle value
   </button>
 </section>
@@ -76,65 +76,19 @@
 <p>State can be a complex object:</p>
 <section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">article</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ amount: 1000, interest: 1.2 }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
-  Total: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.amount * state.interest"</span> /&gt;</span>
+  Total: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"state.amount * state.interest"</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span>
 </span></code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><article x-state="{ amount: 1000, interest: 1.2 }">
-  Total: <span x:="state.amount * state.interest" />
+  Total: <span x="state.amount * state.interest" />
 </article>
 </div>
 </section>
 <blockquote>
   <p><a class="underline"  href="#calculator">The calculator example</a> takes this idea further and shows how to handle user interaction.</p>
 </blockquote>
-<p><code>x-state</code> accepts complex JavaScript expressions as well and exposes <code>document.querySelectorAll</code> through <code>$</code> alias.</p>
-<section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ headings: $('h2') }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"headings"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">a</span>
-        <span class="hljs-attr">x:href</span>=<span class="hljs-string">"state.nextElementSibling.attributes.href.value"</span>
-        <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.textContent"</span>
-      &gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-</span></code></pre></div>
-    <div class="p-4 bg-gray-200 rounded-b-lg"><ul x-state="{ headings: $('h2') }">
-  <template x-each="headings">
-    <li>
-      <a
-        x:href="state.nextElementSibling.attributes.href.value"
-        x:="state.textContent"
-      >
-      </a>
-    </li>
-  </template>
-</ul>
-</div>
-</section>
-<p>It's possible to use the standard <a class="underline"  href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">fetch() API</a> on top of <code>x-state</code> for fetching data as it handles Promises for you internally:</p>
-<section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ cars: fetch('./assets/cars.json').then(res =&gt; res.json()) }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"cars"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.brand"</span> /&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.color"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-</span></code></pre></div>
-    <div class="p-4 bg-gray-200 rounded-b-lg"><div x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }">
-  <ul class="list-disc list-inside">
-    <template x-each="cars">
-      <li><span x:="state.brand" /> - <span x:="state.color" /></li>
-    </template>
-  </ul>
-</div>
-</div>
-</section>
-<h3 class="inline" id="xwithattributes"><code>x:</code> with Attributes</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xwithattributes">#</a>
-<p>In addition to binding values, it's possible to bind attributes with <code>x:</code>:</p>
+<h3 class="inline" id="xwithattributes"><code>x</code> with Attributes</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xwithattributes">#</a>
+<p>In addition to binding values, it's possible to bind attributes with <code>x</code>:</p>
 <section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ target: 'https://survivejs.com' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">x:href</span>=<span class="hljs-string">"state.target"</span>&gt;</span>Link target<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
@@ -173,26 +127,38 @@
 <h3 class="inline" id="xeach"><code>x-each</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xeach">#</a>
 <p><code>x-each</code> allows iteration of a list. It has been designed to be used with a <a class="underline"  href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template">template tag</a>.</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ todos: [{ text: 'Wash dishes' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">, </span></span></span><span class="hljs-template-variable">{ text: 'Eat carrots' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">] }"</span>&gt;</span>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>
+  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{
+    todos: [
+      { text: 'Wash dishes' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">, </span></span></span><span class="hljs-template-variable">{ text: 'Eat carrots' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">
+    ]
+  }"</span>
+&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"todos"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.text"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"state.text"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"JSON.stringify(state.todos, null, 2)"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"JSON.stringify(state.todos, null, 2)"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </span></code></pre></div>
-    <div class="p-4 bg-gray-200 rounded-b-lg"><div x-state="{ todos: [{ text: 'Wash dishes' }, { text: 'Eat carrots' }] }">
+    <div class="p-4 bg-gray-200 rounded-b-lg"><div
+  x-state="{
+    todos: [
+      { text: 'Wash dishes' }, { text: 'Eat carrots' }
+    ]
+  }"
+>
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x:="state.text"></li>
+        <li x="state.text"></li>
       </template>
     </ul>
   </div>
-  <div x:="JSON.stringify(state.todos, null, 2)"></div>
+  <div x="JSON.stringify(state.todos, null, 2)"></div>
 </div>
 </div>
 </section>
@@ -201,13 +167,13 @@
 <section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;<span class="hljs-keyword">div</span> <span class="hljs-symbol">x</span>-label=<span class="hljs-string">"i18n"</span> <span class="hljs-symbol">x</span>-state=<span class="hljs-string">"{ hello: 'Terve' }"</span>&gt;
   &lt;<span class="hljs-keyword">div</span> <span class="hljs-symbol">x</span>-state=<span class="hljs-string">"{ world: 'World' }"</span>&gt;
-    &lt;span <span class="hljs-symbol">x</span>:=<span class="hljs-string">"i18n.hello + ' ' + state.world"</span> /&gt;
+    &lt;span <span class="hljs-symbol">x</span>=<span class="hljs-string">"i18n.hello + ' ' + state.world"</span> /&gt;
   &lt;/<span class="hljs-keyword">div</span>&gt;
 &lt;/<span class="hljs-keyword">div</span>&gt;
 </code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><div x-label="i18n" x-state="{ hello: 'Terve' }">
   <div x-state="{ world: 'World' }">
-    <span x:="i18n.hello + ' ' + state.world" />
+    <span x="i18n.hello + ' ' + state.world" />
   </div>
 </div>
 </div>
@@ -217,89 +183,163 @@
 <h3 class="inline" id="xclosest"><code>x-closest</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xclosest">#</a>
 <p><code>x-closest</code> gives you access to the element closest to display top within the selected elements:</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-closest</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ state: { closest: $('h2, h3') }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string"> }"</span>&gt;</span>
-  Closest heading: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.closest.textContent"</span> /&gt;</span>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>
+  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ closest: '' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
+  <span class="hljs-attr">x-closest</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{
+    state: { closest: document.querySelectorAll('h2, h3') }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">
+  }"</span>
+&gt;</span>
+  Closest heading: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"state.closest.textContent"</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </span></code></pre></div>
-    <div class="p-4 bg-gray-200 rounded-b-lg"><div x-closest="{ state: { closest: $('h2, h3') } }">
-  Closest heading: <span x:="state.closest.textContent" />
+    <div class="p-4 bg-gray-200 rounded-b-lg"><div
+  x-state="{ closest: '' }"
+  x-closest="{
+    state: { closest: document.querySelectorAll('h2, h3') }
+  }"
+>
+  Closest heading: <span x="state.closest.textContent" />
 </div>
 </div>
 </section>
 <h3 class="inline" id="xintersect"><code>x-intersect</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xintersect">#</a>
 <p><code>x-intersect</code> triggers when the element is visible at the viewport. See <a class="underline"  href="https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver">IntersectionObserver documentation</a> for available options.</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-intersect</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ state: { intersected: new Date().toString() }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string"> }"</span>&gt;</span>
-  Intersected at <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.intersected"</span> /&gt;</span>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>
+  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ intersected: '' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
+  <span class="hljs-attr">x-intersect</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{
+    state: { intersected: new Date().toString() }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">
+  }"</span>
+&gt;</span>
+  Intersected at <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"state.intersected"</span> /&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </span></code></pre></div>
-    <div class="p-4 bg-gray-200 rounded-b-lg"><div x-intersect="{ state: { intersected: new Date().toString() } }">
-  Intersected at <span x:="state.intersected" />
+    <div class="p-4 bg-gray-200 rounded-b-lg"><div
+  x-state="{ intersected: '' }"
+  x-intersect="{
+    state: { intersected: new Date().toString() }
+  }"
+>
+  Intersected at <span x="state.intersected" />
 </div>
 </div>
 </section>
 <p>In addition to the standard options, there's an <code>once</code> flag that when set causes the state to be set only once. The behavior is useful for implementing patterns such as lazy loading.</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="hljs-string">&lt;img</span>
-  <span class="hljs-string">x-intersect="{</span> <span class="hljs-attr">options:</span> <span class="hljs-string">{</span> <span class="hljs-attr">once:</span> <span class="hljs-literal">true</span> <span class="hljs-string">},</span> <span class="hljs-attr">state:</span> <span class="hljs-string">{</span> <span class="hljs-attr">src:</span> <span class="hljs-string">'./assets/logo.png'</span> <span class="hljs-string">}</span> <span class="hljs-string">}"</span>
-  <span class="hljs-string">x:src="state.src"</span>
-<span class="hljs-string">/&gt;</span>
-</code></pre></div>
-    <div class="p-4 bg-gray-200 rounded-b-lg"><img
-  x-intersect="{ options: { once: true }, state: { src: './assets/logo.png' } }"
-  x:src="state.src"
-/>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ src: '' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">img</span>
+    <span class="hljs-attr">x-intersect</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{
+      options: { once: true }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">,
+      state: </span></span></span><span class="hljs-template-variable">{ src: './assets/logo.png' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">
+    }"</span>
+    <span class="hljs-attr">x:src</span>=<span class="hljs-string">"state.src"</span>
+  /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</span></code></pre></div>
+    <div class="p-4 bg-gray-200 rounded-b-lg"><div x-state="{ src: '' }">
+  <img
+    x-intersect="{
+      options: { once: true },
+      state: { src: './assets/logo.png' }
+    }"
+    x:src="state.src"
+  />
+</div>
 </div>
 </section>
+<blockquote>
+  <p><strong>TODO:</strong> Figure out why x-state and x-intersect cannot be in the same element in this case. Likely it has to do with directive evaluation not being triggered.</p>
+</blockquote>
 <h3 class="inline" id="xinterval"><code>x-interval</code></h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#xinterval">#</a>
 <p><code>x-interval</code> wraps <a class="underline"  href="https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval">setInterval</a> and exposes its <code>delay</code> parameters. When triggered, it sets state.</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-interval</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ options: { delay: 1000 }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">, state: </span></span></span><span class="hljs-template-variable">{ time: new
-Date().toString() }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string"> }"</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.time"</span> /&gt;</span>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>
+  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ time: '' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
+  <span class="hljs-attr">x-interval</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{
+    options: { delay: 1000 }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">,
+    state: </span></span></span><span class="hljs-template-variable">{ time: new Date().toString() }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">
+  }"</span>
+&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"font-bold"</span>&gt;</span>Current time:<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"state.time"</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </span></code></pre></div>
-    <div class="p-4 bg-gray-200 rounded-b-lg"><div x-interval="{ options: { delay: 1000 }, state: { time: new
-Date().toString() } }" x:="state.time" />
+    <div class="p-4 bg-gray-200 rounded-b-lg"><div
+  x-state="{ time: '' }"
+  x-interval="{
+    options: { delay: 1000 },
+    state: { time: new Date().toString() }
+  }"
+>
+  <span class="font-bold">Current time:</span> <span x="state.time" />
+</div>
 </div>
 </section>
+<blockquote>
+  <p><strong>TODO:</strong> This one has the same limitation. Likely the same issue.</p>
+</blockquote>
 <h2 class="inline" id="examples">Examples</h2><a class="ml-2 text-gray-200 hover:text-gray-800" href="#examples">#</a>
 <p>The examples below combine directives to produce complex user interfaces and to handle specific use cases.</p>
 <h3 class="inline" id="calculator">Calculator</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#calculator">#</a>
 <section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">article</span>
   <span class="hljs-attr">class</span>=<span class="hljs-string">"flex flex-col md:flex-row justify-between md:max-w-md"</span>
-  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ amount: 1000, interest: 1.2 }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
+  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{
+    amount: 1000,
+    interest: 1.2
+  }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
 &gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"amount"</span>&gt;</span>Amount<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"amount"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ amount: this.value }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
-    <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.amount"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"amount"</span>
+      <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
+      <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ amount: this.value }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
+      <span class="hljs-attr">x</span>=<span class="hljs-string">"state.amount"</span>
+    /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"interest"</span>&gt;</span>Interest<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"interest"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ interest: this.value
-    }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.interest"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+      <span class="hljs-attr">id</span>=<span class="hljs-string">"interest"</span>
+      <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
+      <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ interest: this.value
+    }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
+      <span class="hljs-attr">x</span>=<span class="hljs-string">"state.interest"</span>
+    /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
-    Total: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"Math.round(state.amount * state.interest * 100) / 100"</span> /&gt;</span>
+    Total: <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"Math.round(state.amount * state.interest * 100) / 100"</span> /&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span>
 </span></code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><article
   class="flex flex-col md:flex-row justify-between md:max-w-md"
-  x-state="{ amount: 1000, interest: 1.2 }"
+  x-state="{
+    amount: 1000,
+    interest: 1.2
+  }"
 >
   <div class="mb-2">
     <label for="amount">Amount</label>
-    <input id="amount" type="text" oninput="setState({ amount: this.value })"
-    x:="state.amount" />
+    <input
+      id="amount"
+      type="text"
+      oninput="setState({ amount: this.value })"
+      x="state.amount"
+    />
   </div>
   <div class="mb-2">
     <label for="interest">Interest</label>
-    <input id="interest" type="text" oninput="setState({ interest: this.value
-    })" x:="state.interest" />
+    <input
+      id="interest"
+      type="text"
+      oninput="setState({ interest: this.value
+    })"
+      x="state.interest"
+    />
   </div>
   <div>
-    Total: <span x:="Math.round(state.amount * state.interest * 100) / 100" />
+    Total: <span x="Math.round(state.amount * state.interest * 100) / 100" />
   </div>
 </article>
 </div>
@@ -308,55 +348,79 @@ Date().toString() } }" x:="state.time" />
 <section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>
   <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ text: '', todos: [] }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
-  <span class="hljs-attr">onsubmit</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ text: '', todos: this.state.todos.concat({ text: this.state.text }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">) })"</span>
+  <span class="hljs-attr">onsubmit</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{
+    text: '',
+    todos: this.state.todos.concat({
+      text: this.state.text
+    }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)
+  })"</span>
   <span class="hljs-attr">action</span>=<span class="hljs-string">"javascript:"</span>
 &gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mr-2"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Add Todo<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span> <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ text: this.value }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
-      <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.text"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">input</span>
+        <span class="hljs-attr">id</span>=<span class="hljs-string">"text"</span>
+        <span class="hljs-attr">type</span>=<span class="hljs-string">"text"</span>
+        <span class="hljs-attr">oninput</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ text: this.value }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
+        <span class="hljs-attr">x</span>=<span class="hljs-string">"state.text"</span>
+      /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"btn btn-blue"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"submit"</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"todos"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.text"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"state.text"</span> /&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"JSON.stringify(state.todos, null, 2)"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"JSON.stringify(state.todos, null, 2)"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
 </span></code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><form
   x-state="{ text: '', todos: [] }"
-  onsubmit="setState({ text: '', todos: this.state.todos.concat({ text: this.state.text }) })"
+  onsubmit="setState({
+    text: '',
+    todos: this.state.todos.concat({
+      text: this.state.text
+    })
+  })"
   action="javascript:"
 >
   <div class="mb-2">
     <label class="mr-2">
       <span>Add Todo</span>
-      <input id="text" type="text" oninput="setState({ text: this.value })"
-      x:="state.text" />
+      <input
+        id="text"
+        type="text"
+        oninput="setState({ text: this.value })"
+        x="state.text"
+      />
     </label>
     <button class="btn btn-blue" type="submit">Add</button>
   </div>
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
-        <li x:="state.text" />
+        <li x="state.text" />
       </template>
     </ul>
   </div>
-  <div x:="JSON.stringify(state.todos, null, 2)"></div>
+  <div x="JSON.stringify(state.todos, null, 2)"></div>
 </form>
 </div>
 </section>
 <h3 class="inline" id="table">Table</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#table">#</a>
 <section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">table</span>
-  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ cars: fetch('./assets/cars.json').then(res =&gt; res.json()) }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
+  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{
+    cars: [
+      { brand: 'Saab', color: 'gray' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">,
+      </span></span></span><span class="hljs-template-variable">{ brand: 'Ferrari', color: 'red' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">,
+      </span></span></span><span class="hljs-template-variable">{ brand: 'Porsche', color: 'silver' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">,
+    ]
+  }"</span>
   <span class="hljs-attr">class</span>=<span class="hljs-string">"table-fixed"</span>
 &gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
@@ -368,15 +432,21 @@ Date().toString() } }" x:="state.time" />
   <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"cars"</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"border p-2"</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.brand"</span> /&gt;</span> <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"border p-2"</span>
-        <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.color"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"border p-2"</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"state.brand"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"border p-2"</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"state.color"</span> /&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
 </span></code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><table
-  x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }"
+  x-state="{
+    cars: [
+      { brand: 'Saab', color: 'gray' },
+      { brand: 'Ferrari', color: 'red' },
+      { brand: 'Porsche', color: 'silver' },
+    ]
+  }"
   class="table-fixed"
 >
   <thead>
@@ -388,8 +458,8 @@ Date().toString() } }" x:="state.time" />
   <tbody>
     <template x-each="cars">
       <tr>
-        <td class="border p-2" x:="state.brand" /> <td class="border p-2"
-        x:="state.color" />
+        <td class="border p-2" x="state.brand" />
+        <td class="border p-2" x="state.color" />
       </tr>
     </template>
   </tbody>
@@ -402,7 +472,7 @@ Date().toString() } }" x:="state.time" />
   <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"mb-2"</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"false"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span>
       <span class="hljs-attr">class</span>=<span class="hljs-string">"flex flex-row justify-between cursor-pointer"</span>
-      <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(!this.state)"</span>
+      <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(visible =&gt; !visible)"</span>
     &gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Junior Engineer<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
@@ -424,7 +494,7 @@ Date().toString() } }" x:="state.time" />
   <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"false"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">div</span>
       <span class="hljs-attr">class</span>=<span class="hljs-string">"flex flex-row justify-between cursor-pointer"</span>
-      <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(!this.state)"</span>
+      <span class="hljs-attr">onclick</span>=<span class="hljs-string">"setState(visible =&gt; !visible)"</span>
     &gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>Senior Engineer<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
@@ -448,7 +518,7 @@ Date().toString() } }" x:="state.time" />
   <section class="mb-2" x-state="false">
     <div
       class="flex flex-row justify-between cursor-pointer"
-      onclick="setState(!this.state)"
+      onclick="setState(visible => !visible)"
     >
       <span>Junior Engineer</span>
       <div>
@@ -470,7 +540,7 @@ Date().toString() } }" x:="state.time" />
   <section x-state="false">
     <div
       class="flex flex-row justify-between cursor-pointer"
-      onclick="setState(!this.state)"
+      onclick="setState(visible => !visible)"
     >
       <span>Senior Engineer</span>
       <div>
@@ -588,39 +658,49 @@ Date().toString() } }" x:="state.time" />
 </section>
 <h3 class="inline" id="tableofcontents">Table of Contents</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#tableofcontents">#</a>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>
-  <span class="hljs-attr">x-label</span>=<span class="hljs-string">"parent"</span>
-  <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ headings: $('h2, h3') }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>
-  <span class="hljs-attr">x-closest</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ state: { closest: $('h2, h3') }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string"> }"</span>
-&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"headings"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">a</span>
-          <span class="hljs-attr">x:href</span>=<span class="hljs-string">"state.nextElementSibling.attributes.href.value"</span>
-          <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.textContent"</span>
-          <span class="hljs-attr">x:class</span>=<span class="hljs-string">"[
-            state.textContent === parent.closest.textContent &amp;&amp; 'font-bold',
-            state.tagName === 'H3' &amp;&amp; 'ml-2'
-          ]"</span>
-        &gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span>
-</span></code></pre></div>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html">&lt;nav
+  <span class="hljs-keyword">x</span>-label=<span class="hljs-string">"parent"</span>
+  <span class="hljs-keyword">x</span>-state=<span class="hljs-comment">"{</span>
+    closes<span class="hljs-variable">t:</span> {},
+    heading<span class="hljs-variable">s:</span> Array.from(document.querySelectorAll(<span class="hljs-string">'h2, h3'</span>))
+  }<span class="hljs-comment">"</span>
+  <span class="hljs-keyword">x</span>-closest=<span class="hljs-comment">"{</span>
+    state: { closes<span class="hljs-variable">t:</span> document.querySelectorAll(<span class="hljs-string">'h2, h3'</span>) }
+  }<span class="hljs-comment">"</span>
+&gt;
+  <span class="hljs-symbol">&lt;ul&gt;</span>
+    &lt;template <span class="hljs-keyword">x</span>-each=<span class="hljs-string">"headings"</span>&gt;
+      <span class="hljs-symbol">&lt;li&gt;</span>
+        &lt;<span class="hljs-keyword">a</span>
+          <span class="hljs-keyword">x</span>:href=<span class="hljs-string">"state.nextElementSibling.attributes.href.value"</span>
+          <span class="hljs-keyword">x</span>=<span class="hljs-string">"state.textContent"</span>
+          <span class="hljs-keyword">x</span>:class=<span class="hljs-comment">"[</span>
+            state.textContent === parent.closest.textContent &amp;&amp; <span class="hljs-string">'font-bold'</span>,
+            state.tagName === <span class="hljs-string">'H3'</span> &amp;&amp; <span class="hljs-string">'ml-2'</span>
+          ]<span class="hljs-comment">"</span>
+        &gt;
+        &lt;/<span class="hljs-keyword">a</span>&gt;
+      &lt;/li&gt;
+    &lt;/template&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+</code></pre></div>
     <div class="p-4 bg-gray-200 rounded-b-lg"><nav
   x-label="parent"
-  x-state="{ headings: $('h2, h3') }"
-  x-closest="{ state: { closest: $('h2, h3') } }"
+  x-state="{
+    closest: {},
+    headings: Array.from(document.querySelectorAll('h2, h3'))
+  }"
+  x-closest="{
+    state: { closest: document.querySelectorAll('h2, h3') }
+  }"
 >
   <ul>
     <template x-each="headings">
       <li>
         <a
           x:href="state.nextElementSibling.attributes.href.value"
-          x:="state.textContent"
+          x="state.textContent"
           x:class="[
             state.textContent === parent.closest.textContent && 'font-bold',
             state.tagName === 'H3' && 'ml-2'
@@ -633,29 +713,86 @@ Date().toString() } }" x:="state.time" />
 </nav>
 </div>
 </section>
-<h3 class="inline" id="loadingapartial">Loading a Partial</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#loadingapartial">#</a>
+<h3 class="inline" id="asynchronousloading">Asynchronous Loading</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#asynchronousloading">#</a>
+<p>It's possible to use the standard <a class="underline"  href="https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API">fetch() API</a> in combination with <code>x-state</code> and <code>setState</code> to load data over the wire:</p>
 <section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ partial: { status: null }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string"> }"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">button</span>
-    <span class="hljs-attr">onmouseover</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ partial: fetch('./assets/partial.html').then(res =&gt; res.text()) }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">)"</span>
-  &gt;</span>
-    Show Partial
-  <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.partial.status === 'loading' ? 'Loading...' : ''"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x:</span>=<span class="hljs-string">"state.partial.status !== null ? state.partial : ''"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ cars: [] }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="javascript">
+    <span class="hljs-keyword">const</span> parent = <span class="hljs-built_in">document</span>.currentScript.parentNode;
+
+    fetch(<span class="hljs-string">"./assets/cars.json"</span>)
+      .then(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> res.json())
+      .then(<span class="hljs-function"><span class="hljs-params">cars</span> =&gt;</span> setState(</span></span><span class="hljs-template-variable">{ cars }</span><span class="xml">, parent));
+  <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"list-disc list-inside"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">template</span> <span class="hljs-attr">x-each</span>=<span class="hljs-string">"cars"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"state.brand"</span> /&gt;</span> - <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"state.color"</span> /&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 </span></code></pre></div>
-    <div class="p-4 bg-gray-200 rounded-b-lg"><div x-state="{ partial: { status: null } }">
-  <button
-    onmouseover="setState({ partial: fetch('./assets/partial.html').then(res => res.text()) })"
-  >
-    Show Partial
-  </button>
-  <span x:="state.partial.status === 'loading' ? 'Loading...' : ''"></span>
-  <span x:="state.partial.status !== null ? state.partial : ''"></span>
+    <div class="p-4 bg-gray-200 rounded-b-lg"><div x-state="{ cars: [] }">
+  <script>
+    const parent = document.currentScript.parentNode;
+
+    fetch("./assets/cars.json")
+      .then(res => res.json())
+      .then(cars => setState({ cars }, parent));
+  </script>
+  <ul class="list-disc list-inside">
+    <template x-each="cars">
+      <li><span x="state.brand" /> - <span x="state.color" /></li>
+    </template>
+  </ul>
 </div>
 </div>
 </section>
+<h3 class="inline" id="loadingapartial">Loading a Partial</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#loadingapartial">#</a>
+<section class="mb-4">
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg"><pre><code class="html language-html"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">x-state</span>=<span class="hljs-string">"</span></span></span><span class="hljs-template-variable">{ status: 'pending', partial: '' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string"> "</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+    <span class="hljs-attr">onmouseover</span>=<span class="hljs-string">"setState(</span></span></span><span class="hljs-template-variable">{ status: 'loading' }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">);
+    fetch('./assets/partial.html')
+      .then(res =&gt; res.text())
+      .then(partial =&gt; setState(</span></span></span><span class="hljs-template-variable">{
+        partial, status: 'loaded'
+      }</span><span class="xml"><span class="hljs-tag"><span class="hljs-string">, this))"</span>
+  &gt;</span>
+    Show Partial
+  <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"state.status === 'loading' ? 'Loading...' : ''"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">x</span>=<span class="hljs-string">"state.partial"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</span></code></pre></div>
+    <div class="p-4 bg-gray-200 rounded-b-lg"><div x-state="{ status: 'pending', partial: '' } ">
+  <button
+    onmouseover="setState({ status: 'loading' });
+    fetch('./assets/partial.html')
+      .then(res => res.text())
+      .then(partial => setState({
+        partial, status: 'loaded'
+      }, this))"
+  >
+    Show Partial
+  </button>
+  <div>
+    <span x="state.status === 'loading' ? 'Loading...' : ''"></span>
+    <span x="state.partial"></span>
+  </div>
+</div>
+</div>
+</section>
+<h2 class="inline" id="usage">Usage</h2><a class="ml-2 text-gray-200 hover:text-gray-800" href="#usage">#</a>
+<h3 class="inline" id="localuse">Local Use</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#localuse">#</a>
+<p>For now, the easiest way to use Sidewind is to import it to a bootstrap script: <code>import "sidewind";</code>.</p>
+<p>Doing this will activate all included directives and expose <code>setState</code> in the global scope.</p>
+<p>By design, Sidewind is modular and it's possible it will be packaged in a different way in the future so you get only the functionality you want. There's also room for tooling here as it's possible to write a preprocessor that can figure out the right imports based on use per page.</p>
+<h3 class="inline" id="onlineuse">Online Use</h3><a class="ml-2 text-gray-200 hover:text-gray-800" href="#onlineuse">#</a>
+<p>To allow for easy online usage with all functionality, there are versions of Sidewind designed for this purpose - <code>tailwind/sidewind.cjs.development.js</code> and <code>sidewind.cjs.production.min.js</code>. Both include everything and runs the script above.</p>
+<h2 class="inline" id="directiveapi">Directive API</h2><a class="ml-2 text-gray-200 hover:text-gray-800" href="#directiveapi">#</a>
+<p>All directives of the system have been implemented as plugins. For now, it's best to examine the framework source to see how it all goes together.</p>
 <h2 class="inline" id="relatedapproaches">Related Approaches</h2><a class="ml-2 text-gray-200 hover:text-gray-800" href="#relatedapproaches">#</a>
 <ul class="list-disc list-inside" >
 <li><a class="underline"  href="https://github.com/alpinejs/alpine">Alpine.js</a> provides a similar yet more broad API closer to Angular than Sidewind.</li>

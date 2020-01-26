@@ -19,11 +19,20 @@ http://zenorocha.mit-license.org
   color: #8be9fd;
 }
 
+.hljs-function .hljs-keyword {
+  color: #ff79c6;
+}
+
 .hljs-string,
 .hljs-name,
 .hljs-symbol,
+.hljs-variable,
 .hljs-template-variable {
   color: #f1fa8c;
+}
+
+.hljs-comment {
+  color: #6272a4;
 }
 
 .hljs-keyword,
@@ -369,6 +378,7 @@ h1,
 h2,
 h3,
 hr,
+figure,
 p,
 pre {
   margin: 0;
@@ -785,6 +795,10 @@ a {
   padding-bottom: 0.5rem;
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -796,6 +810,10 @@ a {
 
 .top-0 {
   top: 0;
+}
+
+.right-0 {
+  right: 0;
 }
 
 .table-fixed {
