@@ -25,11 +25,8 @@ function evaluateDirective(
   parent?: ExtendedHTMLElement
 ) {
   const elements = (parent || document.body).querySelectorAll(`[${name}]`);
-  const resolvedElements = directive.resolveElements
-    ? directive.resolveElements(elements)
-    : elements;
 
-  for (let i = resolvedElements.length; i--; ) {
+  for (let i = elements.length; i--; ) {
     const element = elements[i] as ExtendedHTMLElement;
     const expression = element.getAttribute(name) || "";
 
