@@ -465,7 +465,7 @@ By design, Sidewind is modular and it's possible it will be packaged in a differ
 
 To allow for easy online usage with all functionality, there are versions of Sidewind designed for this purpose - `tailwind/sidewind.cjs.development.js` and `sidewind.cjs.production.min.js`. Both include everything and runs the script above.
 
-**Example:** https://unpkg.com/sidewind@0.20.0/dist/sidewind.cjs.production.min.js
+**Example:** `<script type="text/javascript" src="https://unpkg.com/sidewind@0.20.1/dist/sidewind.umd.production.min.js" />`
 
 ## Directive API
 

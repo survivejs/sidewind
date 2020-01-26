@@ -40,7 +40,7 @@
   },
   "homepage": "https://bebraw.github.io/sidewind/",
   "scripts": {
-    "build": "tsdx build",
+    "build": "tsdx build --format umd",
     "site:build": "npm run webpack:build",
     "start": "npm run webpack:serve",
     "lint": "tsdx lint demo src test",
