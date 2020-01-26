@@ -29,7 +29,7 @@ The state can be manipulated using a global `setState`:
 ```html
 <section x-state="false">
   <div class="mb-2">Value: <span x="state" /></div>
-  <button class="btn btn-blue" onclick="setState(toggled => !toggled)">
+  <button class="btn btn-blue" onclick="setState(v => !v)">
     Toggle value
   </button>
 </section>
@@ -75,7 +75,13 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 `x-each` allows iteration of a list. It has been designed to be used with a [template tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template).
 
 ```html
-<div x-state="{ todos: [{ text: 'Wash dishes' }, { text: 'Eat carrots' }] }">
+<div
+  x-state="{
+    todos: [
+      { text: 'Wash dishes' }, { text: 'Eat carrots' }
+    ]
+  }"
+>
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="todos">
@@ -108,7 +114,9 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
 ```html
 <div
   x-state="{ cars: [] }"
-  x-promise="{ cars: fetch('./assets/cars.json').then(res => res.json()) }"
+  x-promise="{
+    cars: fetch('./assets/cars.json').then(res => res.json())
+  }"
 >
   <ul class="list-disc list-inside">
     <template x-each="cars">
@@ -129,7 +137,9 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
 ```html
 <div
   x-state="{ closest: '' }"
-  x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
+  x-closest="{
+    state: { closest: document.querySelectorAll('h2, h3') }
+  }"
 >
   Closest heading: <span x="state.closest.textContent" />
 </div>
@@ -142,7 +152,9 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
 ```html
 <div
   x-state="{ intersected: '' }"
-  x-intersect="{ state: { intersected: new Date().toString() } }"
+  x-intersect="{
+    state: { intersected: new Date().toString() }
+  }"
 >
   Intersected at <span x="state.intersected" />
 </div>
@@ -153,7 +165,10 @@ In addition to the standard options, there's an `once` flag that when set causes
 ```html
 <div x-state="{ src: '' }">
   <img
-    x-intersect="{ options: { once: true }, state: { src: './assets/logo.png' } }"
+    x-intersect="{
+      options: { once: true },
+      state: { src: './assets/logo.png' }
+    }"
     x:src="state.src"
   />
 </div>
@@ -168,8 +183,10 @@ In addition to the standard options, there's an `once` flag that when set causes
 ```html
 <div
   x-state="{ time: '' }"
-  x-interval="{ options: { delay: 1000 }, state: { time: new
-Date().toString() } }"
+  x-interval="{
+    options: { delay: 1000 },
+    state: { time: new Date().toString() }
+  }"
 >
   <span class="font-bold">Current time:</span> <span x="state.time" />
 </div>
@@ -186,7 +203,10 @@ The examples below combine directives to produce complex user interfaces and to 
 ```html
 <article
   class="flex flex-col md:flex-row justify-between md:max-w-md"
-  x-state="{ amount: 1000, interest: 1.2 }"
+  x-state="{
+    amount: 1000,
+    interest: 1.2
+  }"
 >
   <div class="mb-2">
     <label for="amount">Amount</label>
@@ -218,7 +238,12 @@ The examples below combine directives to produce complex user interfaces and to 
 ```html
 <form
   x-state="{ text: '', todos: [] }"
-  onsubmit="setState({ text: '', todos: this.state.todos.concat({ text: this.state.text }) })"
+  onsubmit="setState({
+    text: '',
+    todos: this.state.todos.concat({
+      text: this.state.text
+    })
+  })"
   action="javascript:"
 >
   <div class="mb-2">
@@ -249,7 +274,9 @@ The examples below combine directives to produce complex user interfaces and to 
 ```html
 <table
   x-state="{ cars: [] }"
-  x-promise="{ cars: fetch('./assets/cars.json').then(res => res.json()) }"
+  x-promise="{
+    cars: fetch('./assets/cars.json').then(res => res.json())
+  }"
   class="table-fixed"
 >
   <thead>
@@ -374,8 +401,13 @@ The examples below combine directives to produce complex user interfaces and to 
 ```html
 <nav
   x-label="parent"
-  x-state="{ closest: {}, headings: Array.from(document.querySelectorAll('h2, h3')) }"
-  x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
+  x-state="{
+    closest: {},
+    headings: Array.from(document.querySelectorAll('h2, h3'))
+  }"
+  x-closest="{
+    state: { closest: document.querySelectorAll('h2, h3') }
+  }"
 >
   <ul>
     <template x-each="headings">
@@ -400,7 +432,12 @@ The examples below combine directives to produce complex user interfaces and to 
 ```html
 <div x-state="{ status: 'pending', partial: '' } ">
   <button
-    onmouseover="setState({ status: 'loading' }); fetch('./assets/partial.html').then(res => res.text()).then(partial => setState({ partial, status: 'loaded' }, this))"
+    onmouseover="setState({ status: 'loading' });
+    fetch('./assets/partial.html')
+      .then(res => res.text())
+      .then(partial => setState({
+        partial, status: 'loaded'
+      }, this))"
   >
     Show Partial
   </button>
