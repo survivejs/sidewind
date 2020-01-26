@@ -7,8 +7,7 @@ function getState(element: ExtendedHTMLElement) {
   const { state }: { state: BindState } = closestStateContainer;
   const labeledState = getLabeledState(element, "x-label");
 
-  // TODO: Handle querySelectorAll expansion here?
-  return { ...labeledState, state };
+  return Object.assign({}, labeledState, { state });
 }
 
 function getLabeledState(element: ExtendedHTMLElement, labelKey: string) {

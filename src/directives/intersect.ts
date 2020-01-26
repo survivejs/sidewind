@@ -27,11 +27,14 @@ function intersectDirective({
       triggered = true;
       setState(evaluate(expression).state, element);
     },
-    {
-      rootMargin: "0px",
-      threshold: 1.0,
-      ...options,
-    }
+    Object.assign(
+      {},
+      {
+        rootMargin: "0px",
+        threshold: 1.0,
+      },
+      options
+    )
   );
   observer.observe(element);
 }

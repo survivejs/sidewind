@@ -20,7 +20,7 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
   const state = stateContainer.state;
   const evaluatedValue = isFunction(newValue) ? newValue(state) : newValue;
   const updatedState = isObject(state)
-    ? { ...state, ...evaluatedValue }
+    ? Object.assign({}, state, evaluatedValue)
     : evaluatedValue;
 
   stateContainer.state = updatedState;

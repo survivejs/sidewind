@@ -3,9 +3,9 @@ import { BindState } from "./types";
 
 function evaluate(expression: string, value: BindState = {}) {
   try {
-    return Function(
-      ...Object.keys(value),
-      `return ${expression}`
+    return Function.apply(
+      null,
+      Object.keys(value).concat(`return ${expression}`)
     )(...Object.values(value));
   } catch (err) {
     console.error("Failed to evaluate", expression, value, err);
