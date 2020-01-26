@@ -105,27 +105,6 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 </div>
 ```
 
-### `x-promise`
-
-TODO
-
-It's possible to use the standard [fetch() API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) on top of `x-state` for fetching data as it handles Promises for you internally:
-
-```html
-<div
-  x-state="{ cars: [] }"
-  x-promise="{
-    cars: fetch('./assets/cars.json').then(res => res.json())
-  }"
->
-  <ul class="list-disc list-inside">
-    <template x-each="cars">
-      <li><span x="state.brand" /> - <span x="state.color" /></li>
-    </template>
-  </ul>
-</div>
-```
-
 ## Sources
 
 Sources wrap browser state within a reactive stream that's then mapped to a state.
@@ -273,9 +252,12 @@ The examples below combine directives to produce complex user interfaces and to 
 
 ```html
 <table
-  x-state="{ cars: [] }"
-  x-promise="{
-    cars: fetch('./assets/cars.json').then(res => res.json())
+  x-state="{
+    cars: [
+      { brand: 'Saab', color: 'gray' },
+      { brand: 'Ferrari', color: 'red' },
+      { brand: 'Porsche', color: 'silver' },
+    ]
   }"
   class="table-fixed"
 >
@@ -425,6 +407,27 @@ The examples below combine directives to produce complex user interfaces and to 
     </template>
   </ul>
 </nav>
+```
+
+### Asynchronous Loading
+
+It's possible to use the standard [fetch() API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) in combination with `x-state` and `setState` to load data over the wire:
+
+```html
+<div x-state="{ cars: [] }">
+  <script>
+    const parent = document.currentScript.parentNode;
+
+    fetch("./assets/cars.json")
+      .then(res => res.json())
+      .then(cars => setState({ cars }, parent));
+  </script>
+  <ul class="list-disc list-inside">
+    <template x-each="cars">
+      <li><span x="state.brand" /> - <span x="state.color" /></li>
+    </template>
+  </ul>
+</div>
 ```
 
 ### Loading a Partial
