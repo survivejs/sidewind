@@ -1,9 +1,9 @@
 import {
   evaluateDirectives,
   setState,
-  // attributesDirective,
+  attributesDirective,
   // closestDirective,
-  eachDirective,
+  // eachDirective,
   // intervalDirective,
   // intersectDirective,
   stateDirective,
@@ -26,8 +26,8 @@ function initialize(global = window) {
       //{ name: 'x-interval', directive: intervalDirective },
       //{ name: "x-intersect", directive: intersectDirective },
       { name: "x-state", directive: stateDirective },
-      { name: "x-each", directive: eachDirective },
-      //{ name: "x-attr", directive: attributesDirective },
+      //{ name: "x-each", directive: eachDirective },
+      { name: "x-attr", directive: attributesDirective },
       { name: "x", directive: valueDirective },
     ]);
 
