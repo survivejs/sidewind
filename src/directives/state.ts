@@ -4,12 +4,9 @@ function stateDirective({
   element,
   expression,
   evaluate,
-  // setState,
   evaluateDirectives,
   directives,
 }: DirectiveParameters) {
-  // setState(element.state || evaluate(expression), element);
-
   element.state = evaluate(expression);
 
   const observer = new MutationObserver(() => {
