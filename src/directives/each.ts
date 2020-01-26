@@ -1,11 +1,11 @@
-import { BindState, DirectiveParameters, ExtendedHTMLElement } from "../types";
-import { getValues } from "../utils";
-import setState from "../set-state";
+import { DirectiveParameters } from "../types";
+// import { getValues } from "../utils";
+// import setState from "../set-state";
 
-function eachDirective({ element, expression }: DirectiveParameters) {
-  const { state }: { state: BindState } = element.closest(
-    `[x-state]`
-  ) as ExtendedHTMLElement;
+function eachDirective({ element, getState }: DirectiveParameters) {
+  const state = getState(element);
+
+  console.log("state", state);
 
   if (state) {
     const containerParent = element.parentNode;
@@ -21,6 +21,7 @@ function eachDirective({ element, expression }: DirectiveParameters) {
     }
     containerParent.appendChild(element);
 
+    /*
     if (typeof state === "object") {
       Object.values(getValues(state, expression)).forEach(
         values =>
@@ -37,6 +38,7 @@ function eachDirective({ element, expression }: DirectiveParameters) {
           })
       );
     }
+    */
   }
 }
 
