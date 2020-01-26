@@ -13,5 +13,6 @@ function intervalDirective({
 
   evaluateValue();
 }
+intervalDirective.skipEvaluation = true;
 
 export default intervalDirective;
