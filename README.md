@@ -397,17 +397,17 @@ The examples below combine directives to produce complex user interfaces and to 
 
 ### Loading a Partial
 
-> TODO: Rethink the API - x-promise + trigger?
-
 ```html
-<div x-state="{ partial: { status: null } }">
+<div x-state="{ status: 'pending', partial: '' } ">
   <button
-    onmouseover="setState({ partial: fetch('./assets/partial.html').then(res => res.text()) })"
+    onmouseover="setState({ status: 'loading' }); fetch('./assets/partial.html').then(res => res.text()).then(partial => setState({ partial, status: 'loaded' }, this))"
   >
     Show Partial
   </button>
-  <span x="state.partial.status === 'loading' ? 'Loading...' : ''"></span>
-  <span x="state.partial.status !== null ? state.partial : ''"></span>
+  <div>
+    <span x="state.status === 'loading' ? 'Loading...' : ''"></span>
+    <span x="state.partial"></span>
+  </div>
 </div>
 ```
 
