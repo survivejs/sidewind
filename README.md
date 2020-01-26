@@ -242,7 +242,8 @@ The examples below combine directives to produce complex user interfaces and to 
 
 ```html
 <table
-  x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }"
+  x-state="{ cars: '' }"
+  x-promise="{ cars: fetch('./assets/cars.json').then(res => res.json()) }"
   class="table-fixed"
 >
   <thead>

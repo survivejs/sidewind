@@ -1,9 +1,13 @@
 import { DirectiveParameters } from "../types";
-// import { getValues } from "../utils";
-// import setState from "../set-state";
+import { getValues } from "../utils";
 
-function eachDirective({ element, getState }: DirectiveParameters) {
-  const state = getState(element);
+function eachDirective({
+  element,
+  expression,
+  getState,
+  setState,
+}: DirectiveParameters) {
+  const { state } = getState(element);
 
   if (state) {
     const containerParent = element.parentNode;
@@ -12,15 +16,13 @@ function eachDirective({ element, getState }: DirectiveParameters) {
       return;
     }
 
-    // It would be better to diff for changes instead of replacing
-    // all nodes.
-    while (containerParent.firstChild) {
-      containerParent.firstChild.remove();
-    }
-    containerParent.appendChild(element);
-
-    /*
     if (typeof state === "object") {
+      // It would be better to diff for changes instead of replacing
+      // all nodes.
+      while (containerParent.firstChild) {
+        containerParent.firstChild.remove();
+      }
+
       Object.values(getValues(state, expression)).forEach(
         values =>
           Array.isArray(values) &&
@@ -28,15 +30,17 @@ function eachDirective({ element, getState }: DirectiveParameters) {
             const templateClone = document.importNode(element.content, true);
             const firstChild = templateClone.firstElementChild;
 
-            firstChild.state = value;
+            // The element should be a state container itself
             firstChild.setAttribute("x-state", "");
-            containerParent.appendChild(templateClone);
 
+            containerParent.appendChild(templateClone);
             setState(value, firstChild);
           })
       );
+
+      // Append last to trigger mutation observer only once
+      containerParent.appendChild(element);
     }
-    */
   }
 }
 

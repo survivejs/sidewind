@@ -11,7 +11,6 @@ function get(object: BindState, keyString: string) {
   return ret;
 }
 
-// TODO: Consider dropping
 function getValues(data: BindState, getter: string | null): BindState {
   if (!getter) {
     return {};

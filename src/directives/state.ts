@@ -1,4 +1,4 @@
-import { attributesDirective } from "./";
+import { attributesDirective, eachDirective } from "./";
 import { DirectiveParameters, ExtendedHTMLElement } from "../types";
 
 function stateDirective({
@@ -18,7 +18,9 @@ function stateDirective({
     // TODO: Use a flag at directive level to control this?
     const directivesWithoutState = directives.filter(
       ({ directive }) =>
-        directive !== attributesDirective && directive !== stateDirective
+        directive !== attributesDirective &&
+        directive !== stateDirective &&
+        directive !== eachDirective
     );
 
     evaluateDirectives(directivesWithoutState, element);
