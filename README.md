@@ -171,7 +171,7 @@ In addition to the standard options, there's an `once` flag that when set causes
 </div>
 ```
 
-> **TODO:** This one has the same limitation. Likely the same bug.
+> **TODO:** This one has the same limitation. Likely the same issue.
 
 ## Examples
 
@@ -450,6 +450,24 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
   </div>
 </div>
 ```
+
+## Usage
+
+### Local Use
+
+For now, the easiest way to use Sidewind is to import it to a bootstrap script: `import "sidewind";`.
+
+Doing this will activate all included directives and expose `setState` in the global scope.
+
+By design, Sidewind is modular and it's possible it will be packaged in a different way in the future so you get only the functionality you want. There's also room for tooling here as it's possible to write a preprocessor that can figure out the right imports based on use per page.
+
+### Online Use
+
+To allow for easy online usage with all functionality, there are versions of Sidewind designed for this purpose - `tailwind/sidewind.cjs.development.js` and `sidewind.cjs.production.min.js`. Both include everything and runs the script above.
+
+## Directive API
+
+All directives of the system have been implemented as plugins. For now, it's best to examine the framework source to see how it all goes together.
 
 ## Related Approaches
 
