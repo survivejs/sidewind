@@ -228,7 +228,7 @@ function getHTML({
           <nav
             class="sticky top-0"
             x-label="parent"
-            x-state="{ headings: document.querySelectorAll('h2, h3') }"
+            x-state="{ closest: {}, headings: Array.from(document.querySelectorAll('h2, h3')) }"
             x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
           >
             <ul>

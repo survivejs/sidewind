@@ -374,7 +374,7 @@ The examples below combine directives to produce complex user interfaces and to 
 ```html
 <nav
   x-label="parent"
-  x-state="{ headings: document.querySelectorAll('h2, h3') }"
+  x-state="{ closest: {}, headings: Array.from(document.querySelectorAll('h2, h3')) }"
   x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
 >
   <ul>
