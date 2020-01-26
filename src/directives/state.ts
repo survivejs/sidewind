@@ -9,13 +9,20 @@ function stateDirective({
 }: DirectiveParameters) {
   element.state = evaluate(expression);
 
-  const observer = new MutationObserver(() => {
+  const observer = new MutationObserver(mutations => {
+    const attributeName = mutations[0].attributeName;
+
+    // If triggered by something else than setState, skip.
+    if (attributeName !== "x-updated") {
+      return;
+    }
+
     // Avoid recursion by not evaluating all directives
-    const directivesWithoutState = directives.filter(
+    const directivesWithoutSkipping = directives.filter(
       ({ directive }) => !directive.skipEvaluation
     );
 
-    evaluateDirectives(directivesWithoutState, element);
+    evaluateDirectives(directivesWithoutSkipping, element);
   });
 
   observer.observe(element, { attributes: true, subtree: true });
