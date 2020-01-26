@@ -4,7 +4,7 @@ import {
   attributesDirective,
   closestDirective,
   eachDirective,
-  // intervalDirective,
+  intervalDirective,
   intersectDirective,
   stateDirective,
   valueDirective,
@@ -22,12 +22,12 @@ declare global {
 function initialize(global = window) {
   global.onload = () =>
     evaluateDirectives([
-      //{ name: 'x-interval', directive: intervalDirective },
       { name: "x-state", directive: stateDirective },
       { name: "x-each", directive: eachDirective },
       { name: "x-attr", directive: attributesDirective },
       { name: "x", directive: valueDirective },
       { name: "x-closest", directive: closestDirective },
+      { name: "x-interval", directive: intervalDirective },
       { name: "x-intersect", directive: intersectDirective },
     ]);
 

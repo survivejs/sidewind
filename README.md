@@ -170,9 +170,12 @@ In addition to the standard options, there's an `once` flag that when set causes
   x-state="{ time: '' }"
   x-interval="{ options: { delay: 1000 }, state: { time: new
 Date().toString() } }"
-  x="state.time"
-/>
+>
+  <span class="font-bold">Current time:</span> <span x="state.time" />
+</div>
 ```
+
+> **TODO:** This one has the same limitation. Likely the same bug.
 
 ## Examples
 
