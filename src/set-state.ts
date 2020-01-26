@@ -1,7 +1,5 @@
 import { ExtendedHTMLElement } from "./types";
 
-// type PromiseResult = { key: string; values: any };
-
 function setState(newValue: any, element?: ExtendedHTMLElement) {
   if (!element) {
     element = window.event && (window.event.target as ExtendedHTMLElement);
@@ -20,56 +18,19 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
   }
 
   const state = stateContainer.state;
-  const evaluatedValue =
-    typeof newValue === "function" ? newValue(state) : newValue;
+  const evaluatedValue = typeof isFunction(newValue)
+    ? newValue(state)
+    : newValue;
   const updatedState = isObject(state)
     ? { ...state, ...evaluatedValue }
     : evaluatedValue;
 
   // element.state = updatedState;
   stateContainer.state = updatedState;
+}
 
-  // TODO: Push to another directive
-  /*
-  let promises: { key: string; promise: Promise<PromiseResult> }[] = [];
-  isObject(updatedState) &&
-    Object.keys(updatedState).forEach(key => {
-      const v = updatedState[key];
-
-      if (v && v.then) {
-        promises.push({
-          key,
-          promise: v.then((values: any) => ({ key, values })),
-        });
-      }
-    });
-
-  if (promises.length > 0) {
-    const newState: BindState = {};
-
-    promises.forEach(({ key }) => {
-      newState[key] = { status: "loading" };
-    });
-
-    stateContainer.state = { ...stateContainer.state, ...newState };
-    // evaluate(stateContainer);
-
-    Promise.all(promises.map(({ promise }) => promise)).then(values => {
-      const promisedState: BindState = {};
-
-      values.forEach(({ key, values }: PromiseResult) => {
-        promisedState[key] = values;
-      });
-
-      const newState = { ...stateContainer.state, ...promisedState };
-
-      stateContainer.state = newState;
-      // evaluate(stateContainer);
-    });
-  }
-  */
-
-  // evaluate(stateContainer);
+function isFunction(obj: any) {
+  return typeof obj === "function";
 }
 
 function isObject(obj: any) {
