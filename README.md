@@ -45,41 +45,6 @@ State can be a complex object:
 
 > [The calculator example](#calculator) takes this idea further and shows how to handle user interaction.
 
-`x-state` accepts complex JavaScript expressions as well and exposes `document.querySelectorAll` through `$` alias.
-
-```html
-<ul x-state="{ headings: $('h2') }">
-  <template x-each="headings">
-    <li>
-      <a
-        x:href="state.nextElementSibling.attributes.href.value"
-        x="state.textContent"
-      >
-      </a>
-    </li>
-  </template>
-</ul>
-```
-
-### `x-promise`
-
-TODO
-
-It's possible to use the standard [fetch() API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) on top of `x-state` for fetching data as it handles Promises for you internally:
-
-```html
-<div
-  x-state="{ cars: [] }"
-  x-promise="{ cars: fetch('./assets/cars.json').then(res => res.json()) }"
->
-  <ul class="list-disc list-inside">
-    <template x-each="cars">
-      <li><span x="state.brand" /> - <span x="state.color" /></li>
-    </template>
-  </ul>
-</div>
-```
-
 ### `x` with Attributes
 
 In addition to binding values, it's possible to bind attributes with `x`:
@@ -134,6 +99,25 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 </div>
 ```
 
+### `x-promise`
+
+TODO
+
+It's possible to use the standard [fetch() API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) on top of `x-state` for fetching data as it handles Promises for you internally:
+
+```html
+<div
+  x-state="{ cars: [] }"
+  x-promise="{ cars: fetch('./assets/cars.json').then(res => res.json()) }"
+>
+  <ul class="list-disc list-inside">
+    <template x-each="cars">
+      <li><span x="state.brand" /> - <span x="state.color" /></li>
+    </template>
+  </ul>
+</div>
+```
+
 ## Sources
 
 Sources wrap browser state within a reactive stream that's then mapped to a state.
@@ -143,7 +127,10 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
 `x-closest` gives you access to the element closest to display top within the selected elements:
 
 ```html
-<div x-state="{ closest: '' }" x-closest="{ state: { closest: $('h2, h3') } }">
+<div
+  x-state="{ closest: '' }"
+  x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
+>
   Closest heading: <span x="state.closest.textContent" />
 </div>
 ```
@@ -380,8 +367,8 @@ The examples below combine directives to produce complex user interfaces and to 
 ```html
 <nav
   x-label="parent"
-  x-state="{ headings: $('h2, h3') }"
-  x-closest="{ state: { closest: $('h2, h3') } }"
+  x-state="{ headings: document.querySelectorAll('h2, h3') }"
+  x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
 >
   <ul>
     <template x-each="headings">

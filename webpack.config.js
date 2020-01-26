@@ -228,8 +228,8 @@ function getHTML({
           <nav
             class="sticky top-0"
             x-label="parent"
-            x-state="{ headings: $('h2, h3') }"
-            x-closest="{ state: { closest: $('h2, h3') } }"
+            x-state="{ headings: document.querySelectorAll('h2, h3') }"
+            x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
           >
             <ul>
               <template x-each="headings">
