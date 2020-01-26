@@ -25,7 +25,7 @@ type DirectiveParameters = {
 
 interface DirectiveFunction {
   (args: DirectiveParameters): void;
-  init?: (parent: ExtendedHTMLElement | Document) => void;
+  init?: (parent: ExtendedHTMLElement) => void;
   resolveElements?: (elements: NodeListOf<Element>) => ExtendedHTMLElement[];
   skipEvaluation?: boolean;
 }

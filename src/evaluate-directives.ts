@@ -9,7 +9,8 @@ function evaluateDirectives(
 ) {
   directives.forEach(
     ({ directive }) =>
-      typeof directive.init === "function" && directive.init(parent || document)
+      typeof directive.init === "function" &&
+      directive.init(parent || (document.body as ExtendedHTMLElement))
   );
 
   directives.forEach(({ name, directive }) =>
@@ -21,9 +22,9 @@ function evaluateDirective(
   directives: Directive[],
   name: string,
   directive: DirectiveFunction,
-  parent?: ExtendedHTMLElement | Document
+  parent?: ExtendedHTMLElement
 ) {
-  const elements = (parent || document).querySelectorAll(`[${name}]`);
+  const elements = (parent || document.body).querySelectorAll(`[${name}]`);
   const resolvedElements = directive.resolveElements
     ? directive.resolveElements(elements)
     : elements;
