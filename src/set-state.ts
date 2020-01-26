@@ -20,14 +20,13 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
   }
 
   const state = stateContainer.state;
-  const updatedState = isObject(state) ? { ...state, ...newValue } : newValue;
+  const evaluatedValue =
+    typeof newValue === "function" ? newValue(state) : newValue;
+  const updatedState = isObject(state)
+    ? { ...state, ...evaluatedValue }
+    : evaluatedValue;
 
-  console.log(newValue, element, element.state);
-
-  // TODO: If newValue is a function, pass previous state to it
-  // and extract value
-
-  element.state = updatedState;
+  // element.state = updatedState;
   stateContainer.state = updatedState;
 
   // TODO: Push to another directive
