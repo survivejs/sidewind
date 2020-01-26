@@ -10,15 +10,6 @@ function closestDirective({
   const { state } = evaluate(expression);
   const key = Object.keys(state)[0];
 
-  // TODO: Eliminate somehow - should setState handle this?
-  const initialState = evaluate(element.getAttribute("x-state") || "");
-  element.setAttribute(
-    "x-state",
-    JSON.stringify(
-      initialState ? { ...initialState, [key]: "" } : { [key]: "" }
-    )
-  );
-
   window.addEventListener("scroll", () =>
     evaluateClosestValue(element, evaluate(expression).state, key, setState)
   );

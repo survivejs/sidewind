@@ -6,14 +6,7 @@ function intervalDirective({
   evaluate,
   setState,
 }: DirectiveParameters) {
-  const { options, state } = evaluate(expression);
-
-  // TODO: Eliminate somehow - should setState handle this?
-  const initialState = evaluate(element.getAttribute("x-state") || "");
-  element.setAttribute(
-    "x-state",
-    JSON.stringify(initialState ? { ...initialState, ...state } : state)
-  );
+  const { options = {} } = evaluate(expression);
 
   setInterval(() => {
     setState(evaluate(expression).state, element);

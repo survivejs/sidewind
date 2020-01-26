@@ -6,17 +6,7 @@ function intersectDirective({
   evaluate,
   setState,
 }: DirectiveParameters) {
-  const { options = {}, state } = evaluate(expression);
-  // TODO: Eliminate somehow - should setState handle this?
-  const key = Object.keys(state)[0];
-  const emptyIntersect = { [key]: "" };
-  const initialState = evaluate(element.getAttribute("x-state") || "");
-  element.setAttribute(
-    "x-state",
-    JSON.stringify(
-      initialState ? { ...initialState, ...emptyIntersect } : emptyIntersect
-    )
-  );
+  const { options = {} } = evaluate(expression);
 
   let triggered = false;
   const observer = new IntersectionObserver(
