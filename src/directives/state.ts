@@ -9,7 +9,7 @@ function stateDirective({
   setState(element.state || evaluate(expression), element);
 
   const observer = new MutationObserver((mutationsList, observer) => {
-    console.log(mutationsList, observer);
+    console.log(mutationsList, observer, element.state);
 
     // TODO: Trigger updates now
   });

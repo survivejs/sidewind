@@ -1,5 +1,5 @@
 import setState from "./set-state";
-import evaluateDirective from "./evaluate-directive";
+import evaluateDirectives from "./evaluate-directives";
 import {
   attributesDirective,
   closestDirective,
@@ -11,7 +11,7 @@ import {
 } from "./directives";
 
 export {
-  evaluateDirective,
+  evaluateDirectives,
   setState,
   attributesDirective,
   closestDirective,

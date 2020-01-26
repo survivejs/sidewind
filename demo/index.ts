@@ -1,5 +1,5 @@
 import {
-  evaluateDirective,
+  evaluateDirectives,
   setState,
   attributesDirective,
   closestDirective,
@@ -19,22 +19,19 @@ declare global {
   }
 }
 
-function evaluateDirectives() {
-  evaluateDirective("x-closest", closestDirective);
-  // TODO: Enable again
-  // evaluateDirective("x-interval", intervalDirective);
-  evaluateDirective("x-intersect", intersectDirective);
-  evaluateDirective("x-state", stateDirective);
-  evaluateDirective("x-each", eachDirective);
-  evaluateDirective("x-attr", attributesDirective);
-  evaluateDirective("x", valueDirective);
-}
-
 function initialize(global = window) {
-  global.onload = evaluateDirectives;
+  global.onload = () =>
+    evaluateDirectives([
+      { name: "x-closest", directive: closestDirective },
+      // TODO: Enable again
+      // { name: 'x-interval', directive: intervalDirective },
+      { name: "x-intersect", directive: intersectDirective },
+      { name: "x-state", directive: stateDirective },
+      { name: "x-each", directive: eachDirective },
+      { name: "x-attr", directive: attributesDirective },
+      { name: "x", directive: valueDirective },
+    ]);
 
-  // TODO: Pass evaluateDirectives + figure out how setState would
-  // work internally (avoid recursion)
   global.setState = setState;
 }
 
