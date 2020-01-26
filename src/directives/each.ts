@@ -5,7 +5,8 @@ function eachDirective({
   element,
   expression,
   getState,
-  setState,
+  evaluateDirectives,
+  directives,
 }: DirectiveParameters) {
   const { state } = getState(element);
   const containerParent = element.parentNode;
@@ -28,16 +29,15 @@ function eachDirective({
         const firstChild = templateClone.firstElementChild;
 
         // The element should be a state container itself
-        firstChild.setAttribute("x-state", "");
+        firstChild.setAttribute("x-state", JSON.stringify(value));
+        firstChild.state = value;
 
         containerParent.appendChild(templateClone);
-        setState(value, firstChild);
+        evaluateDirectives(directives, firstChild);
       })
   );
 
-  // Append last to trigger mutation observer only once
   containerParent.appendChild(element);
 }
-eachDirective.skipEvaluation = true;
 
 export default eachDirective;
