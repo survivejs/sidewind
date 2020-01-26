@@ -5,8 +5,6 @@ import { DirectiveParameters } from "../types";
 function eachDirective({ element, getState }: DirectiveParameters) {
   const state = getState(element);
 
-  console.log("state", state);
-
   if (state) {
     const containerParent = element.parentNode;
 
