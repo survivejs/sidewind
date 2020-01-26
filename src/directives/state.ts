@@ -7,6 +7,14 @@ function stateDirective({
   setState,
 }: DirectiveParameters) {
   setState(element.state || evaluate(expression), element);
+
+  const observer = new MutationObserver((mutationsList, observer) => {
+    console.log(mutationsList, observer);
+
+    // TODO: Trigger updates now
+  });
+
+  observer.observe(element, { attributes: true, subtree: true });
 }
 stateDirective.resolveElements = (elements: NodeListOf<Element>) =>
   orderByParents(Array.from(elements as NodeListOf<ExtendedHTMLElement>));

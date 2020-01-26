@@ -23,8 +23,10 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
     ? { ...state, ...evaluatedValue }
     : evaluatedValue;
 
-  // element.state = updatedState;
   stateContainer.state = updatedState;
+
+  // Signal to the state container that state was updated within
+  element.setAttribute("x-updated", "");
 }
 
 function isFunction(obj: any) {
