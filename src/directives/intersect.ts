@@ -25,7 +25,6 @@ function intersectDirective({
       }
 
       triggered = true;
-
       setState(evaluate(expression).state, element);
     },
     {
@@ -36,5 +35,6 @@ function intersectDirective({
   );
   observer.observe(element);
 }
+intersectDirective.skipEvaluation = true;
 
 export default intersectDirective;
