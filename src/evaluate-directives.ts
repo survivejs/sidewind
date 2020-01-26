@@ -34,8 +34,7 @@ function evaluateDirective(
       evaluate,
       getState,
       setState,
-      evaluateDirectives: (directives, parent) =>
-        evaluateDirectives(directives, parent),
+      evaluateDirectives,
     });
   }
 }
