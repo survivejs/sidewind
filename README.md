@@ -151,12 +151,15 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
 In addition to the standard options, there's an `once` flag that when set causes the state to be set only once. The behavior is useful for implementing patterns such as lazy loading.
 
 ```html
-<img
-  x-state="{ src: '' }"
-  x-intersect="{ options: { once: true }, state: { src: './assets/logo.png' } }"
-  x:src="state.src"
-/>
+<div x-state="{ src: '' }">
+  <img
+    x-intersect="{ options: { once: true }, state: { src: './assets/logo.png' } }"
+    x:src="state.src"
+  />
+</div>
 ```
+
+> **TODO:** Figure out why x-state and x-intersect cannot be in the same element in this case. Likely it has to do with directive evaluation not being triggered.
 
 ### `x-interval`
 
