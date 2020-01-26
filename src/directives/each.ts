@@ -38,5 +38,6 @@ function eachDirective({
   // Append last to trigger mutation observer only once
   containerParent.appendChild(element);
 }
+eachDirective.skipEvaluation = true;
 
 export default eachDirective;

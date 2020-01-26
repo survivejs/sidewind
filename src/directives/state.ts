@@ -1,4 +1,3 @@
-import { attributesDirective, eachDirective } from "./";
 import { DirectiveParameters, ExtendedHTMLElement } from "../types";
 
 function stateDirective({
@@ -14,13 +13,9 @@ function stateDirective({
   element.state = evaluate(expression);
 
   const observer = new MutationObserver(() => {
-    // Avoid recursion by not evaluating directive itself
-    // TODO: Use a flag at directive level to control this?
+    // Avoid recursion by not evaluating all directives
     const directivesWithoutState = directives.filter(
-      ({ directive }) =>
-        directive !== attributesDirective &&
-        directive !== stateDirective &&
-        directive !== eachDirective
+      ({ directive }) => !directive.skipEvaluation
     );
 
     evaluateDirectives(directivesWithoutState, element);
@@ -28,6 +23,7 @@ function stateDirective({
 
   observer.observe(element, { attributes: true, subtree: true });
 }
+stateDirective.skipEvaluation = true;
 stateDirective.resolveElements = (elements: NodeListOf<Element>) =>
   orderByParents(Array.from(elements as NodeListOf<ExtendedHTMLElement>));
 

@@ -25,7 +25,7 @@ function attributesDirective({
     }
   });
 }
-
+attributesDirective.skipEvaluation = true;
 attributesDirective.init = function generateAttributeKeys(
   parent: ExtendedHTMLElement
 ) {
