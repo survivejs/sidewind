@@ -18,9 +18,7 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
   }
 
   const state = stateContainer.state;
-  const evaluatedValue = typeof isFunction(newValue)
-    ? newValue(state)
-    : newValue;
+  const evaluatedValue = isFunction(newValue) ? newValue(state) : newValue;
   const updatedState = isObject(state)
     ? { ...state, ...evaluatedValue }
     : evaluatedValue;
