@@ -4,14 +4,21 @@ function stateDirective({
   element,
   expression,
   evaluate,
-  setState,
+  // setState,
+  evaluateDirectives,
+  directives,
 }: DirectiveParameters) {
-  setState(element.state || evaluate(expression), element);
+  // setState(element.state || evaluate(expression), element);
 
-  const observer = new MutationObserver((mutationsList, observer) => {
-    console.log(mutationsList, observer, element.state);
+  element.state = evaluate(expression);
 
-    // TODO: Trigger updates now
+  const observer = new MutationObserver(() => {
+    // Avoid recursion by not evaluating directive itself
+    const directivesWithoutState = directives.filter(
+      ({ directive }) => directive !== stateDirective
+    );
+
+    evaluateDirectives(directivesWithoutState, element);
   });
 
   observer.observe(element, { attributes: true, subtree: true });

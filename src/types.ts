@@ -9,10 +9,16 @@ type ExtendedHTMLElement = HTMLElement & {
   state: BindState;
   value: any;
 };
+type Directive = { name: string; directive: DirectiveFunction };
 type DirectiveParameters = {
+  directives: Directive[];
   element: ExtendedHTMLElement;
   expression: any;
   evaluate: typeof evaluate;
+  evaluateDirectives: (
+    directives: Directive[],
+    element: ExtendedHTMLElement
+  ) => void;
   getState: typeof getState;
   setState: typeof setState;
 };
@@ -26,6 +32,7 @@ export {
   BindState,
   State,
   ExtendedHTMLElement,
+  Directive,
   DirectiveParameters,
   DirectiveFunction,
 };

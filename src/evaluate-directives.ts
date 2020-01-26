@@ -1,18 +1,24 @@
-import { DirectiveFunction, ExtendedHTMLElement } from "./types";
+import { Directive, DirectiveFunction, ExtendedHTMLElement } from "./types";
 import evaluate from "./evaluate";
 import getState from "./get-state";
 import setState from "./set-state";
 
 function evaluateDirectives(
-  directives: { name: string; directive: DirectiveFunction }[]
+  directives: Directive[],
+  parent?: ExtendedHTMLElement
 ) {
   directives.forEach(({ name, directive }) =>
-    evaluateDirective(name, directive)
+    evaluateDirective(directives, name, directive, parent)
   );
 }
 
-function evaluateDirective(name: string, directive: DirectiveFunction) {
-  const elements = document.querySelectorAll(`[${name}]`);
+function evaluateDirective(
+  directives: Directive[],
+  name: string,
+  directive: DirectiveFunction,
+  parent?: ExtendedHTMLElement
+) {
+  const elements = (parent || document).querySelectorAll(`[${name}]`);
   const resolvedElements = directive.resolveElements
     ? directive.resolveElements(elements)
     : elements;
@@ -21,7 +27,16 @@ function evaluateDirective(name: string, directive: DirectiveFunction) {
     const element = elements[i] as ExtendedHTMLElement;
     const expression = element.getAttribute(name) || "";
 
-    directive({ element, expression, evaluate, getState, setState });
+    directive({
+      directives,
+      element,
+      expression,
+      evaluate,
+      getState,
+      setState,
+      evaluateDirectives: (directives, parent) =>
+        evaluateDirectives(directives, parent),
+    });
   }
 }
 
