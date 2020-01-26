@@ -61,10 +61,17 @@ State can be a complex object:
 </ul>
 ```
 
+### `x-promise`
+
+TODO
+
 It's possible to use the standard [fetch() API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) on top of `x-state` for fetching data as it handles Promises for you internally:
 
 ```html
-<div x-state="{ cars: fetch('./assets/cars.json').then(res => res.json()) }">
+<div
+  x-state="{ cars: [] }"
+  x-promise="{ cars: fetch('./assets/cars.json').then(res => res.json()) }"
+>
   <ul class="list-disc list-inside">
     <template x-each="cars">
       <li><span x="state.brand" /> - <span x="state.color" /></li>
@@ -136,7 +143,7 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
 `x-closest` gives you access to the element closest to display top within the selected elements:
 
 ```html
-<div x-closest="{ state: { closest: $('h2, h3') } }">
+<div x-state="{ closest: '' }" x-closest="{ state: { closest: $('h2, h3') } }">
   Closest heading: <span x="state.closest.textContent" />
 </div>
 ```
@@ -146,7 +153,10 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
 `x-intersect` triggers when the element is visible at the viewport. See [IntersectionObserver documentation](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver) for available options.
 
 ```html
-<div x-intersect="{ state: { intersected: new Date().toString() } }">
+<div
+  x-state="{ intersected: '' }"
+  x-intersect="{ state: { intersected: new Date().toString() } }"
+>
   Intersected at <span x="state.intersected" />
 </div>
 ```
@@ -155,6 +165,7 @@ In addition to the standard options, there's an `once` flag that when set causes
 
 ```html
 <img
+  x-state="{ src: '' }"
   x-intersect="{ options: { once: true }, state: { src: './assets/logo.png' } }"
   x:src="state.src"
 />
@@ -166,9 +177,10 @@ In addition to the standard options, there's an `once` flag that when set causes
 
 ```html
 <div
-  disabled-x-interval="{ options: { delay: 1000 }, state: { time: new
+  x-state="{ time: '' }"
+  x-interval="{ options: { delay: 1000 }, state: { time: new
 Date().toString() } }"
-  disabled-x="state.time"
+  x="state.time"
 />
 ```
 
@@ -391,7 +403,7 @@ The examples below combine directives to produce complex user interfaces and to 
 
 ### Loading a Partial
 
-> TODO: Rethink the API
+> TODO: Rethink the API - x-promise + trigger?
 
 ```html
 <div x-state="{ partial: { status: null } }">

@@ -4,7 +4,7 @@ import {
   attributesDirective,
   closestDirective,
   eachDirective,
-  intervalDirective,
+  // intervalDirective,
   intersectDirective,
   stateDirective,
   valueDirective,
@@ -21,7 +21,8 @@ declare global {
 
 function evaluateDirectives() {
   evaluateDirective("x-closest", closestDirective);
-  evaluateDirective("x-interval", intervalDirective);
+  // TODO: Enable again
+  // evaluateDirective("x-interval", intervalDirective);
   evaluateDirective("x-intersect", intersectDirective);
   evaluateDirective("x-state", stateDirective);
   evaluateDirective("x-each", eachDirective);
