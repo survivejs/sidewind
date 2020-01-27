@@ -33,12 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bebraw/sidewind.git"
+    "url": "https://github.com/survivejs/sidewind.git"
   },
   "bugs": {
-    "url": "https://github.com/bebraw/sidewind/issues"
+    "url": "https://github.com/survivejs/sidewind/issues"
   },
-  "homepage": "https://bebraw.github.io/sidewind/",
+  "homepage": "https://survivejs.github.io/sidewind/",
   "scripts": {
     "build": "tsdx build --format umd",
     "site:build": "npm run webpack:build",
