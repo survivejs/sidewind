@@ -103,6 +103,7 @@ function processMarkdown(input) {
     extensions: [
       ...bindings,
       expandCode(),
+      styleH1(),
       addHeaderAnchors("h2"),
       addHeaderAnchors("h3"),
     ],
@@ -110,6 +111,16 @@ function processMarkdown(input) {
 
   // TODO: Deal with the code sections
   return convert.makeHtml(input);
+}
+
+function styleH1() {
+  const tag = "h1";
+
+  return {
+    type: "output",
+    regex: new RegExp(`<${tag} id="(.*)">(.*)<\/${tag}>`, "g"),
+    replace: `<${tag} class="mb-8 pb-2 text-4xl border-b-4">$2</${tag}>`,
+  };
 }
 
 function addHeaderAnchors(tag) {
