@@ -707,6 +707,10 @@ a {
   border-width: 1px;
 }
 
+.border-b-4 {
+  border-bottom-width: 4px;
+}
+
 .cursor-pointer {
   cursor: pointer;
 }
@@ -782,6 +786,10 @@ a {
   margin-bottom: 1rem;
 }
 
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
 .p-2 {
   padding: 0.5rem;
 }
@@ -792,6 +800,10 @@ a {
 
 .py-2 {
   padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.pb-2 {
   padding-bottom: 0.5rem;
 }
 
@@ -834,6 +846,10 @@ a {
 
 .hover\:text-gray-800:hover {
   color: #2d3748;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
 }
 
 .underline {
