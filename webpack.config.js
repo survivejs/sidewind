@@ -233,7 +233,7 @@ function getHTML({
       ${cssTags}
     </head>
     <body>
-      ${githubCorner("https://github.com/bebraw/sidewind")}
+      ${githubCorner("https://github.com/survivejs/sidewind")}
       <main class="flex m-8">
         <aside class="hidden md:inline md:w-1/3">
           <nav
