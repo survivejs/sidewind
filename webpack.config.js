@@ -16,7 +16,7 @@ const PATHS = {
   ASSETS: path.resolve(__dirname, "assets"),
   DEMO: path.resolve(__dirname, "demo"),
   SRC: path.resolve(__dirname, "src"),
-  OUTPUT: path.resolve(__dirname, "docs"),
+  OUTPUT: path.resolve(__dirname, "public"),
 };
 
 const commonConfig = merge({
