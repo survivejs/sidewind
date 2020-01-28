@@ -18,12 +18,6 @@ Sidewind is composed of a collection of directives that operate on the DOM. I've
 <section x-state="false">Value: <span x="state" /></section>
 ```
 
-`x-state` and `x` can exist even within the same element:
-
-```html
-<section>Value: <span x-state="false" x="state" /></section>
-```
-
 The state can be manipulated using a global `setState`:
 
 ```html
@@ -153,8 +147,6 @@ In addition to the standard options, there's an `once` flag that when set causes
 </div>
 ```
 
-> **TODO:** Figure out why x-state and x-intersect cannot be in the same element in this case. Likely it has to do with directive evaluation not being triggered.
-
 ### `x-interval`
 
 `x-interval` wraps [setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval) and exposes its `delay` parameters. When triggered, it sets state.
@@ -170,8 +162,6 @@ In addition to the standard options, there's an `once` flag that when set causes
   <span class="font-bold">Current time:</span> <span x="state.time" />
 </div>
 ```
-
-> **TODO:** This one has the same limitation. Likely the same issue.
 
 ## Examples
 
