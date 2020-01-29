@@ -142,9 +142,9 @@ function expandCode() {
           const example = decodeHTML(match);
           const decodedExample = Buffer.from(example).toString("base64");
 
-          return `<section class="mb-4">
+          return `<section class="mb-4" x-state="{ code: atob('${decodedExample}') }">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg">
-      <div class="flex font-mono relative" x-state="{ code: atob('${decodedExample}') }">
+      <div class="flex font-mono relative">
         <pre x="highlight('html', state.code)"></pre>
         <textarea
           class="absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none"
@@ -158,7 +158,7 @@ function expandCode() {
         ></textarea>
       </div>
     </div>
-    <div class="p-4 bg-gray-200 rounded-b-lg">${example}</div>
+    <div class="p-4 bg-gray-200 rounded-b-lg" x="state.code">${example}</div>
 </section>`;
         };
       return showdown.helper.replaceRecursiveRegExp(
