@@ -441,6 +441,23 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
 </div>
 ```
 
+### Code Editor
+
+```html
+<div class="flex font-mono relative" x-state="'console.log(\'demo\')'">
+  <pre x="state"></pre>
+  <textarea
+    class="absolute min-w-full top-0 left-0 outline-none opacity-25 bg-none"
+    oninput="setState(this.value)"
+    x="state"
+    autocapitalize="off"
+    autocomplete="off"
+    autocorrect="off"
+    spellcheck="false"
+  ></textarea>
+</div>
+```
+
 ## Usage
 
 ### Local Use
