@@ -44,7 +44,7 @@
     "build": "tsdx build --format umd",
     "site:build": "npm run webpack:build",
     "start": "npm run webpack:serve",
-    "lint": "tsdx lint demo src test",
+    "lint": "tsdx lint src test",
     "test": "tsdx test",
     "prepare": "npm run build && npm run site:build",
     "webpack:build": "webpack --env production",
