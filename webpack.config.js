@@ -140,10 +140,24 @@ function expandCode() {
         flags = "g",
         replacement = (_, match, left, right) => {
           const example = decodeHTML(match);
-          const code = left + highlightAuto(example).value + right;
+
+          console.log("match", match, "example", example);
 
           return `<section class="mb-4">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg">${code}</div>
+    <div class="p-4 bg-gray-800 text-white rounded-t-lg">
+      <div class="flex font-mono relative" x-state="'console.log(\\'demo\\')'">
+        <pre x="state"></pre>
+        <textarea
+          class="absolute min-w-full top-0 left-0 outline-none opacity-25 bg-none"
+          oninput="setState(this.value)"
+          x="state"
+          autocapitalize="off"
+          autocomplete="off"
+          autocorrect="off"
+          spellcheck="false"
+        ></textarea>
+      </div>
+    </div>
     <div class="p-4 bg-gray-200 rounded-b-lg">${example}</div>
 </section>`;
         };
