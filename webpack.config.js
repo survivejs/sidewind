@@ -144,16 +144,17 @@ function expandCode() {
 
           return `<section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg">
-      <div class="flex font-mono relative" x-state="atob('${decodedExample}')">
-        <pre x="highlight('html', state)"></pre>
+      <div class="flex font-mono relative" x-state="{ code: atob('${decodedExample}') }">
+        <pre x="highlight('html', state.code)"></pre>
         <textarea
-          class="absolute min-w-full top-0 left-0 outline-none opacity-25 bg-none"
-          oninput="setState(this.value)"
-          x="state"
+          class="absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none"
+          oninput="setState({ code: this.value })"
+          x="state.code"
           autocapitalize="off"
           autocomplete="off"
           autocorrect="off"
           spellcheck="false"
+          x:rows="state.code.split('\\n').length"
         ></textarea>
       </div>
     </div>
