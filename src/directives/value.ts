@@ -11,7 +11,7 @@ function valueDirective({
   if (element.localName === "input") {
     element.value = evaluatedValue;
   } else {
-    element.textContent = evaluatedValue;
+    element.innerHTML = evaluatedValue;
   }
 }
 

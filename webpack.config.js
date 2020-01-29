@@ -140,13 +140,12 @@ function expandCode() {
         flags = "g",
         replacement = (_, match, left, right) => {
           const example = decodeHTML(match);
-
-          console.log("match", match, "example", example);
+          const decodedExample = Buffer.from(example).toString("base64");
 
           return `<section class="mb-4">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg">
-      <div class="flex font-mono relative" x-state="'console.log(\\'demo\\')'">
-        <pre x="state"></pre>
+      <div class="flex font-mono relative" x-state="atob('${decodedExample}')">
+        <pre x="highlight('html', state)"></pre>
         <textarea
           class="absolute min-w-full top-0 left-0 outline-none opacity-25 bg-none"
           oninput="setState(this.value)"
