@@ -16,8 +16,9 @@ function valueDirective({
     element.innerHTML = evaluatedValue;
 
     const firstChild = element.children[0];
+    const closestState = firstChild && firstChild.closest("[x-state]");
 
-    if (firstChild && firstChild.getAttribute("x-state")) {
+    if (closestState) {
       evaluateDirectives(directives, element);
     }
   }
