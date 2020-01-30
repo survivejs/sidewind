@@ -27,6 +27,5 @@ function stateDirective({
 
   observer.observe(element, { attributes: true, subtree: true });
 }
-stateDirective.skipEvaluation = true;
 
 export default stateDirective;
