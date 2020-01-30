@@ -271,17 +271,14 @@ The examples below combine directives to produce complex user interfaces and to 
 ### Accordion
 
 ```html
-<article>
-  <section class="mb-2" x-state="false">
+<section>
+  <div class="mb-2" x-state="false">
     <div
       class="flex flex-row justify-between cursor-pointer"
       onclick="setState(visible => !visible)"
     >
       <span>Junior Engineer</span>
-      <div>
-        <span x:class="state && 'hidden'">+</span>
-        <span x:class="!state && 'hidden'">-</span>
-      </div>
+      <span x="state ? '+' : '-'" />
     </div>
     <div
       x:class="[
@@ -292,18 +289,15 @@ The examples below combine directives to produce complex user interfaces and to 
     >
       Junior engineer description
     </div>
-  </section>
+  </div>
   <hr class="my-2" />
-  <section x-state="false">
+  <div x-state="false">
     <div
       class="flex flex-row justify-between cursor-pointer"
       onclick="setState(visible => !visible)"
     >
       <span>Senior Engineer</span>
-      <div>
-        <span x:class="state && 'hidden'">+</span>
-        <span x:class="!state && 'hidden'">-</span>
-      </div>
+      <span x="state ? '+' : '-'" />
     </div>
     <div
       x:class="[
@@ -314,8 +308,8 @@ The examples below combine directives to produce complex user interfaces and to 
     >
       Senior engineer description
     </div>
-  </section>
-</article>
+  </div>
+</section>
 ```
 
 ### Tabs
