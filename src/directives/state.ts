@@ -1,4 +1,4 @@
-import { DirectiveParameters } from "../types";
+import { DirectiveParameters, ExtendedHTMLElement } from "../types";
 
 function stateDirective({
   element,
@@ -10,10 +10,13 @@ function stateDirective({
   element.state = evaluate(expression);
 
   const observer = new MutationObserver(mutations => {
-    const attributeName = mutations[0].attributeName;
+    const { attributeName, target } = mutations[0];
+    const closestStateContainer = (target as ExtendedHTMLElement).closest(
+      `[x-state]`
+    );
 
     // If triggered by something else than setState, skip.
-    if (attributeName !== "x-updated") {
+    if (attributeName !== "x-updated" || closestStateContainer !== element) {
       return;
     }
 
@@ -27,6 +30,5 @@ function stateDirective({
 
   observer.observe(element, { attributes: true, subtree: true });
 }
-stateDirective.skipEvaluation = true;
 
 export default stateDirective;

@@ -271,17 +271,14 @@ The examples below combine directives to produce complex user interfaces and to 
 ### Accordion
 
 ```html
-<article>
-  <section class="mb-2" x-state="false">
+<section>
+  <div class="mb-2" x-state="false">
     <div
       class="flex flex-row justify-between cursor-pointer"
       onclick="setState(visible => !visible)"
     >
       <span>Junior Engineer</span>
-      <div>
-        <span x:class="state && 'hidden'">+</span>
-        <span x:class="!state && 'hidden'">-</span>
-      </div>
+      <span x="state ? '+' : '-'" />
     </div>
     <div
       x:class="[
@@ -292,18 +289,15 @@ The examples below combine directives to produce complex user interfaces and to 
     >
       Junior engineer description
     </div>
-  </section>
+  </div>
   <hr class="my-2" />
-  <section x-state="false">
+  <div x-state="false">
     <div
       class="flex flex-row justify-between cursor-pointer"
       onclick="setState(visible => !visible)"
     >
       <span>Senior Engineer</span>
-      <div>
-        <span x:class="state && 'hidden'">+</span>
-        <span x:class="!state && 'hidden'">-</span>
-      </div>
+      <span x="state ? '+' : '-'" />
     </div>
     <div
       x:class="[
@@ -314,8 +308,8 @@ The examples below combine directives to produce complex user interfaces and to 
     >
       Senior engineer description
     </div>
-  </section>
-</article>
+  </div>
+</section>
 ```
 
 ### Tabs
@@ -420,6 +414,8 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
 </div>
 ```
 
+> **TODO:** The example above is currently disabled due to scripting limitations with `innerHTML` but the code works outside of the editor.
+
 ### Loading a Partial
 
 ```html
@@ -470,7 +466,7 @@ By design, Sidewind is modular and it's possible it will be packaged in a differ
 
 ### Online Use
 
-To allow for easy online usage with all functionality, there are versions of Sidewind designed for this purpose - `tailwind/sidewind.cjs.development.js` and `sidewind.cjs.production.min.js`. Both include everything and runs the script above.
+To allow for easy online usage with all functionality, there are versions of Sidewind designed for this purpose - `tailwind/sidewind.umd.development.js` and `sidewind.umd.production.min.js`. Both include everything and runs the script above.
 
 **Example:**
 
