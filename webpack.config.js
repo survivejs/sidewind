@@ -2,7 +2,6 @@ const fs = require("fs");
 const path = require("path");
 const temp = require("temp");
 const glob = require("glob");
-const { highlightAuto } = require("highlight.js");
 const showdown = require("showdown");
 const decodeHTML = require("html-encoder-decoder").decode;
 const webpack = require("webpack");
