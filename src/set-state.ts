@@ -11,7 +11,7 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
 
   let stateContainer = element.hasAttribute("x-state")
     ? element
-    : (element.closest(`[x-state]`) as ExtendedHTMLElement);
+    : (element.closest("[x-state]") as ExtendedHTMLElement);
 
   if (!stateContainer) {
     return;
