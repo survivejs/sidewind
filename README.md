@@ -414,6 +414,8 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
 </div>
 ```
 
+> **TODO:** The example above is currently disabled due to scripting limitations with `innerHTML` but the code works outside of the editor.
+
 ### Loading a Partial
 
 ```html
