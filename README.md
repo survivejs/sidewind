@@ -163,6 +163,47 @@ In addition to the standard options, there's an `once` flag that when set causes
 </div>
 ```
 
+### `x-promise`
+
+It's possible to use the standard [fetch() API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) on top of `x-promise` to handle data requests:
+
+```html
+<div
+  x-state="{ cars: [] }"
+  x-promise="{
+    state: {
+      cars: fetch('./assets/cars.json').then(res => res.json())
+    }
+  }"
+>
+  <ul class="list-disc list-inside">
+    <template x-each="cars">
+      <li><span x="state.brand" /> - <span x="state.color" /></li>
+    </template>
+  </ul>
+</div>
+```
+
+In case there's an error, then the `Error` object is emitted to `error` state:
+
+```html
+<div
+  x-state="{ cars: [], error: {} }"
+  x-promise="{
+    state: {
+      cars: fetch('./assets/404.json').then(res => res.json())
+    }
+  }"
+>
+  <div x="state.error.message" />
+  <ul class="list-disc list-inside">
+    <template x-each="cars">
+      <li><span x="state.brand" /> - <span x="state.color" /></li>
+    </template>
+  </ul>
+</div>
+```
+
 ## Examples
 
 The examples below combine directives to produce complex user interfaces and to handle specific use cases.
@@ -392,29 +433,6 @@ The examples below combine directives to produce complex user interfaces and to 
   </ul>
 </nav>
 ```
-
-### Asynchronous Loading
-
-It's possible to use the standard [fetch() API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) in combination with `x-state` and `setState` to load data over the wire:
-
-```html
-<div x-state="{ cars: [] }">
-  <script>
-    const parent = document.currentScript.parentNode;
-
-    fetch("./assets/cars.json")
-      .then(res => res.json())
-      .then(cars => setState({ cars }, parent));
-  </script>
-  <ul class="list-disc list-inside">
-    <template x-each="cars">
-      <li><span x="state.brand" /> - <span x="state.color" /></li>
-    </template>
-  </ul>
-</div>
-```
-
-> **TODO:** The example above is currently disabled due to scripting limitations with `innerHTML` but the code works outside of the editor.
 
 ### Loading a Partial
 

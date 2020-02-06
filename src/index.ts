@@ -6,6 +6,7 @@ import {
   eachDirective,
   intervalDirective,
   intersectDirective,
+  promiseDirective,
   stateDirective,
   valueDirective,
 } from "./directives";
@@ -23,6 +24,7 @@ window.onload = () =>
     { name: "x-attr", directive: attributesDirective },
     { name: "x", directive: valueDirective },
     { name: "x-closest", directive: closestDirective },
+    { name: "x-promise", directive: promiseDirective },
     { name: "x-interval", directive: intervalDirective },
     { name: "x-intersect", directive: intersectDirective },
   ]);
