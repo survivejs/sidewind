@@ -137,8 +137,8 @@ function expandCode() {
       const left = "<pre><code\\b[^>]*>",
         right = "</code></pre>",
         flags = "g",
-        replacement = (_, match, left, right) => {
-          const example = decodeHTML(match);
+        replacement = (_, match) => {
+          const example = decodeHTML(match).trim();
           const decodedExample = Buffer.from(example).toString("base64");
 
           return `<section class="mb-4" x-state="{ code: atob('${decodedExample}') }">
