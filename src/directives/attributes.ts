@@ -46,7 +46,7 @@ attributesDirective.init = function generateAttributeKeys(
 };
 
 function isForbidden(name: string) {
-  return name === "x" || name === "x-state";
+  return name === "x" || name === "x-attr" || name === "x-state";
 }
 
 export default attributesDirective;
