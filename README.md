@@ -41,11 +41,11 @@ State can be a complex object:
 
 ### `x` with Attributes
 
-In addition to binding values, it's possible to bind attributes with `x`:
+In addition to binding values, it's possible to bind attributes with `x-`:
 
 ```html
 <section x-state="{ target: 'https://survivejs.com' }">
-  <a x:href="state.target">Link target</a>
+  <a x-href="state.target">Link target</a>
 </section>
 ```
 
@@ -54,8 +54,8 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 ```html
 <section x-state="{ target: 'https://survivejs.com' }">
   <a
-    x:href="state.target"
-    x:class="[
+    x-href="state.target"
+    x-class="[
       'p-2',
       state.target === 'https://survivejs.com' && 'bg-gray-400'
     ]"
@@ -142,7 +142,7 @@ In addition to the standard options, there's an `once` flag that when set causes
       options: { once: true },
       state: { src: './assets/logo.png' }
     }"
-    x:src="state.src"
+    x-src="state.src"
   />
 </div>
 ```
@@ -322,7 +322,7 @@ The examples below combine directives to produce complex user interfaces and to 
       <span x="state ? '+' : '-'" />
     </div>
     <div
-      x:class="[
+      x-class="[
         'py-2',
         'text-gray-600',
         !state && 'hidden'
@@ -341,7 +341,7 @@ The examples below combine directives to produce complex user interfaces and to 
       <span x="state ? '+' : '-'" />
     </div>
     <div
-      x:class="[
+      x-class="[
         'py-2',
         'text-gray-600',
         !state && 'hidden'
@@ -359,7 +359,7 @@ The examples below combine directives to produce complex user interfaces and to 
 <section x-state="'animals'">
   <nav class="flex flex-row justify-between cursor-pointer">
     <div
-      x:class="[
+      x-class="[
         'p-2',
         'w-full',
         state === 'animals' ? 'bg-gray-400' : 'btn-muted'
@@ -369,7 +369,7 @@ The examples below combine directives to produce complex user interfaces and to 
       Animals
     </div>
     <div
-      x:class="[
+      x-class="[
         'p-2',
         'w-full',
         state === 'languages' ? 'bg-gray-400' : 'btn-muted'
@@ -379,7 +379,7 @@ The examples below combine directives to produce complex user interfaces and to 
       Languages
     </div>
     <div
-      x:class="[
+      x-class="[
         'p-2',
         'w-full',
         state === 'colors' ? 'bg-gray-400' : 'btn-muted'
@@ -390,13 +390,13 @@ The examples below combine directives to produce complex user interfaces and to 
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div x:class="state !== 'animals' && 'hidden'">
+    <div x-class="state !== 'animals' && 'hidden'">
       Animals tab
     </div>
-    <div x:class="state !== 'languages' && 'hidden'">
+    <div x-class="state !== 'languages' && 'hidden'">
       Languages tab
     </div>
-    <div x:class="state !== 'colors' && 'hidden'">
+    <div x-class="state !== 'colors' && 'hidden'">
       Colors tab
     </div>
   </div>
@@ -420,9 +420,9 @@ The examples below combine directives to produce complex user interfaces and to 
     <template x-each="headings">
       <li>
         <a
-          x:href="state.nextElementSibling.attributes.href.value"
+          x-href="state.nextElementSibling.attributes.href.value"
           x="state.textContent"
-          x:class="[
+          x-class="[
             state.textContent === parent.closest.textContent && 'font-bold',
             state.tagName === 'H3' && 'ml-2'
           ]"

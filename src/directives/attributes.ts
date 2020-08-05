@@ -1,18 +1,23 @@
 import { DirectiveParameters, ExtendedHTMLElement } from "../types";
 
+const ATTRIBUTE_KEY = "x-";
+
 function attributesDirective({
   element,
   evaluate,
   getState,
 }: DirectiveParameters) {
   const attributes = Array.from(element.attributes);
-  const attributeKey = "x:";
 
   attributes.forEach(attribute => {
     const attributeName = attribute.nodeName;
 
-    if (attributeName.startsWith(attributeKey)) {
-      const targetName = attributeName.split(attributeKey).filter(Boolean)[0];
+    if (attributeName.startsWith(ATTRIBUTE_KEY)) {
+      const targetName = attributeName.split(ATTRIBUTE_KEY).filter(Boolean)[0];
+
+      if (isForbidden(targetName)) {
+        return;
+      }
 
       const evaluatedValue = evaluate(attribute.value, getState(element));
 
@@ -32,10 +37,16 @@ attributesDirective.init = function generateAttributeKeys(
     .concat(parent)
     .forEach(
       element =>
-        Array.from(element.attributes || []).some(attribute =>
-          attribute.name.startsWith("x:")
+        Array.from(element.attributes || []).some(
+          attribute =>
+            attribute.name.startsWith(ATTRIBUTE_KEY) &&
+            !isForbidden(attribute.name)
         ) && element.setAttribute("x-attr", "")
     );
 };
+
+function isForbidden(name: string) {
+  return name === "x" || name === "x-state";
+}
 
 export default attributesDirective;
