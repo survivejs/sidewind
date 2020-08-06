@@ -146,7 +146,7 @@ function expandCode() {
       <div class="inline-block font-mono relative">
         <pre class="overflow-hidden mr-16 pr-16 w-full" x="highlight('html', state.code)"></pre>
         <textarea
-          class="overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
+          class="overflow-hidden absolute min-w-full h-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
           oninput="setState({ code: this.value })"
           x="state.code"
           autocapitalize="off"
