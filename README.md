@@ -74,6 +74,12 @@ Default classes are retained as this allows more compact syntax with a fallback:
     x-href="state.target"
     >Link target</a
   >
+  <button
+    class="btn btn-blue"
+    onclick="setState({ target: 'https://google.com' })"
+  >
+    Change target
+  </button>
 </section>
 ```
 

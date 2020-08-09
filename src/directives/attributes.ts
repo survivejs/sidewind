@@ -73,8 +73,9 @@ function setXAttr(element: Element) {
 function setXInitialClass(element: Element) {
   const classAttribute = element.getAttribute("class");
   const xClassAttribute = element.getAttribute("x-class");
+  const xInitialClassAttribute = element.getAttribute("x-initial-class");
 
-  if (classAttribute && xClassAttribute) {
+  if (classAttribute && xClassAttribute && !xInitialClassAttribute) {
     element.setAttribute("x-initial-class", classAttribute);
   }
 }
