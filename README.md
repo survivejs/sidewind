@@ -64,6 +64,19 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
 </section>
 ```
 
+Default classes are retained as this allows more compact syntax with a fallback:
+
+```html
+<section x-state="{ target: 'https://survivejs.com' }">
+  <a
+    class="p-2"
+    x-class="state.target === 'https://survivejs.com' && 'bg-gray-400'"
+    x-href="state.target"
+    >Link target</a
+  >
+</section>
+```
+
 ### `x-each`
 
 `x-each` allows iteration of a list. It has been designed to be used with a [template tag](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template).

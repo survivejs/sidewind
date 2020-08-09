@@ -13,40 +13,81 @@ function attributesDirective({
     const attributeName = attribute.nodeName;
 
     if (attributeName.startsWith(ATTRIBUTE_KEY)) {
-      const targetName = attributeName.split(ATTRIBUTE_KEY).filter(Boolean)[0];
-
-      if (isForbidden(targetName)) {
+      if (isForbidden(attributeName)) {
         return;
       }
 
-      const evaluatedValue = evaluate(attribute.value, getState(element));
+      const targetName = attributeName.split(ATTRIBUTE_KEY).filter(Boolean)[0];
 
-      element.setAttribute(
+      setAttribute(
+        element,
         targetName,
-        Array.isArray(evaluatedValue)
-          ? evaluatedValue.filter(Boolean).join(" ")
-          : evaluatedValue
+        evaluate(attribute.value, getState(element))
       );
     }
   });
 }
+
+function setAttribute(
+  element: ExtendedHTMLElement,
+  targetName: string,
+  evaluatedValue: any
+) {
+  let extraValues: string[] = [];
+
+  if (targetName === "class") {
+    const initialClass = element.getAttribute("x-initial-class");
+
+    if (initialClass) {
+      extraValues = initialClass.split(" ");
+    }
+  }
+
+  const initialValues = Array.isArray(evaluatedValue)
+    ? evaluatedValue.filter(Boolean)
+    : [evaluatedValue];
+
+  element.setAttribute(targetName, initialValues.concat(extraValues).join(" "));
+}
+
 attributesDirective.init = function generateAttributeKeys(
   parent: ExtendedHTMLElement
 ) {
   Array.from(parent.querySelectorAll("*"))
     .concat(parent)
-    .forEach(
-      element =>
-        Array.from(element.attributes || []).some(
-          attribute =>
-            attribute.name.startsWith(ATTRIBUTE_KEY) &&
-            !isForbidden(attribute.name)
-        ) && element.setAttribute("x-attr", "")
-    );
+    .forEach(element => {
+      setXInitialClass(element);
+      setXAttr(element);
+    });
 };
 
+function setXAttr(element: Element) {
+  Array.from(element.attributes || []).some(
+    attribute =>
+      attribute.name.startsWith(ATTRIBUTE_KEY) && !isForbidden(attribute.name)
+  ) && element.setAttribute("x-attr", "");
+}
+
+// TODO: This could be potentially generalized if there's use for the feature beyond
+// classes.
+function setXInitialClass(element: Element) {
+  const classAttribute = element.getAttribute("class");
+  const xClassAttribute = element.getAttribute("x-class");
+
+  if (classAttribute && xClassAttribute) {
+    element.setAttribute("x-initial-class", classAttribute);
+  }
+}
+
 function isForbidden(name: string) {
-  return ["x", "x-attr", "x-each", "x-label", "x-state"].includes(name);
+  return [
+    "x",
+    "x-attr",
+    "x-each",
+    "x-initial-class",
+    "x-label",
+    "x-state",
+  ].includes(name);
 }
 
 export default attributesDirective;
