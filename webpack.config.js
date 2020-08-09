@@ -103,8 +103,8 @@ function processMarkdown(input) {
       ...bindings,
       expandCode(),
       styleH1(),
-      addHeaderAnchors("h2"),
-      addHeaderAnchors("h3"),
+      addHeadingAnchors("h2"),
+      addHeadingAnchors("h3"),
     ],
   });
 
@@ -122,7 +122,7 @@ function styleH1() {
   };
 }
 
-function addHeaderAnchors(tag) {
+function addHeadingAnchors(tag) {
   return {
     type: "output",
     regex: new RegExp(`<${tag} id="(.*)">(.*)<\/${tag}>`, "g"),
