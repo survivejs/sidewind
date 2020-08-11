@@ -56,7 +56,7 @@ For classes, it's possible to pass an array to evaluate to produce multiple clas
   <a
     x-href="state.target"
     x-class="[
-      'p-2',
+      state.target === 'https://google.com' && 'bg-red-400',
       state.target === 'https://survivejs.com' && 'bg-gray-400'
     ]"
     >Link target</a
@@ -340,13 +340,7 @@ The examples below combine directives to produce complex user interfaces and to 
       <span>Junior Engineer</span>
       <span x="state ? '+' : '-'" />
     </div>
-    <div
-      x-class="[
-        'py-2',
-        'text-gray-600',
-        !state && 'hidden'
-      ]"
-    >
+    <div class="py-2 text-gray-600" x-class="!state && 'hidden'">
       Junior engineer description
     </div>
   </div>
@@ -359,13 +353,7 @@ The examples below combine directives to produce complex user interfaces and to 
       <span>Senior Engineer</span>
       <span x="state ? '+' : '-'" />
     </div>
-    <div
-      x-class="[
-        'py-2',
-        'text-gray-600',
-        !state && 'hidden'
-      ]"
-    >
+    <div class="py-2 text-gray-600" x-class="!state && 'hidden'">
       Senior engineer description
     </div>
   </div>
@@ -378,31 +366,22 @@ The examples below combine directives to produce complex user interfaces and to 
 <section x-state="'animals'">
   <nav class="flex flex-row justify-between cursor-pointer">
     <div
-      x-class="[
-        'p-2',
-        'w-full',
-        state === 'animals' ? 'bg-gray-400' : 'btn-muted'
-      ]"
+      class="p-2 w-full"
+      x-class="state === 'animals' ? 'bg-gray-400' : 'btn-muted'"
       onclick="setState('animals')"
     >
       Animals
     </div>
     <div
-      x-class="[
-        'p-2',
-        'w-full',
-        state === 'languages' ? 'bg-gray-400' : 'btn-muted'
-      ]"
+      class="p-2 w-full"
+      x-class="state === 'languages' ? 'bg-gray-400' : 'btn-muted'"
       onclick="setState('languages')"
     >
       Languages
     </div>
     <div
-      x-class="[
-        'p-2',
-        'w-full',
-        state === 'colors' ? 'bg-gray-400' : 'btn-muted'
-      ]"
+      class="p-2 w-full"
+      x-class="state === 'colors' ? 'bg-gray-400' : 'btn-muted'"
       onclick="setState('colors')"
     >
       Colors
