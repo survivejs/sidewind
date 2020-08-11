@@ -388,13 +388,13 @@ The examples below combine directives to produce complex user interfaces and to 
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div x-class="state !== 'animals' && 'hidden'">
+    <div x-class="state === 'animals' ? '' : 'hidden'">
       Animals tab
     </div>
-    <div x-class="state !== 'languages' && 'hidden'">
+    <div x-class="state === 'languages' ? '' : 'hidden'">
       Languages tab
     </div>
-    <div x-class="state !== 'colors' && 'hidden'">
+    <div x-class="state === 'colors' ? '' : 'hidden'">
       Colors tab
     </div>
   </div>

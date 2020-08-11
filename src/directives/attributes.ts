@@ -73,10 +73,18 @@ function setXAttr(element: Element) {
 function setXInitialClass(element: Element) {
   const classAttribute = element.getAttribute("class");
   const xClassAttribute = element.getAttribute("x-class");
+  const xEvaluatableAttribute = element.getAttribute("x-evaluatable");
   const xInitialClassAttribute = element.getAttribute("x-initial-class");
 
-  if (classAttribute && xClassAttribute && !xInitialClassAttribute) {
+  if (
+    classAttribute &&
+    xClassAttribute &&
+    !xInitialClassAttribute &&
+    !xEvaluatableAttribute
+  ) {
     element.setAttribute("x-initial-class", classAttribute);
+  } else {
+    element.setAttribute("x-evaluatable", "true");
   }
 }
 
@@ -85,6 +93,7 @@ function isForbidden(name: string) {
     "x",
     "x-attr",
     "x-each",
+    "x-evaluatable",
     "x-initial-class",
     "x-label",
     "x-state",
