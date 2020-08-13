@@ -1,4 +1,5 @@
 import { BindState, ExtendedHTMLElement } from "./types";
+import getParents from "./get-parents";
 
 function getState(element: ExtendedHTMLElement) {
   const closestStateContainer = element.closest(
@@ -23,25 +24,6 @@ function getLabeledState(element: ExtendedHTMLElement, labelKey: string) {
     if (label) {
       ret[label] = labeledStateContainer.state;
     }
-  }
-
-  return ret;
-}
-
-function getParents(element: HTMLElement, attribute: string) {
-  const ret = [];
-  let parent: HTMLElement | null = element.parentElement;
-
-  while (true) {
-    if (!parent) {
-      break;
-    }
-
-    if (parent.hasAttribute(attribute)) {
-      ret.push(parent);
-    }
-
-    parent = parent.parentElement;
   }
 
   return ret;

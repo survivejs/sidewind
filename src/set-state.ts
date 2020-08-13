@@ -1,4 +1,5 @@
 import { ExtendedHTMLElement } from "./types";
+import getParents from "./get-parents";
 
 function setState(newValue: any, element?: ExtendedHTMLElement) {
   if (!element) {
@@ -19,9 +20,24 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
 
   const state = stateContainer.state;
   const evaluatedValue = isFunction(newValue) ? newValue(state) : newValue;
-  const updatedState = isObject(state)
-    ? Object.assign({}, state, evaluatedValue)
-    : evaluatedValue;
+  let updatedState = evaluatedValue;
+
+  console.log("evaluated value", evaluatedValue);
+
+  if (isObject(state)) {
+    const labeledStateContainers = getParents(element, "x-label");
+
+    if (labeledStateContainers.length) {
+      // TODO: take labeled state containers into account
+      console.log(
+        "got labeled state containers",
+        evaluatedValue,
+        labeledStateContainers
+      );
+    } else {
+      updatedState = Object.assign({}, state, evaluatedValue);
+    }
+  }
 
   stateContainer.state = updatedState;
 

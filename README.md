@@ -108,12 +108,32 @@ Default classes are retained as this allows more compact syntax with a fallback:
 
 ### `x-label`
 
-`x-label` gives access to parent state and it's useful for sharing information between scopes in one direction.
+`x-label` gives access to parent state and it's useful for sharing information between scopes.
 
 ```html
 <div x-label="i18n" x-state="{ hello: 'Terve' }">
   <div x-state="{ world: 'World' }">
     <span x="i18n.hello + ' ' + state.world" />
+  </div>
+</div>
+```
+
+It's also possible to set parent state within a child.
+
+```html
+<div x-label="parent" x-state="'parent state'">
+  <div x-state="'child state'">
+    <div>Parent state: <span x="parent" /></div>
+    <div>Child state: <span x="state" /></div>
+    <button
+      class="btn btn-blue"
+      onclick="setState({ parent: 'Changed parent' })"
+    >
+      Change parent state
+    </button>
+    <button class="btn btn-blue" onclick="setState('Changed child')">
+      Change child state
+    </button>
   </div>
 </div>
 ```
