@@ -33,26 +33,30 @@ function setState(
   let updatedState;
 
   if (parent) {
-    const labeledStateContainers = getParents(element, "x-label");
+    const labelName = "x-label";
+    const labeledStateContainers = getParents(element, labelName);
+    const matchingParents = labeledStateContainers.filter(
+      elem => elem.getAttribute(labelName) === parent
+    );
 
-    if (labeledStateContainers.length) {
-      // TODO: take labeled state containers into account
-      console.log(
-        "got labeled state containers",
-        evaluatedValue,
-        labeledStateContainers
-      );
+    if (matchingParents.length) {
+      const matchingParent = matchingParents[0];
+
+      // Signal to the state container that state was updated within
+      element.setAttribute("x-updated", "");
+
+      setState(newValue, { element: matchingParent as ExtendedHTMLElement });
     }
   } else {
     updatedState = isObject(evaluatedValue)
       ? Object.assign({}, state, evaluatedValue)
       : evaluatedValue;
+
+    stateContainer.state = updatedState;
+
+    // Signal to the state container that state was updated within
+    element.setAttribute("x-updated", "");
   }
-
-  stateContainer.state = updatedState;
-
-  // Signal to the state container that state was updated within
-  element.setAttribute("x-updated", "");
 }
 
 function isFunction(obj: any) {

@@ -118,7 +118,7 @@ Default classes are retained as this allows more compact syntax with a fallback:
 </div>
 ```
 
-It's also possible to set the parent state within a child.
+It's also possible to set the parent state within a child. This allows you to nest state within state while being able to mutate it.
 
 ```html
 <div x-label="parent" x-state="'parent state'">
@@ -136,7 +136,7 @@ It's also possible to set the parent state within a child.
     </button>
     <button
       class="btn btn-blue"
-      onclick="setState('Changed both') || setState('Changed parent', { parent: 'parent' })"
+      onclick="setState('Changed both') || setState('Changed both', { parent: 'parent' })"
     >
       Change both
     </button>
