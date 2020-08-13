@@ -118,7 +118,7 @@ Default classes are retained as this allows more compact syntax with a fallback:
 </div>
 ```
 
-It's also possible to set parent state within a child.
+It's also possible to set the parent state within a child.
 
 ```html
 <div x-label="parent" x-state="'parent state'">
@@ -127,12 +127,18 @@ It's also possible to set parent state within a child.
     <div>Child state: <span x="state" /></div>
     <button
       class="btn btn-blue"
-      onclick="setState({ parent: 'Changed parent' })"
+      onclick="setState('Changed parent', { parent: 'parent' })"
     >
       Change parent state
     </button>
     <button class="btn btn-blue" onclick="setState('Changed child')">
       Change child state
+    </button>
+    <button
+      class="btn btn-blue"
+      onclick="setState('Changed both') || setState('Changed parent', { parent: 'parent' })"
+    >
+      Change both
     </button>
   </div>
 </div>
@@ -462,7 +468,7 @@ The examples below combine directives to produce complex user interfaces and to 
       .then(res => res.text())
       .then(partial => setState({
         partial, status: 'loaded'
-      }, this))"
+      }, { element: this }))"
   >
     Show Partial
   </button>

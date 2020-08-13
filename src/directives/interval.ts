@@ -7,7 +7,7 @@ function intervalDirective({
   setState,
 }: DirectiveParameters) {
   const { options = {} } = evaluate(expression);
-  const evaluateValue = () => setState(evaluate(expression).state, element);
+  const evaluateValue = () => setState(evaluate(expression).state, { element });
 
   setInterval(evaluateValue, options.delay || 1000);
 

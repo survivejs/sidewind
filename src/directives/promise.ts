@@ -16,10 +16,10 @@ function promiseDirective({
         newState[key] = values[i];
       });
 
-      setState(newState, element);
+      setState(newState, { element });
     })
     .catch(error => {
-      setState({ error }, element);
+      setState({ error }, { element });
     });
 }
 promiseDirective.skipEvaluation = true;

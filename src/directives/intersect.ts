@@ -25,7 +25,7 @@ function intersectDirective({
       }
 
       triggered = true;
-      setState(evaluate(expression).state, element);
+      setState(evaluate(expression).state, { element });
     },
     Object.assign(
       {},

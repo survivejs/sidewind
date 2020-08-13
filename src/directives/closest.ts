@@ -43,7 +43,7 @@ function evaluateClosestValue(
     Math.abs(a.top) < Math.abs(b.top) ? a : b
   );
 
-  setState({ [key]: closest.element }, closestContainer);
+  setState({ [key]: closest.element }, { element: closestContainer });
 }
 
 export default closestDirective;

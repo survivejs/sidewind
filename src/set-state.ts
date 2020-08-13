@@ -1,7 +1,17 @@
 import { ExtendedHTMLElement } from "./types";
 import getParents from "./get-parents";
 
-function setState(newValue: any, element?: ExtendedHTMLElement) {
+function setState(
+  newValue: any,
+  {
+    element,
+    parent,
+  }: {
+    element?: ExtendedHTMLElement;
+    parent?: string;
+    foo?: any;
+  } = {}
+) {
   if (!element) {
     element = window.event && (window.event.target as ExtendedHTMLElement);
 
@@ -20,11 +30,9 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
 
   const state = stateContainer.state;
   const evaluatedValue = isFunction(newValue) ? newValue(state) : newValue;
-  let updatedState = evaluatedValue;
+  let updatedState;
 
-  console.log("evaluated value", evaluatedValue);
-
-  if (isObject(state)) {
+  if (parent) {
     const labeledStateContainers = getParents(element, "x-label");
 
     if (labeledStateContainers.length) {
@@ -34,9 +42,11 @@ function setState(newValue: any, element?: ExtendedHTMLElement) {
         evaluatedValue,
         labeledStateContainers
       );
-    } else {
-      updatedState = Object.assign({}, state, evaluatedValue);
     }
+  } else {
+    updatedState = isObject(evaluatedValue)
+      ? Object.assign({}, state, evaluatedValue)
+      : evaluatedValue;
   }
 
   stateContainer.state = updatedState;
