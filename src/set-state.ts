@@ -54,6 +54,9 @@ function setState(
 
     stateContainer.state = updatedState;
 
+    // Can this be avoided?
+    stateContainer.setAttribute("x-state", JSON.stringify(updatedState));
+
     // Signal to the state container that state was updated within
     element.setAttribute("x-updated", "");
   }

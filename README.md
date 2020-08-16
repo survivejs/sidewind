@@ -170,7 +170,7 @@ The nested behavior works for attributes as well.
         class="btn btn-blue"
         onclick="setState(state => !state) || setState(state => !state, { parent: 'parent' })"
       >
-        Change classes both
+        Change classes for both
       </button>
     </div>
   </div>
