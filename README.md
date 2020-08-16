@@ -122,6 +122,7 @@ It's also possible to set the parent state within a child. This allows you to ne
 
 ```html
 <div x-label="parent" x-state="'parent state'">
+  <div>Parent state in between: <span x="parent" /></div>
   <div class="space-y-2" x-state="'child state'">
     <div>Parent state: <span x="parent" /></div>
     <div>Child state: <span x="state" /></div>
