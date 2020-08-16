@@ -9,7 +9,11 @@ function stateDirective({
 }: DirectiveParameters) {
   element.state = evaluate(expression);
 
-  const observer = new MutationObserver(mutations => {
+  if (element.observer) {
+    return;
+  }
+
+  element.observer = new MutationObserver(mutations => {
     const { target } = mutations[0];
 
     // @ts-ignore
@@ -31,7 +35,7 @@ function stateDirective({
     evaluateDirectives(directivesWithoutSkipping, closestStateContainer);
   });
 
-  observer.observe(element, {
+  element.observer.observe(element, {
     attributeFilter: ["x-updated"],
     attributes: true,
     subtree: true,

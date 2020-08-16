@@ -7,6 +7,7 @@ type State = { [id: string]: any } | string;
 type ExtendedHTMLElement = HTMLElement & {
   content: any;
   state: BindState;
+  observer: MutationObserver;
   value: any;
 };
 type Directive = { name: string; directive: DirectiveFunction };
