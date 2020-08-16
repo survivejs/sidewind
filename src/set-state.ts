@@ -42,8 +42,8 @@ function setState(
     if (matchingParents.length) {
       const matchingParent = matchingParents[0];
 
-      // Signal to the state container that state was updated within
-      element.setAttribute("x-updated", "");
+      // Signal to the state container that state was updated with a parent
+      element.setAttribute("x-updated", parent);
 
       setState(newValue, { element: matchingParent as ExtendedHTMLElement });
     }

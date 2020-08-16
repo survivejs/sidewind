@@ -10,13 +10,15 @@ function stateDirective({
   element.state = evaluate(expression);
 
   const observer = new MutationObserver(mutations => {
-    const { attributeName, target } = mutations[0];
-    const closestStateContainer = (target as ExtendedHTMLElement).closest(
-      `[x-state]`
-    );
+    const { target } = mutations[0];
 
-    // If triggered by something else than setState, skip.
-    if (attributeName !== "x-updated" || closestStateContainer !== element) {
+    // @ts-ignore
+    const updatedTarget = target.attributes.getNamedItem("x-updated").value;
+    const closestStateContainer = updatedTarget
+      ? (target as ExtendedHTMLElement).closest(`[x-label="${updatedTarget}"]`)
+      : (target as ExtendedHTMLElement).closest(`[x-state]`);
+
+    if (!updatedTarget && closestStateContainer !== element) {
       return;
     }
 
@@ -25,10 +27,15 @@ function stateDirective({
       ({ directive }) => !directive.skipEvaluation
     );
 
-    evaluateDirectives(directivesWithoutSkipping, element);
+    // @ts-ignore
+    evaluateDirectives(directivesWithoutSkipping, closestStateContainer);
   });
 
-  observer.observe(element, { attributes: true, subtree: true });
+  observer.observe(element, {
+    attributeFilter: ["x-updated"],
+    attributes: true,
+    subtree: true,
+  });
 }
 
 export default stateDirective;
