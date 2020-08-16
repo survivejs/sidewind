@@ -21,7 +21,7 @@
     "prettier": "^1.19.1",
     "purgecss-webpack-plugin": "^1.6.0",
     "showdown": "^1.9.1",
-    "tailwindcss": "^1.1.4",
+    "tailwindcss": "^1.6.2",
     "temp": "^0.9.1",
     "ts-loader": "^6.2.1",
     "tsdx": "^0.12.1",

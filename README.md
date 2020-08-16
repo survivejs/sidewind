@@ -122,7 +122,7 @@ It's also possible to set the parent state within a child. This allows you to ne
 
 ```html
 <div x-label="parent" x-state="'parent state'">
-  <div x-state="'child state'">
+  <div class="space-y-2" x-state="'child state'">
     <div>Parent state: <span x="parent" /></div>
     <div>Child state: <span x="state" /></div>
     <button
@@ -140,6 +140,38 @@ It's also possible to set the parent state within a child. This allows you to ne
     >
       Change both
     </button>
+  </div>
+</div>
+```
+
+The nested behavior works for attributes as well.
+
+```html
+<div x-label="parent" x-state="true">
+  <div class="space-y-2" x-state="true">
+    <div class="p-2" x-class="parent ? 'bg-red-400' : 'bg-red-200'">
+      Parent
+    </div>
+    <div class="p-2" x-class="state ? 'bg-gray-400' : 'bg-gray-200'">
+      Child
+    </div>
+    <div class="flex space-x-2">
+      <button
+        class="btn btn-blue"
+        onclick="setState(state => !state, { parent: 'parent' })"
+      >
+        Change parent class
+      </button>
+      <button class="btn btn-blue" onclick="setState(state => !state)">
+        Change child class
+      </button>
+      <button
+        class="btn btn-blue"
+        onclick="setState(state => !state) || setState(state => !state, { parent: 'parent' })"
+      >
+        Change classes both
+      </button>
+    </div>
   </div>
 </div>
 ```

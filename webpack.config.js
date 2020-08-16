@@ -212,7 +212,7 @@ module.exports = mode => {
         mode,
         plugins: [
           new PurgeCSSPlugin({
-            whitelistPatterns: [/^hljs/],
+            whitelistPatterns: [/^hljs/, /^space-x/, /^space-y/],
             paths: glob.sync(`${htmlDir}/**/*.html`),
             extractors: [
               {
