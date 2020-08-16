@@ -245,7 +245,6 @@ function getHTML({
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <title>${title}</title>
       ${cssTags}
-      <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
     </head>
     <body>
       ${githubCorner("https://github.com/survivejs/sidewind")}
