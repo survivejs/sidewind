@@ -546,7 +546,7 @@ To allow for easy online usage with all functionality, there are versions of Sid
 **Example:**
 
 <code class="overflow-auto max-w-full inline-block">
-  <script type="text/javascript" src="https://unpkg.com/sidewind@1.2.1/dist/sidewind.umd.production.min.js" />
+  <script type="text/javascript" src="https://unpkg.com/sidewind@3.1.2/dist/sidewind.umd.production.min.js"></script>
 </code>
 
 ## Directive API
