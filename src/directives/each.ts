@@ -22,7 +22,7 @@ function eachDirective({
   }
 
   Object.values(getValues(state, expression)).forEach(
-    values =>
+    (values) =>
       Array.isArray(values) &&
       values.forEach((value: any) => {
         const templateClone = document.importNode(element.content, true);

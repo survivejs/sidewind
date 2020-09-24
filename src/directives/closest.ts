@@ -25,15 +25,17 @@ function evaluateClosestValue(
   key: string,
   setState: DirectiveParameters["setState"]
 ) {
-  const elements = Array.from(getValues(closestState, key)[key]).map(value => {
-    const element = value as HTMLElement;
-    const { top } = element.getBoundingClientRect();
+  const elements = Array.from(getValues(closestState, key)[key]).map(
+    (value) => {
+      const element = value as HTMLElement;
+      const { top } = element.getBoundingClientRect();
 
-    return {
-      element,
-      top,
-    };
-  });
+      return {
+        element,
+        top,
+      };
+    }
+  );
 
   if (!elements || elements.length < 1) {
     return;

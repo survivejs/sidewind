@@ -5,9 +5,14 @@ const glob = require("glob");
 const showdown = require("showdown");
 const decodeHTML = require("html-encoder-decoder").decode;
 const webpack = require("webpack");
-const merge = require("webpack-merge");
+const { merge } = require("webpack-merge");
 const CopyPlugin = require("copy-webpack-plugin");
-const MiniHtmlWebpackPlugin = require("mini-html-webpack-plugin");
+const {
+  MiniHtmlWebpackPlugin,
+  generateAttributes,
+  generateCSSReferences,
+  generateJSReferences,
+} = require("mini-html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const PurgeCSSPlugin = require("purgecss-webpack-plugin");
 
@@ -47,7 +52,7 @@ const commonConfig = merge({
     path: PATHS.OUTPUT,
   },
   plugins: [
-    new CopyPlugin([{ from: PATHS.ASSETS, to: "assets" }]),
+    new CopyPlugin({ patterns: [{ from: PATHS.ASSETS, to: "assets" }] }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
@@ -66,11 +71,6 @@ const commonConfig = merge({
         cssAttributes,
         jsAttributes,
       }) => {
-        const {
-          generateAttributes,
-          generateCSSReferences,
-          generateJSReferences,
-        } = MiniHtmlWebpackPlugin;
         const htmlAttrs = generateAttributes(htmlAttributes);
 
         const cssTags = generateCSSReferences({
@@ -93,7 +93,7 @@ const commonConfig = merge({
 
 function processMarkdown(input) {
   const classMap = { a: "underline", ul: "list-disc list-inside" };
-  const bindings = Object.keys(classMap).map(key => ({
+  const bindings = Object.keys(classMap).map((key) => ({
     type: "output",
     regex: new RegExp(`<${key}(.*)>`, "g"),
     replace: `<${key} class="${classMap[key]}" $1>`,
@@ -190,7 +190,7 @@ class AddDependencyPlugin {
   }
 }
 
-module.exports = mode => {
+module.exports = (mode) => {
   switch (mode) {
     case "development": {
       return merge(commonConfig, {
@@ -212,15 +212,12 @@ module.exports = mode => {
         mode,
         plugins: [
           new PurgeCSSPlugin({
-            whitelistPatterns: [/^hljs/, /^space-x/, /^space-y/],
+            whitelistPatterns: [/^hljs/, /^space-x/, /^space-y/], // Example: /^svg-/
             paths: glob.sync(`${htmlDir}/**/*.html`),
             extractors: [
               {
-                extractor: class TailwindExtractor {
-                  static extract(content) {
-                    return content.match(/[A-Za-z0-9-_:/]+/g) || [];
-                  }
-                },
+                extractor: (content) =>
+                  content.match(/[^<>"'`\s]*[^<>"'`\s:]/g) || [],
                 extensions: ["html"],
               },
             ],
@@ -245,6 +242,8 @@ function getHTML({
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <title>${title}</title>
       ${cssTags}
+      <link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/styles/dracula.min.css">
     </head>
     <body>
       ${githubCorner("https://github.com/survivejs/sidewind")}

@@ -1,9 +1,8 @@
-const hljs = require("highlight.js/lib/highlight.js");
-const html = require("highlight.js/lib/languages/xml");
+const hljs = require("highlight.js");
 
-const js = require("highlight.js/lib/languages/javascript");
+const html = require("highlight.js/lib/languages/xml.js");
+const js = require("highlight.js/lib/languages/javascript.js");
 
-require("highlight.js/styles/dracula.css");
 require("./index.pcss");
 require("../src");
 

@@ -10,13 +10,13 @@ function intersectDirective({
 
   let triggered = false;
   const observer = new IntersectionObserver(
-    entries => {
+    (entries) => {
       if (options.once && triggered) {
         return;
       }
 
       // https://stackoverflow.com/questions/53214116/intersectionobserver-callback-firing-immediately-on-page-load
-      const intersected = entries.some(entry => {
+      const intersected = entries.some((entry) => {
         return entry.intersectionRatio > 0;
       });
 

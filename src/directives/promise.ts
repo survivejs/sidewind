@@ -9,7 +9,7 @@ function promiseDirective({
   const { state } = evaluate(expression);
 
   Promise.all(Object.values(state))
-    .then(values => {
+    .then((values) => {
       const newState: BindState = {};
 
       Object.keys(state).forEach((key, i) => {
@@ -18,7 +18,7 @@ function promiseDirective({
 
       setState(newState, { element });
     })
-    .catch(error => {
+    .catch((error) => {
       setState({ error }, { element });
     });
 }

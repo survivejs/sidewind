@@ -9,7 +9,7 @@ function attributesDirective({
 }: DirectiveParameters) {
   const attributes = Array.from(element.attributes);
 
-  attributes.forEach(attribute => {
+  attributes.forEach((attribute) => {
     const attributeName = attribute.nodeName;
 
     if (attributeName.startsWith(ATTRIBUTE_KEY)) {
@@ -55,7 +55,7 @@ attributesDirective.init = function generateAttributeKeys(
 ) {
   Array.from(parent.querySelectorAll("*"))
     .concat(parent)
-    .forEach(element => {
+    .forEach((element) => {
       setXInitialClass(element);
       setXAttr(element);
     });
@@ -63,7 +63,7 @@ attributesDirective.init = function generateAttributeKeys(
 
 function setXAttr(element: Element) {
   Array.from(element.attributes || []).some(
-    attribute =>
+    (attribute) =>
       attribute.name.startsWith(ATTRIBUTE_KEY) && !isForbidden(attribute.name)
   ) && element.setAttribute("x-attr", "");
 }

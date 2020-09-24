@@ -5,4 +5,8 @@ module.exports = {
   theme: {},
   variants: {},
   corePlugins: {},
+  // Purging happens through webpack
+  purge: {
+    enabled: false,
+  },
 };

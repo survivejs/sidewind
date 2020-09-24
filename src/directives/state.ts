@@ -13,7 +13,7 @@ function stateDirective({
     return;
   }
 
-  element.observer = new MutationObserver(mutations => {
+  element.observer = new MutationObserver((mutations) => {
     const { target } = mutations[0];
 
     // @ts-ignore

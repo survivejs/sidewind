@@ -36,7 +36,7 @@ function setState(
     const labelName = "x-label";
     const labeledStateContainers = getParents(element, labelName);
     const matchingParents = labeledStateContainers.filter(
-      elem => elem.getAttribute(labelName) === parent
+      (elem) => elem.getAttribute(labelName) === parent
     );
 
     if (matchingParents.length) {
