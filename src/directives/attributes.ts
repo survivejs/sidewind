@@ -83,7 +83,7 @@ function setXInitialClass(element: Element) {
     !xEvaluatableAttribute
   ) {
     element.setAttribute("x-initial-class", classAttribute);
-  } else {
+  } else if (element.closest(`[x-state]`)) {
     element.setAttribute("x-evaluatable", "true");
   }
 }
