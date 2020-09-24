@@ -23,9 +23,7 @@ The state can be manipulated using a global `setState`:
 ```html
 <section x-state="false">
   <div class="mb-2">Value: <span x="state" /></div>
-  <button class="btn btn-blue" onclick="setState(v => !v)">
-    Toggle value
-  </button>
+  <button class="btn btn-blue" onclick="setState(v => !v)">Toggle value</button>
 </section>
 ```
 
@@ -150,12 +148,8 @@ The nested behavior works for attributes as well.
 ```html
 <div x-label="parent" x-state="true">
   <div class="space-y-2" x-state="true">
-    <div class="p-2" x-class="parent ? 'bg-red-400' : 'bg-red-200'">
-      Parent
-    </div>
-    <div class="p-2" x-class="state ? 'bg-gray-400' : 'bg-gray-200'">
-      Child
-    </div>
+    <div class="p-2" x-class="parent ? 'bg-red-400' : 'bg-red-200'">Parent</div>
+    <div class="p-2" x-class="state ? 'bg-gray-400' : 'bg-gray-200'">Child</div>
     <div class="flex space-x-2">
       <button
         class="btn btn-blue"
@@ -447,15 +441,9 @@ The examples below combine directives to produce complex user interfaces and to 
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div x-class="state === 'animals' ? '' : 'hidden'">
-      Animals tab
-    </div>
-    <div x-class="state === 'languages' ? '' : 'hidden'">
-      Languages tab
-    </div>
-    <div x-class="state === 'colors' ? '' : 'hidden'">
-      Colors tab
-    </div>
+    <div x-class="state === 'animals' ? '' : 'hidden'">Animals tab</div>
+    <div x-class="state === 'languages' ? '' : 'hidden'">Languages tab</div>
+    <div x-class="state === 'colors' ? '' : 'hidden'">Colors tab</div>
   </div>
 </section>
 ```
@@ -545,9 +533,7 @@ To allow for easy online usage with all functionality, there are versions of Sid
 
 **Example:**
 
-<code class="overflow-auto max-w-full inline-block">
-  <script type="text/javascript" src="https://unpkg.com/sidewind@3.1.2/dist/sidewind.umd.production.min.js"></script>
-</code>
+> `<script type="text/javascript" src="https://unpkg.com/sidewind@3.2.0/dist/sidewind.umd.production.min.js"></script>`
 
 ## Directive API
 
