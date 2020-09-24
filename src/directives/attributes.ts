@@ -53,6 +53,8 @@ function setAttribute(
 attributesDirective.init = function generateAttributeKeys(
   parent: ExtendedHTMLElement
 ) {
+  // TODO: Likely it's smartest to go only through x-state scopes (drop check from setXInitialClass)
+  // for a bit of extra performance at init.
   Array.from(parent.querySelectorAll("*"))
     .concat(parent)
     .forEach((element) => {
