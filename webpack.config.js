@@ -52,7 +52,7 @@ const commonConfig = merge({
     path: PATHS.OUTPUT,
   },
   plugins: [
-    new CopyPlugin({ patterns: [{ from: PATHS.ASSETS, to: "assets" }] }),
+    new CopyPlugin({ patterns: [{ from: PATHS.ASSETS, to: "assets" }, "./CNAME"] }),
     new MiniCssExtractPlugin({
       filename: "[name].css",
     }),
