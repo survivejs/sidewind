@@ -244,6 +244,9 @@ function getHTML({
       ${cssTags}
       <link rel="stylesheet"
       href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/styles/dracula.min.css">
+      <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/highlight.min.js"></script>
+      <script charset="UTF-8" src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/languages/javascript.min.js"></script>
+      <script charset="UTF-8" src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/languages/xml.min.js"></script>
     </head>
     <body>
       ${githubCorner("https://github.com/survivejs/sidewind")}
