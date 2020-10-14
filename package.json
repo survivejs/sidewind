@@ -40,7 +40,7 @@
   "bugs": {
     "url": "https://github.com/survivejs/sidewind/issues"
   },
-  "homepage": "https://survivejs.github.io/sidewind/",
+  "homepage": "https://sidewind.js.org/",
   "scripts": {
     "build": "tsdx build --format umd",
     "site:build": "npm run webpack:build",
