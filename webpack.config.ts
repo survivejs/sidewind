@@ -7,6 +7,7 @@ import type {
 import fs from "fs";
 import path from "path";
 import temp from "temp";
+import { bw } from "@beamwind/play";
 import showdown from "showdown";
 import { merge } from "webpack-merge";
 import { WebpackPluginServe } from "webpack-plugin-serve";
@@ -103,7 +104,7 @@ function processMarkdown(input: string) {
     type: "output",
     regex: new RegExp(`<${key}(.*)>`, "g"),
     // @ts-ignore: No index signature with a parameter of type 'string' was found
-    replace: `<${key} class="${classMap[key]}" $1>`,
+    replace: `<${key} class="${bw(classMap[key])}" $1>`,
   }));
   const convert = new showdown.Converter({
     extensions: [
@@ -125,7 +126,9 @@ function styleH1() {
   return {
     type: "output",
     regex: new RegExp(`<${tag} id="(.*)">(.*)<\/${tag}>`, "g"),
-    replace: `<${tag} class="mb-8 pb-2 text-4xl border-b-4">$2</${tag}>`,
+    replace: `<${tag} class="${bw(
+      "mb-8 pb-2 text-4xl border-b-4"
+    )}">$2</${tag}>`,
   };
 }
 
@@ -133,7 +136,11 @@ function addHeadingAnchors(tag: string) {
   return {
     type: "output",
     regex: new RegExp(`<${tag} id="(.*)">(.*)<\/${tag}>`, "g"),
-    replace: `<div><${tag} class="inline" id="$1">$2</${tag}><a class="ml-2 text-gray-200 hover:text-gray-800" href="#$1">#</a></div>`,
+    replace: `<div><${tag} class="${bw(
+      "inline"
+    )}" id="$1">$2</${tag}><a class="${bw(
+      "ml-2 text-gray-200 hover:text-gray-800"
+    )}" href="#$1">#</a></div>`,
   };
 }
 
@@ -148,12 +155,20 @@ function expandCode() {
           const example = decodeHTML(match).trim();
           const decodedExample = Buffer.from(example).toString("base64");
 
-          return `<section class="mb-4" x-state="{ code: atob('${decodedExample}') }">
-    <div class="p-4 bg-gray-800 text-white rounded-t-lg overflow-x-auto overflow-y-hidden">
-      <div class="inline-block font-mono relative">
-        <pre class="overflow-hidden mr-16 pr-16 w-full" x="highlight('html', state.code)"></pre>
+          return `<section class="${bw(
+            "mb-4"
+          )}" x-state="{ code: atob('${decodedExample}') }">
+    <div class="${bw(
+      "p-4 bg-gray-800 text-white rounded-t-lg overflow-x-auto overflow-y-hidden"
+    )}">
+      <div class="${bw("inline-block font-mono relative")}">
+        <pre class="${bw(
+          "overflow-hidden mr-16 pr-16 w-full"
+        )}" x="highlight('html', state.code)"></pre>
         <textarea
-          class="overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
+          class="${bw(
+            "overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
+          )}"
           oninput="setState({ code: this.value })"
           x="state.code"
           autocapitalize="off"
@@ -164,7 +179,9 @@ function expandCode() {
         ></textarea>
       </div>
     </div>
-    <div class="p-4 bg-gray-200 rounded-b-lg" x="state.code">${example}</div>
+    <div class="${bw(
+      "p-4 bg-gray-200 rounded-b-lg"
+    )}" x="state.code">${example}</div>
 </section>`;
         };
       return showdown.helper.replaceRecursiveRegExp(
@@ -252,16 +269,17 @@ function getHTML({
       ${cssTags}
       <link rel="stylesheet"
       href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/styles/dracula.min.css">
+      <script src="unpkg.com/@beamwind/play@2.1.1/script/play.js"></script>
       <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/highlight.min.js"></script>
       <script charset="UTF-8" src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/languages/javascript.min.js"></script>
       <script charset="UTF-8" src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/languages/xml.min.js"></script>
     </head>
     <body>
       ${githubCorner("https://github.com/survivejs/sidewind")}
-      <main class="flex m-8">
-        <aside class="hidden md:inline md:w-1/3">
+      <main class="${bw("flex m-8")}">
+        <aside class="${bw("hidden md:inline md:w-1/3")}">
           <nav
-            class="sticky top-0"
+            class="${bw("sticky top-0")}"
             x-label="parent"
             x-state="{ closest: {}, headings: Array.from(document.querySelectorAll('h2, h3')) }"
             x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
@@ -273,8 +291,10 @@ function getHTML({
                     x-href="state.nextElementSibling.attributes.href.value"
                     x="state.textContent"
                     x-class="[
-                      state.textContent === parent.closest.textContent && 'font-bold',
-                      state.tagName === 'H3' && 'ml-2'
+                      state.textContent === parent.closest.textContent && '${bw(
+                        "font-bold"
+                      )}',
+                      state.tagName === 'H3' && '${bw("ml-2")}'
                     ]"
                   >
                   </a>
@@ -283,7 +303,7 @@ function getHTML({
             </ul>
           </nav>
         </aside>
-        <article class="w-full md:w-2/3 md:max-w-2xl">
+        <article class="${bw("w-full md:w-2/3 md:max-w-2xl")}">
           ${processMarkdown(
             fs.readFileSync("./README.md", { encoding: "utf-8" })
           )}
