@@ -4,7 +4,8 @@ const temp = require("temp");
 const glob = require("glob");
 const showdown = require("showdown");
 const decodeHTML = require("html-encoder-decoder").decode;
-const webpack = require("webpack");
+const { mode } = require("webpack-nano/argv");
+const { WebpackPluginServe } = require("webpack-plugin-serve");
 const { merge } = require("webpack-merge");
 const CopyPlugin = require("copy-webpack-plugin");
 const {
@@ -190,16 +191,22 @@ class AddDependencyPlugin {
   }
 }
 
-module.exports = (mode) => {
+const getConfig = (mode) => {
   switch (mode) {
     case "development": {
       return merge(commonConfig, {
         mode,
+        watch: true,
         plugins: [
+          new WebpackPluginServe({
+            port: process.env.PORT || 8080,
+            static: PATHS.OUTPUT,
+            liveReload: true,
+            waitForBuild: true,
+          }),
           new AddDependencyPlugin({
             path: path.join(__dirname, "./README.md"),
           }),
-          new webpack.HotModuleReplacementPlugin(),
         ],
       });
     }
@@ -227,6 +234,8 @@ module.exports = (mode) => {
     }
   }
 };
+
+module.exports = getConfig(mode);
 
 function getHTML({
   title = "",
