@@ -25,5 +25,10 @@
       "*": ["src/*", "node_modules/*"]
     },
     "esModuleInterop": true
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
   }
 }
