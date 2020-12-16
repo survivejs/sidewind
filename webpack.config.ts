@@ -8,6 +8,7 @@ import fs from "fs";
 import path from "path";
 import temp from "temp";
 import { createInstance, virtualInjector } from "beamwind";
+import tailwind from "@beamwind/preset-tailwind";
 import showdown from "showdown";
 import { merge } from "webpack-merge";
 import { WebpackPluginServe } from "webpack-plugin-serve";
@@ -22,7 +23,9 @@ import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 // Is this the right place or should this be controlled per render?
 const injector = virtualInjector();
-const { bw } = createInstance({ injector });
+const { setup, bw } = createInstance({ injector });
+
+setup(tailwind());
 
 const decodeHTML = require("html-encoder-decoder").decode;
 const { mode } = require("webpack-nano/argv");
