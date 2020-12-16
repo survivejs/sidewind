@@ -7,7 +7,7 @@ import type {
 import fs from "fs";
 import path from "path";
 import temp from "temp";
-import { bw } from "@beamwind/play";
+import { createInstance, virtualInjector } from "beamwind";
 import showdown from "showdown";
 import { merge } from "webpack-merge";
 import { WebpackPluginServe } from "webpack-plugin-serve";
@@ -19,6 +19,10 @@ import {
   generateJSReferences,
 } from "mini-html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+
+// Is this the right place or should this be controlled per render?
+const injector = virtualInjector();
+const { bw } = createInstance({ injector });
 
 const decodeHTML = require("html-encoder-decoder").decode;
 const { mode } = require("webpack-nano/argv");
@@ -259,7 +263,8 @@ function getHTML({
   cssTags = "",
   jsTags = "",
 } = {}) {
-  return `<!DOCTYPE html>
+  const styleTag = "STYLE_TAG";
+  const markup = `<!DOCTYPE html>
   <html${htmlAttrs}>
     <head>
       <meta charset="UTF-8">
@@ -273,6 +278,7 @@ function getHTML({
       <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/highlight.min.js"></script>
       <script charset="UTF-8" src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/languages/javascript.min.js"></script>
       <script charset="UTF-8" src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/languages/xml.min.js"></script>
+      ${styleTag}
     </head>
     <body>
       ${githubCorner("https://github.com/survivejs/sidewind")}
@@ -312,6 +318,11 @@ function getHTML({
       ${jsTags}
     </body>
   </html>`;
+
+  return markup.replace(
+    styleTag,
+    `<style id="__beamwind">${injector.target.join("\n")}</style>`
+  );
 }
 
 // http://tholman.com/github-corners/
