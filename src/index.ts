@@ -13,11 +13,12 @@ import {
 
 declare global {
   interface Window {
+    evaluateAllDirectives: typeof evaluateAllDirectives;
     setState: typeof setState;
   }
 }
 
-window.onload = () =>
+function evaluateAllDirectives() {
   evaluateDirectives([
     { name: "x-state", directive: stateDirective },
     { name: "x-each", directive: eachDirective },
@@ -28,5 +29,9 @@ window.onload = () =>
     { name: "x-interval", directive: intervalDirective },
     { name: "x-intersect", directive: intersectDirective },
   ]);
+}
 
+window.addEventListener("load", evaluateAllDirectives);
+
+window.evaluateAllDirectives = evaluateAllDirectives;
 window.setState = setState;
