@@ -2,6 +2,10 @@ import { BindState, ExtendedHTMLElement } from "./types";
 import getParents from "./get-parents";
 
 function getState(element: ExtendedHTMLElement) {
+  if (!element) {
+    return {};
+  }
+
   const closestStateContainer = element.closest(
     `[x-state]`
   ) as ExtendedHTMLElement;
