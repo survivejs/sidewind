@@ -3,7 +3,7 @@ import getParents from "./get-parents";
 
 function getState(element: ExtendedHTMLElement) {
   if (!element) {
-    return {};
+    return { state: {} };
   }
 
   const closestStateContainer = element.closest(
