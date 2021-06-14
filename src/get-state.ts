@@ -2,13 +2,14 @@ import { BindState, ExtendedHTMLElement } from "./types";
 import getParents from "./get-parents";
 
 function getState(element: ExtendedHTMLElement) {
-  if (!element) {
-    return { state: {} };
-  }
-
   const closestStateContainer = element.closest(
     `[x-state]`
   ) as ExtendedHTMLElement;
+
+  if (!closestStateContainer) {
+    return { state: {} };
+  }
+
   const { state }: { state: BindState } = closestStateContainer;
   const labeledState = getLabeledState(element, "x-label");
 
