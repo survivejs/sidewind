@@ -1,4 +1,5 @@
 export { default as attributesDirective } from "./attributes";
+export { default as cloakDirective } from "./cloak";
 export { default as closestDirective } from "./closest";
 export { default as eachDirective } from "./each";
 export { default as intersectDirective } from "./intersect";

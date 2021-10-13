@@ -37,6 +37,18 @@ State can be a complex object:
 
 > [The calculator example](#calculator) takes this idea further and shows how to handle user interaction.
 
+### `x-cloak`
+
+`x-cloak` has been designed let you hide interactive content until Sidewind has loaded to avoid displaying markup that's not ready. Consider the example below:
+
+```html
+<article hidden x-cloak x-state="{ amount: 1000, interest: 1.2 }">
+  Total: <span x="state.amount * state.interest" />
+</article>
+```
+
+When it executes, it removes the [hidden](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden) attribute from the element and it will be ready to run.
+
 ### `x` with Attributes
 
 In addition to binding values, it's possible to bind attributes with `x-`:
