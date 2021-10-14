@@ -558,7 +558,7 @@ All directives of the system have been implemented as plugins. For now, it's bes
 - [htmx](https://htmx.org/) is a complete solution with server integration.
 - [Mavo](https://mavo.io) implements a DSL on top of HTML for light interactivity.
 - [Svelte](https://svelte.dev) implements a compiler based approach.
-- [Vue](https://vuejs.org), and especially Vue 3, allows similar usage in the frontend as Sidewind.
+- [Vue](https://vuejs.org), and especially Vue 3, allows similar usage in the frontend as Sidewind. See also [petite-vue](https://github.com/vuejs/petite-vue).
 
 ## License
 
