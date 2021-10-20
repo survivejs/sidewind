@@ -46,6 +46,9 @@ function setState(
 
       setState(newValue, { element: matchingParent as ExtendedHTMLElement });
     }
+    else {
+      console.warn('Failed to find matching parents for', parent)
+    }
   } else {
     updatedState = isObject(evaluatedValue)
       ? Object.assign({}, state, evaluatedValue)
