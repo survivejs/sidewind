@@ -9,7 +9,6 @@ function setState(
   }: {
     element?: ExtendedHTMLElement;
     parent?: string;
-    foo?: any;
   } = {}
 ) {
   if (!element) {
