@@ -27,10 +27,6 @@ function setState(
     return;
   }
 
-  const state = stateContainer.state;
-  const evaluatedValue = isFunction(newValue) ? newValue(state) : newValue;
-  let updatedState;
-
   if (parent) {
     const labelName = "x-label";
     const labeledStateContainers = getParents(element, labelName);
@@ -50,7 +46,9 @@ function setState(
       console.warn('Failed to find matching parents for', parent)
     }
   } else {
-    updatedState = isObject(evaluatedValue)
+    const state = stateContainer.state;
+    const evaluatedValue = isFunction(newValue) ? newValue(state) : newValue;
+    const updatedState = isObject(evaluatedValue)
       ? Object.assign({}, state, evaluatedValue)
       : evaluatedValue;
 
