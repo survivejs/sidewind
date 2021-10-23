@@ -3,29 +3,22 @@ import getParents from "../get-parents";
 
 function recurseDirective({
   element,
-  expression,
-  evaluate,
-  getState,
   evaluateDirectives,
   directives,
 }: DirectiveParameters) {
-  const state = evaluate(expression, getState(element));
+  const parents = getParents(element, "_x");
+  const firstParent = parents[0];
+  const template = firstParent.nextElementSibling as ExtendedHTMLElement;
 
-  if (state) {
-    const parents = getParents(element, "_x");
-    const firstParent = parents[0];
-    const template = firstParent.nextElementSibling as ExtendedHTMLElement;
+  if (template) {
+    const templateClone = template.cloneNode(true) as ExtendedHTMLElement;
 
-    if (template) {
-      const templateClone = template.cloneNode(true) as ExtendedHTMLElement;
+    // TODO: This should use the expression
+    templateClone.setAttribute("x-each", "children");
 
-      // TODO: Figure out how to resolve to this or change the interface somehow
-      templateClone.setAttribute("x-each", "children");
+    element.appendChild(templateClone);
 
-      element.appendChild(templateClone);
-
-      evaluateDirectives(directives, element);
-    }
+    evaluateDirectives(directives, element);
   }
 }
 

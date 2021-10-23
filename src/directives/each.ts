@@ -26,6 +26,8 @@ function eachDirective({
   eachBoundary.setAttribute("_x", "");
   containerParent.appendChild(eachBoundary);
 
+  console.log("x-each", state, expression);
+
   Object.values(getValues(state, expression)).forEach(
     (values) =>
       Array.isArray(values) &&
