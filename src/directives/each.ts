@@ -33,14 +33,14 @@ function eachDirective({
           // The element should be a state container itself
           child.setAttribute("x-state", JSON.stringify(value));
           child.state = value;
-        } while (child = child.nextElementSibling);
+        } while ((child = child.nextElementSibling));
 
         containerParent.appendChild(templateClone);
 
         child = firstChild;
         do {
           evaluateDirectives(directives, child);
-        } while (child = child.nextElementSibling);
+        } while ((child = child.nextElementSibling));
       })
   );
 
