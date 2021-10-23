@@ -14,16 +14,21 @@ function recurseDirective({
   if (state) {
     const parents = getParents(element, "_x");
     const firstParent = parents[0];
+    const template = firstParent.nextElementSibling as ExtendedHTMLElement;
 
-    if (firstParent) {
-      console.log("recurse", state, firstParent);
+    // TODO: Get template instead!
+    if (template) {
+      const templateClone = template.cloneNode(true) as ExtendedHTMLElement;
+      // const firstChild = templateClone.firstElementChild;
 
-      const clone = (firstParent.cloneNode(true) as Element).firstElementChild;
+      // const templateElement = document.createElement("template");
+      templateClone.setAttribute("x-each", "children");
 
-      if (!clone) {
-        return;
-      }
+      element.appendChild(templateClone);
 
+      evaluateDirectives(directives, element);
+
+      /*
       clone.setAttribute("x-state", JSON.stringify(state));
 
       // @ts-ignore
@@ -36,6 +41,7 @@ function recurseDirective({
       element.appendChild(templateElement);
 
       evaluateDirectives(directives, templateElement as ExtendedHTMLElement);
+      */
     }
   }
 

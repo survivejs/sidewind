@@ -185,7 +185,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
       <template x-each="todos">
         <li>
           <span x="state.text"></span>
-          <ul x-recurse="state.children"></ul>
+          <ul class="list-disc list-inside" x-recurse="state.children"></ul>
         </li>
       </template>
     </ul>
