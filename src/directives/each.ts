@@ -21,6 +21,11 @@ function eachDirective({
     containerParent.firstChild.remove();
   }
 
+  // Create a boundary for x-recurse to copy
+  const eachBoundary = document.createElement("div");
+  eachBoundary.setAttribute("_x", "");
+  containerParent.appendChild(eachBoundary);
+
   Object.values(getValues(state, expression)).forEach(
     (values) =>
       Array.isArray(values) &&
@@ -30,17 +35,19 @@ function eachDirective({
 
         let child = firstChild;
         do {
-          // The element should be a state container itself
-          child.setAttribute("x-state", JSON.stringify(value));
-          child.state = value;
-        } while ((child = child.nextElementSibling));
+          if (child) {
+            // The element should be a state container itself
+            child.setAttribute("x-state", JSON.stringify(value));
+            child.state = value;
+          }
+        } while ((child = child?.nextElementSibling));
 
-        containerParent.appendChild(templateClone);
+        eachBoundary.appendChild(templateClone);
 
         child = firstChild;
         do {
           evaluateDirectives(directives, child);
-        } while ((child = child.nextElementSibling));
+        } while ((child = child?.nextElementSibling));
       })
   );
 
