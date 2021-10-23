@@ -116,6 +116,51 @@ Default classes are retained as this allows more compact syntax with a fallback:
 </div>
 ```
 
+Each child of the template has access to the state of the current item.
+
+```html
+<div
+  x-state="{
+    todos: [
+      { type: 'Chore', text: 'Wash dishes' },
+      { type: 'Food', text: 'Eat carrots' }
+    ]
+  }"
+>
+  <div class="mb-2">
+    <ul class="list-disc list-inside">
+      <template x-each="todos">
+        <li><span x="state.type"></span> - <span x="state.text"></span></li>
+      </template>
+    </ul>
+  </div>
+  <div x="JSON.stringify(state.todos, null, 2)"></div>
+</div>
+```
+
+Same goes for sibling items.
+
+```html
+<div
+  x-state="{
+    todos: [
+      { type: 'Chore', text: 'Wash dishes' },
+      { type: 'Food', text: 'Eat carrots' }
+    ]
+  }"
+>
+  <div class="mb-2">
+    <ul class="list-disc list-inside">
+      <template x-each="todos">
+        <li x="state.type"></li>
+        <li x="state.text"></li>
+      </template>
+    </ul>
+  </div>
+  <div x="JSON.stringify(state.todos, null, 2)"></div>
+</div>
+```
+
 ### `x-label`
 
 `x-label` gives access to parent state and it's useful for sharing information between scopes.
