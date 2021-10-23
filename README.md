@@ -161,6 +161,39 @@ Same goes for sibling items.
 </div>
 ```
 
+### `x-recurse`
+
+It is also possible to apply `x-each` recursively using `x-recurse`. It will find the nearest `x-each` and then apply it using the given state.
+
+```html
+<div
+  x-state="{
+    todos: [
+      {
+        text: 'Wash dishes',
+        todos: [
+          { text: 'Wash forks' },
+          { text: 'Wash plates' }
+        ]
+      },
+      { text: 'Eat carrots' }
+    ]
+  }"
+>
+  <div class="mb-2">
+    <ul class="list-disc list-inside">
+      <template x-each="todos">
+        <li>
+          <span x="state.text"></span>
+          <ul x-recurse="state.todos"></ul>
+        </li>
+      </template>
+    </ul>
+  </div>
+  <div x="JSON.stringify(state.todos, null, 2)"></div>
+</div>
+```
+
 ### `x-label`
 
 `x-label` gives access to parent state and it's useful for sharing information between scopes.
