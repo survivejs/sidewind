@@ -16,37 +16,17 @@ function recurseDirective({
     const firstParent = parents[0];
     const template = firstParent.nextElementSibling as ExtendedHTMLElement;
 
-    // TODO: Get template instead!
     if (template) {
       const templateClone = template.cloneNode(true) as ExtendedHTMLElement;
-      // const firstChild = templateClone.firstElementChild;
 
-      // const templateElement = document.createElement("template");
+      // TODO: Figure out how to resolve to this or change the interface somehow
       templateClone.setAttribute("x-each", "children");
 
       element.appendChild(templateClone);
 
       evaluateDirectives(directives, element);
-
-      /*
-      clone.setAttribute("x-state", JSON.stringify(state));
-
-      // @ts-ignore
-      // clone.state = { children: state };
-
-      const templateElement = document.createElement("template");
-      templateElement.setAttribute("x-each", "todos"); // TODO
-
-      templateElement.appendChild(clone);
-      element.appendChild(templateElement);
-
-      evaluateDirectives(directives, templateElement as ExtendedHTMLElement);
-      */
     }
   }
-
-  // TODO: Find the closest parent with x-each, clone it and then apply
-  // with the current state as its value
 }
 
 export default recurseDirective;
