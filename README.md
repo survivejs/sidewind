@@ -171,7 +171,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
     todos: [
       {
         text: 'Wash dishes',
-        todos: [
+        children: [
           { text: 'Wash forks' },
           { text: 'Wash plates' }
         ]
@@ -185,7 +185,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
       <template x-each="todos">
         <li>
           <span x="state.text"></span>
-          <ul x-recurse="state.todos"></ul>
+          <ul x-recurse="state.children"></ul>
         </li>
       </template>
     </ul>
