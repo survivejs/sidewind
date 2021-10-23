@@ -1,4 +1,5 @@
 import { DirectiveParameters } from "../types";
+import getParents from "../get-parents";
 
 function eachDirective({
   element,
@@ -25,6 +26,9 @@ function eachDirective({
   const eachBoundary = document.createElement("div");
   eachBoundary.setAttribute("_x", "");
   containerParent.appendChild(eachBoundary);
+  containerParent.appendChild(element);
+
+  const level = getParents(element, "x-recurse").length;
 
   state.forEach((value: any) => {
     const templateClone = document.importNode(element.content, true);
@@ -33,6 +37,8 @@ function eachDirective({
     let child = firstChild;
     do {
       if (child) {
+        value._level = level;
+
         // The element should be a state container itself
         child.setAttribute("x-state", JSON.stringify(value));
         child.state = value;
@@ -46,8 +52,6 @@ function eachDirective({
       evaluateDirectives(directives, child);
     } while ((child = child?.nextElementSibling));
   });
-
-  containerParent.appendChild(element);
 }
 
 export default eachDirective;

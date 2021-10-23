@@ -163,7 +163,7 @@ Same goes for sibling items.
 
 ### `x-recurse`
 
-It is also possible to apply `x-each` recursively using `x-recurse`. It will find the nearest `x-each` and then apply it using the given state.
+It is also possible to apply `x-each` recursively using `x-recurse`. It will find the nearest `x-each` and then apply it using the given state. To allow styling, `x-each` injects a `_level` property to each item based on the depth of recursion.
 
 ```html
 <div
@@ -183,7 +183,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="state.todos">
-        <li>
+        <li x-class="'ml-' + (state._level * 2)">
           <span x="state.text"></span>
           <ul class="list-disc list-inside" x-recurse="state.children"></ul>
         </li>
