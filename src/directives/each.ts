@@ -26,21 +26,21 @@ function eachDirective({
       Array.isArray(values) &&
       values.forEach((value: any) => {
         const templateClone = document.importNode(element.content, true);
-        const children = templateClone.children;
+        const firstChild = templateClone.firstElementChild;
 
-        for (let i = 0; i < children.length; i++) {
-          const child = children[i];
-
+        let child = firstChild;
+        do {
           // The element should be a state container itself
           child.setAttribute("x-state", JSON.stringify(value));
           child.state = value;
-        }
+        } while (child = child.nextElementSibling);
 
         containerParent.appendChild(templateClone);
 
-        for (let i = 0; i < children.length; i++) {
-          evaluateDirectives(directives, children[i]);
-        }
+        child = firstChild;
+        do {
+          evaluateDirectives(directives, child);
+        } while (child = child.nextElementSibling);
       })
   );
 
