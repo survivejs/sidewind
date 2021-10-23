@@ -260,7 +260,7 @@ function getHTML({
             x-closest="{ state: { closest: document.querySelectorAll('h2, h3') } }"
           >
             <ul>
-              <template x-each="headings">
+              <template x-each="state.headings">
                 <li>
                   <a
                     x-href="state.nextElementSibling.attributes.href.value"

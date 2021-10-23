@@ -3,6 +3,7 @@ import getParents from "../get-parents";
 
 function recurseDirective({
   element,
+  expression,
   evaluateDirectives,
   directives,
 }: DirectiveParameters) {
@@ -13,8 +14,7 @@ function recurseDirective({
   if (template) {
     const templateClone = template.cloneNode(true) as ExtendedHTMLElement;
 
-    // TODO: This should use the expression
-    templateClone.setAttribute("x-each", "children");
+    templateClone.setAttribute("x-each", expression);
 
     element.appendChild(templateClone);
 

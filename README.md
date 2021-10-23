@@ -107,7 +107,7 @@ Default classes are retained as this allows more compact syntax with a fallback:
 >
   <div class="mb-2">
     <ul class="list-disc list-inside">
-      <template x-each="todos">
+      <template x-each="state.todos">
         <li x="state.text"></li>
       </template>
     </ul>
@@ -129,7 +129,7 @@ Each child of the template has access to the state of the current item.
 >
   <div class="mb-2">
     <ul class="list-disc list-inside">
-      <template x-each="todos">
+      <template x-each="state.todos">
         <li><span x="state.type"></span> - <span x="state.text"></span></li>
       </template>
     </ul>
@@ -151,7 +151,7 @@ Same goes for sibling items.
 >
   <div class="mb-2">
     <ul class="list-disc list-inside">
-      <template x-each="todos">
+      <template x-each="state.todos">
         <li x="state.type"></li>
         <li x="state.text"></li>
       </template>
@@ -182,7 +182,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
 >
   <div class="mb-2">
     <ul class="list-disc list-inside">
-      <template x-each="todos">
+      <template x-each="state.todos">
         <li>
           <span x="state.text"></span>
           <ul class="list-disc list-inside" x-recurse="state.children"></ul>
@@ -339,7 +339,7 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
   }"
 >
   <ul class="list-disc list-inside">
-    <template x-each="cars">
+    <template x-each="state.cars">
       <li><span x="state.brand" /> - <span x="state.color" /></li>
     </template>
   </ul>
@@ -359,7 +359,7 @@ In case there's an error, then the `Error` object is emitted to `error` state:
 >
   <div x="state.error.message" />
   <ul class="list-disc list-inside">
-    <template x-each="cars">
+    <template x-each="state.cars">
       <li><span x="state.brand" /> - <span x="state.color" /></li>
     </template>
   </ul>
@@ -432,7 +432,7 @@ The examples below combine directives to produce complex user interfaces and to 
   </div>
   <div class="mb-2">
     <ul class="list-disc list-inside">
-      <template x-each="todos">
+      <template x-each="state.todos">
         <li x="state.text" />
       </template>
     </ul>
@@ -461,7 +461,7 @@ The examples below combine directives to produce complex user interfaces and to 
     </tr>
   </thead>
   <tbody>
-    <template x-each="cars">
+    <template x-each="state.cars">
       <tr>
         <td class="border p-2" x="state.brand" />
         <td class="border p-2" x="state.color" />
@@ -552,7 +552,7 @@ The examples below combine directives to produce complex user interfaces and to 
   }"
 >
   <ul>
-    <template x-each="headings">
+    <template x-each="state.headings">
       <li>
         <a
           x-href="state.nextElementSibling.attributes.href.value"
