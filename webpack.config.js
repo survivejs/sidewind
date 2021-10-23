@@ -143,6 +143,9 @@ function expandCode() {
 
           return `<section class="mb-4" x-state="{ code: atob('${decodedExample}') }">
     <div class="p-4 bg-gray-800 text-white rounded-t-lg overflow-x-auto overflow-y-hidden">
+      <div class="relative">
+        <div class="absolute right-0 text-xs font-thin select-none text-white">Editor</div>
+      </div>
       <div class="inline-block font-mono relative">
         <pre class="overflow-hidden mr-16 pr-16 w-full" x="highlight('html', state.code)"></pre>
         <textarea
