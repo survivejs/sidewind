@@ -1,3 +1,4 @@
+import getState from "./get-state";
 import setState from "./set-state";
 import evaluateDirectives from "./evaluate-directives";
 import {
@@ -16,6 +17,7 @@ import {
 declare global {
   interface Window {
     evaluateAllDirectives: typeof evaluateAllDirectives;
+    getState: typeof getState;
     setState: typeof setState;
   }
 }
@@ -38,4 +40,5 @@ function evaluateAllDirectives() {
 window.addEventListener("load", evaluateAllDirectives);
 
 window.evaluateAllDirectives = evaluateAllDirectives;
+window.getState = getState;
 window.setState = setState;
