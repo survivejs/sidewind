@@ -9,7 +9,7 @@ function recurseDirective({
 }: DirectiveParameters) {
   const parents = getParents(element, "_x");
   const firstParent = parents[0];
-  const template = firstParent.nextElementSibling as ExtendedHTMLElement;
+  const template = firstParent.firstElementChild as ExtendedHTMLElement;
 
   if (template) {
     const templateClone = template.cloneNode(true) as ExtendedHTMLElement;

@@ -10,7 +10,7 @@ function eachDirective({
   directives,
 }: DirectiveParameters) {
   const state = evaluate(expression, getState(element));
-  const containerParent = element.parentNode;
+  const containerParent = element.parentElement;
 
   if (!state || !containerParent || typeof state !== "object") {
     return;
@@ -22,10 +22,8 @@ function eachDirective({
     containerParent.firstChild.remove();
   }
 
-  // Create a boundary for x-recurse to copy
-  const eachBoundary = document.createElement("div");
-  eachBoundary.setAttribute("_x", "");
-  containerParent.appendChild(eachBoundary);
+  // Mark container parent as a boundary for x-recurse to copy
+  containerParent.setAttribute("_x", "");
   containerParent.appendChild(element);
 
   const level = getParents(element, "x-recurse").length;
@@ -45,7 +43,7 @@ function eachDirective({
       }
     } while ((child = child?.nextElementSibling));
 
-    eachBoundary.appendChild(templateClone);
+    containerParent.appendChild(templateClone);
 
     child = firstChild;
     do {
