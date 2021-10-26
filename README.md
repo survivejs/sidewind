@@ -223,15 +223,9 @@ Iterated items can also have inputs while focus is retained on edit.
   <div class="flex gap-2">
     <button
       class="btn btn-blue"
-      onclick="setState({ todos: [{ text: 'Wash dishes', selected: true }, { text: 'Eat carrots', selected: false }] })"
+      onclick="setState(({ todos }) => ({ todos: [{ ...todos[0], selected: true }].concat(todos.slice(1)) }))"
     >
       Select first
-    </button>
-    <button
-      class="btn btn-blue"
-      onclick="setState({ todos: [{ text: 'Wash dishes', selected: false }, { text: 'Eat carrots', selected: true }] })"
-    >
-      Select second
     </button>
     <button
       class="btn btn-blue"

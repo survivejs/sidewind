@@ -26,11 +26,33 @@ function eachDirective({
   // If we had initialized already, then it's important to update state
   // per each item and handle possible additions and removals
   if (initializedAlready) {
+    const amountOfItems = state.length;
+
+    // Subtract template
+    const amountOfChildren = containerParent.children.length - 1;
+
+    // Create missing nodes
+    if (amountOfItems > amountOfChildren) {
+      for (let i = 0; i < amountOfItems - amountOfChildren; i++) {
+        const templateClone = document.importNode(element.content, true);
+        containerParent.appendChild(templateClone.firstElementChild);
+      }
+    }
+    // Remove extra nodes
+    if (amountOfItems < amountOfChildren) {
+      for (let i = 0; i < amountOfChildren - amountOfItems; i++) {
+        containerParent.lastChild?.remove();
+      }
+    }
+
     let child = containerParent.firstElementChild
       ?.nextElementSibling as ExtendedHTMLElement;
 
+    // Update nodes
     state.forEach((value: any) => {
       if (child) {
+        // The element should be a state container itself
+        child.setAttribute("x-state", "");
         // The actual state is stored to the object
         child.state = { value, level };
 
