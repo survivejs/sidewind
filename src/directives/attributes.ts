@@ -98,6 +98,7 @@ function isForbidden(name: string) {
     "x-evaluatable",
     "x-initial-class",
     "x-label",
+    "x-recurse",
     "x-state",
     "x-updated",
   ].includes(name);
