@@ -198,6 +198,44 @@ Iterated items can also have inputs while focus is retained on edit.
 </div>
 ```
 
+`x-each` state can be updated indirectly.
+
+```html
+<div
+  x-state="{
+    todos: [
+      { text: 'Wash dishes', selected: false }, { text: 'Eat carrots', selected: false }
+    ]
+  }"
+>
+  <div class="mb-2">
+    <ul class="list-disc list-inside">
+      <template x-each="state.todos">
+        <li
+          x-class="state.value.selected && 'font-bold'"
+          x="state.value.text"
+        ></li>
+      </template>
+    </ul>
+  </div>
+  <div x="JSON.stringify(state.todos, null, 2)"></div>
+  <div>
+    <button
+      class="btn btn-blue"
+      onclick="setState({ todos: [{ text: 'Wash dishes', selected: true }, { text: 'Eat carrots', selected: false }] })"
+    >
+      Select first
+    </button>
+    <button
+      class="btn btn-blue"
+      onclick="setState({ todos: [{ text: 'Wash dishes', selected: false }, { text: 'Eat carrots', selected: true }] })"
+    >
+      Select second
+    </button>
+  </div>
+</div>
+```
+
 ### `x-recurse`
 
 It is also possible to apply `x-each` recursively using `x-recurse`. It will find the nearest `x-each` and then apply it using the given state. To allow styling, `x-each` injects a `level` property to each item based on the depth of recursion.
