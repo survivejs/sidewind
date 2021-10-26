@@ -17,11 +17,9 @@ function attributesDirective({
         return;
       }
 
-      const targetName = attributeName.split(ATTRIBUTE_KEY).filter(Boolean)[0];
-
       setAttribute(
         element,
-        targetName,
+        attributeName.slice(2),
         evaluate(attribute.value, getState(element))
       );
     }

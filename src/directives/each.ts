@@ -6,6 +6,8 @@ function eachDirective({
   expression,
   evaluate,
   getState,
+  evaluateDirectives,
+  directives,
 }: DirectiveParameters) {
   const state = evaluate(expression, getState(element));
   const containerParent = element.parentElement;
@@ -36,6 +38,8 @@ function eachDirective({
         child.setAttribute("x-state", "");
         // The actual state is stored to the object
         child.state = { value, level };
+
+        evaluateDirectives(directives, child);
       }
     } while ((child = child?.nextElementSibling));
   });
