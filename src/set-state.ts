@@ -41,9 +41,8 @@ function setState(
       element.setAttribute("x-updated", parent);
 
       setState(newValue, { element: matchingParent as ExtendedHTMLElement });
-    }
-    else {
-      console.warn('Failed to find matching parents for', parent)
+    } else {
+      console.warn("Failed to find matching parents for", parent);
     }
   } else {
     const state = stateContainer.state;
@@ -54,10 +53,8 @@ function setState(
 
     stateContainer.state = updatedState;
 
-    // Can this be avoided?
-    stateContainer.setAttribute("x-state", JSON.stringify(updatedState));
-
-    // Signal to the state container that state was updated within
+    // Signal to the state container that state was updated within. x-state
+    // will notice the update thanks to a mutation observer
     element.setAttribute("x-updated", "");
   }
 }
