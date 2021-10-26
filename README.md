@@ -222,7 +222,10 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
       <template x-each="state.todos">
         <li x-class="'ml-' + (state.level * 2)">
           <span x="state.value.text"></span>
-          <ul class="list-disc list-inside" x-recurse="state.children"></ul>
+          <ul
+            class="list-disc list-inside"
+            x-recurse="state.value.children"
+          ></ul>
         </li>
       </template>
     </ul>
