@@ -202,6 +202,7 @@ Iterated items can also have inputs while focus is retained on edit.
 
 ```html
 <div
+  class="flex flex-col gap-2"
   x-state="{
     todos: [
       { text: 'Wash dishes', selected: false }, { text: 'Eat carrots', selected: false }
@@ -219,7 +220,7 @@ Iterated items can also have inputs while focus is retained on edit.
     </ul>
   </div>
   <div x="JSON.stringify(state.todos, null, 2)"></div>
-  <div>
+  <div class="flex gap-2">
     <button
       class="btn btn-blue"
       onclick="setState({ todos: [{ text: 'Wash dishes', selected: true }, { text: 'Eat carrots', selected: false }] })"
