@@ -13,8 +13,8 @@ function evaluateDirectives(
       directive.init(parent || (document.body as ExtendedHTMLElement))
   );
 
-  directives.forEach(({ name, directive }) =>
-    evaluateDirective(directives, name, directive, parent)
+  directives.forEach(({ name, directive, evaluateFrom }) =>
+    evaluateDirective(directives, name, directive, parent, evaluateFrom)
   );
 }
 
@@ -22,23 +22,32 @@ function evaluateDirective(
   directives: Directive[],
   name: string,
   directive: DirectiveFunction,
-  parent?: ExtendedHTMLElement
+  parent?: ExtendedHTMLElement,
+  evaluateFrom: Directive["evaluateFrom"] = "top"
 ) {
   const elements = (parent || document.body).querySelectorAll(`[${name}]`);
 
-  elements.forEach((element) => {
-    const expression = element.getAttribute(name) || "";
+  if (evaluateFrom === "top") {
+    for (let i = 0; i < elements.length; i++) {
+      evaluateOne(elements[i] as ExtendedHTMLElement);
+    }
+  } else {
+    for (let i = elements.length; i--; ) {
+      evaluateOne(elements[i] as ExtendedHTMLElement);
+    }
+  }
 
+  function evaluateOne(element: ExtendedHTMLElement) {
     directive({
       directives,
       element: element as ExtendedHTMLElement,
-      expression,
+      expression: element.getAttribute(name) || "",
       evaluate,
       getState,
       setState,
       evaluateDirectives,
     });
-  });
+  }
 }
 
 export default evaluateDirectives;

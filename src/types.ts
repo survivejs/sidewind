@@ -10,7 +10,11 @@ type ExtendedHTMLElement = HTMLElement & {
   observer: MutationObserver;
   value: any;
 };
-type Directive = { name: string; directive: DirectiveFunction };
+type Directive = {
+  name: string;
+  directive: DirectiveFunction;
+  evaluateFrom?: "top" | "bottom";
+};
 type DirectiveParameters = {
   directives: Directive[];
   element: ExtendedHTMLElement;

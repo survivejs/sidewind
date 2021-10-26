@@ -25,7 +25,7 @@ declare global {
 function evaluateAllDirectives() {
   evaluateDirectives([
     { name: "x-state", directive: stateDirective },
-    { name: "x-each", directive: eachDirective },
+    { name: "x-each", directive: eachDirective, evaluateFrom: "bottom" },
     { name: "x-attr", directive: attributesDirective },
     { name: "x", directive: valueDirective },
     { name: "x-cloak", directive: cloakDirective },
