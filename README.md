@@ -266,7 +266,14 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
       {
         text: 'Wash dishes',
         children: [
-          { text: 'Wash forks' },
+          {
+            text: 'Wash forks',
+            children: [
+              {
+                text: 'Wash tiny forks'
+              }
+            ]
+          },
           { text: 'Wash plates' }
         ]
       },
