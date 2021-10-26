@@ -15,14 +15,14 @@ Sidewind is composed of a collection of directives that operate on the DOM. I've
 `x-state` is a state container and the state is often used by other directives. `x` is used for binding values. Consider the example below:
 
 ```html
-<section x-state="false">Value: <span x="state" /></section>
+<section x-state="false">Value: <span x="state"></span></section>
 ```
 
 The state can be manipulated using a global `setState`:
 
 ```html
 <section x-state="false">
-  <div class="mb-2">Value: <span x="state" /></div>
+  <div class="mb-2">Value: <span x="state"></span></div>
   <button class="btn btn-blue" onclick="setState(v => !v)">Toggle value</button>
 </section>
 ```
@@ -362,6 +362,17 @@ The labeled data is available at `x-each` as well:
 </div>
 ```
 
+State can also be derived to compose or enhance it.
+
+```html
+<section x-label="parent" x-state="{ name: 'Hello' }">
+  <div>Value: <span x="state.name"></span></div>
+  <div x-state="{ longerName: parent.name + ' again' }">
+    <div>Value: <span x="state.longerName"></span></div>
+  </div>
+</section>
+```
+
 ## Sources
 
 Sources wrap browser state within a reactive stream that's then mapped to a state.
@@ -441,7 +452,10 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
 >
   <ul class="list-disc list-inside">
     <template x-each="state.cars">
-      <li><span x="state.value.brand" /> - <span x="state.value.color" /></li>
+      <li>
+        <span x="state.value.brand"></span> -
+        <span x="state.value.color"></span>
+      </li>
     </template>
   </ul>
 </div>
@@ -461,7 +475,10 @@ In case there's an error, then the `Error` object is emitted to `error` state:
   <div x="state.error.message" />
   <ul class="list-disc list-inside">
     <template x-each="state.cars">
-      <li><span x="state.value.brand" /> - <span x="state.value.color" /></li>
+      <li>
+        <span x="state.value.brand"></span> -
+        <span x="state.value.color"></span>
+      </li>
     </template>
   </ul>
 </div>
@@ -548,9 +565,9 @@ The examples below combine directives to produce complex user interfaces and to 
 <table
   x-state="{
     cars: [
-      { brand: 'Saab', color: 'gray' },
-      { brand: 'Ferrari', color: 'red' },
-      { brand: 'Porsche', color: 'silver' },
+      { brand: 'Saab', speed: 'fast' },
+      { brand: 'Ferrari', speed: 'faster' },
+      { brand: 'Porsche', speed: 'fastest' },
     ]
   }"
   class="table-fixed"
@@ -558,14 +575,14 @@ The examples below combine directives to produce complex user interfaces and to 
   <thead>
     <tr class="bg-gray-400">
       <td class="border p-2">Brand</td>
-      <td class="border p-2">Color</td>
+      <td class="border p-2">Speed</td>
     </tr>
   </thead>
   <tbody>
     <template x-each="state.cars">
       <tr>
         <td class="border p-2" x="state.value.brand" />
-        <td class="border p-2" x="state.value.color" />
+        <td class="border p-2" x="state.value.speed" />
       </tr>
     </template>
   </tbody>

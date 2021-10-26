@@ -26,20 +26,19 @@ function evaluateDirective(
 ) {
   const elements = (parent || document.body).querySelectorAll(`[${name}]`);
 
-  for (let i = elements.length; i--; ) {
-    const element = elements[i] as ExtendedHTMLElement;
+  elements.forEach((element) => {
     const expression = element.getAttribute(name) || "";
 
     directive({
       directives,
-      element,
+      element: element as ExtendedHTMLElement,
       expression,
       evaluate,
       getState,
       setState,
       evaluateDirectives,
     });
-  }
+  });
 }
 
 export default evaluateDirectives;
