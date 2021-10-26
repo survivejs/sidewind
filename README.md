@@ -161,6 +161,35 @@ Same goes for sibling items.
 </div>
 ```
 
+Iterated items can also have inputs while focus is retained on edit.
+
+```html
+<div
+  x-state="{
+    title: 'Demo',
+    description: 'x-each demo'
+  }"
+  oninput="setState(state => ({
+    ...state,
+    [event.target.dataset.field]: event.target.value
+  }), { element: this })"
+>
+  <div class="mb-2">
+    <ul class="list-disc list-inside">
+      <template x-each="Object.entries(state)">
+        <li>
+          <label>
+            Field:
+            <input type="text" x-data-field="state[0]" x="state[1]" />
+          </label>
+        </li>
+      </template>
+    </ul>
+  </div>
+  <div x="JSON.stringify(state, null, 2)"></div>
+</div>
+```
+
 ### `x-recurse`
 
 It is also possible to apply `x-each` recursively using `x-recurse`. It will find the nearest `x-each` and then apply it using the given state. To allow styling, `x-each` injects a `_level` property to each item based on the depth of recursion.
