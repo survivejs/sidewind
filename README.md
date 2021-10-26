@@ -108,7 +108,7 @@ Default classes are retained as this allows more compact syntax with a fallback:
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="state.todos">
-        <li x="state.text"></li>
+        <li x="state.value.text"></li>
       </template>
     </ul>
   </div>
@@ -130,7 +130,10 @@ Each child of the template has access to the state of the current item.
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="state.todos">
-        <li><span x="state.type"></span> - <span x="state.text"></span></li>
+        <li>
+          <span x="state.value.type"></span> -
+          <span x="state.value.text"></span>
+        </li>
       </template>
     </ul>
   </div>
@@ -152,8 +155,8 @@ Same goes for sibling items.
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="state.todos">
-        <li x="state.type"></li>
-        <li x="state.text"></li>
+        <li x="state.value.type"></li>
+        <li x="state.value.text"></li>
       </template>
     </ul>
   </div>
@@ -182,8 +185,8 @@ Iterated items can also have inputs while focus is retained on edit.
             Field:
             <input
               type="text"
-              x-data-field="state[0]"
-              x="state[1]"
+              x-data-field="state.value[0]"
+              x="state.value[1]"
               oninput="setState([this.dataset.field, this.value])"
             />
           </label>
@@ -197,7 +200,7 @@ Iterated items can also have inputs while focus is retained on edit.
 
 ### `x-recurse`
 
-It is also possible to apply `x-each` recursively using `x-recurse`. It will find the nearest `x-each` and then apply it using the given state. To allow styling, `x-each` injects a `_level` property to each item based on the depth of recursion.
+It is also possible to apply `x-each` recursively using `x-recurse`. It will find the nearest `x-each` and then apply it using the given state. To allow styling, `x-each` injects a `level` property to each item based on the depth of recursion.
 
 ```html
 <div
@@ -217,8 +220,8 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="state.todos">
-        <li x-class="'ml-' + (state._level * 2)">
-          <span x="state.text"></span>
+        <li x-class="'ml-' + (state.level * 2)">
+          <span x="state.value.text"></span>
           <ul class="list-disc list-inside" x-recurse="state.children"></ul>
         </li>
       </template>
@@ -310,7 +313,7 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
     state: { closest: document.querySelectorAll('h2, h3') }
   }"
 >
-  Closest heading: <span x="state.closest.textContent" />
+  Closest heading: <span x="state.closest.textContent"></span>
 </div>
 ```
 
@@ -325,7 +328,7 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
     state: { intersected: new Date().toString() }
   }"
 >
-  Intersected at <span x="state.intersected" />
+  Intersected at <span x="state.intersected"></span>
 </div>
 ```
 
@@ -374,7 +377,7 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
 >
   <ul class="list-disc list-inside">
     <template x-each="state.cars">
-      <li><span x="state.brand" /> - <span x="state.color" /></li>
+      <li><span x="state.value.brand" /> - <span x="state.value.color" /></li>
     </template>
   </ul>
 </div>
@@ -394,7 +397,7 @@ In case there's an error, then the `Error` object is emitted to `error` state:
   <div x="state.error.message" />
   <ul class="list-disc list-inside">
     <template x-each="state.cars">
-      <li><span x="state.brand" /> - <span x="state.color" /></li>
+      <li><span x="state.value.brand" /> - <span x="state.value.color" /></li>
     </template>
   </ul>
 </div>
@@ -467,7 +470,7 @@ The examples below combine directives to produce complex user interfaces and to 
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="state.todos">
-        <li x="state.text" />
+        <li x="state.value.text" />
       </template>
     </ul>
   </div>
@@ -497,8 +500,8 @@ The examples below combine directives to produce complex user interfaces and to 
   <tbody>
     <template x-each="state.cars">
       <tr>
-        <td class="border p-2" x="state.brand" />
-        <td class="border p-2" x="state.color" />
+        <td class="border p-2" x="state.value.brand" />
+        <td class="border p-2" x="state.value.color" />
       </tr>
     </template>
   </tbody>
@@ -589,11 +592,11 @@ The examples below combine directives to produce complex user interfaces and to 
     <template x-each="state.headings">
       <li>
         <a
-          x-href="state.nextElementSibling.attributes.href.value"
-          x="state.textContent"
+          x-href="state.value.nextElementSibling?.attributes.href.value"
+          x="state.value.textContent"
           x-class="[
-            state.textContent === parent.closest.textContent && 'font-bold',
-            state.tagName === 'H3' && 'ml-2'
+            state.value.textContent === parent.closest?.textContent && 'font-bold',
+            state.value.tagName === 'H3' && 'ml-2'
           ]"
         >
         </a>

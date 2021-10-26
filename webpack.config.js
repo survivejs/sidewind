@@ -266,11 +266,11 @@ function getHTML({
               <template x-each="state.headings">
                 <li>
                   <a
-                    x-href="state.nextElementSibling.attributes.href.value"
-                    x="state.textContent"
+                    x-href="state.value.nextElementSibling?.attributes.href.value"
+                    x="state.value.textContent"
                     x-class="[
-                      state.textContent === parent.closest.textContent && 'font-bold',
-                      state.tagName === 'H3' && 'ml-2'
+                      state.value.textContent === parent.closest?.textContent && 'font-bold',
+                      state.value.tagName === 'H3' && 'ml-2'
                     ]"
                   >
                   </a>

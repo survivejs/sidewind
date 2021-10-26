@@ -6,8 +6,6 @@ function eachDirective({
   expression,
   evaluate,
   getState,
-  evaluateDirectives,
-  directives,
 }: DirectiveParameters) {
   const state = evaluate(expression, getState(element));
   const containerParent = element.parentElement;
@@ -28,24 +26,17 @@ function eachDirective({
   state.forEach((value: any) => {
     const templateClone = document.importNode(element.content, true);
     const firstChild = templateClone.firstElementChild;
-
-    let child = firstChild;
-    do {
-      if (child) {
-        // TODO: Find a better way to pass _level
-        value._level = level;
-
-        // The element should be a state container itself
-        child.setAttribute("x-state", JSON.stringify(value));
-        child.state = value;
-      }
-    } while ((child = child?.nextElementSibling));
-
     containerParent.appendChild(templateClone);
 
-    child = firstChild;
+    let child = firstChild;
+
     do {
-      evaluateDirectives(directives, child);
+      if (child) {
+        // The element should be a state container itself
+        child.setAttribute("x-state", "");
+        // The actual state is stored to the object
+        child.state = { value, level };
+      }
     } while ((child = child?.nextElementSibling));
   });
 }

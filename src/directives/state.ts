@@ -7,7 +7,9 @@ function stateDirective({
   evaluateDirectives,
   directives,
 }: DirectiveParameters) {
-  element.state = evaluate(expression);
+  if (!element.state) {
+    element.state = evaluate(expression);
+  }
 
   if (element.observer) {
     return;
