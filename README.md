@@ -301,6 +301,29 @@ The nested behavior works for attributes as well.
 </div>
 ```
 
+The labeled data is available at `x-each` as well:
+
+```html
+<div x-label="parent" x-state="{ message: 'Hello' }">
+  <div
+    x-state="{
+    todos: [
+      { text: 'Wash dishes' }, { text: 'Eat carrots' }
+    ]
+  }"
+  >
+    <div class="mb-2">
+      <ul class="list-disc list-inside">
+        <template x-each="state.todos">
+          <li x="parent.message + ': ' + state.value.text"></li>
+        </template>
+      </ul>
+    </div>
+    <div x="JSON.stringify(state.todos, null, 2)"></div>
+  </div>
+</div>
+```
+
 ## Sources
 
 Sources wrap browser state within a reactive stream that's then mapped to a state.
