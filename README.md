@@ -180,7 +180,12 @@ Iterated items can also have inputs while focus is retained on edit.
         <li>
           <label>
             Field:
-            <input type="text" x-data-field="state[0]" x="state[1]" />
+            <input
+              type="text"
+              x-data-field="state[0]"
+              x="state[1]"
+              oninput="setState([this.dataset.field, this.value])"
+            />
           </label>
         </li>
       </template>

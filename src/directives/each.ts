@@ -1,5 +1,5 @@
-import { DirectiveParameters } from "../types";
 import getParents from "../get-parents";
+import type { DirectiveParameters } from "../types";
 
 function eachDirective({
   element,
@@ -16,15 +16,12 @@ function eachDirective({
     return;
   }
 
-  // It would be better to diff for changes instead of replacing
-  // all nodes.
-  while (containerParent.firstChild) {
-    containerParent.firstChild.remove();
+  if (containerParent.children.length > 1) {
+    return;
   }
 
   // Mark container parent as a boundary for x-recurse to copy
   containerParent.setAttribute("_x", "");
-  containerParent.appendChild(element);
 
   const level = getParents(element, "x-recurse").length;
 
@@ -35,6 +32,7 @@ function eachDirective({
     let child = firstChild;
     do {
       if (child) {
+        // TODO: Find a better way to pass _level
         value._level = level;
 
         // The element should be a state container itself
