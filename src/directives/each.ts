@@ -24,7 +24,7 @@ function eachDirective({
   const level = getParents(element, "x-recurse").length;
 
   // If we had initialized already, then it's important to update state
-  // per each item
+  // per each item and handle possible additions and removals
   if (initializedAlready) {
     let child = containerParent.firstElementChild
       ?.nextElementSibling as ExtendedHTMLElement;

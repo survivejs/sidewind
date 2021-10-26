@@ -232,6 +232,30 @@ Iterated items can also have inputs while focus is retained on edit.
     >
       Select second
     </button>
+    <button
+      class="btn btn-blue"
+      onclick="setState(({ todos }) => ({ todos: [{ text: 'New item', selected: false }].concat(todos) }))"
+    >
+      Add item to the beginning
+    </button>
+    <button
+      class="btn btn-blue"
+      onclick="setState(({ todos }) => ({ todos: todos.concat({ text: 'New item', selected: false }) }))"
+    >
+      Add item to the end
+    </button>
+    <button
+      class="btn btn-blue"
+      onclick="setState(({ todos }) => ({ todos: todos.slice(0, -1) }))"
+    >
+      Remove item from the end
+    </button>
+    <button
+      class="btn btn-blue"
+      onclick="setState(({ todos }) => ({ todos: todos.slice(1) }))"
+    >
+      Remove item from the beginning
+    </button>
   </div>
 </div>
 ```
