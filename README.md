@@ -287,7 +287,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
   <div class="mb-2">
     <ul class="list-disc list-inside">
       <template x-each="state.todos">
-        <li x-class="'ml-' + (state.level * 2)">
+        <li x-class="state.level > 0 && 'ml-2'">
           <span x="state.value.text"></span>
           <ul
             class="list-disc list-inside"
