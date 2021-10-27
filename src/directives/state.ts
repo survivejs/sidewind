@@ -44,5 +44,6 @@ function stateDirective({
     subtree: true,
   });
 }
+stateDirective.evaluateFrom = "top";
 
 export default stateDirective;

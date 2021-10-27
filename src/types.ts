@@ -13,7 +13,6 @@ type ExtendedHTMLElement = HTMLElement & {
 type Directive = {
   name: string;
   directive: DirectiveFunction;
-  evaluateFrom?: "top" | "bottom";
 };
 type DirectiveParameters = {
   directives: Directive[];
@@ -28,16 +27,20 @@ type DirectiveParameters = {
   setState: typeof setState;
 };
 
+type EvaluateFrom = "top" | "bottom";
+
 interface DirectiveFunction {
   (args: DirectiveParameters): void;
   init?: (parent: ExtendedHTMLElement) => void;
   skipEvaluation?: boolean;
+  evaluateFrom?: EvaluateFrom;
 }
 
 export {
   BindState,
   State,
   ExtendedHTMLElement,
+  EvaluateFrom,
   Directive,
   DirectiveParameters,
   DirectiveFunction,
