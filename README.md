@@ -263,7 +263,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
 <div
   class="flex flex-col gap-2"
   x-state="{
-    todos: [
+    initial: [
       {
         text: 'Wash dishes',
         children: [
@@ -282,12 +282,23 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
         { text: 'Chew', children: 'foo' },
         { text: 'Swallow', children: 'bar' }
       ] }
-    ]
+    ],
+    todo: [
+      { text: 'Eat carrots', children: [
+        { text: 'Chew', children: 'foo' },
+        { text: 'Swallow', children: 'bar' }
+      ] }
+    ],
+    done: [
+      {
+        text: 'Wash dishes'
+      }
+    ],
   }"
 >
   <div>
     <ul class="list-disc list-inside">
-      <template x-each="state.todos">
+      <template x-each="state.todo">
         <li x-class="state.level > 0 && 'ml-2'">
           <span x="state.value.text"></span>
           <ul
@@ -298,10 +309,21 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
       </template>
     </ul>
   </div>
-  <div x="JSON.stringify(state.todos, null, 2)"></div>
+  <div x="JSON.stringify(state, null, 2)"></div>
   <div>
-    <button class="btn btn-blue" onclick="setState(({ todos }) => ({ todos }))">
-      Replace state
+    <button
+      class="btn btn-blue"
+      onclick="setState(({ todo, initial }) => ({ todo: initial }))"
+    >
+      Replace state with initial
+    </button>
+  </div>
+  <div>
+    <button
+      class="btn btn-blue"
+      onclick="setState(({ todo, done }) => ({ todo: done }))"
+    >
+      Replace state with done
     </button>
   </div>
 </div>
