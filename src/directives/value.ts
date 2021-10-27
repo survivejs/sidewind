@@ -8,12 +8,18 @@ function valueDirective({
   evaluateDirectives,
   directives,
 }: DirectiveParameters) {
-  const evaluatedValue = evaluate(expression, getState(element));
+  const state = evaluate(expression, getState(element));
+
+  if (state === element.state) {
+    return;
+  }
+
+  element.state = state;
 
   if (element.localName === "input") {
-    element.value = evaluatedValue;
+    element.value = state;
   } else {
-    element.innerHTML = evaluatedValue;
+    element.innerHTML = state;
 
     const firstChild = element.children[0];
     const closestState = firstChild && firstChild.closest("[x-state]");

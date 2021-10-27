@@ -10,11 +10,18 @@ function eachDirective({
   directives,
 }: DirectiveParameters) {
   const state = evaluate(expression, getState(element));
-  const containerParent = element.parentElement;
+  const containerParent = element.parentElement as ExtendedHTMLElement;
 
   if (!containerParent || !Array.isArray(state)) {
     return;
   }
+
+  if (state === containerParent.state) {
+    return;
+  }
+
+  // Stash state so it can be compared later to avoid work
+  containerParent.state = state;
 
   const initializedAlready = containerParent.children.length > 1;
 
