@@ -15,6 +15,12 @@ function recurseDirective({
     return;
   }
 
+  const hasTemplateAlready = element.firstElementChild?.tagName === "TEMPLATE";
+
+  if (hasTemplateAlready) {
+    return;
+  }
+
   const parents = getParents(element, "_x");
   const firstParent = parents[0];
   const template = firstParent.firstElementChild as ExtendedHTMLElement;
