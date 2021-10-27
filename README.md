@@ -255,6 +255,81 @@ Iterated items can also have inputs while focus is retained on edit.
 </div>
 ```
 
+It's possible to render lists inside lists.
+
+```html
+<div
+  class="flex flex-col gap-2"
+  x-state="{
+    initial: [
+      {
+        text: 'Wash dishes',
+        children: [
+          {
+            text: 'Wash forks',
+            children: [
+              {
+                text: 'Wash tiny forks'
+              }
+            ]
+          },
+          { text: 'Wash plates', children: 'testing' }
+        ]
+      },
+      { text: 'Eat carrots', children: [
+        { text: 'Chew', children: 'foo' },
+        { text: 'Swallow', children: 'bar' }
+      ] }
+    ],
+    todo: [
+      { text: 'Eat carrots', children: [
+        { text: 'Chew', children: 'foo' },
+        { text: 'Swallow', children: 'bar' }
+      ] }
+    ],
+    done: [
+      {
+        text: 'Wash cups'
+      }
+    ],
+  }"
+>
+  <div>
+    <ul class="list-disc list-inside">
+      <template x-each="state.todo">
+        <li>
+          <span x="state.value.text"></span>
+          <ul class="list-disc list-inside ml-2">
+            <template x-each="state.value.children">
+              <li>
+                <span x="state.value.text"></span>
+              </li>
+            </template>
+          </ul>
+        </li>
+      </template>
+    </ul>
+  </div>
+  <div x="JSON.stringify(state, null, 2)"></div>
+  <div>
+    <button
+      class="btn btn-blue"
+      onclick="setState(({ todo, initial }) => ({ todo: initial }))"
+    >
+      Replace state with initial
+    </button>
+  </div>
+  <div>
+    <button
+      class="btn btn-blue"
+      onclick="setState(({ todo, done }) => ({ todo: done }))"
+    >
+      Replace state with done
+    </button>
+  </div>
+</div>
+```
+
 ### `x-recurse`
 
 It is also possible to apply `x-each` recursively using `x-recurse`. It will find the nearest `x-each` and then apply it using the given state. To allow styling, `x-each` injects a `level` property to each item based on the depth of recursion.
@@ -291,7 +366,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
     ],
     done: [
       {
-        text: 'Wash dishes'
+        text: 'Wash cups'
       }
     ],
   }"

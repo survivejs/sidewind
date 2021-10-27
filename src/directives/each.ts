@@ -17,8 +17,23 @@ function eachDirective({
   }
 
   if (state === containerParent.state) {
+    /*console.log(
+      "same state, skipping",
+      getState(element),
+      expression,
+      state,
+      element.isRecursive
+    );*/
+
     return;
   }
+  /*console.log(
+    "different state",
+    getState(element),
+    expression,
+    state,
+    element.isRecursive
+  );*/
 
   // Stash state so it can be compared later to avoid work
   containerParent.state = state;
@@ -30,6 +45,7 @@ function eachDirective({
 
   const level = getParents(element, "x-recurse").length;
 
+  // TODO: Handle x-recurse and recursion here as well
   // If we had initialized already, then it's important to update state
   // per each item and handle possible additions and removals
   if (initializedAlready) {
@@ -58,12 +74,38 @@ function eachDirective({
     // Update nodes
     state.forEach((value: any) => {
       if (child) {
+        // console.log("updating child", child, value);
+
         // The element should be a state container itself
         child.setAttribute("x-state", "");
         // The actual state is stored to the object
         child.state = { value, level };
 
+        // Is it better to trigger this only once against the container?
         evaluateDirectives(directives, child);
+
+        let childOfChild = child.firstElementChild as ExtendedHTMLElement;
+
+        do {
+          if (childOfChild) {
+            // @ts-ignore
+            console.log("child of child", childOfChild, childOfChild.state);
+
+            // TODO: If there's anything with a template, erase its siblings
+            // childOfChild.remove(); // XXX
+
+            // XXXXX: This removes too much now. Likely the trick is to reuse
+            // the original template somehow and remove anything that's not in it
+            //let c;
+            //while ((c = childOfChild.nextElementSibling)) {
+            //console.log(c.tagName);
+            //c.remove();
+            // c.state = state;
+            //}
+          }
+        } while (
+          (childOfChild = childOfChild?.nextElementSibling as ExtendedHTMLElement)
+        );
 
         child = child.nextElementSibling as ExtendedHTMLElement;
       }
@@ -91,5 +133,6 @@ function eachDirective({
     });
   }
 }
+eachDirective.evaluateFrom = "top";
 
 export default eachDirective;

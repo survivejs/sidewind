@@ -6,6 +6,7 @@ type BindState = { [id: string]: any };
 type State = { [id: string]: any } | string;
 type ExtendedHTMLElement = HTMLElement & {
   content: any;
+  isRecursive?: boolean;
   state: BindState;
   observer: MutationObserver;
   value: any;
