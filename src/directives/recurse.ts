@@ -4,9 +4,17 @@ import getParents from "../get-parents";
 function recurseDirective({
   element,
   expression,
+  evaluate,
+  getState,
   evaluateDirectives,
   directives,
 }: DirectiveParameters) {
+  const state = evaluate(expression, getState(element));
+
+  if (!Array.isArray(state)) {
+    return;
+  }
+
   const parents = getParents(element, "_x");
   const firstParent = parents[0];
   const template = firstParent.firstElementChild as ExtendedHTMLElement;

@@ -12,7 +12,7 @@ function eachDirective({
   const state = evaluate(expression, getState(element));
   const containerParent = element.parentElement;
 
-  if (!state || !containerParent || typeof state !== "object") {
+  if (!containerParent || !Array.isArray(state)) {
     return;
   }
 
