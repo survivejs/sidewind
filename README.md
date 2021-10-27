@@ -261,6 +261,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
 
 ```html
 <div
+  class="flex flex-col gap-2"
   x-state="{
     todos: [
       {
@@ -284,7 +285,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
     ]
   }"
 >
-  <div class="mb-2">
+  <div>
     <ul class="list-disc list-inside">
       <template x-each="state.todos">
         <li x-class="state.level > 0 && 'ml-2'">
@@ -298,6 +299,11 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
     </ul>
   </div>
   <div x="JSON.stringify(state.todos, null, 2)"></div>
+  <div>
+    <button class="btn btn-blue" onclick="setState(({ todos }) => ({ todos }))">
+      Replace state
+    </button>
+  </div>
 </div>
 ```
 
