@@ -10,12 +10,6 @@ function valueDirective({
 }: DirectiveParameters) {
   const state = evaluate(expression, getState(element));
 
-  if (state === element.state) {
-    return;
-  }
-
-  element.state = state;
-
   if (element.localName === "input") {
     element.value = state;
   } else {
