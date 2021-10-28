@@ -281,7 +281,7 @@ It's possible to render lists inside lists.
         { text: 'Swallow', children: 'bar' }
       ] }
     ],
-    todo: [
+    show: [
       { text: 'Eat carrots', children: [
         { text: 'Chew', children: 'foo' },
         { text: 'Swallow', children: 'bar' }
@@ -296,7 +296,7 @@ It's possible to render lists inside lists.
 >
   <div>
     <ul class="list-disc list-inside">
-      <template x-each="state.todo">
+      <template x-each="state.show">
         <li>
           <span x="state.value.text"></span>
           <ul class="list-disc list-inside ml-2">
@@ -310,11 +310,11 @@ It's possible to render lists inside lists.
       </template>
     </ul>
   </div>
-  <div x="JSON.stringify(state, null, 2)"></div>
+  <div x="JSON.stringify(state.show, null, 2)"></div>
   <div>
     <button
       class="btn btn-blue"
-      onclick="setState(({ todo, initial }) => ({ todo: initial }))"
+      onclick="setState(({ initial }) => ({ show: initial }))"
     >
       Replace state with initial
     </button>
@@ -322,7 +322,7 @@ It's possible to render lists inside lists.
   <div>
     <button
       class="btn btn-blue"
-      onclick="setState(({ todo, done }) => ({ todo: done }))"
+      onclick="setState(({ done }) => ({ show: done }))"
     >
       Replace state with done
     </button>
@@ -358,7 +358,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
         { text: 'Swallow', children: 'bar' }
       ] }
     ],
-    todo: [
+    show: [
       { text: 'Eat carrots', children: [
         { text: 'Chew', children: 'foo' },
         { text: 'Swallow', children: 'bar' }
@@ -373,7 +373,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
 >
   <div>
     <ul class="list-disc list-inside">
-      <template x-each="state.todo">
+      <template x-each="state.show">
         <li x-class="state.level > 0 && 'ml-2'">
           <span x="state.value.text"></span>
           <ul
@@ -384,11 +384,11 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
       </template>
     </ul>
   </div>
-  <div x="JSON.stringify(state, null, 2)"></div>
+  <div x="JSON.stringify(state.show, null, 2)"></div>
   <div>
     <button
       class="btn btn-blue"
-      onclick="setState(({ todo, initial }) => ({ todo: initial }))"
+      onclick="setState(({ initial }) => ({ show: initial }))"
     >
       Replace state with initial
     </button>
@@ -396,7 +396,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
   <div>
     <button
       class="btn btn-blue"
-      onclick="setState(({ todo, done }) => ({ todo: done }))"
+      onclick="setState(({ done }) => ({ show: done }))"
     >
       Replace state with done
     </button>

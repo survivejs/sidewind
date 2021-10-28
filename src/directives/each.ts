@@ -9,32 +9,16 @@ function eachDirective({
   evaluateDirectives,
   directives,
 }: DirectiveParameters) {
-  const state = evaluate(expression, getState(element));
+  const state = evaluate(expression, getState(element)) || [];
   const containerParent = element.parentElement as ExtendedHTMLElement;
 
-  if (!containerParent || !Array.isArray(state)) {
+  if (!containerParent) {
     return;
   }
 
   if (state === containerParent.state) {
-    /*console.log(
-      "same state, skipping",
-      getState(element),
-      expression,
-      state,
-      element.isRecursive
-    );*/
-
     return;
   }
-  /*console.log(
-    "different state",
-    getState(element),
-    expression,
-    state,
-    element.isRecursive
-  );*/
-
   // Stash state so it can be compared later to avoid work
   containerParent.state = state;
 
@@ -71,45 +55,30 @@ function eachDirective({
     let child = containerParent.firstElementChild
       ?.nextElementSibling as ExtendedHTMLElement;
 
-    // Update nodes
     state.forEach((value: any) => {
       if (child) {
-        // console.log("updating child", child, value);
-
-        // The element should be a state container itself
         child.setAttribute("x-state", "");
         // The actual state is stored to the object
         child.state = { value, level };
 
+        const children = findFirstChildrenWith(child, "TEMPLATE");
+
+        children.forEach((child) => {
+          if (child.parentElement) {
+            (child.parentElement as ExtendedHTMLElement).state = state;
+          }
+        });
+
         // Is it better to trigger this only once against the container?
         evaluateDirectives(directives, child);
-
-        let childOfChild = child.firstElementChild as ExtendedHTMLElement;
-
-        do {
-          if (childOfChild) {
-            // @ts-ignore
-            console.log("child of child", childOfChild, childOfChild.state);
-
-            // TODO: If there's anything with a template, erase its siblings
-            // childOfChild.remove(); // XXX
-
-            // XXXXX: This removes too much now. Likely the trick is to reuse
-            // the original template somehow and remove anything that's not in it
-            //let c;
-            //while ((c = childOfChild.nextElementSibling)) {
-            //console.log(c.tagName);
-            //c.remove();
-            // c.state = state;
-            //}
-          }
-        } while (
-          (childOfChild = childOfChild?.nextElementSibling as ExtendedHTMLElement)
-        );
 
         child = child.nextElementSibling as ExtendedHTMLElement;
       }
     });
+
+    if (child && state.length === 0) {
+      child.remove();
+    }
     // Otherwise we'll set up the initial DOM structure based on a template
     // and populate it with data that's then evaluated.
   } else {
@@ -134,5 +103,27 @@ function eachDirective({
   }
 }
 eachDirective.evaluateFrom = "top";
+
+function findFirstChildrenWith(element: Element, tagName: string) {
+  let ret: ExtendedHTMLElement[] = [];
+
+  function recurse(element: Element) {
+    let child = element.firstElementChild;
+
+    do {
+      if (child?.tagName === tagName) {
+        ret.push(child as ExtendedHTMLElement);
+      }
+
+      if (child?.children.length) {
+        recurse(child);
+      }
+    } while ((child = child?.nextElementSibling || null));
+  }
+
+  recurse(element);
+
+  return ret;
+}
 
 export default eachDirective;
