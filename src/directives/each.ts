@@ -29,9 +29,6 @@ function eachDirective({
 
   const level = getParents(element, "x-recurse").length;
 
-  // TODO: Handle x-recurse and recursion here as well
-  // If we had initialized already, then it's important to update state
-  // per each item and handle possible additions and removals
   if (initializedAlready) {
     const amountOfItems = state.length;
 
@@ -69,7 +66,6 @@ function eachDirective({
           }
         });
 
-        // Is it better to trigger this only once against the container?
         evaluateDirectives(directives, child);
 
         child = child.nextElementSibling as ExtendedHTMLElement;
@@ -113,9 +109,7 @@ function findFirstChildrenWith(element: Element, tagName: string) {
     do {
       if (child?.tagName === tagName) {
         ret.push(child as ExtendedHTMLElement);
-      }
-
-      if (child?.children.length) {
+      } else if (child?.children.length) {
         recurse(child);
       }
     } while ((child = child?.nextElementSibling || null));
