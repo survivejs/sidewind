@@ -421,6 +421,62 @@ It's possible to render lists inside lists.
 </div>
 ```
 
+`x-each` also works with state derived from `x-each`.
+
+```html
+<div
+  x-state="{
+    dataSources: [
+      {
+        id: 'readme',
+        operation: 'file',
+        input: './README.md',
+        transformWith: [
+          {
+            name: 'markdown'
+          },
+          {
+            name: 'reverse'
+          }
+        ]
+      }
+    ]
+  }"
+>
+  <div class="mb-2">
+    <ul class="list-disc list-inside">
+      <template x-each="state.dataSources">
+        <li x="state.value.id"></li>
+        <li x="JSON.stringify(state, null, 2)"></li>
+        <ul class="ml-2 list-disc list-inside">
+          <template x-each="state.value.transformWith">
+            <li x="state.value.name"></li>
+          </template>
+        </ul>
+      </template>
+    </ul>
+  </div>
+  <div x="JSON.stringify(state.dataSources, null, 2)"></div>
+  <div>
+    <button
+      class="btn btn-blue"
+      onclick="setState(({ dataSources }) => ({ dataSources }))"
+    >
+      Replace state
+    </button>
+    <button
+      class="btn btn-blue"
+      onclick="setState(() => ({ greeting: 'hello' }))"
+    >
+      Set unrelated state I
+    </button>
+    <button class="btn btn-blue" onclick="setState({ greeting: 'ohai' })">
+      Set unrelated state II
+    </button>
+  </div>
+</div>
+```
+
 ### `x-recurse`
 
 It is also possible to apply `x-each` recursively using `x-recurse`. It will find the nearest `x-each` and then apply it using the given state. To allow styling, `x-each` injects a `level` property to each item based on the depth of recursion.

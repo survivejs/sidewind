@@ -9,18 +9,20 @@ function eachDirective({
   evaluateDirectives,
   directives,
 }: DirectiveParameters) {
-  const state = evaluate(expression, getState(element)) || [];
+  const elementState = getState(element);
+  const state = evaluate(expression, elementState) || [];
   const containerParent = element.parentElement as ExtendedHTMLElement;
 
-  if (!containerParent) {
+  if (!containerParent || state === containerParent.state) {
     return;
   }
 
-  if (state === containerParent.state) {
-    return;
-  }
-  // Stash state so it can be compared later to avoid work
-  containerParent.state = state;
+  // Stash state so it can be compared later to avoid work.
+  // In case state is derived from another x-each, use getState(element) here.
+  // Is there a cleaner way to solve this?
+  containerParent.state = expression.startsWith("state.value")
+    ? elementState.state
+    : state;
 
   const initializedAlready = containerParent.children.length > 1;
 
@@ -45,7 +47,7 @@ function eachDirective({
     // Remove extra nodes
     if (amountOfItems < amountOfChildren) {
       for (let i = 0; i < amountOfChildren - amountOfItems; i++) {
-        containerParent.lastChild?.remove();
+        containerParent.lastElementChild?.remove();
       }
     }
 
