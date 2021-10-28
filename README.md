@@ -330,6 +330,41 @@ It's possible to render lists inside lists.
 </div>
 ```
 
+`x-each` also works with complex objects.
+
+```html
+<div
+  x-state="{
+    dataSources: [
+      {
+        id: 'readme',
+        operation: 'file',
+        input: './README.md',
+        transformWith: 'markdown'
+      }
+    ]
+  }"
+>
+  <div class="mb-2">
+    <ul class="list-disc list-inside">
+      <template x-each="state.dataSources">
+        <li x="state.value.id + ' : ' + state.value.operation"></li>
+        <li x="JSON.stringify(state, null, 2)"></li>
+      </template>
+    </ul>
+  </div>
+  <div x="JSON.stringify(state.dataSources, null, 2)"></div>
+  <div>
+    <button
+      class="btn btn-blue"
+      onclick="setState(({ dataSources }) => ({ dataSources }))"
+    >
+      Replace state
+    </button>
+  </div>
+</div>
+```
+
 ### `x-recurse`
 
 It is also possible to apply `x-each` recursively using `x-recurse`. It will find the nearest `x-each` and then apply it using the given state. To allow styling, `x-each` injects a `level` property to each item based on the depth of recursion.
