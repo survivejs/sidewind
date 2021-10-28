@@ -17,12 +17,11 @@ function eachDirective({
     return;
   }
 
+  const hasParentEach = !!element.parentElement?.closest("[x-has-each]");
+
   // Stash state so it can be compared later to avoid work.
   // In case state is derived from another x-each, use getState(element) here.
-  // Is there a cleaner way to solve this?
-  containerParent.state = expression.startsWith("state.value")
-    ? elementState.state
-    : state;
+  containerParent.state = hasParentEach ? elementState.state : state;
 
   const initializedAlready = containerParent.children.length > 1;
 
@@ -84,6 +83,7 @@ function eachDirective({
       const templateClone = document.importNode(element.content, true);
       const firstChild = templateClone.firstElementChild;
       containerParent.appendChild(templateClone);
+      containerParent.setAttribute("x-has-each", "");
 
       let child = firstChild;
 

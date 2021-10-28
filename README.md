@@ -431,14 +431,10 @@ It's possible to render lists inside lists.
         id: 'readme',
         operation: 'file',
         input: './README.md',
-        transformWith: [
-          {
-            name: 'markdown'
-          },
-          {
-            name: 'reverse'
-          }
-        ]
+        transformWith: {
+          name: 'markdown',
+          operation: 'transform'
+        }
       }
     ]
   }"
@@ -449,8 +445,11 @@ It's possible to render lists inside lists.
         <li x="state.value.id"></li>
         <li x="JSON.stringify(state, null, 2)"></li>
         <ul class="ml-2 list-disc list-inside">
-          <template x-each="state.value.transformWith">
-            <li x="state.value.name"></li>
+          <template x-each="Object.entries(state.value.transformWith)">
+            <li>
+              <span x="state.value[0]"></span> -
+              <span x="state.value[1]"></span>
+            </li>
           </template>
         </ul>
       </template>
