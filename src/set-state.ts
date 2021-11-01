@@ -42,7 +42,16 @@ function setState(
 
       setState(newValue, { element: matchingParent as ExtendedHTMLElement });
     } else {
-      console.warn("Failed to find matching parents for", parent);
+      console.warn(
+        "Failed to find matching parents for",
+        parent,
+        "in",
+        labeledStateContainers,
+        "for",
+        element,
+        "using",
+        labelName
+      );
     }
   } else {
     const state = stateContainer.state;
