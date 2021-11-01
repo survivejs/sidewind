@@ -1,6 +1,6 @@
 {
   "name": "sidewind",
-  "version": "5.4.2",
+  "version": "5.4.3",
   "description": "Sidewind - Tailwind but for state",
   "main": "dist/sidewind.umd.development.js",
   "typings": "dist/index.d.ts",
