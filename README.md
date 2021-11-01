@@ -667,12 +667,23 @@ The same works with the JavaScript API.
 
 ```html
 <section x-label="parent" x-state="{ name: 'Hello' }">
-  <div>Value: <span x="state.name"></span></div>
-  <div x-state="{ longerName: parent.name + ' again' }">
-    <div>Value: <span x="state.longerName"></span></div>
-    <button class="btn btn-blue mb-2" onclick="hiClicked(this)">
-      Change to hi from within
-    </button>
+  <div x-label="child" x-state="{ value: 'you' }">
+    <div>Value: <span x="parent.name"></span></div>
+    <div x-state="{ longerName: parent.name + ' ' + child.value }">
+      <div>Value: <span x="state.longerName"></span></div>
+      <button class="btn btn-blue mb-2" onclick="hiClicked(this)">
+        Change to hi from within
+      </button>
+      <button class="btn btn-blue mb-2" onclick="bothClicked(this)">
+        Change both from within
+      </button>
+      <button
+        class="btn btn-blue"
+        onclick="setState({ value: 'me' }, { parent: 'child' })"
+      >
+        Change to me
+      </button>
+    </div>
   </div>
   <button class="btn btn-blue" onclick="morningClicked(this)">
     Change to morning

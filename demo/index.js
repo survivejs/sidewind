@@ -17,7 +17,13 @@ function goodbyeClicked(element) {
   setState({ name: "Goodbye" }, { element, parent: "parent" });
 }
 
+function bothClicked(element) {
+  setState({ name: "Goodbye" }, { element, parent: "parent" });
+  setState({ value: "someone" }, { element, parent: "child" });
+}
+
 window.highlight = highlight;
 window.hiClicked = hiClicked;
 window.morningClicked = morningClicked;
 window.goodbyeClicked = goodbyeClicked;
+window.bothClicked = bothClicked;
