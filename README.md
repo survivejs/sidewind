@@ -692,13 +692,13 @@ Also multiple labels are supported.
     <div x="selected.componentId"></div>
     <button
       class="btn btn-blue"
-      onclick="setState({ name: 'Morning' }, { parent: 'editor' })"
+      onclick="setState({ page: 'Morning' }, { parent: 'editor' })"
     >
       Change page
     </button>
     <button
       class="btn btn-blue"
-      onclick="setState({ name: '321' }, { parent: 'selected' })"
+      onclick="setState({ componentId: '321' }, { parent: 'selected' })"
     >
       Change component id
     </button>
