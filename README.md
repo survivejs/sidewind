@@ -647,6 +647,12 @@ State can also be derived to compose or enhance it.
   <div>Value: <span x="state.name"></span></div>
   <div x-state="{ longerName: parent.name + ' again' }">
     <div>Value: <span x="state.longerName"></span></div>
+    <button
+      class="btn btn-blue mb-2"
+      onclick="setState({ name: 'Hi' }, { parent: 'parent' })"
+    >
+      Change to hi from within
+    </button>
   </div>
   <button class="btn btn-blue" onclick="setState({ name: 'Morning' })">
     Change to morning
@@ -654,6 +660,49 @@ State can also be derived to compose or enhance it.
   <button class="btn btn-blue" onclick="setState({ name: 'Goodbye' })">
     Change to goodbye
   </button>
+</section>
+```
+
+The same works with the JavaScript API.
+
+```html
+<section x-label="parent" x-state="{ name: 'Hello' }">
+  <div>Value: <span x="state.name"></span></div>
+  <div x-state="{ longerName: parent.name + ' again' }">
+    <div>Value: <span x="state.longerName"></span></div>
+    <button class="btn btn-blue mb-2" onclick="hiClicked(this)">
+      Change to hi from within
+    </button>
+  </div>
+  <button class="btn btn-blue" onclick="morningClicked(this)">
+    Change to morning
+  </button>
+  <button class="btn btn-blue" onclick="goodbyeClicked(this)">
+    Change to goodbye
+  </button>
+</section>
+```
+
+Also multiple labels are supported.
+
+```html
+<section x-label="editor" x-state="{ page: 'Hello' }">
+  <div x-label="selected" x-state="{ componentId: '123' }">
+    <div x="editor.page + ' ' + selected.componentId"></div>
+    <div x="selected.componentId"></div>
+    <button
+      class="btn btn-blue"
+      onclick="setState({ name: 'Morning' }, { parent: 'editor' })"
+    >
+      Change page
+    </button>
+    <button
+      class="btn btn-blue"
+      onclick="setState({ name: '321' }, { parent: 'selected' })"
+    >
+      Change component id
+    </button>
+  </div>
 </section>
 ```
 
