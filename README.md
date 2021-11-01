@@ -1090,7 +1090,7 @@ To allow for easy online usage with all functionality, there are versions of Sid
 
 **Example:**
 
-> `<script type="text/javascript" src="https://unpkg.com/sidewind@5.4.4/dist/sidewind.umd.production.min.js"></script>`
+> `<script type="text/javascript" src="https://unpkg.com/sidewind@5.4.5/dist/sidewind.umd.production.min.js"></script>`
 
 ## Related Approaches
 
