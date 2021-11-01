@@ -8,7 +8,11 @@ function stateDirective({
   directives,
   getState,
 }: DirectiveParameters) {
-  if (!element.state) {
+  // State has to be evaluated regardless for derivations to work.
+  //
+  // x-each is a special case as it maintains state directly. Potentially
+  // this could be changed to break the coupling.
+  if (expression) {
     element.state = evaluate(expression, getState(element));
   }
 
