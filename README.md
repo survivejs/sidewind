@@ -688,6 +688,7 @@ Also multiple labels are supported.
 ```html
 <section x-label="editor" x-state="{ page: 'Hello' }">
   <div x-label="selected" x-state="{ componentId: '123' }">
+    <div x="editor.page"></div>
     <div x="editor.page + ' ' + selected.componentId"></div>
     <div x="selected.componentId"></div>
     <button

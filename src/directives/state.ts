@@ -12,7 +12,7 @@ function stateDirective({
   //
   // x-each is a special case as it maintains state directly. Potentially
   // this could be changed to break the coupling.
-  if (expression) {
+  if (expression || typeof element.state === "undefined") {
     element.state = evaluate(expression, getState(element));
   }
 
