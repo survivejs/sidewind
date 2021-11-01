@@ -648,6 +648,12 @@ State can also be derived to compose or enhance it.
   <div x-state="{ longerName: parent.name + ' again' }">
     <div>Value: <span x="state.longerName"></span></div>
   </div>
+  <button class="btn btn-blue" onclick="setState({ name: 'Morning' })">
+    Change to morning
+  </button>
+  <button class="btn btn-blue" onclick="setState({ name: 'Goodbye' })">
+    Change to goodbye
+  </button>
 </section>
 ```
 
