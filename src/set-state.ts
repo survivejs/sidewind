@@ -60,9 +60,7 @@ function setState(
       ? Object.assign({}, state, evaluatedValue)
       : evaluatedValue;
 
-    // The gotcha with maintaining state like this is that you cannot serialize
-    // and restore complex objects like HTMLElements for example
-    stateContainer.setAttribute("x-state", JSON.stringify(updatedState));
+    stateContainer.setAttribute("x-state", "");
     stateContainer.state = updatedState;
 
     // Signal to the state container that state was updated within. x-state
