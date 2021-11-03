@@ -1,0 +1,13 @@
+{
+  "developmentPort": 3000,
+  "meta": {
+    "siteName": "Sidewind"
+  },
+  "paths": {
+    "components": "./components",
+    "output": "./public",
+    "pages": "./pages",
+    "scripts": "./demo",
+    "transforms": "./transforms"
+  }
+}

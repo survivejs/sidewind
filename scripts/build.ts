@@ -1,3 +1,10 @@
 import { build } from "gustwind";
+import { getJson } from "./utils.ts";
 
-console.log(build);
+async function main() {
+  const siteMeta = await getJson("./meta.json");
+
+  build(siteMeta);
+}
+
+main();

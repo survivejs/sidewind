@@ -1,0 +1,7 @@
+{
+  "element": "a",
+  "class": "underline",
+  "__class": {
+    "font-bold": "attributes.href === context.pathname"
+  }
+}

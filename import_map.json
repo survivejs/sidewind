@@ -1,5 +1,6 @@
 {
   "imports": {
-    "gustwind": "https://deno.land/x/gustwind@v0.4.0/mod.ts"
+    "gustwind": "https://deno.land/x/gustwind@v0.4.1/mod.ts",
+    "gustwind/utils/fs.ts": "https://deno.land/x/gustwind@v0.4.1/utils/fs.ts"
   }
 }
