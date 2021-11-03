@@ -1,7 +1,7 @@
 {
   "imports": {
-    "gustwind": "https://deno.land/x/gustwind@v0.4.4/mod.ts",
-    "gustwind/utils/fs.ts": "https://deno.land/x/gustwind@v0.4.4/utils/fs.ts",
+    "gustwind": "https://deno.land/x/gustwind@v0.4.7/mod.ts",
+    "gustwind/utils/fs.ts": "https://deno.land/x/gustwind@v0.4.7/utils/fs.ts",
     "path": "https://deno.land/std@0.107.0/path/mod.ts"
   }
 }
