@@ -1,13 +1,6 @@
 [
   {
     "element": "Link",
-    "children": "Modes",
-    "attributes": {
-      "href": "/modes/"
-    }
-  },
-  {
-    "element": "Link",
     "children": "Configuration",
     "attributes": {
       "href": "/configuration/"

@@ -21,7 +21,7 @@
                 {
                   "element": "div",
                   "class": "font-thin",
-                  "children": "Gustwind is a Deno powered JSON oriented site generator. It was written with speed and flexibility in mind."
+                  "children": "Sidewind implements Tailwind style semantics for state. The API is reactive and it has been inspired by React and Vue.js."
                 }
               ]
             },
@@ -55,7 +55,7 @@
                 {
                   "element": "div",
                   "class": "font-thin",
-                  "inputText": "Gustwind was developed by [Juho Vepsäläinen](https://github.com/bebraw).",
+                  "inputText": "Sidewind was developed by [Juho Vepsäläinen](https://github.com/bebraw).",
                   "transformWith": ["markdown"],
                   "__children": "content"
                 }
