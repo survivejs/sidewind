@@ -42,8 +42,8 @@
   "homepage": "https://sidewind.js.org/",
   "scripts": {
     "build": "tsdx build --format umd",
-    "site:build": "deno run --import-map import_map.json --unstable --no-check -A ./scripts/build.ts",
-    "start": "deno run --import-map import_map.json --unstable --no-check -A ./scripts/serve.ts",
+    "site:build": "gustwind -b",
+    "start": "gustwind -d",
     "lint": "tsdx lint src test",
     "test": "tsdx test",
     "prepare": "npm run build && npm run site:build",
