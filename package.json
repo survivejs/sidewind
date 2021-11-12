@@ -27,7 +27,7 @@
     "presite:build": "npm run install_gustwind",
     "site:build": "gustwind -b",
     "prestart": "npm run install_gustwind",
-    "vercel:build": "deno run -A --unstable --no-check -f https://deno.land/x/gustwind@v0.9.1/cli.ts -b",
+    "vercel:build": "deno run -A --unstable --no-check https://deno.land/x/gustwind@v0.9.1/cli.ts -b",
     "start": "gustwind -d",
     "lint": "tsdx lint src test",
     "test": "tsdx test",
