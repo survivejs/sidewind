@@ -24,6 +24,10 @@ marked.setOptions({
   },
 });
 
+// Add example classes to Twind
+// TODO: It would be good to capture these directly from examples
+tw("hidden bg-gray-400 p-2 flex flex-row justify-between cursor-pointer");
+
 function transformMarkdown(input: string) {
   // https://github.com/markedjs/marked/issues/545
   const tableOfContents: { slug: string; level: number; text: string }[] = [];
