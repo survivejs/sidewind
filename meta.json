@@ -9,6 +9,10 @@
         "charset": "UTF-8",
         "name": "viewport",
         "content": "width=device-width, initial-scale=1.0"
+      },
+      {
+        "http-equiv": "X-UA-Compatible",
+        "content": "ie=edge"
       }
     ],
     "link": [
@@ -19,13 +23,29 @@
       {
         "rel": "stylesheet",
         "type": "text/css",
-        "href": "https://cdn.jsdelivr.net/gh/highlightjs/highlight.js/src/styles/github.css"
+        "href": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/styles/github.min.css"
       }
     ],
     "script": [
       {
         "type": "text/javascript",
         "src": "https://unpkg.com/sidewind@5.4.6/dist/sidewind.umd.production.min.js"
+      },
+      {
+        "type": "text/javascript",
+        "src": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/highlight.min.js"
+      },
+      {
+        "type": "text/javascript",
+        "src": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/languages/javascript.min.js"
+      },
+      {
+        "type": "text/javascript",
+        "src": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/languages/xml.min.js"
+      },
+      {
+        "type": "module",
+        "src": "/global.js"
       }
     ]
   },
@@ -34,6 +54,7 @@
     "dataSources": "./dataSources",
     "output": "./public",
     "pages": "./pages",
+    "scripts": "./scripts",
     "transforms": "./transforms"
   },
   "features": {

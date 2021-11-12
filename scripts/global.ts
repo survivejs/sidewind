@@ -1,5 +1,5 @@
-require("./index.pcss");
-require("../src");
+// @ts-ignore This comes from sidewind
+const setState = window.setState;
 
 function highlight(language, str) {
   return hljs.highlight(language, str).value;

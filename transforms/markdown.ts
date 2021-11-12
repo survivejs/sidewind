@@ -1,9 +1,10 @@
 import { marked } from "https://unpkg.com/marked@4.0.0/lib/marked.esm.js";
-import * as twind from "https://cdn.skypack.dev/twind@0.16.16?min";
+import { tw } from "https://cdn.skypack.dev/twind@0.16.16?min";
 import { HighlightJS as highlight } from "https://cdn.skypack.dev/highlight.js@11.3.1?min";
 import highlightJS from "https://unpkg.com/highlight.js@11.3.1/es/languages/javascript";
 import highlightJSON from "https://unpkg.com/highlight.js@11.3.1/es/languages/json";
 import highlightTS from "https://unpkg.com/highlight.js@11.3.1/es/languages/typescript";
+import { Html5Entities } from "https://deno.land/x/html_entities@v1.0/mod.js";
 
 highlight.registerLanguage("javascript", highlightJS);
 highlight.registerLanguage("js", highlightJS);
@@ -44,15 +45,18 @@ function transformMarkdown(input: string) {
           }
         }
 
-        code = code.replace(/\n$/, "") + "\n";
+        // code = code.replace(/\n$/, "") + "\n";
+
+        return renderEditor(code);
 
         if (!lang) {
           return "<pre><code>" + code + "</code></pre>\n";
         }
 
+        /*
         return (
           '<pre class="' +
-          twind.tw`overflow-auto -mx-4 md:mx-0 bg-gray-100` +
+          tw`overflow-auto -mx-4 md:mx-0 bg-gray-100` +
           '"><code class="' +
           // @ts-ignore How to type this?
           this.options.langPrefix +
@@ -61,6 +65,7 @@ function transformMarkdown(input: string) {
           code +
           "</code></pre>\n"
         );
+        */
       },
       heading(
         text: string,
@@ -78,7 +83,7 @@ function transformMarkdown(input: string) {
           '"><h' +
           level +
           ' class="' +
-          twind.tw`inline` +
+          tw`inline` +
           '"' +
           ' id="' +
           slug +
@@ -94,7 +99,7 @@ function transformMarkdown(input: string) {
         if (href === null) {
           return text;
         }
-        let out = '<a class="' + twind.tw`underline` + '" href="' + href + '"';
+        let out = '<a class="' + tw`underline` + '" href="' + href + '"';
         if (title) {
           out += ' title="' + title + '"';
         }
@@ -112,7 +117,7 @@ function transformMarkdown(input: string) {
           type +
           startatt +
           ' class="' +
-          twind.tw(klass) +
+          tw(klass) +
           '">\n' +
           body +
           "</" +
@@ -124,6 +129,44 @@ function transformMarkdown(input: string) {
   });
 
   return { content: marked(input), tableOfContents };
+}
+
+function renderEditor(input: string) {
+  const example = Html5Entities.decode(input);
+  // const encoder = new TextEncoder();
+  const decodedExample = btoa(example); //encoder.encode(example));
+
+  return `<section class="${tw(
+    "mb-4"
+  )}" x-state="{ code: atob('${decodedExample}') }">
+<div class="${tw(
+    "p-4 bg-gray-800 text-white rounded-t-lg overflow-x-auto overflow-y-hidden"
+  )}">
+<div class="${tw("relative")}">
+  <div class="${tw(
+    "absolute right-0 text-xs font-thin select-none text-white"
+  )}">Editor</div>
+</div>
+<div class="${tw("inline-block font-mono relative")}">
+  <pre class="${tw(
+    "overflow-hidden mr-16 pr-16 w-full"
+  )}" x="highlight('html', state.code)"></pre>
+  <textarea
+    class="${tw(
+      "overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-none whitespace-pre resize-none"
+    )}"
+    oninput="setState({ code: this.value })"
+    x="state.code"
+    autocapitalize="off"
+    autocomplete="off"
+    autocorrect="off"
+    spellcheck="false"
+    x-rows="state.code.split('\\n').length"
+  ></textarea>
+</div>
+</div>
+<div class="${tw("p-4 bg-gray-200 rounded-b-lg")}" x="state.code"></div>
+</section>`;
 }
 
 export default transformMarkdown;
