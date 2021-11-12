@@ -1,4 +1,7 @@
-# Sources
+---
+slug: "sources"
+title: "Sources"
+---
 
 Sources wrap browser state within a reactive stream that's then mapped to a state internally.
 

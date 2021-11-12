@@ -1,4 +1,7 @@
-# Directives
+---
+slug: "directives"
+title: "Directives"
+---
 
 Sidewind is composed of a collection of directives that operate on the DOM. I've documented them in detail below.
 

@@ -1,0 +1,42 @@
+{
+  "meta": {
+    "__title": "match.name",
+    "__description": "match.description"
+  },
+  "dataSources": [
+    {
+      "id": "documentation",
+      "operation": "indexMarkdown",
+      "input": "./documentation"
+    }
+  ],
+  "matchBy": {
+    "dataSource": "documentation",
+    "collection": "content",
+    "property": "data.slug"
+  },
+  "page": [
+    {
+      "element": "MainNavigation"
+    },
+    {
+      "element": "div",
+      "class": "py-4 mx-auto max-w-3xl prose lg:prose-xl",
+      "children": [
+        {
+          "element": "h1",
+          "__children": "match.data.title"
+        },
+        {
+          "element": "p",
+          "inputProperty": "match.content",
+          "transformWith": ["markdown"],
+          "__children": "content"
+        }
+      ]
+    },
+    {
+      "element": "MainFooter"
+    }
+  ]
+}

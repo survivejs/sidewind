@@ -9,7 +9,7 @@
         {
           "element": "a",
           "class": "scale-150 whitespace-nowrap",
-          "children": "🐳💨",
+          "children": "💨",
           "attributes": {
             "href": "/"
           }
@@ -23,13 +23,6 @@
       "element": "div",
       "class": "flex gap-4 ml-auto sm:ml-0",
       "children": [
-        {
-          "element": "Link",
-          "children": "Blog",
-          "attributes": {
-            "href": "/blog/"
-          }
-        },
         {
           "element": "Link",
           "children": "GitHub",

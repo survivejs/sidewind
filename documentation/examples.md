@@ -1,4 +1,7 @@
-# Examples
+---
+slug: "examples"
+title: "Examples"
+---
 
 The examples below combine directives to produce complex user interfaces and to handle specific use cases.
 

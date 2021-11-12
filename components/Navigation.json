@@ -1,16 +1,30 @@
 [
   {
     "element": "Link",
-    "children": "Configuration",
+    "children": "Directives",
     "attributes": {
-      "href": "/configuration/"
+      "href": "/directives/"
     }
   },
   {
     "element": "Link",
-    "children": "Concepts",
+    "children": "Sources",
     "attributes": {
-      "href": "/concepts/"
+      "href": "/sources/"
+    }
+  },
+  {
+    "element": "Link",
+    "children": "Examples",
+    "attributes": {
+      "href": "/examples/"
+    }
+  },
+  {
+    "element": "Link",
+    "children": "Usage",
+    "attributes": {
+      "href": "/usage/"
     }
   }
 ]
