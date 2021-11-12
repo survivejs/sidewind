@@ -20,8 +20,20 @@
       "element": "MainNavigation"
     },
     {
+      "element": "aside",
+      "class": "fixed top-16 pl-4 hidden lg:inline",
+      "children": [
+        {
+          "element": "TableOfContents"
+        }
+      ]
+    },
+    {
       "element": "div",
       "class": "md:mx-auto my-8 px-4 md:px-0 w-full lg:max-w-3xl",
+      "attributes": {
+        "id": "main"
+      },
       "children": [
         {
           "element": "div",
