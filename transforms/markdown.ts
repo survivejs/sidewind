@@ -35,6 +35,9 @@ function transformMarkdown(input: string) {
       code(code: string) {
         return renderEditor(code);
       },
+      paragraph(text) {
+        return '<p class="' + tw("my-2") + '">' + text + "</p>";
+      },
       heading(
         text: string,
         level: number,
@@ -45,8 +48,17 @@ function transformMarkdown(input: string) {
 
         tableOfContents.push({ slug, level, text });
 
+        const classes = {
+          1: "inline-block underline text-gray-900 font-extrabold leading-3 text-3xl mt-0 mb-8",
+          2: "inline-block underline text-gray-900 font-bold leading-4 text-xl mt-4 mb-2",
+          3: "inline-block underline text-gray-900 font-semibold leading-5 text-lg mt-1 mb-1",
+          4: "inline-block underline text-gray-900 font-medium leading-6 mt-1 mb-0.5",
+        };
+
         return (
-          '<a href="#' +
+          '<a class="' +
+          tw(classes[level]) +
+          '" href="#' +
           slug +
           '"><h' +
           level +
@@ -78,8 +90,8 @@ function transformMarkdown(input: string) {
         const type = ordered ? "ol" : "ul",
           startatt = ordered && start !== 1 ? ' start="' + start + '"' : "",
           klass = ordered
-            ? "list-decimal list-inside"
-            : "list-disc list-inside";
+            ? "list-decimal list-outside my-2"
+            : "list-disc list-outside my-2";
         return (
           "<" +
           type +
