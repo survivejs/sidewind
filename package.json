@@ -42,8 +42,8 @@
   "homepage": "https://sidewind.js.org/",
   "scripts": {
     "build": "tsdx build --format umd",
-    "site:build": "gustwind -b",
-    "start": "gustwind -d",
+    "site:build": "deno run -A --unstable --no-check https://deno.land/x/gustwind@v0.7.9/cli.ts -b",
+    "start": "deno run -A --unstable --no-check https://deno.land/x/gustwind@v0.7.9/cli.ts -d",
     "lint": "tsdx lint src test",
     "test": "tsdx test",
     "prepare": "npm run build && npm run site:build",
