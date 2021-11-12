@@ -1,6 +1,6 @@
 {
   "element": "footer",
-  "class": "py-8 font-light bg-gradient-to-br from-emerald-100 to-purple-200",
+  "class": "py-8 font-light bg-gradient-to-br from-orange-100 to-purple-200",
   "children": [
     {
       "element": "div",

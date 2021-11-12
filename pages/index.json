@@ -17,7 +17,7 @@
     },
     {
       "element": "header",
-      "class": "bg-gradient-to-br from-purple-200 to-emerald-100 py-8",
+      "class": "bg-gradient-to-br from-purple-200 to-orange-100 py-8",
       "children": [
         {
           "element": "div",
