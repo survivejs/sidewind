@@ -43,7 +43,7 @@ In addition to the standard options, there's an `once` flag that when set causes
   <img
     x-intersect="{
       options: { once: true },
-      state: { src: './assets/logo.png' }
+      state: { src: '/logo.png' }
     }"
     x-src="state.src"
   />
@@ -75,7 +75,7 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
   x-state="{ cars: [] }"
   x-promise="{
     state: {
-      cars: fetch('./assets/cars.json').then(res => res.json())
+      cars: fetch('/cars.json').then(res => res.json())
     }
   }"
 >
@@ -97,7 +97,7 @@ In case there's an error, then the `Error` object is emitted to `error` state:
   x-state="{ cars: [], error: {} }"
   x-promise="{
     state: {
-      cars: fetch('./assets/404.json').then(res => res.json())
+      cars: fetch('/404.json').then(res => res.json())
     }
   }"
 >

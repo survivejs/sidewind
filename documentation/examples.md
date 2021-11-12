@@ -105,7 +105,7 @@ The examples below combine directives to produce complex user interfaces and to 
 <div x-state="{ status: 'pending', partial: '' } ">
   <button
     onmouseover="setState({ status: 'loading' });
-    fetch('./assets/partial.html')
+    fetch('/partial.html')
       .then(res => res.text())
       .then(partial => setState({
         partial, status: 'loaded'
