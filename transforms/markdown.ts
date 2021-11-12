@@ -32,40 +32,8 @@ function transformMarkdown(input: string) {
   // https://github.com/markedjs/marked/blob/master/src/Renderer.js
   marked.use({
     renderer: {
-      code(code: string, infostring: string): string {
-        const lang = ((infostring || "").match(/\S*/) || [])[0];
-
-        // @ts-ignore How to type this?
-        if (this.options.highlight) {
-          // @ts-ignore How to type this?
-          const out = this.options.highlight(code, lang);
-
-          if (out != null && out !== code) {
-            code = out;
-          }
-        }
-
-        // code = code.replace(/\n$/, "") + "\n";
-
+      code(code: string) {
         return renderEditor(code);
-
-        if (!lang) {
-          return "<pre><code>" + code + "</code></pre>\n";
-        }
-
-        /*
-        return (
-          '<pre class="' +
-          tw`overflow-auto -mx-4 md:mx-0 bg-gray-100` +
-          '"><code class="' +
-          // @ts-ignore How to type this?
-          this.options.langPrefix +
-          lang +
-          '">' +
-          code +
-          "</code></pre>\n"
-        );
-        */
       },
       heading(
         text: string,
@@ -133,12 +101,10 @@ function transformMarkdown(input: string) {
 
 function renderEditor(input: string) {
   const example = Html5Entities.decode(input);
-  // const encoder = new TextEncoder();
-  const decodedExample = btoa(example); //encoder.encode(example));
 
-  return `<section class="${tw(
-    "mb-4"
-  )}" x-state="{ code: atob('${decodedExample}') }">
+  return `<section class="${tw("mb-4")}" x-state="{ code: atob('${btoa(
+    example
+  )}') }">
 <div class="${tw(
     "p-4 bg-gray-800 text-white rounded-t-lg overflow-x-auto overflow-y-hidden"
   )}">
@@ -165,7 +131,9 @@ function renderEditor(input: string) {
   ></textarea>
 </div>
 </div>
-<div class="${tw("p-4 bg-gray-200 rounded-b-lg")}" x="state.code"></div>
+<div class="${tw(
+    "p-4 bg-gray-200 rounded-b-lg"
+  )}" x="state.code">${example}</div>
 </section>`;
 }
 
