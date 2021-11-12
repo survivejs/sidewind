@@ -26,7 +26,9 @@ marked.setOptions({
 
 // Add example classes to Twind
 // TODO: It would be good to capture these directly from examples
-tw("hidden bg-gray-400 p-2 flex flex-row justify-between cursor-pointer");
+tw(
+  "hidden bg-red-400 bg-gray-400 ml-2 p-2 flex flex-row justify-between cursor-pointer space-y-2"
+);
 
 function transformMarkdown(input: string) {
   // https://github.com/markedjs/marked/issues/545

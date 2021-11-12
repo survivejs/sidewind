@@ -75,10 +75,10 @@ The examples below combine directives to produce complex user interfaces and to 
   x-label="parent"
   x-state="{
     closest: {},
-    headings: Array.from(document.querySelectorAll('h2, h3'))
+    headings: Array.from(document.querySelectorAll('#main h2, h3'))
   }"
   x-closest="{
-    state: { closest: document.querySelectorAll('h2, h3') }
+    state: { closest: document.querySelectorAll('#main h2, h3') }
   }"
 >
   <ul>
