@@ -122,7 +122,7 @@ To get an idea of what it's like to develop with Sidewind, try tweaking the foll
 <div class="flex font-mono relative" x-state="'console.log(\'demo\')'">
   <pre x="highlight('js', state)"></pre>
   <textarea
-    class="absolute min-w-full top-0 left-0 outline-none opacity-25 bg-none"
+    class="absolute min-w-full top-0 left-0 outline-none opacity-50 bg-transparent whitespace-pre resize-none"
     oninput="setState(this.value)"
     x="state"
     autocapitalize="off"
