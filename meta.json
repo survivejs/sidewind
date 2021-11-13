@@ -59,6 +59,7 @@
     "twindSetup": "./twindSetup.ts"
   },
   "features": {
+    "loadTwindRuntime": true,
     "showEditorAlways": false
   }
 }
