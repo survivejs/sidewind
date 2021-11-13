@@ -18,7 +18,7 @@ The state can be manipulated using a global `setState`:
 
 ```html
 <section x-state="false">
-  <div class="mb-2">Value: <span x="state"></span></div>
+  <div class="prose mb-2">Value: <span x="state"></span></div>
   <button class="btn btn-blue" onclick="setState(v => !v)">Toggle value</button>
 </section>
 ```
