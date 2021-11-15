@@ -2,7 +2,7 @@ import getState from "./get-state";
 import setState from "./set-state";
 import evaluateDirectives from "./evaluate-directives";
 import {
-  attributesDirective,
+  attributeDirective,
   cloakDirective,
   closestDirective,
   eachDirective,
@@ -26,7 +26,7 @@ function evaluateAllDirectives() {
   evaluateDirectives([
     { name: "x-state", directive: stateDirective },
     { name: "x-each", directive: eachDirective },
-    { name: "x-attr", directive: attributesDirective },
+    { name: "x-attr", directive: attributeDirective },
     { name: "x", directive: valueDirective },
     { name: "x-cloak", directive: cloakDirective },
     { name: "x-closest", directive: closestDirective },

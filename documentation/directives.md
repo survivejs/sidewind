@@ -45,23 +45,26 @@ State can be a complex object:
 
 When it executes, it removes the [hidden](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/hidden) attribute from the element and it will be ready to run.
 
-## `x` with Attributes
+## `x-attr`
 
-In addition to binding values, it's possible to bind attributes with `x-`:
+In addition to binding values, it's possible to bind attributes with `x-attr`:
 
 ```html
 <section x-state="{ target: 'https://survivejs.com' }">
-  <a x-href="state.target">Link target</a>
+  <a x-attr @href="state.target">Link target</a>
 </section>
 ```
+
+The idea is that `x-attr` tells Sidewind that there are bindings and then `@` is used to signify which. Using the keyword is a small optimization and it also makes it easier to find spots in code where you might have attribute bindings in place.
 
 For classes, it's possible to pass an array to evaluate to produce multiple classes based on expressions:
 
 ```html
 <section x-state="{ target: 'https://survivejs.com' }">
   <a
-    x-href="state.target"
-    x-class="[
+    x-attr
+    @href="state.target"
+    @class="[
       state.target === 'https://google.com' && 'bg-red-400',
       state.target === 'https://survivejs.com' && 'bg-gray-400'
     ]"
@@ -75,9 +78,10 @@ Default classes are retained as this allows more compact syntax with a fallback:
 ```html
 <section x-state="{ target: 'https://survivejs.com' }">
   <a
+    x-attr
     class="p-2"
-    x-class="state.target === 'https://survivejs.com' && 'bg-gray-400'"
-    x-href="state.target"
+    @class="state.target === 'https://survivejs.com' && 'bg-gray-400'"
+    @href="state.target"
     >Link target</a
   >
   <button
@@ -209,8 +213,9 @@ Iterated items can also have inputs while focus is retained on edit.
     <ul class="list-disc list-inside">
       <template x-each="state.todos">
         <li
-          x-class="state.value.selected && 'font-bold'"
           x="state.value.text"
+          x-attr
+          @class="state.value.selected && 'font-bold'"
         ></li>
       </template>
     </ul>
@@ -516,7 +521,7 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
   <div>
     <ul class="list-disc list-inside">
       <template x-each="state.show">
-        <li x-class="state.level > 0 && 'ml-2'">
+        <li x-attr @class="state.level > 0 && 'ml-2'">
           <span x="state.value.text"></span>
           <ul
             class="list-disc list-inside"
@@ -590,8 +595,12 @@ The nested behavior works for attributes as well.
 ```html
 <div x-label="parent" x-state="true">
   <div class="space-y-2" x-state="true">
-    <div class="p-2" x-class="parent ? 'bg-red-400' : 'bg-red-200'">Parent</div>
-    <div class="p-2" x-class="state ? 'bg-gray-400' : 'bg-gray-200'">Child</div>
+    <div x-attr class="p-2" @class="parent ? 'bg-red-400' : 'bg-red-200'">
+      Parent
+    </div>
+    <div x-attr class="p-2" @class="state ? 'bg-gray-400' : 'bg-gray-200'">
+      Child
+    </div>
     <div class="flex space-x-2">
       <button
         class="btn btn-blue"

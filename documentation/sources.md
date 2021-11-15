@@ -41,11 +41,12 @@ In addition to the standard options, there's an `once` flag that when set causes
 ```html
 <div x-state="{ src: '' }">
   <img
+    x-attr
     x-intersect="{
       options: { once: true },
       state: { src: '/logo.png' }
     }"
-    x-src="state.src"
+    @src="state.src"
   />
 </div>
 ```

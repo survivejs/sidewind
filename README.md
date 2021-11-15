@@ -87,31 +87,36 @@ To get an idea of what it's like to develop with Sidewind, try tweaking the foll
 <section x-state="'animals'">
   <nav class="flex flex-row justify-between cursor-pointer">
     <div
+      x-attr
       class="p-2 w-full"
-      x-class="state === 'animals' ? 'bg-gray-400' : 'btn-muted'"
+      @class="state === 'animals' ? 'bg-gray-400' : 'btn-muted'"
       onclick="setState('animals')"
     >
       Animals
     </div>
     <div
+      x-attr
       class="p-2 w-full"
-      x-class="state === 'languages' ? 'bg-gray-400' : 'btn-muted'"
+      @class="state === 'languages' ? 'bg-gray-400' : 'btn-muted'"
       onclick="setState('languages')"
     >
       Languages
     </div>
     <div
+      x-attr
       class="p-2 w-full"
-      x-class="state === 'colors' ? 'bg-gray-400' : 'btn-muted'"
+      @class="state === 'colors' ? 'bg-gray-400' : 'btn-muted'"
       onclick="setState('colors')"
     >
       Colors
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div x-class="state === 'animals' ? '' : 'hidden'">Animals tab</div>
-    <div x-class="state === 'languages' ? '' : 'hidden'">Languages tab</div>
-    <div x-class="state === 'colors' ? '' : 'hidden'">Colors tab</div>
+    <div x-attr @class="state === 'animals' ? '' : 'hidden'">Animals tab</div>
+    <div x-attr @class="state === 'languages' ? '' : 'hidden'">
+      Languages tab
+    </div>
+    <div x-attr @class="state === 'colors' ? '' : 'hidden'">Colors tab</div>
   </div>
 </section>
 ```
