@@ -27,7 +27,7 @@ marked.setOptions({
 // Add example classes to Twind
 // TODO: It would be good to capture these directly from examples
 tw(
-  "btn btn-blue:hover btn-muted hidden bg-red-400 bg-gray-400 ml-2 p-2 flex flex-row justify-between cursor-pointer space-y-2"
+  "btn btn-muted hidden bg-red-400 bg-gray-400 ml-2 p-2 flex flex-row justify-between cursor-pointer space-y-2"
 );
 
 function transformMarkdown(input: string) {
