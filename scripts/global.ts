@@ -5,10 +5,10 @@ import highlightXML from "https://unpkg.com/highlight.js@11.3.1/es/languages/xml
 import twindSetup from "../twindSetup.ts";
 import "../src";
 
+setup(twindSetup);
+
 HighlightJS.registerLanguage("js", highlightJS);
 HighlightJS.registerLanguage("html", highlightXML);
-
-setup(twindSetup);
 
 // @ts-ignore This comes from sidewind
 const setState = window.setState;

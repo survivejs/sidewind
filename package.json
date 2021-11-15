@@ -23,9 +23,9 @@
   "homepage": "https://sidewind.js.org/",
   "scripts": {
     "build": "tsdx build --format umd",
-    "install_gustwind": "deno install -A --unstable --no-check -f https://deno.land/x/gustwind@v0.12.1/cli.ts",
+    "install_gustwind": "deno install -A --unstable --no-check -f https://deno.land/x/gustwind@v0.12.2/cli.ts",
     "site:build": "gustwind -b",
-    "vercel:build": "deno run -A --unstable --no-check https://deno.land/x/gustwind@v0.12.1/cli.ts -b",
+    "vercel:build": "deno run -A --unstable --no-check https://deno.land/x/gustwind@v0.12.2/cli.ts -b",
     "start": "gustwind -d",
     "lint": "tsdx lint src test",
     "test": "tsdx test",
