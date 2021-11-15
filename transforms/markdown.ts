@@ -135,7 +135,7 @@ function renderEditor(input: string) {
   )}" x="highlight('html', state.code)"></pre>
   <textarea
     class="${tw(
-      "overflow-hidden absolute min-w-full top-0 left-0 outline-none opacity-50 bg-transparent whitespace-pre resize-none"
+      "overflow-hidden absolute min-w-full min-h-full top-0 left-0 outline-none opacity-50 bg-transparent whitespace-pre resize-none"
     )}"
     oninput="setState({ code: this.value })"
     x="state.code"
