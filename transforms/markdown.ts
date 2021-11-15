@@ -1,6 +1,6 @@
 import { marked } from "https://unpkg.com/marked@4.0.0/lib/marked.esm.js";
 import { tw } from "https://cdn.skypack.dev/twind@0.16.16?min";
-import { HighlightJS } from "https://cdn.skypack.dev/highlight.js@11.3.1?min";
+import HighlightJS from "https://unpkg.com/@highlightjs/cdn-assets@11.3.1/es/core.min.js";
 import highlightJS from "https://unpkg.com/highlight.js@11.3.1/es/languages/javascript";
 import highlightXML from "https://unpkg.com/highlight.js@11.3.1/es/languages/xml";
 import { Html5Entities } from "https://deno.land/x/html_entities@v1.0/mod.js";
