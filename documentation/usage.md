@@ -8,7 +8,9 @@ The easiest way to use Sidewind, is to consume the bundle that includes all func
 
 **Example:**
 
-> `<script type="text/javascript" src="https://unpkg.com/sidewind@5.4.6/dist/sidewind.umd.production.min.js"></script>`
+> `<script type="text/javascript" src="https://unpkg.com/sidewind/dist/sidewind.umd.production.min.js"></script>`
+
+I recommend fixing the lookup to a specific version like this: `https://unpkg.com/sidewind@6.0.0/dist/sidewind.umd.production.min.js`. Doing this will avoid breakage in case a new major version is released.
 
 ## Programmatic API
 
