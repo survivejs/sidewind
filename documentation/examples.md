@@ -46,9 +46,9 @@ The examples below combine directives to produce complex user interfaces and to 
       onclick="setState(visible => !visible)"
     >
       <span>Junior Engineer</span>
-      <span x="state ? '+' : '-'" />
+      <span x="state ? '-' : '+'" />
     </div>
-    <div class="py-2 text-gray-600" x-class="!state && 'hidden'">
+    <div x-attr class="py-2 text-gray-600" @class="!state && 'hidden'">
       Junior engineer description
     </div>
   </div>
@@ -59,9 +59,9 @@ The examples below combine directives to produce complex user interfaces and to 
       onclick="setState(visible => !visible)"
     >
       <span>Senior Engineer</span>
-      <span x="state ? '+' : '-'" />
+      <span x="state ? '-' : '+'" />
     </div>
-    <div class="py-2 text-gray-600" x-class="!state && 'hidden'">
+    <div x-attr class="py-2 text-gray-600" @class="!state && 'hidden'">
       Senior engineer description
     </div>
   </div>
@@ -85,9 +85,10 @@ The examples below combine directives to produce complex user interfaces and to 
     <template x-each="state.headings">
       <li>
         <a
-          x-href="state.value.nextElementSibling?.attributes.href.value"
           x="state.value.textContent"
-          x-class="[
+          x-attr
+          @href="state.value.nextElementSibling?.attributes.href.value"
+          @class="[
             state.value.textContent === parent.closest?.textContent && 'font-bold',
             state.value.tagName === 'H3' && 'ml-2'
           ]"
