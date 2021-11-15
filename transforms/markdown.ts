@@ -1,16 +1,12 @@
 import { marked } from "https://unpkg.com/marked@4.0.0/lib/marked.esm.js";
 import { tw } from "https://cdn.skypack.dev/twind@0.16.16?min";
-import { HighlightJS as highlight } from "https://cdn.skypack.dev/highlight.js@11.3.1?min";
+import { HighlightJS } from "https://cdn.skypack.dev/highlight.js@11.3.1?min";
 import highlightJS from "https://unpkg.com/highlight.js@11.3.1/es/languages/javascript";
-import highlightJSON from "https://unpkg.com/highlight.js@11.3.1/es/languages/json";
-import highlightTS from "https://unpkg.com/highlight.js@11.3.1/es/languages/typescript";
+import highlightXML from "https://unpkg.com/highlight.js@11.3.1/es/languages/xml";
 import { Html5Entities } from "https://deno.land/x/html_entities@v1.0/mod.js";
 
-highlight.registerLanguage("javascript", highlightJS);
-highlight.registerLanguage("js", highlightJS);
-highlight.registerLanguage("json", highlightJSON);
-highlight.registerLanguage("typescript", highlightTS);
-highlight.registerLanguage("ts", highlightTS);
+HighlightJS.registerLanguage("js", highlightJS);
+HighlightJS.registerLanguage("html", highlightXML);
 
 marked.setOptions({
   gfm: true,
@@ -20,7 +16,9 @@ marked.setOptions({
   smartLists: true,
   smartypants: true,
   highlight: (code: string, language: string) => {
-    return highlight.highlight(code, { language }).value;
+    console.log("highlight", code, language);
+
+    return HighlightJS.highlight(code, { language }).value;
   },
 });
 

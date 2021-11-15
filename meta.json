@@ -27,22 +27,6 @@
     ],
     "script": [
       {
-        "type": "text/javascript",
-        "src": "https://unpkg.com/sidewind@5.4.6/dist/sidewind.umd.production.min.js"
-      },
-      {
-        "type": "text/javascript",
-        "src": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/highlight.min.js"
-      },
-      {
-        "type": "text/javascript",
-        "src": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/languages/javascript.min.js"
-      },
-      {
-        "type": "text/javascript",
-        "src": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/languages/xml.min.js"
-      },
-      {
         "type": "module",
         "src": "/global.js"
       }
@@ -59,7 +43,6 @@
     "twindSetup": "./twindSetup.ts"
   },
   "features": {
-    "loadTwindRuntime": true,
     "showEditorAlways": false
   }
 }
