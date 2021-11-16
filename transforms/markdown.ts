@@ -1,12 +1,12 @@
 import { marked } from "https://unpkg.com/marked@4.0.0/lib/marked.esm.js";
 import { tw } from "https://cdn.skypack.dev/twind@0.16.16?min";
-import HighlightJS from "https://unpkg.com/@highlightjs/cdn-assets@11.3.1/es/core.min.js";
+import highlight from "https://unpkg.com/@highlightjs/cdn-assets@11.3.1/es/core.min.js";
 import highlightJS from "https://unpkg.com/highlight.js@11.3.1/es/languages/javascript";
 import highlightXML from "https://unpkg.com/highlight.js@11.3.1/es/languages/xml";
 import { Html5Entities } from "https://deno.land/x/html_entities@v1.0/mod.js";
 
-HighlightJS.registerLanguage("js", highlightJS);
-HighlightJS.registerLanguage("html", highlightXML);
+highlight.registerLanguage("js", highlightJS);
+highlight.registerLanguage("html", highlightXML);
 
 marked.setOptions({
   gfm: true,
@@ -18,14 +18,14 @@ marked.setOptions({
   highlight: (code: string, language: string) => {
     console.log("highlight", code, language);
 
-    return HighlightJS.highlight(code, { language }).value;
+    return highlight.highlight(code, { language }).value;
   },
 });
 
 // Add example classes to Twind
 // TODO: It would be good to capture these directly from examples
 tw(
-  "btn btn-muted hidden bg-red-400 bg-gray-400 ml-2 p-2 flex flex-row justify-between cursor-pointer space-y-2"
+  "btn btn-muted hidden bg-red-400 bg-gray-400 ml-2 p-2 flex flex-row justify-between cursor-pointer space-y-2",
 );
 
 function transformMarkdown(input: string) {
@@ -39,14 +39,14 @@ function transformMarkdown(input: string) {
       code(code: string) {
         return renderEditor(code);
       },
-      paragraph(text) {
+      paragraph(text: string) {
         return '<p class="' + tw("my-2") + '">' + text + "</p>";
       },
       heading(
         text: string,
         level: number,
         raw: string,
-        slugger: { slug: (s: string) => string }
+        slugger: { slug: (s: string) => string },
       ) {
         const slug = slugger.slug(raw);
 
@@ -118,25 +118,35 @@ function transformMarkdown(input: string) {
 function renderEditor(input: string) {
   const example = Html5Entities.decode(input);
 
-  return `<section class="${tw("mb-4")}" x-state="{ code: atob('${btoa(
-    example
-  )}') }">
-<div class="${tw(
-    "p-4 bg-gray-800 text-white rounded-t-lg overflow-x-auto overflow-y-hidden"
-  )}">
+  return `<section class="${tw("mb-4")}" x-state="{ code: atob('${
+    btoa(
+      example,
+    )
+  }') }">
+<div class="${
+    tw(
+      "p-4 bg-gray-800 text-white rounded-t-lg overflow-x-auto overflow-y-hidden",
+    )
+  }">
 <div class="${tw("relative")}">
-  <div class="${tw(
-    "absolute right-0 text-xs font-thin select-none text-white"
-  )}">Editor</div>
+  <div class="${
+    tw(
+      "absolute right-0 text-xs font-thin select-none text-white",
+    )
+  }">Editor</div>
 </div>
 <div class="${tw("inline-block font-mono relative")}">
-  <pre class="${tw(
-    "overflow-hidden mr-16 pr-16 w-full"
-  )}" x="highlight('html', state.code)"></pre>
+  <pre class="${
+    tw(
+      "overflow-hidden mr-16 pr-16 w-full",
+    )
+  }" x="highlight('html', state.code)"></pre>
   <textarea
-    class="${tw(
-      "overflow-hidden absolute min-w-full min-h-full top-0 left-0 outline-none opacity-50 bg-transparent whitespace-pre resize-none"
-    )}"
+    class="${
+    tw(
+      "overflow-hidden absolute min-w-full min-h-full top-0 left-0 outline-none opacity-50 bg-transparent whitespace-pre resize-none",
+    )
+  }"
     oninput="setState({ code: this.value })"
     x="state.code"
     autocapitalize="off"
@@ -147,9 +157,11 @@ function renderEditor(input: string) {
   ></textarea>
 </div>
 </div>
-<div class="${tw(
-    "p-4 bg-gray-200 rounded-b-lg"
-  )}" x="state.code">${example}</div>
+<div class="${
+    tw(
+      "p-4 bg-gray-200 rounded-b-lg",
+    )
+  }" x="state.code">${example}</div>
 </section>`;
 }
 
