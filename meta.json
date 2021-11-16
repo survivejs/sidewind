@@ -22,7 +22,7 @@
       },
       {
         "rel": "stylesheet",
-        "href": "https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.2/build/styles/dracula.min.css"
+        "href": "https://cdn.jsdelivr.net/gh/highlightjs/highlight.js@11.3.1/src/styles/github-dark.min.css"
       }
     ],
     "script": [
