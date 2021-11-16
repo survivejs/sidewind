@@ -1,4 +1,4 @@
-import { DirectiveParameters } from "../types";
+import type { DirectiveParameters } from "../types.ts";
 
 function valueDirective({
   element,

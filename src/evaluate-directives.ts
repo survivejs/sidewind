@@ -1,21 +1,21 @@
-import {
+import type {
   Directive,
   DirectiveFunction,
   EvaluateFrom,
   ExtendedHTMLElement,
-} from "./types";
-import evaluate from "./evaluate";
-import getState from "./get-state";
-import setState from "./set-state";
+} from "./types.ts";
+import evaluate from "./evaluate.ts";
+import getState from "./get-state.ts";
+import setState from "./set-state.ts";
 
 function evaluateDirectives(
   directives: Directive[],
-  parent?: ExtendedHTMLElement
+  parent?: ExtendedHTMLElement,
 ) {
   directives.forEach(
     ({ directive }) =>
       typeof directive.init === "function" &&
-      directive.init(parent || (document.body as ExtendedHTMLElement))
+      directive.init(parent || (document.body as ExtendedHTMLElement)),
   );
 
   directives.forEach(({ name, directive }) =>
@@ -24,7 +24,7 @@ function evaluateDirectives(
       name,
       directive,
       parent,
-      directive.evaluateFrom
+      directive.evaluateFrom,
     )
   );
 }
@@ -34,7 +34,7 @@ function evaluateDirective(
   name: string,
   directive: DirectiveFunction,
   parent?: ExtendedHTMLElement,
-  evaluateFrom: EvaluateFrom = "bottom"
+  evaluateFrom: EvaluateFrom = "bottom",
 ) {
   const elements = (parent || document.body).querySelectorAll(`[${name}]`);
 
@@ -43,7 +43,7 @@ function evaluateDirective(
       evaluateOne(elements[i] as ExtendedHTMLElement);
     }
   } else {
-    for (let i = elements.length; i--; ) {
+    for (let i = elements.length; i--;) {
       evaluateOne(elements[i] as ExtendedHTMLElement);
     }
   }

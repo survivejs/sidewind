@@ -1,15 +1,15 @@
-import { ExtendedHTMLElement } from "./types";
-import getParents from "./get-parents";
+import type { ExtendedHTMLElement } from "./types.ts";
+import getParents from "./get-parents.ts";
 
 function setState(
-  newValue: any,
+  newValue: unknown,
   {
     element,
     parent,
   }: {
     element?: ExtendedHTMLElement;
     parent?: string;
-  } = {}
+  } = {},
 ) {
   if (!element) {
     element = window.event && (window.event.target as ExtendedHTMLElement);
@@ -19,7 +19,7 @@ function setState(
     }
   }
 
-  let stateContainer = element.hasAttribute("x-state")
+  const stateContainer = element.hasAttribute("x-state")
     ? element
     : (element.closest("[x-state]") as ExtendedHTMLElement);
 
@@ -31,7 +31,7 @@ function setState(
     const labelName = "x-label";
     const labeledStateContainers = getParents(element, labelName);
     const matchingParents = labeledStateContainers.filter(
-      (elem) => elem.getAttribute(labelName) === parent
+      (elem) => elem.getAttribute(labelName) === parent,
     );
 
     if (matchingParents.length) {
@@ -50,12 +50,14 @@ function setState(
         "for",
         element,
         "using",
-        labelName
+        labelName,
       );
     }
   } else {
     const state = stateContainer.state;
-    const evaluatedValue = isFunction(newValue) ? newValue(state) : newValue;
+    const evaluatedValue = typeof newValue === "function"
+      ? newValue(state)
+      : newValue;
     const updatedState = isObject(evaluatedValue)
       ? Object.assign({}, state, evaluatedValue)
       : evaluatedValue;
@@ -69,11 +71,8 @@ function setState(
   }
 }
 
-function isFunction(obj: any) {
-  return typeof obj === "function";
-}
-
-function isObject(obj: any) {
+function isObject(obj: unknown) {
+  // @ts-ignore nodeName might not exist
   return typeof obj === "object" && obj && !obj.nodeName;
 }
 

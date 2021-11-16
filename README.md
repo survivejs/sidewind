@@ -147,6 +147,12 @@ To get an idea of what it's like to develop with Sidewind, try tweaking the foll
 - [Svelte](https://svelte.dev) implements a compiler based approach.
 - [Vue](https://vuejs.org), and especially Vue 3, allows similar usage in the frontend as Sidewind. See also [petite-vue](https://github.com/vuejs/petite-vue).
 
+## Development
+
+Run the available commands through [velociraptor](https://github.com/umbopepato/velociraptor) (vr).
+
+To build, run `vr build <version?>`. Then to publish, `cd npm && npm publish`.
+
 ## License
 
 MIT.

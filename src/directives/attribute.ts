@@ -1,4 +1,5 @@
-import { DirectiveParameters, ExtendedHTMLElement } from "../types";
+/// <reference lib="dom" />
+import type { DirectiveParameters, ExtendedHTMLElement } from "../types.ts";
 
 const X_INITIAL_CLASS = "x-initial-class";
 
@@ -16,7 +17,7 @@ function attributeDirective({
       setAttribute(
         element,
         attributeName.slice(1),
-        evaluate(attribute.value, getState(element))
+        evaluate(attribute.value, getState(element)),
       );
     }
   });
@@ -25,7 +26,7 @@ function attributeDirective({
 function setAttribute(
   element: ExtendedHTMLElement,
   targetName: string,
-  evaluatedValue: any
+  evaluatedValue: unknown,
 ) {
   let extraValues: string[] = [];
 

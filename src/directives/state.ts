@@ -1,4 +1,4 @@
-import { DirectiveParameters, ExtendedHTMLElement } from "../types";
+import type { DirectiveParameters, ExtendedHTMLElement } from "../types.ts";
 
 function stateDirective({
   element,
@@ -23,7 +23,7 @@ function stateDirective({
   element.observer = new MutationObserver((mutations) => {
     const { target } = mutations[0];
 
-    // @ts-ignore
+    // @ts-ignore Target has a wrong type here (Node)
     const updatedTarget = target.attributes.getNamedItem("x-updated").value;
     const closestStateContainer = updatedTarget
       ? (target as ExtendedHTMLElement).closest(`[x-label="${updatedTarget}"]`)
@@ -35,11 +35,13 @@ function stateDirective({
 
     // Avoid recursion by not evaluating all directives
     const directivesWithoutSkipping = directives.filter(
-      ({ directive }) => !directive.skipEvaluation
+      ({ directive }) => !directive.skipEvaluation,
     );
 
-    // @ts-ignore
-    evaluateDirectives(directivesWithoutSkipping, closestStateContainer);
+    evaluateDirectives(
+      directivesWithoutSkipping,
+      closestStateContainer as ExtendedHTMLElement,
+    );
   });
 
   element.observer.observe(element, {

@@ -1,5 +1,5 @@
-import getParents from "../get-parents";
-import type { DirectiveParameters, ExtendedHTMLElement } from "../types";
+import getParents from "../get-parents.ts";
+import type { DirectiveParameters, ExtendedHTMLElement } from "../types.ts";
 
 function eachDirective({
   element,
@@ -39,7 +39,9 @@ function eachDirective({
     // Create missing nodes
     if (amountOfItems > amountOfChildren) {
       for (let i = 0; i < amountOfItems - amountOfChildren; i++) {
+        // @ts-ignore TODO: Check and validate this
         const templateClone = document.importNode(element.content, true);
+        // @ts-ignore TODO: Check and validate this (Node, not Element)
         containerParent.appendChild(templateClone.firstElementChild);
       }
     }
@@ -53,7 +55,7 @@ function eachDirective({
     let child = containerParent.firstElementChild
       ?.nextElementSibling as ExtendedHTMLElement;
 
-    state.forEach((value: any) => {
+    state.forEach((value: unknown) => {
       if (child) {
         child.setAttribute("x-state", "");
         // The actual state is stored to the object
@@ -79,8 +81,10 @@ function eachDirective({
     // Otherwise we'll set up the initial DOM structure based on a template
     // and populate it with data that's then evaluated.
   } else {
-    state.forEach((value: any) => {
+    state.forEach((value: unknown) => {
+      // @ts-ignore TODO: Check and validate this
       const templateClone = document.importNode(element.content, true);
+      // @ts-ignore TODO: Check and validate this (Node, not Element)
       const firstChild = templateClone.firstElementChild;
       containerParent.appendChild(templateClone);
       containerParent.setAttribute("x-has-each", "");
@@ -103,7 +107,7 @@ function eachDirective({
 eachDirective.evaluateFrom = "top";
 
 function findFirstChildrenWith(element: Element, tagName: string) {
-  let ret: ExtendedHTMLElement[] = [];
+  const ret: ExtendedHTMLElement[] = [];
 
   function recurse(element: Element) {
     let child = element.firstElementChild;

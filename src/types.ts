@@ -1,15 +1,15 @@
-import evaluate from "./evaluate";
-import getState from "./get-state";
-import setState from "./set-state";
+import evaluate from "./evaluate.ts";
+import getState from "./get-state.ts";
+import setState from "./set-state.ts";
 
-type BindState = { [id: string]: any };
-type State = { [id: string]: any } | string;
+type BindState = { [id: string]: unknown };
+type State = { [id: string]: unknown } | string;
 type ExtendedHTMLElement = HTMLElement & {
-  content: any;
+  content: unknown;
   isRecursive?: boolean;
   state: BindState;
   observer: MutationObserver;
-  value: any;
+  value: unknown;
 };
 type Directive = {
   name: string;
@@ -18,11 +18,11 @@ type Directive = {
 type DirectiveParameters = {
   directives: Directive[];
   element: ExtendedHTMLElement;
-  expression: any;
+  expression: string;
   evaluate: typeof evaluate;
   evaluateDirectives: (
     directives: Directive[],
-    element: ExtendedHTMLElement
+    element: ExtendedHTMLElement,
   ) => void;
   getState: typeof getState;
   setState: typeof setState;
@@ -37,12 +37,12 @@ interface DirectiveFunction {
   evaluateFrom?: EvaluateFrom;
 }
 
-export {
+export type {
   BindState,
-  State,
-  ExtendedHTMLElement,
-  EvaluateFrom,
   Directive,
-  DirectiveParameters,
   DirectiveFunction,
+  DirectiveParameters,
+  EvaluateFrom,
+  ExtendedHTMLElement,
+  State,
 };

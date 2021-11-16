@@ -1,0 +1,25 @@
+{
+  "deno.enable": true,
+  "deno.unstable": true,
+  "deno.lint": true,
+  "[json]": {
+    "editor.defaultFormatter": "denoland.vscode-deno",
+  },
+  "[md]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "denoland.vscode-deno",
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "denoland.vscode-deno",
+  },
+  "deno.import_intellisense_origins": {
+    "https://deno.land": true
+  },
+  "deno.suggest.imports.hosts": {
+    "https://unpkg.com": false,
+    "https://esm.sh": false,
+    "https://deno.land": false
+  }
+}

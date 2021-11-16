@@ -1,4 +1,5 @@
-import { DirectiveParameters } from "../types";
+/// <reference lib="dom" />
+import type { DirectiveParameters } from "../types.ts";
 
 function intersectDirective({
   element,
@@ -33,8 +34,8 @@ function intersectDirective({
         rootMargin: "0px",
         threshold: 1.0,
       },
-      options
-    )
+      options,
+    ),
   );
   observer.observe(element);
 }

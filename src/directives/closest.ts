@@ -1,5 +1,10 @@
-import { BindState, DirectiveParameters, ExtendedHTMLElement } from "../types";
-import { getValues } from "../utils";
+/// <reference lib="dom" />
+import type {
+  BindState,
+  DirectiveParameters,
+  ExtendedHTMLElement,
+} from "../types.ts";
+import { getValues } from "../utils.ts";
 
 // TODO: Communicate somehow this should be evaluated after value directive
 // -> dependency declaration
@@ -14,7 +19,7 @@ function closestDirective({
   const evaluateValue = () =>
     evaluateClosestValue(element, evaluate(expression).state, key, setState);
 
-  window.addEventListener("scroll", evaluateValue);
+  globalThis.addEventListener("scroll", evaluateValue);
 
   evaluateValue();
 }
@@ -23,8 +28,9 @@ function evaluateClosestValue(
   closestContainer: ExtendedHTMLElement,
   closestState: BindState,
   key: string,
-  setState: DirectiveParameters["setState"]
+  setState: DirectiveParameters["setState"],
 ) {
+  // @ts-ignore TODO: Check and validate this
   const elements = Array.from(getValues(closestState, key)[key]).map(
     (value) => {
       const element = value as HTMLElement;
@@ -34,7 +40,7 @@ function evaluateClosestValue(
         element,
         top,
       };
-    }
+    },
   );
 
   if (!elements || elements.length < 1) {

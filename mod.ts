@@ -1,18 +1,19 @@
-import getState from "./get-state";
-import setState from "./set-state";
-import evaluateDirectives from "./evaluate-directives";
+/// <reference lib="dom" />
+import getState from "./src/get-state.ts";
+import setState from "./src/set-state.ts";
+import evaluateDirectives from "./src/evaluate-directives.ts";
 import {
   attributeDirective,
   cloakDirective,
   closestDirective,
   eachDirective,
-  intervalDirective,
   intersectDirective,
-  recurseDirective,
+  intervalDirective,
   promiseDirective,
+  recurseDirective,
   stateDirective,
   valueDirective,
-} from "./directives";
+} from "./src/directives/index.ts";
 
 declare global {
   interface Window {
@@ -37,7 +38,7 @@ function evaluateAllDirectives() {
   ]);
 }
 
-window.addEventListener("load", evaluateAllDirectives);
+globalThis.addEventListener("load", evaluateAllDirectives);
 
 window.evaluateAllDirectives = evaluateAllDirectives;
 window.getState = getState;

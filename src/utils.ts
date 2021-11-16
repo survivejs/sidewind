@@ -1,11 +1,11 @@
-import { BindState } from "./types";
+import type { BindState } from "./types.ts";
 
 function get(object: BindState, keyString: string) {
   const keys = keyString.split(".");
   let ret = object;
 
   keys.forEach((key) => {
-    ret = ret[key];
+    ret = ret[key] as BindState;
   });
 
   return ret;

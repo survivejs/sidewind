@@ -1,9 +1,9 @@
-import { BindState, ExtendedHTMLElement } from "./types";
-import getParents from "./get-parents";
+import type { BindState, ExtendedHTMLElement } from "./types.ts";
+import getParents from "./get-parents.ts";
 
 function getState(element: ExtendedHTMLElement) {
   const closestStateContainer = element.closest(
-    "[x-state]"
+    "[x-state]",
   ) as ExtendedHTMLElement;
 
   if (!closestStateContainer) {
@@ -20,7 +20,7 @@ function getLabeledState(element: ExtendedHTMLElement, labelKey: string) {
   const labeledStateContainers = getParents(element, labelKey);
   const ret: BindState = {};
 
-  for (let i = labeledStateContainers.length; i--; ) {
+  for (let i = labeledStateContainers.length; i--;) {
     const labeledStateContainer = labeledStateContainers[
       i
     ] as ExtendedHTMLElement;
