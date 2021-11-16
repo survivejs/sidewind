@@ -33,14 +33,14 @@
     ]
   },
   "paths": {
-    "assets": "./assets",
-    "components": "./components",
-    "dataSources": "./dataSources",
+    "assets": "./site/assets",
+    "components": "./site/components",
+    "dataSources": "./site/dataSources",
     "output": "./public",
-    "pages": "./pages",
-    "scripts": "./scripts",
-    "transforms": "./transforms",
-    "twindSetup": "./twindSetup.ts"
+    "pages": "./site/pages",
+    "scripts": "./site/scripts",
+    "transforms": "./site/transforms",
+    "twindSetup": "./site/twindSetup.ts"
   },
   "features": {
     "showEditorAlways": false

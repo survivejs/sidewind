@@ -15,11 +15,8 @@ marked.setOptions({
   sanitize: false,
   smartLists: true,
   smartypants: true,
-  highlight: (code: string, language: string) => {
-    console.log("highlight", code, language);
-
-    return highlight.highlight(code, { language }).value;
-  },
+  highlight: (code: string, language: string) =>
+    highlight.highlight(code, { language }).value,
 });
 
 // Add example classes to Twind
