@@ -51,6 +51,20 @@ In addition to the standard options, there's an `once` flag that when set causes
 </div>
 ```
 
+The parent to target can also be the element itself:
+
+```html
+<img
+  x-state="{ src: '' }"
+  x-attr
+  x-intersect="{
+    options: { once: true },
+    state: { src: '/assets/logo.png' }
+  }"
+  @src="state.src"
+/>
+```
+
 ## `x-interval`
 
 `x-interval` wraps [setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval) and exposes its `delay` parameters. When triggered, it sets state.
