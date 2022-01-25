@@ -44,7 +44,7 @@ In addition to the standard options, there's an `once` flag that when set causes
     x-attr
     x-intersect="{
       options: { once: true },
-      state: { src: '/logo.png' }
+      state: { src: '/assets/logo.png' }
     }"
     @src="state.src"
   />
@@ -76,7 +76,7 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
   x-state="{ cars: [] }"
   x-promise="{
     state: {
-      cars: fetch('/cars.json').then(res => res.json())
+      cars: fetch('/assets/cars.json').then(res => res.json())
     }
   }"
 >

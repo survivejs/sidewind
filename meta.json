@@ -6,7 +6,7 @@
     "siteName": "Sidewind"
   },
   "paths": {
-    "assets": "./site/assets",
+    "assets": "./assets",
     "components": "./site/components",
     "dataSources": "./site/dataSources",
     "layouts": "./site/layouts",
