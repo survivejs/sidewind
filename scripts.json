@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "install:gustwind": "deno install -A --unstable --no-check -f https://deno.land/x/gustwind@v0.17.3/cli.ts",
+    "build:site": "gustwind -b",
+    "start": "gustwind -d",
+    "vercel:build": "deno run -A --unstable --no-check https://deno.land/x/gustwind@v0.17.3/cli.ts -b"
+  }
+}
