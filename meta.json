@@ -1,47 +1,27 @@
 {
-  "developmentPort": 3000,
+  "port": 3000,
   "amountOfBuildThreads": 1,
-  "siteName": "Sidewind",
-  "language": "en",
-  "head": {
-    "meta": [
-      {
-        "charset": "UTF-8",
-        "name": "viewport",
-        "content": "width=device-width, initial-scale=1.0"
-      },
-      {
-        "http-equiv": "X-UA-Compatible",
-        "content": "ie=edge"
-      }
-    ],
-    "link": [
-      {
-        "rel": "icon",
-        "href": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💨</text></svg>"
-      },
-      {
-        "rel": "stylesheet",
-        "href": "https://cdn.jsdelivr.net/gh/highlightjs/highlight.js@11.3.1/src/styles/github-dark.min.css"
-      }
-    ],
-    "script": [
-      {
-        "type": "module",
-        "src": "/global.js"
-      }
-    ]
+  "meta": {
+    "language": "en",
+    "siteName": "Sidewind"
   },
   "paths": {
     "assets": "./site/assets",
     "components": "./site/components",
     "dataSources": "./site/dataSources",
+    "layouts": "./site/layouts",
     "output": "./public",
-    "pages": "./site/pages",
+    "routes": "./site/routes.json",
     "scripts": "./site/scripts",
     "transforms": "./site/transforms",
     "twindSetup": "./site/twindSetup.ts"
   },
+  "scripts": [
+    {
+      "type": "module",
+      "src": "/global.js"
+    }
+  ],
   "features": {
     "showEditorAlways": false
   }
