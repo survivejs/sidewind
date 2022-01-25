@@ -3,6 +3,8 @@ import { DirectiveParameters } from "../types";
 function intersectDirective({
   element,
   expression,
+  evaluateDirectives,
+  directives,
   evaluate,
   setState,
 }: DirectiveParameters) {
@@ -26,6 +28,15 @@ function intersectDirective({
 
       triggered = true;
       setState(evaluate(expression).state, { element });
+
+      // Evaluate directives from the element parent to allow setting state to
+      // x-intersected element itself.
+      // Most likely this should be solved in another way at a higher level.
+      const directivesWithoutSkipping = directives.filter(
+        ({ directive }) => !directive.skipEvaluation
+      );
+
+      evaluateDirectives(directivesWithoutSkipping, element.parentElement);
     },
     Object.assign(
       {},
