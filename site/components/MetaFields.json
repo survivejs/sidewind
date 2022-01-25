@@ -1,0 +1,106 @@
+[
+  {
+    "element": "link",
+    "attributes": {
+      "rel": "icon",
+      "href": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💨</text></svg>"
+    }
+  },
+  {
+    "_reference": "https://web.dev/defer-non-critical-css/",
+    "element": "link",
+    "attributes": {
+      "rel": "preload",
+      "href": "https://cdn.jsdelivr.net/gh/highlightjs/highlight.js@11.3.1/src/styles/github-dark.min.css",
+      "as": "style",
+      "onload": "this.onload=null;this.rel='stylesheet'"
+    }
+  },
+  {
+    "element": "noscript",
+    "children": [
+      {
+        "element": "link",
+        "attributes": {
+          "rel": "stylesheet",
+          "href": "https://cdn.jsdelivr.net/gh/highlightjs/highlight.js@11.3.1/src/styles/github-dark.min.css"
+        }
+      }
+    ]
+  },
+  {
+    "element": "meta",
+    "attributes": {
+      "name": "pagepath",
+      "__content": "meta.pagePath"
+    }
+  },
+  {
+    "element": "meta",
+    "attributes": {
+      "charset": "UTF-8",
+      "name": "viewport",
+      "content": "width=device-width, initial-scale=1.0"
+    }
+  },
+  {
+    "element": "meta",
+    "attributes": {
+      "name": "og:site_name",
+      "__content": "meta.siteName"
+    }
+  },
+  {
+    "element": "meta",
+    "attributes": {
+      "name": "twitter:site",
+      "__content": "meta.siteName"
+    }
+  },
+  {
+    "element": "meta",
+    "attributes": {
+      "name": "og:title",
+      "__content": "meta.title"
+    }
+  },
+  {
+    "element": "meta",
+    "attributes": {
+      "name": "twitter:title",
+      "__content": "meta.title"
+    }
+  },
+  {
+    "element": "meta",
+    "attributes": {
+      "name": "description",
+      "__content": "meta.description"
+    }
+  },
+  {
+    "element": "meta",
+    "attributes": {
+      "name": "og:description",
+      "__content": "meta.description"
+    }
+  },
+  {
+    "element": "meta",
+    "attributes": {
+      "name": "twitter:description",
+      "__content": "meta.description"
+    }
+  },
+  {
+    "element": "meta",
+    "attributes": {
+      "name": "built",
+      "__content": "meta.built"
+    }
+  },
+  {
+    "element": "title",
+    "__children": "meta.title"
+  }
+]

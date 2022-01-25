@@ -38,7 +38,6 @@ function stateDirective({
       ({ directive }) => !directive.skipEvaluation
     );
 
-    // @ts-ignore
     evaluateDirectives(directivesWithoutSkipping, closestStateContainer);
   });
 

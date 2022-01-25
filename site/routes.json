@@ -1,0 +1,36 @@
+{
+  "/": {
+    "meta": {
+      "title": "Sidewind",
+      "description": "Tailwind but for state"
+    },
+    "layout": "siteIndex",
+    "dataSources": [
+      {
+        "id": "readme",
+        "operation": "file",
+        "input": "./README.md",
+        "transformWith": ["markdown"]
+      }
+    ],
+    "expand": {
+      "dataSources": [
+        {
+          "id": "documentation",
+          "operation": "indexMarkdown",
+          "input": "./documentation"
+        }
+      ],
+      "matchBy": {
+        "dataSource": "documentation",
+        "collection": "content",
+        "slug": "data.slug"
+      },
+      "layout": "documentationPage",
+      "meta": {
+        "__title": "match.data.title",
+        "__description": "match.data.description"
+      }
+    }
+  }
+}
