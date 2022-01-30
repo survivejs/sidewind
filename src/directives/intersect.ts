@@ -36,6 +36,7 @@ function intersectDirective({
         ({ directive }) => !directive.skipEvaluation
       );
 
+      // @ts-ignore
       evaluateDirectives(directivesWithoutSkipping, element.parentElement);
     },
     Object.assign(
