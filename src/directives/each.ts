@@ -13,6 +13,15 @@ function eachDirective({
   const state = evaluate(expression, elementState) || [];
   const containerParent = element.parentElement as ExtendedHTMLElement;
 
+  if (!Array.isArray(state)) {
+    console.error(
+      "x-each - Evaluated expression does not yield an array",
+      expression
+    );
+
+    return;
+  }
+
   if (!containerParent || state === containerParent.state) {
     return;
   }
