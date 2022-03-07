@@ -35,6 +35,7 @@ function eachDirective({
   // Remove possible initial nodes (SSR)
   containerParent
     .querySelectorAll("*[x-initial='']")
+    // @ts-ignore Skip this check
     .forEach((e: ExtendedHTMLElement) => e.remove());
 
   const initializedAlready = containerParent.children.length > 1;
