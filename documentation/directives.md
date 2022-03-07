@@ -366,7 +366,7 @@ It's possible to render lists inside lists.
 </div>
 ```
 
-`x-each` also works with complex objects.
+`x-each` also works with even more complex objects.
 
 ```html
 <div
