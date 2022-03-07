@@ -477,6 +477,29 @@ It's possible to render lists inside lists.
 </div>
 ```
 
+`x-each` supports server-side rendering out of the box (better SEO without JS enabled). In this case, you should take care to populate the state and adjacent elements with the same state. The elements will be removed when `x-each` mounts.
+
+```html
+<div
+  x-state="{
+    todos: [
+      { text: 'Wash dishes' }, { text: 'Eat carrots' }
+    ]
+  }"
+>
+  <div class="mb-2">
+    <ul class="list-disc list-inside">
+      <template x-each="state.todos">
+        <li x="state.value.text"></li>
+      </template>
+      <li>Wash dishes</li>
+      <li>Eat carrots</li>
+    </ul>
+  </div>
+  <div x="JSON.stringify(state.todos, null, 2)"></div>
+</div>
+```
+
 ## `x-recurse`
 
 It is also possible to apply `x-each` recursively using `x-recurse`. It will find the nearest `x-each` and then apply it using the given state. To allow styling, `x-each` injects a `level` property to each item based on the depth of recursion.
