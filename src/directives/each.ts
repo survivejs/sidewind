@@ -32,6 +32,11 @@ function eachDirective({
   // In case state is derived from another x-each, use getState(element) here.
   containerParent.state = hasParentEach ? elementState.state : state;
 
+  // Remove possible initial nodes (SSR)
+  containerParent
+    .querySelectorAll("*[x-initial='']")
+    .forEach((e: ExtendedHTMLElement) => e.remove());
+
   const initializedAlready = containerParent.children.length > 1;
 
   // Mark container parent as a boundary for x-recurse to copy

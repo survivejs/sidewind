@@ -477,7 +477,9 @@ It's possible to render lists inside lists.
 </div>
 ```
 
-`x-each` supports server-side rendering out of the box (better SEO without JS enabled). In this case, you should take care to populate the state and adjacent elements with the same state. The elements will be removed when `x-each` mounts.
+## `x-initial` and SSR
+
+`x-each` supports server-side rendering (SSR) out of the box (better SEO without JS enabled). In this case, you should take care to populate the state and adjacent elements with the same state (here different content is used for the sake of testing). The elements marked with `x-initial` will be removed when `x-each` mounts.
 
 ```html
 <div
@@ -492,8 +494,8 @@ It's possible to render lists inside lists.
       <template x-each="state.todos">
         <li x="state.value.text"></li>
       </template>
-      <li>Wash dishes</li>
-      <li>Eat carrots</li>
+      <li x-initial>Wash dishes (SSR)</li>
+      <li x-initial>Eat carrots (SSR)</li>
     </ul>
   </div>
   <div x="JSON.stringify(state.todos, null, 2)"></div>
