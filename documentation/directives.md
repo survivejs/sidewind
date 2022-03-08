@@ -207,9 +207,9 @@ Iterated items can also have inputs while focus is retained on edit.
     <ul class="list-disc list-inside" x-each="state.todos">
       <li
         x-template
-          x="state.value.text"
-          x-attr
-          @class="state.value.selected && 'font-bold'"
+        x="state.value.text"
+        x-attr
+        @class="state.value.selected && 'font-bold'"
       ></li>
     </ul>
   </div>
