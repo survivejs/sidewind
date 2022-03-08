@@ -71,10 +71,8 @@ To get an idea of what it's like to develop with Sidewind, try tweaking the foll
     <button class="btn btn-blue" type="submit">Add</button>
   </div>
   <div class="mb-2">
-    <ul class="list-disc list-inside">
-      <template x-each="state.todos">
-        <li x="state.value.text" />
-      </template>
+    <ul class="list-disc list-inside" x-each="state.todos">
+      <li x-template x="state.value.text" />
     </ul>
   </div>
   <div x="JSON.stringify(state.todos, null, 2)"></div>

@@ -94,13 +94,11 @@ It's possible to use the standard [fetch() API](https://developer.mozilla.org/en
     }
   }"
 >
-  <ul class="list-disc list-inside">
-    <template x-each="state.cars">
-      <li>
-        <span x="state.value.brand"></span> -
-        <span x="state.value.color"></span>
-      </li>
-    </template>
+  <ul class="list-disc list-inside" x-each="state.cars">
+    <li x-template>
+      <span x="state.value.brand"></span> -
+      <span x="state.value.color"></span>
+    </li>
   </ul>
 </div>
 ```

@@ -25,13 +25,11 @@ The examples below combine directives to produce complex user interfaces and to 
       <td class="border p-2">Speed</td>
     </tr>
   </thead>
-  <tbody>
-    <template x-each="state.cars">
-      <tr>
-        <td class="border p-2" x="state.value.brand" />
-        <td class="border p-2" x="state.value.speed" />
-      </tr>
-    </template>
+  <tbody x-each="state.cars">
+    <tr x-template>
+      <td class="border p-2" x="state.value.brand" />
+      <td class="border p-2" x="state.value.speed" />
+    </tr>
   </tbody>
 </table>
 ```
