@@ -292,12 +292,10 @@ It's possible to render lists inside lists.
     <ul class="list-disc list-inside" x-each="state.show">
       <li x-template>
         <span x="state.value.text"></span>
-        <ul class="list-disc list-inside ml-2">
-          <template x-each="state.value.children">
-            <li>
-              <span x="state.value.text"></span>
-            </li>
-          </template>
+        <ul class="list-disc list-inside ml-2" x-each="state.value.children">
+          <li x-template>
+            <span x="state.value.text"></span>
+          </li>
         </ul>
       </li>
     </ul>

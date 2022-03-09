@@ -115,13 +115,11 @@ In case there's an error, then the `Error` object is emitted to `error` state:
   }"
 >
   <div x="state.error.message" />
-  <ul class="list-disc list-inside">
-    <template x-each="state.cars">
-      <li>
-        <span x="state.value.brand"></span> -
-        <span x="state.value.color"></span>
-      </li>
-    </template>
+  <ul class="list-disc list-inside" x-each="state.cars">
+    <li x-template>
+      <span x="state.value.brand"></span> -
+      <span x="state.value.color"></span>
+    </li>
   </ul>
 </div>
 ```

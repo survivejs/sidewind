@@ -79,21 +79,19 @@ The examples below combine directives to produce complex user interfaces and to 
     state: { closest: document.querySelectorAll('#main h2, h3') }
   }"
 >
-  <ul>
-    <template x-each="state.headings">
-      <li>
-        <a
-          x="state.value.textContent"
-          x-attr
-          @href="state.value.nextElementSibling?.attributes.href.value"
-          @class="[
-            state.value.textContent === parent.closest?.textContent && 'font-bold',
-            state.value.tagName === 'H3' && 'ml-2'
-          ]"
-        >
-        </a>
-      </li>
-    </template>
+  <ul x-each="state.headings">
+    <li x-template>
+      <a
+        x="state.value.textContent"
+        x-attr
+        @href="state.value.nextElementSibling?.attributes.href.value"
+        @class="[
+          state.value.textContent === parent.closest?.textContent && 'font-bold',
+          state.value.tagName === 'H3' && 'ml-2'
+        ]"
+      >
+      </a>
+    </li>
   </ul>
 </nav>
 ```

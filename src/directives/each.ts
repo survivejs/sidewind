@@ -32,17 +32,17 @@ function eachDirective({
   // In case state is derived from another x-each, use getState(element) here.
   element.state = hasParentEach ? elementState.state : state;
 
-  let templates = element.querySelectorAll("*[x-template]");
+  let templates = element.querySelectorAll(":scope > *[x-template]");
+
+  if (!templates.length) {
+    console.error("x-each - x-template was not found", element);
+
+    return;
+  }
 
   // If x-template isn't meant to be a group, pick only the first one
   if (templates[0].getAttribute("x-template") !== "group") {
     templates = [templates[0]];
-  }
-
-  if (!templates) {
-    console.error("x-each - x-template was not found", element);
-
-    return;
   }
 
   // Stash template for future use
