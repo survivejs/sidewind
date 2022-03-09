@@ -139,7 +139,7 @@ Each child of the template has access to the state of the current item.
 </div>
 ```
 
-Same goes for sibling items.
+Same goes for sibling items. Note how multiple templates are grouped together.
 
 ```html
 <div
@@ -152,8 +152,8 @@ Same goes for sibling items.
 >
   <div class="mb-2">
     <ul class="list-disc list-inside" x-each="state.todos">
-      <li x-template x="state.value.type"></li>
-      <li x-template x="state.value.text"></li>
+      <li x-template="group" x="state.value.type"></li>
+      <li x-template="group" x="state.value.text"></li>
     </ul>
   </div>
   <div x="JSON.stringify(state.todos, null, 2)"></div>
@@ -339,8 +339,8 @@ It's possible to render lists inside lists.
 >
   <div class="mb-2">
     <ul class="list-disc list-inside" x-each="state.dataSources">
-      <li x-template x="state.value.id + ' : ' + state.value.operation"></li>
-      <li x-template x="JSON.stringify(state, null, 2)"></li>
+      <li x-template="group" x="state.value.id + ' : ' + state.value.operation"></li>
+      <li x-template="group" x="JSON.stringify(state, null, 2)"></li>
     </ul>
   </div>
   <div x="JSON.stringify(state.dataSources, null, 2)"></div>
@@ -379,9 +379,9 @@ It's possible to render lists inside lists.
 >
   <div class="mb-2">
     <ul class="list-disc list-inside" x-each="state.dataSources">
-        <li x-template x="state.value.id"></li>
-        <li x-template x="JSON.stringify(state, null, 2)"></li>
-        <ul x-template x-each="state.value.transformWith">
+        <li x-template="group" x="state.value.id"></li>
+        <li x-template="group" x="JSON.stringify(state, null, 2)"></li>
+        <ul x-template="group" x-each="state.value.transformWith">
           <li x="state.value.name"></li>
         </ul>
     </ul>
@@ -427,9 +427,9 @@ It's possible to render lists inside lists.
 >
   <div class="mb-2">
     <ul class="list-disc list-inside" x-each="state.dataSources">
-      <li x-template x="state.value.id"></li>
-      <li x-template x="JSON.stringify(state, null, 2)"></li>
-      <ul x-template class="ml-2 list-disc list-inside" x-each="Object.entries(state.value.transformWith)">
+      <li x-template="group" x="state.value.id"></li>
+      <li x-template="group" x="JSON.stringify(state, null, 2)"></li>
+      <ul x-template="group" class="ml-2 list-disc list-inside" x-each="Object.entries(state.value.transformWith)">
         <li x-template>
           <span x="state.value[0]"></span> -
           <span x="state.value[1]"></span>
@@ -458,9 +458,9 @@ It's possible to render lists inside lists.
 </div>
 ```
 
-## `x-template` in `initial` mode and SSR
+## `x-template` and SSR
 
-`x-each` supports server-side rendering (SSR) out of the box (better SEO without JS enabled). In this case, you should take care to populate the state and adjacent elements with the same state (here different content is used for the sake of testing). The elements marked with `x-template="initial"` will be removed when `x-each` mounts and it will use the first one as the template.
+`x-each` supports server-side rendering (SSR) out of the box (better SEO without JS enabled). In this case, you should take care to populate the state and adjacent elements with the same state (here different content is used for the sake of testing). The elements marked with `x-template` will be removed when `x-each` mounts and it will use the first one as the template.
 
 ```html
 <div
@@ -472,8 +472,8 @@ It's possible to render lists inside lists.
 >
   <div class="mb-2">
     <ul class="list-disc list-inside" x-each="state.todos">
-      <li x-template="initial" x="state.value.text">Wash dishes (SSR)</li>
-      <li x-template="initial" x="state.value.text">Eat carrots (SSR)</li>
+      <li x-template x="state.value.text">Wash dishes (SSR)</li>
+      <li x-template x="state.value.text">Eat carrots (SSR)</li>
     </ul>
   </div>
   <div x="JSON.stringify(state.todos, null, 2)"></div>
@@ -526,16 +526,14 @@ It is also possible to apply `x-each` recursively using `x-recurse`. It will fin
   }"
 >
   <div>
-    <ul class="list-disc list-inside">
-      <template x-each="state.show">
-        <li x-attr @class="state.level > 0 && 'ml-2'">
-          <span x="state.value.text"></span>
-          <ul
-            class="list-disc list-inside"
-            x-recurse="state.value.children"
-          ></ul>
-        </li>
-      </template>
+    <ul class="list-disc list-inside" x-each="state.show">
+      <li x-template x-attr @class="state.level > 0 && 'ml-2'">
+        <span x="state.value.text"></span>
+        <ul
+          class="list-disc list-inside"
+          x-recurse="state.value.children"
+        ></ul>
+      </li>
     </ul>
   </div>
   <div x="JSON.stringify(state.show, null, 2)"></div>
@@ -641,10 +639,8 @@ The labeled data is available at `x-each` as well:
   }"
   >
     <div class="mb-2">
-      <ul class="list-disc list-inside">
-        <template x-each="state.todos">
-          <li x="parent.message + ': ' + state.value.text"></li>
-        </template>
+      <ul class="list-disc list-inside" x-each="state.todos">
+        <li x-template x="parent.message + ': ' + state.value.text"></li>
       </ul>
     </div>
     <div x="JSON.stringify(state.todos, null, 2)"></div>
