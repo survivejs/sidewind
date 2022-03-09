@@ -12,29 +12,37 @@ function recurseDirective({
   const state = evaluate(expression, getState(element));
 
   if (!Array.isArray(state)) {
+    console.error(
+      "x-recurse - Evaluated expression does not yield an array",
+      expression,
+      element,
+      getState(element)
+    );
+
     return;
   }
 
-  const hasTemplateAlready = element.firstElementChild?.tagName === "TEMPLATE";
+  const hasEachAlready = element.getAttribute("x-each");
 
-  if (hasTemplateAlready) {
+  if (hasEachAlready) {
     return;
   }
 
-  const parents = getParents(element, "_x");
-  const firstParent = parents[0];
-  const template = firstParent.firstElementChild as ExtendedHTMLElement;
+  const parents = getParents(element, "x-template");
+  const template = parents[0];
 
-  if (template) {
-    const templateClone = template.cloneNode(true) as ExtendedHTMLElement;
+  if (!template) {
+    console.error("x-recurse - Parent x-template was not found");
 
-    templateClone.setAttribute("x-each", expression);
-    templateClone.isRecursive = true;
-
-    element.appendChild(templateClone);
-
-    evaluateDirectives(directives, element);
+    return;
   }
+
+  const templateClone = template.cloneNode(true) as ExtendedHTMLElement;
+
+  element.appendChild(templateClone);
+  element.setAttribute("x-each", expression);
+
+  evaluateDirectives(directives, element);
 }
 
 export default recurseDirective;

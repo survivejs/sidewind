@@ -61,6 +61,7 @@ function eachDirective({
       const template = templates[i];
 
       // Copy template
+      // TODO: template.cloneNode(true) is cleaner
       const templateClone = document.importNode(template, true);
 
       // The element should be a state container itself
@@ -83,9 +84,6 @@ function eachDirective({
     // @ts-ignore Skip this check
     .forEach((e: ExtendedHTMLElement) => e.remove());
   */
-
-  // Mark container parent as a boundary for x-recurse to copy
-  // element.setAttribute("_x", "");
 
   /*
   const level = getParents(element, "x-recurse").length;
