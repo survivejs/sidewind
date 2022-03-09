@@ -32,19 +32,21 @@ function eachDirective({
   // In case state is derived from another x-each, use getState(element) here.
   element.state = hasParentEach ? elementState.state : state;
 
-  // TODO: Handle x-template="group"
-  const template = element.querySelector("*[x-template='']");
+  let templates = element.querySelectorAll("*[x-template]");
 
-  console.log(template);
+  // If x-template isn't meant to be a group, pick only the first one
+  if (templates[0].getAttribute("x-template") !== "group") {
+    templates = [templates[0]];
+  }
 
-  if (!template) {
+  if (!templates) {
     console.error("x-each - x-template was not found", element);
 
     return;
   }
 
   // Stash template for future use
-  element.template = template;
+  element.templates = templates;
 
   // Empty contents as they'll be replaced by applying the template
   while (element.firstChild) {
@@ -53,21 +55,25 @@ function eachDirective({
 
   const level = getParents(element, "x-recurse").length;
 
-  // Apply the template against each item in the collection
+  // Apply the templates against each item in the collection
   state.forEach((value: any) => {
-    // Copy template
-    const templateClone = document.importNode(template, true);
+    for (let i = 0; i < templates.length; i++) {
+      const template = templates[i];
 
-    // The element should be a state container itself
-    templateClone.setAttribute("x-state", "");
+      // Copy template
+      const templateClone = document.importNode(template, true);
 
-    // The actual state is stored to the object
-    templateClone.state = { value, level };
+      // The element should be a state container itself
+      templateClone.setAttribute("x-state", "");
 
-    element.appendChild(templateClone);
-    element.setAttribute("x-has-each", "");
+      // The actual state is stored to the object
+      templateClone.state = { value, level };
 
-    evaluateDirectives(directives, templateClone);
+      element.appendChild(templateClone);
+      element.setAttribute("x-has-each", "");
+
+      evaluateDirectives(directives, templateClone);
+    }
   });
 
   // Remove possible initial nodes (SSR)
