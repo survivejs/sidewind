@@ -11,41 +11,80 @@ function eachDirective({
 }: DirectiveParameters) {
   const elementState = getState(element);
   const state = evaluate(expression, elementState) || [];
-  const containerParent = element.parentElement as ExtendedHTMLElement;
 
   if (!Array.isArray(state)) {
     console.error(
       "x-each - Evaluated expression does not yield an array",
-      expression
+      expression,
+      element
     );
 
     return;
   }
 
-  if (!containerParent || state === containerParent.state) {
+  if (state === element.state) {
     return;
   }
 
-  const hasParentEach = !!element.parentElement?.closest("[x-has-each]");
+  const hasParentEach = !!element.closest("[x-has-each]");
 
   // Stash state so it can be compared later to avoid work.
   // In case state is derived from another x-each, use getState(element) here.
-  containerParent.state = hasParentEach ? elementState.state : state;
+  element.state = hasParentEach ? elementState.state : state;
+
+  // TODO: Handle x-template="group"
+  const template = element.querySelector("*[x-template='']");
+
+  console.log(template);
+
+  if (!template) {
+    console.error("x-each - x-template was not found", element);
+
+    return;
+  }
+
+  // Stash template for future use
+  element.template = template;
+
+  // Empty contents as they'll be replaced by applying the template
+  while (element.firstChild) {
+    element.removeChild(element.lastChild);
+  }
+
+  const level = getParents(element, "x-recurse").length;
+
+  // Apply the template against each item in the collection
+  state.forEach((value: any) => {
+    // Copy template
+    const templateClone = document.importNode(template, true);
+
+    // The element should be a state container itself
+    templateClone.setAttribute("x-state", "");
+
+    // The actual state is stored to the object
+    templateClone.state = { value, level };
+
+    element.appendChild(templateClone);
+    element.setAttribute("x-has-each", "");
+
+    evaluateDirectives(directives, templateClone);
+  });
 
   // Remove possible initial nodes (SSR)
+  /*
   containerParent
     .querySelectorAll("*[x-initial='']")
     // @ts-ignore Skip this check
     .forEach((e: ExtendedHTMLElement) => e.remove());
-
-  const initializedAlready = containerParent.children.length > 1;
+  */
 
   // Mark container parent as a boundary for x-recurse to copy
-  containerParent.setAttribute("_x", "");
+  // element.setAttribute("_x", "");
 
+  /*
   const level = getParents(element, "x-recurse").length;
 
-  if (initializedAlready) {
+  if (element.initializedAlready) {
     const amountOfItems = state.length;
 
     // Subtract template
@@ -114,6 +153,7 @@ function eachDirective({
       } while ((child = child?.nextElementSibling));
     });
   }
+  */
 }
 eachDirective.evaluateFrom = "top";
 
