@@ -380,7 +380,7 @@ It's possible to render lists inside lists.
         <li x-template="group" x="state.value.id"></li>
         <li x-template="group" x="JSON.stringify(state, null, 2)"></li>
         <ul x-template="group" x-each="state.value.transformWith">
-          <li x="state.value.name"></li>
+          <li x-template x="state.value.name"></li>
         </ul>
     </ul>
   </div>
