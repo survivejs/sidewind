@@ -59,10 +59,7 @@ function eachDirective({
   state.forEach((value: any) => {
     for (let i = 0; i < templates.length; i++) {
       const template = templates[i];
-
-      // Copy template
-      // TODO: template.cloneNode(true) is cleaner
-      const templateClone = document.importNode(template, true);
+      const templateClone = template.cloneNode(true);
 
       // The element should be a state container itself
       templateClone.setAttribute("x-state", "");
