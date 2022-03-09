@@ -1,9 +1,37 @@
 [
   {
     "element": "Link",
-    "children": "Directives",
+    "children": "State",
     "attributes": {
-      "href": "/directives/"
+      "href": "/state/"
+    }
+  },
+  {
+    "element": "Link",
+    "children": "Labels",
+    "attributes": {
+      "href": "/labels/"
+    }
+  },
+  {
+    "element": "Link",
+    "children": "Recursion",
+    "attributes": {
+      "href": "/recursion/"
+    }
+  },
+  {
+    "element": "Link",
+    "children": "Iteration",
+    "attributes": {
+      "href": "/iteration/"
+    }
+  },
+  {
+    "element": "Link",
+    "children": "Attributes",
+    "attributes": {
+      "href": "/attributes/"
     }
   },
   {
