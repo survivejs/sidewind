@@ -49,6 +49,14 @@ function evaluateDirective(
   }
 
   function evaluateOne(element: ExtendedHTMLElement) {
+    const closestEach =
+      !element.getAttribute("x-each") && element.closest("[x-each]");
+
+    // If scope isn't ready, skip until a later evaluation
+    if (closestEach && !closestEach.getAttribute("_x-init")) {
+      return;
+    }
+
     directive({
       directives,
       element: element as ExtendedHTMLElement,

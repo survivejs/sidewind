@@ -48,6 +48,9 @@ function eachDirective({
   // Stash template for future use
   element.templates = templates;
 
+  // Mark element as initialized (needed by state evaluation)
+  element.setAttribute("_x-init", 1);
+
   // Empty contents as they'll be replaced by applying the template
   while (element.firstChild) {
     element.removeChild(element.lastChild);
