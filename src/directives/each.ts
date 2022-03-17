@@ -56,7 +56,9 @@ function eachDirective({
     element.removeChild(element.lastChild);
   }
 
-  const level = getParents(element, "x-recurse").length;
+  const level =
+    getParents(element, "x-recurse").length +
+    (element.hasAttribute("x-recurse") ? 1 : 0);
 
   // Apply the templates against each item in the collection
   state.forEach((value: any) => {

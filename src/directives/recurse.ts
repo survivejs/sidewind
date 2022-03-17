@@ -12,13 +12,6 @@ function recurseDirective({
   const state = evaluate(expression, getState(element));
 
   if (!Array.isArray(state)) {
-    console.error(
-      "x-recurse - Evaluated expression does not yield an array",
-      expression,
-      element,
-      getState(element)
-    );
-
     return;
   }
 
@@ -38,11 +31,13 @@ function recurseDirective({
   }
 
   const templateClone = template.cloneNode(true) as ExtendedHTMLElement;
+  templateClone.setAttribute("x-template", "");
 
   element.appendChild(templateClone);
   element.setAttribute("x-each", expression);
 
-  evaluateDirectives(directives, element);
+  // Evaluate against parent since the element itself contains x-each
+  evaluateDirectives(directives, element.parentElement);
 }
 
 export default recurseDirective;
