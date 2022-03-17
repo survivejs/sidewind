@@ -28,7 +28,7 @@ function recurseDirective({
     return;
   }
 
-  const parents = getParents(element, "x-template");
+  const parents = getParents(element, "_x-template");
   const template = parents[0];
 
   if (!template) {

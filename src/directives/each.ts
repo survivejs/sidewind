@@ -70,6 +70,9 @@ function eachDirective({
       // The element should be a state container itself
       templateClone.setAttribute("x-state", "");
 
+      // Mark as a former template so that recursion (x-recurse) can find it
+      templateClone.setAttribute("_x-template", "");
+
       // The actual state is stored to the object
       templateClone.state = { value, level };
 
