@@ -64,6 +64,9 @@ function eachDirective({
       const template = templates[i];
       const templateClone = template.cloneNode(true);
 
+      // Remote template mark
+      templateClone.removeAttribute("x-template");
+
       // The element should be a state container itself
       templateClone.setAttribute("x-state", "");
 

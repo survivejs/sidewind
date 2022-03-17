@@ -23,7 +23,7 @@
               "attributes": {
                 "x": "state.value.textContent",
                 "x-attr": "",
-                "@href": "state.value.parentElement?.attributes.href.value",
+                "@href": "state.value.parentElement?.attributes.href?.value",
                 "@class": "[state.value.textContent === parent.closest.textContent && 'underline', state.tagName === 'H3' && 'ml-2']"
               }
             }
