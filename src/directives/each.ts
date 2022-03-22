@@ -26,11 +26,22 @@ function eachDirective({
     return;
   }
 
+  const level =
+    getParents(element, "x-recurse").length +
+    (element.hasAttribute("x-recurse") ? 1 : 0);
+
   if (element.templates?.length > 0) {
     const amountOfItems = state.length;
     const amountOfChildren = element.children.length;
 
-    console.log("create missing nodes", state, amountOfItems, amountOfChildren);
+    console.log(
+      "create missing nodes",
+      element.templates,
+      state,
+      amountOfItems,
+      amountOfChildren,
+      element.children
+    );
 
     // Create missing nodes
     if (amountOfItems > amountOfChildren) {
@@ -47,7 +58,23 @@ function eachDirective({
       }
     }
 
-    // TODO: Update each template
+    // TODO: Take grouped templates into account here
+    let child = element.firstElementChild as ExtendedHTMLElement;
+
+    // TODO: Handle templating for the recursion case
+    state.forEach((value: any) => {
+      if (child) {
+        child.setAttribute("x-state", "");
+        // The actual state is stored to the object
+        child.state = { value, level };
+
+        child = child.nextElementSibling as ExtendedHTMLElement;
+      }
+    });
+
+    if (child && state.length === 0) {
+      child.remove();
+    }
   } else {
     const hasParentEach = !!element.closest("[x-has-each]");
 
@@ -73,20 +100,19 @@ function eachDirective({
 
     // Mark element as initialized (needed by state evaluation)
     element.setAttribute("_x-init", 1);
+    element.setAttribute("x-has-each", "");
 
     // Empty contents as they'll be replaced by applying the template
     while (element.firstChild) {
       element.removeChild(element.lastChild);
     }
 
-    const level =
-      getParents(element, "x-recurse").length +
-      (element.hasAttribute("x-recurse") ? 1 : 0);
     const renderTemplate = getTemplateRenderer(element, templates, level);
 
     state.forEach(renderTemplate);
-    evaluateDirectives(directives, element);
   }
+
+  evaluateDirectives(directives, element);
 
   /*
   const level = getParents(element, "x-recurse").length;
@@ -147,7 +173,7 @@ function getTemplateRenderer(
   templates: NodeList,
   level: number
 ) {
-  return (value: any) => {
+  const renderTemplate = (value: any) => {
     for (let i = 0; i < templates.length; i++) {
       const template = templates[i];
       const templateClone = template.cloneNode(true);
@@ -165,9 +191,10 @@ function getTemplateRenderer(
       templateClone.state = { value, level };
 
       element.appendChild(templateClone);
-      element.setAttribute("x-has-each", "");
     }
   };
+
+  return renderTemplate;
 }
 
 function findFirstChildrenWith(element: Element, tagName: string) {
