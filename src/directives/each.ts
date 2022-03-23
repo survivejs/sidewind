@@ -33,27 +33,11 @@ function eachDirective({
   if (element.templates?.length > 0) {
     const amountOfItems = state.length;
     const amountOfChildren = element.children.length;
+    const amountOfExtraNodes = amountOfItems - amountOfChildren;
 
-    console.log(
-      "create missing nodes",
-      element.templates,
-      state,
-      amountOfItems,
-      amountOfChildren,
-      element.children
-    );
-
-    // Create missing nodes
-    if (amountOfItems > amountOfChildren) {
-      for (let i = 0; i < amountOfItems - amountOfChildren; i++) {
-        // TODO: Copy enough template(s) here
-        // const templateClone = element.cloneNode(true);
-        // element.appendChild(templateClone.firstElementChild);
-      }
-    }
     // Remove extra nodes
-    if (amountOfItems < amountOfChildren) {
-      for (let i = 0; i < amountOfChildren - amountOfItems; i++) {
+    if (amountOfExtraNodes < 0) {
+      for (let i = 0; i < -amountOfExtraNodes; i++) {
         element.lastElementChild?.remove();
       }
     }
@@ -74,6 +58,19 @@ function eachDirective({
 
     if (child && state.length === 0) {
       child.remove();
+    }
+
+    // Create missing nodes
+    if (amountOfExtraNodes > 0) {
+      for (let i = 0; i < amountOfExtraNodes; i++) {
+        const renderTemplate = getTemplateRenderer(
+          element,
+          element.templates,
+          level
+        );
+
+        state.slice(amountOfChildren).forEach(renderTemplate);
+      }
     }
   } else {
     const hasParentEach = !!element.closest("[x-has-each]");
@@ -195,26 +192,6 @@ function getTemplateRenderer(
   };
 
   return renderTemplate;
-}
-
-function findFirstChildrenWith(element: Element, tagName: string) {
-  let ret: ExtendedHTMLElement[] = [];
-
-  function recurse(element: Element) {
-    let child = element.firstElementChild;
-
-    do {
-      if (child?.tagName === tagName) {
-        ret.push(child as ExtendedHTMLElement);
-      } else if (child?.children.length) {
-        recurse(child);
-      }
-    } while ((child = child?.nextElementSibling || null));
-  }
-
-  recurse(element);
-
-  return ret;
 }
 
 export default eachDirective;
