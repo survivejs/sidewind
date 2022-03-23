@@ -12,7 +12,7 @@
     "layouts": "./site/layouts",
     "output": "./public",
     "routes": "./site/routes.json",
-    "scripts": "./site/scripts",
+    "scripts": "./src",
     "transforms": "./site/transforms",
     "twindSetup": "./site/twindSetup.ts"
   },

@@ -2,8 +2,8 @@ import HighlightJS from "https://unpkg.com/@highlightjs/cdn-assets@11.3.1/es/cor
 import { setup } from "https://cdn.skypack.dev/twind@0.16.16/shim?min";
 import highlightJS from "https://unpkg.com/highlight.js@11.3.1/es/languages/javascript";
 import highlightXML from "https://unpkg.com/highlight.js@11.3.1/es/languages/xml";
-import twindSetup from "../twindSetup.ts";
-import "../../src";
+import twindSetup from "../site/twindSetup.ts";
+import "./index.ts";
 
 setup(twindSetup);
 
