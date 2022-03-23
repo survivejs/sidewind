@@ -99,7 +99,8 @@ Iterated items can also have inputs while focus is retained on edit.
           Field:
           <input
             type="text"
-            x-data-field="state.value[0]"
+            x-attr
+            @data-field="state.value[0]"
             x="state.value[1]"
             oninput="setState({ value: [this.dataset.field, this.value] })"
           />
