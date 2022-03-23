@@ -43,9 +43,9 @@ function eachDirective({
     }
 
     // TODO: Take grouped templates into account here
+    // (i.e. select enough nodes matching to a group (element.templates.length))
     let child = element.firstElementChild as ExtendedHTMLElement;
 
-    // TODO: Handle templating for the recursion case
     state.forEach((value: any) => {
       if (child) {
         child.setAttribute("x-state", "");
@@ -110,58 +110,6 @@ function eachDirective({
   }
 
   evaluateDirectives(directives, element);
-
-  /*
-  const level = getParents(element, "x-recurse").length;
-
-  if (element.initializedAlready) {
-    const amountOfItems = state.length;
-
-    // Subtract template
-    const amountOfChildren = containerParent.children.length - 1;
-
-    // Create missing nodes
-    if (amountOfItems > amountOfChildren) {
-      for (let i = 0; i < amountOfItems - amountOfChildren; i++) {
-        const templateClone = document.importNode(element.content, true);
-        containerParent.appendChild(templateClone.firstElementChild);
-      }
-    }
-    // Remove extra nodes
-    if (amountOfItems < amountOfChildren) {
-      for (let i = 0; i < amountOfChildren - amountOfItems; i++) {
-        containerParent.lastElementChild?.remove();
-      }
-    }
-
-    let child = containerParent.firstElementChild
-      ?.nextElementSibling as ExtendedHTMLElement;
-
-    state.forEach((value: any) => {
-      if (child) {
-        child.setAttribute("x-state", "");
-        // The actual state is stored to the object
-        child.state = { value, level };
-
-        const children = findFirstChildrenWith(child, "TEMPLATE");
-
-        children.forEach((child) => {
-          if (child.parentElement) {
-            (child.parentElement as ExtendedHTMLElement).state = state;
-          }
-        });
-
-        evaluateDirectives(directives, child);
-
-        child = child.nextElementSibling as ExtendedHTMLElement;
-      }
-    });
-
-    if (child && state.length === 0) {
-      child.remove();
-    }
-  }
-  */
 }
 eachDirective.evaluateFrom = "top";
 
