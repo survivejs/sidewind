@@ -8,16 +8,16 @@
   },
   {
     "element": "Link",
-    "children": "Labels",
+    "children": "Attributes",
     "attributes": {
-      "href": "/labels/"
+      "href": "/attributes/"
     }
   },
   {
     "element": "Link",
-    "children": "Recursion",
+    "children": "Sources",
     "attributes": {
-      "href": "/recursion/"
+      "href": "/sources/"
     }
   },
   {
@@ -29,16 +29,16 @@
   },
   {
     "element": "Link",
-    "children": "Attributes",
+    "children": "Labels",
     "attributes": {
-      "href": "/attributes/"
+      "href": "/labels/"
     }
   },
   {
     "element": "Link",
-    "children": "Sources",
+    "children": "Recursion",
     "attributes": {
-      "href": "/sources/"
+      "href": "/recursion/"
     }
   },
   {
