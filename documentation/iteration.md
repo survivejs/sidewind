@@ -74,6 +74,12 @@ Same goes for sibling items. Note how multiple templates are grouped together.
     </ul>
   </div>
   <div x="JSON.stringify(state.todos, null, 2)"></div>
+  <button
+    class="btn btn-blue"
+    onclick="setState(({ todos }) => ({ todos: todos.concat({ type: 'Food', text: 'Eat karelian pies' }) }))"
+  >
+    Add item to the end
+  </button>
 </div>
 ```
 

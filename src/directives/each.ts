@@ -29,9 +29,10 @@ function eachDirective({
   const level =
     getParents(element, "x-recurse").length +
     (element.hasAttribute("x-recurse") ? 1 : 0);
+  const amountOfTemplates = element.templates?.length;
 
-  if (element.templates?.length > 0) {
-    const amountOfItems = state.length;
+  if (amountOfTemplates > 0) {
+    const amountOfItems = state.length * amountOfTemplates;
     const amountOfChildren = element.children.length;
     const amountOfExtraNodes = amountOfItems - amountOfChildren;
 
@@ -42,17 +43,17 @@ function eachDirective({
       }
     }
 
-    // TODO: Take grouped templates into account here
-    // (i.e. select enough nodes matching to a group (element.templates.length))
     let child = element.firstElementChild as ExtendedHTMLElement;
 
     state.forEach((value: any) => {
-      if (child) {
-        child.setAttribute("x-state", "");
-        // The actual state is stored to the object
-        child.state = { value, level };
+      for (let i = 0; i < amountOfTemplates; i++) {
+        if (child) {
+          child.setAttribute("x-state", "");
+          // The actual state is stored to the object
+          child.state = { value, level };
 
-        child = child.nextElementSibling as ExtendedHTMLElement;
+          child = child.nextElementSibling as ExtendedHTMLElement;
+        }
       }
     });
 
@@ -62,14 +63,16 @@ function eachDirective({
 
     // Create missing nodes
     if (amountOfExtraNodes > 0) {
-      for (let i = 0; i < amountOfExtraNodes; i++) {
+      for (let i = 0; i < amountOfExtraNodes / amountOfTemplates; i++) {
         const renderTemplate = getTemplateRenderer(
           element,
           element.templates,
           level
         );
 
-        state.slice(amountOfChildren).forEach(renderTemplate);
+        state
+          .slice(amountOfChildren / amountOfTemplates)
+          .forEach(renderTemplate);
       }
     }
   } else {
