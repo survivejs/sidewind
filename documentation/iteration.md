@@ -413,5 +413,3 @@ It's possible to render lists inside lists.
 ```
 
 The example above would work even if you remove the latter `x="state.value.text"` but it can be easier to generate the full form from a site generator.
-
-The caveat of the current approach is that it doesn't allow expansion to multiple templates at once but support this could be added by using a different type of syntax and then adapting to that.
