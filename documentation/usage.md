@@ -10,7 +10,7 @@ The easiest way to use Sidewind, is to consume the bundle that includes all func
 
 > `<script type="text/javascript" src="https://unpkg.com/sidewind/dist/sidewind.umd.production.min.js"></script>`
 
-I recommend fixing the lookup to a specific version like this: `https://unpkg.com/sidewind@6.0.0/dist/sidewind.umd.production.min.js`. Doing this will avoid breakage in case a new major version is released.
+I recommend fixing the lookup to a specific version like this: `https://unpkg.com/sidewind@<version>/dist/sidewind.umd.production.min.js`. Doing this will avoid breakage in case a new major version is released.
 
 ## Programmatic API
 

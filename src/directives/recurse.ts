@@ -15,26 +15,29 @@ function recurseDirective({
     return;
   }
 
-  const hasTemplateAlready = element.firstElementChild?.tagName === "TEMPLATE";
+  const hasEachAlready = element.getAttribute("x-each");
 
-  if (hasTemplateAlready) {
+  if (hasEachAlready) {
     return;
   }
 
-  const parents = getParents(element, "_x");
-  const firstParent = parents[0];
-  const template = firstParent.firstElementChild as ExtendedHTMLElement;
+  const parents = getParents(element, "_x-template");
+  const template = parents[0];
 
-  if (template) {
-    const templateClone = template.cloneNode(true) as ExtendedHTMLElement;
+  if (!template) {
+    console.error("x-recurse - Parent x-template was not found");
 
-    templateClone.setAttribute("x-each", expression);
-    templateClone.isRecursive = true;
-
-    element.appendChild(templateClone);
-
-    evaluateDirectives(directives, element);
+    return;
   }
+
+  const templateClone = template.cloneNode(true) as ExtendedHTMLElement;
+  templateClone.setAttribute("x-template", "");
+
+  element.appendChild(templateClone);
+  element.setAttribute("x-each", expression);
+
+  // Evaluate against parent since the element itself contains x-each
+  evaluateDirectives(directives, element.parentElement);
 }
 
 export default recurseDirective;

@@ -1,9 +1,16 @@
 [
   {
     "element": "Link",
-    "children": "Directives",
+    "children": "State",
     "attributes": {
-      "href": "/directives/"
+      "href": "/state/"
+    }
+  },
+  {
+    "element": "Link",
+    "children": "Attributes",
+    "attributes": {
+      "href": "/attributes/"
     }
   },
   {
@@ -11,6 +18,27 @@
     "children": "Sources",
     "attributes": {
       "href": "/sources/"
+    }
+  },
+  {
+    "element": "Link",
+    "children": "Iteration",
+    "attributes": {
+      "href": "/iteration/"
+    }
+  },
+  {
+    "element": "Link",
+    "children": "Labels",
+    "attributes": {
+      "href": "/labels/"
+    }
+  },
+  {
+    "element": "Link",
+    "children": "Recursion",
+    "attributes": {
+      "href": "/recursion/"
     }
   },
   {

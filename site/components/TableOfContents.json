@@ -8,26 +8,24 @@
   "children": [
     {
       "element": "ul",
+      "attributes": {
+        "x-each": "state.headings"
+      },
       "children": [
         {
-          "element": "template",
+          "element": "li",
           "attributes": {
-            "x-each": "state.headings"
+            "x-template": ""
           },
           "children": [
             {
-              "element": "li",
-              "children": [
-                {
-                  "element": "a",
-                  "attributes": {
-                    "x": "state.value.textContent",
-                    "x-attr": "",
-                    "@href": "state.value.parentElement?.attributes.href.value",
-                    "@class": "[state.value.textContent === parent.closest.textContent && 'underline', state.tagName === 'H3' && 'ml-2']"
-                  }
-                }
-              ]
+              "element": "a",
+              "attributes": {
+                "x": "state.value.textContent",
+                "x-attr": "",
+                "@href": "state.value.parentElement?.attributes.href?.value",
+                "@class": "[state.value.textContent === parent.closest.textContent && 'underline', state.tagName === 'H3' && 'ml-2']"
+              }
             }
           ]
         }

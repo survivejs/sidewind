@@ -11,130 +11,138 @@ function eachDirective({
 }: DirectiveParameters) {
   const elementState = getState(element);
   const state = evaluate(expression, elementState) || [];
-  const containerParent = element.parentElement as ExtendedHTMLElement;
 
   if (!Array.isArray(state)) {
     console.error(
       "x-each - Evaluated expression does not yield an array",
-      expression
+      expression,
+      element
     );
 
     return;
   }
 
-  if (!containerParent || state === containerParent.state) {
+  if (state === element.state) {
     return;
   }
 
-  const hasParentEach = !!element.parentElement?.closest("[x-has-each]");
+  const level =
+    getParents(element, "x-recurse").length +
+    (element.hasAttribute("x-recurse") ? 1 : 0);
+  const amountOfTemplates = element.templates?.length;
 
-  // Stash state so it can be compared later to avoid work.
-  // In case state is derived from another x-each, use getState(element) here.
-  containerParent.state = hasParentEach ? elementState.state : state;
+  if (amountOfTemplates > 0) {
+    const amountOfItems = state.length * amountOfTemplates;
+    const amountOfChildren = element.children.length;
+    const amountOfExtraNodes = amountOfItems - amountOfChildren;
 
-  // Remove possible initial nodes (SSR)
-  containerParent
-    .querySelectorAll("*[x-initial='']")
-    // @ts-ignore Skip this check
-    .forEach((e: ExtendedHTMLElement) => e.remove());
-
-  const initializedAlready = containerParent.children.length > 1;
-
-  // Mark container parent as a boundary for x-recurse to copy
-  containerParent.setAttribute("_x", "");
-
-  const level = getParents(element, "x-recurse").length;
-
-  if (initializedAlready) {
-    const amountOfItems = state.length;
-
-    // Subtract template
-    const amountOfChildren = containerParent.children.length - 1;
-
-    // Create missing nodes
-    if (amountOfItems > amountOfChildren) {
-      for (let i = 0; i < amountOfItems - amountOfChildren; i++) {
-        const templateClone = document.importNode(element.content, true);
-        containerParent.appendChild(templateClone.firstElementChild);
-      }
-    }
     // Remove extra nodes
-    if (amountOfItems < amountOfChildren) {
-      for (let i = 0; i < amountOfChildren - amountOfItems; i++) {
-        containerParent.lastElementChild?.remove();
+    if (amountOfExtraNodes < 0) {
+      for (let i = 0; i < -amountOfExtraNodes; i++) {
+        element.lastElementChild?.remove();
       }
     }
 
-    let child = containerParent.firstElementChild
-      ?.nextElementSibling as ExtendedHTMLElement;
+    let child = element.firstElementChild as ExtendedHTMLElement;
 
     state.forEach((value: any) => {
-      if (child) {
-        child.setAttribute("x-state", "");
-        // The actual state is stored to the object
-        child.state = { value, level };
+      for (let i = 0; i < amountOfTemplates; i++) {
+        if (child) {
+          child.setAttribute("x-state", "");
+          // The actual state is stored to the object
+          child.state = { value, level };
 
-        const children = findFirstChildrenWith(child, "TEMPLATE");
-
-        children.forEach((child) => {
-          if (child.parentElement) {
-            (child.parentElement as ExtendedHTMLElement).state = state;
-          }
-        });
-
-        evaluateDirectives(directives, child);
-
-        child = child.nextElementSibling as ExtendedHTMLElement;
+          child = child.nextElementSibling as ExtendedHTMLElement;
+        }
       }
     });
 
     if (child && state.length === 0) {
       child.remove();
     }
-    // Otherwise we'll set up the initial DOM structure based on a template
-    // and populate it with data that's then evaluated.
+
+    // Create missing nodes
+    if (amountOfExtraNodes > 0) {
+      for (let i = 0; i < amountOfExtraNodes / amountOfTemplates; i++) {
+        const renderTemplate = getTemplateRenderer(
+          element,
+          element.templates,
+          level
+        );
+
+        state
+          .slice(amountOfChildren / amountOfTemplates)
+          .forEach(renderTemplate);
+      }
+    }
   } else {
-    state.forEach((value: any) => {
-      const templateClone = document.importNode(element.content, true);
-      const firstChild = templateClone.firstElementChild;
-      containerParent.appendChild(templateClone);
-      containerParent.setAttribute("x-has-each", "");
+    const hasParentEach = !!element.closest("[x-has-each]");
 
-      let child = firstChild;
+    // Stash state so it can be compared later to avoid work.
+    // In case state is derived from another x-each, use getState(element) here.
+    element.state = hasParentEach ? elementState.state : state;
 
-      do {
-        if (child) {
-          // The element should be a state container itself
-          child.setAttribute("x-state", "");
-          // The actual state is stored to the object
-          child.state = { value, level };
+    let templates = element.querySelectorAll(":scope > *[x-template]");
 
-          evaluateDirectives(directives, child);
-        }
-      } while ((child = child?.nextElementSibling));
-    });
+    if (!templates.length) {
+      console.error("x-each - x-template was not found", element);
+
+      return;
+    }
+
+    // If x-template isn't meant to be a group, pick only the first one
+    if (templates[0].getAttribute("x-template") !== "group") {
+      templates = [templates[0]];
+    }
+
+    // Stash template for future use
+    element.templates = templates;
+
+    // Mark element as initialized (needed by state evaluation)
+    element.setAttribute("_x-init", 1);
+    element.setAttribute("x-has-each", "");
+
+    // Empty contents as they'll be replaced by applying the template
+    while (element.firstChild) {
+      element.removeChild(element.lastChild);
+    }
+
+    const renderTemplate = getTemplateRenderer(element, templates, level);
+
+    state.forEach(renderTemplate);
   }
+
+  evaluateDirectives(directives, element);
 }
 eachDirective.evaluateFrom = "top";
 
-function findFirstChildrenWith(element: Element, tagName: string) {
-  let ret: ExtendedHTMLElement[] = [];
+function getTemplateRenderer(
+  element: ExtendedHTMLElement,
+  templates: NodeList,
+  level: number
+) {
+  const renderTemplate = (value: any) => {
+    for (let i = 0; i < templates.length; i++) {
+      const template = templates[i];
+      const templateClone = template.cloneNode(true);
 
-  function recurse(element: Element) {
-    let child = element.firstElementChild;
+      // Remote template mark
+      templateClone.removeAttribute("x-template");
 
-    do {
-      if (child?.tagName === tagName) {
-        ret.push(child as ExtendedHTMLElement);
-      } else if (child?.children.length) {
-        recurse(child);
-      }
-    } while ((child = child?.nextElementSibling || null));
-  }
+      // The element should be a state container itself
+      templateClone.setAttribute("x-state", "");
 
-  recurse(element);
+      // Mark as a former template so that recursion (x-recurse) can find it
+      templateClone.setAttribute("_x-template", "");
 
-  return ret;
+      // The actual state is stored to the object
+      templateClone.state = { value, level };
+
+      element.appendChild(templateClone);
+    }
+  };
+
+  return renderTemplate;
 }
 
 export default eachDirective;

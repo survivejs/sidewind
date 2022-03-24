@@ -49,6 +49,17 @@ function evaluateDirective(
   }
 
   function evaluateOne(element: ExtendedHTMLElement) {
+    if (element.closest("[x-template]")) {
+      return;
+    }
+
+    const closestEach = name !== "x-each" && element.closest("[x-each]");
+
+    // If scope isn't ready, skip until a later evaluation
+    if (closestEach && !closestEach.getAttribute("_x-init")) {
+      return;
+    }
+
     directive({
       directives,
       element: element as ExtendedHTMLElement,
