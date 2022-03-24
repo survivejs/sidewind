@@ -9,6 +9,7 @@ type ExtendedHTMLElement = HTMLElement & {
   isRecursive?: boolean;
   state: BindState;
   observer: MutationObserver;
+  templates?: NodeList;
   value: any;
 };
 type Directive = {

@@ -29,7 +29,7 @@ function eachDirective({
   const level =
     getParents(element, "x-recurse").length +
     (element.hasAttribute("x-recurse") ? 1 : 0);
-  const amountOfTemplates = element.templates?.length;
+  const amountOfTemplates = element.templates?.length || 0;
 
   if (amountOfTemplates > 0) {
     const amountOfItems = state.length * amountOfTemplates;
@@ -92,6 +92,7 @@ function eachDirective({
 
     // If x-template isn't meant to be a group, pick only the first one
     if (templates[0].getAttribute("x-template") !== "group") {
+      // @ts-ignore Figure out the right way to type this (should be a NodeList)
       templates = [templates[0]];
     }
 
@@ -99,12 +100,12 @@ function eachDirective({
     element.templates = templates;
 
     // Mark element as initialized (needed by state evaluation)
-    element.setAttribute("_x-init", 1);
+    element.setAttribute("_x-init", "1");
     element.setAttribute("x-has-each", "");
 
     // Empty contents as they'll be replaced by applying the template
     while (element.firstChild) {
-      element.removeChild(element.lastChild);
+      element.lastChild && element.removeChild(element.lastChild);
     }
 
     const renderTemplate = getTemplateRenderer(element, templates, level);
@@ -118,13 +119,17 @@ eachDirective.evaluateFrom = "top";
 
 function getTemplateRenderer(
   element: ExtendedHTMLElement,
-  templates: NodeList,
+  templates: ExtendedHTMLElement["templates"],
   level: number
 ) {
   const renderTemplate = (value: any) => {
+    if (!templates) {
+      return;
+    }
+
     for (let i = 0; i < templates.length; i++) {
       const template = templates[i];
-      const templateClone = template.cloneNode(true);
+      const templateClone = template.cloneNode(true) as ExtendedHTMLElement;
 
       // Remote template mark
       templateClone.removeAttribute("x-template");

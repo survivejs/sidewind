@@ -37,7 +37,7 @@ function recurseDirective({
   element.setAttribute("x-each", expression);
 
   // Evaluate against parent since the element itself contains x-each
-  evaluateDirectives(directives, element.parentElement);
+  evaluateDirectives(directives, element.parentElement as ExtendedHTMLElement);
 }
 
 export default recurseDirective;
