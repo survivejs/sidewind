@@ -4,12 +4,12 @@ slug: "ssr"
 
 # Server-side rendering (SSR)
 
-`x-each` supports SSR out of the box (better SEO without JS enabled) and it is able to hydrate its state from the rendered markup.
+`x-each` supports SSR out of the box (better SEO without JS enabled) and it is able to hydrate its state from the rendered markup if `x-ssr` is set.
 
 ```html
 <div x-state="{ todos: [] }">
   <div class="mb-2">
-    <ul class="list-disc list-inside" x-each="state.todos">
+    <ul class="list-disc list-inside" x-each="state.todos" x-ssr>
       <li x-template>
         <div>
           <span x="state.value.text">Wash dishes</span>

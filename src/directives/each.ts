@@ -82,7 +82,8 @@ function eachDirective({
     // In case state is derived from another x-each, use getState(element) here.
     element.state = hasParentEach ? elementState.state : state;
 
-    let templates = element.querySelectorAll(":scope > *[x-template]");
+    const xTemplates = element.querySelectorAll(":scope > *[x-template]");
+    let templates = xTemplates;
 
     if (!templates.length) {
       console.error("x-each - x-template was not found", element);
@@ -108,9 +109,14 @@ function eachDirective({
       element.lastChild && element.removeChild(element.lastChild);
     }
 
-    const renderTemplate = getTemplateRenderer(element, templates, level);
+    if (element.hasAttribute("x-ssr")) {
+      // TODO: Capture state now
+      console.log("capture state");
+    } else {
+      const renderTemplate = getTemplateRenderer(element, templates, level);
 
-    state.forEach(renderTemplate);
+      state.forEach(renderTemplate);
+    }
   }
 
   evaluateDirectives(directives, element);
