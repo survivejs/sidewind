@@ -104,15 +104,38 @@ function eachDirective({
     element.setAttribute("_x-init", "1");
     element.setAttribute("x-has-each", "");
 
-    // Empty contents as they'll be replaced by applying the template
-    while (element.firstChild) {
-      element.lastChild && element.removeChild(element.lastChild);
-    }
-
     if (element.hasAttribute("x-ssr")) {
       // TODO: Capture state now
-      console.log("capture state");
+      // 1. Go through each template
+      // 2. Pick x (but not inside x-each) and x-each (set x-ssr for these?)
+      // When picking x, skip state.value prefix and pick remaining field name
+      // Value should be element textContent
+
+      for (let i = 0; i < xTemplates.length; i++) {
+        const xTemplate = xTemplates[i];
+        const xValues = xTemplate.querySelectorAll(`[x]`);
+        const newState: Record<string, unknown> = {};
+
+        for (let j = 0; j < xValues.length; j++) {
+          const xValue = xValues[j];
+
+          // Pick only elements without an x-each parent (i.e. the current x-each)
+          if (getParents(xValue, "x-each")[0] === undefined) {
+            const k = xValue.getAttribute("x").split("state.value.")[1];
+            const v = xValue.textContent;
+
+            newState[k] = v;
+          }
+        }
+
+        element.state.push(newState);
+      }
     } else {
+      // Empty contents as they'll be replaced by applying the template
+      while (element.firstChild) {
+        element.lastChild && element.removeChild(element.lastChild);
+      }
+
       const renderTemplate = getTemplateRenderer(element, templates, level);
 
       state.forEach(renderTemplate);
