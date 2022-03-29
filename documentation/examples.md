@@ -6,6 +6,98 @@ slug: "examples"
 
 The examples below combine directives to produce complex user interfaces and to handle specific use cases.
 
+## Calculator
+
+```html
+<article
+  class="flex flex-col md:flex-row justify-between md:max-w-md"
+  x-state="{
+    amount: 1000,
+    interest: 1.2
+  }"
+>
+  <div class="mb-2">
+    <label for="amount">Amount</label>
+    <input
+      id="amount"
+      type="text"
+      oninput="setState({ amount: this.value })"
+      x="state.amount"
+    />
+  </div>
+  <div class="mb-2">
+    <label for="interest">Interest</label>
+    <input
+      id="interest"
+      type="text"
+      oninput="setState({ interest: this.value
+    })"
+      x="state.interest"
+    />
+  </div>
+  <div>
+    Total: <span x="Math.round(state.amount * state.interest * 100) / 100" />
+  </div>
+</article>
+```
+
+## Tabs
+
+```html
+<section x-state="'animals'">
+  <nav class="flex flex-row justify-between cursor-pointer">
+    <div
+      x-attr
+      class="p-2 w-full"
+      @class="state === 'animals' ? 'bg-gray-400' : 'btn-muted'"
+      onclick="setState('animals')"
+    >
+      Animals
+    </div>
+    <div
+      x-attr
+      class="p-2 w-full"
+      @class="state === 'languages' ? 'bg-gray-400' : 'btn-muted'"
+      onclick="setState('languages')"
+    >
+      Languages
+    </div>
+    <div
+      x-attr
+      class="p-2 w-full"
+      @class="state === 'colors' ? 'bg-gray-400' : 'btn-muted'"
+      onclick="setState('colors')"
+    >
+      Colors
+    </div>
+  </nav>
+  <div class="bg-gray-100 p-2">
+    <div x-attr @class="state === 'animals' ? '' : 'hidden'">Animals tab</div>
+    <div x-attr @class="state === 'languages' ? '' : 'hidden'">
+      Languages tab
+    </div>
+    <div x-attr @class="state === 'colors' ? '' : 'hidden'">Colors tab</div>
+  </div>
+</section>
+```
+
+## Code Editor
+
+```html
+<div class="flex font-mono relative" x-state="'console.log(\'demo\')'">
+  <pre x="highlight('js', state)"></pre>
+  <textarea
+    class="absolute min-w-full min-h-full top-0 left-0 outline-none opacity-50 bg-transparent whitespace-pre resize-none"
+    oninput="setState(this.value)"
+    x="state"
+    autocapitalize="off"
+    autocomplete="off"
+    autocorrect="off"
+    spellcheck="false"
+  ></textarea>
+</div>
+```
+
 ## Table
 
 ```html
