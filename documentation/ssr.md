@@ -12,14 +12,14 @@ slug: "ssr"
     <ul class="list-disc list-inside" x-each="state.todos" x-ssr>
       <li x-template>
         <span x="state.value.text">Wash dishes</span>
-        <ul x-each="state.value.tags">
+        <ul class="list-decimal list-inside ml-2" x-each="state.value.tags">
           <li x-template x="state.value">chore</li>
         </ul>
         <span x="JSON.stringify(state.value)"></span>
       </li>
       <li x-template>
         <span x="state.value.text">Eat vegetables</span>
-        <ul x-each="state.value.tags">
+        <ul class="list-decimal list-inside ml-2" x-each="state.value.tags">
           <li x-template x="state.value">green</li>
           <li x-template x="state.value">food</li>
         </ul>

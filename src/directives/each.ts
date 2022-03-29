@@ -120,11 +120,13 @@ function eachDirective({
           const xValue = xValues[j];
 
           // Pick only elements without an x-each parent (i.e. the current x-each)
-          if (getParents(xValue, "x-each")[0] === undefined) {
+          if (xValue.closest("[x-each]") === element) {
             const k = xValue.getAttribute("x").split("state.value.")[1];
             const v = xValue.textContent;
 
-            newState[k] = v;
+            if (k) {
+              newState[k] = v;
+            }
           }
         }
 
