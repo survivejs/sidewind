@@ -113,13 +113,13 @@ function eachDirective({
 
       for (let i = 0; i < xTemplates.length; i++) {
         const xTemplate = xTemplates[i];
-        const xValues = xTemplate.querySelectorAll(`[x]`);
+        const xValues = xTemplate.querySelectorAll("[x]");
         const newState: Record<string, unknown> = {};
 
         for (let j = 0; j < xValues.length; j++) {
           const xValue = xValues[j];
 
-          // Pick only elements without an x-each parent (i.e. the current x-each)
+          // Pick only elements that have the x-each as their parent
           if (xValue.closest("[x-each]") === element) {
             const k = xValue.getAttribute("x").split("state.value.")[1];
             const v = xValue.textContent;
@@ -130,7 +130,30 @@ function eachDirective({
           }
         }
 
-        // TODO: Handle x-each
+        const xEachContainers = xTemplate.querySelectorAll("[x-each]");
+
+        for (let j = 0; j < xEachContainers.length; j++) {
+          const xEachContainer = xEachContainers[j];
+
+          // Pick only elements that have the x-each as their parent.
+          // The gotcha here is that since the element itself is x-each,
+          // closest() matches to itself so you should traverse starting from
+          // the immediate parent.
+          if (xEachContainer.parentElement.closest("[x-each]") === element) {
+            const k = xEachContainer
+              .getAttribute("x-each")
+              .split("state.value.")[1];
+
+            // TODO: Get values
+            console.log("found valid x-each", k);
+
+            if (k) {
+              newState[k] = [];
+            }
+          }
+        }
+
+        console.log("x-each containers", xEachContainers);
 
         element.state.push(newState);
       }
