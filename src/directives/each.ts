@@ -114,12 +114,15 @@ function eachDirective({
       element.state = extractValuesFromTemplates(element, xTemplates);
 
       // Find the closest state container and update its internal state
-      const parentStateElement = element.closest("[x-state]");
-      const parentKey = expression.split("state.")[1];
-      parentStateElement.state = {
-        ...parentStateElement.state,
-        [parentKey]: element.state,
-      };
+      const parentStateElement: ExtendedHTMLElement | null =
+        element.closest("[x-state]");
+      if (parentStateElement) {
+        const parentKey = expression.split("state.")[1];
+        parentStateElement.state = {
+          ...parentStateElement.state,
+          [parentKey]: element.state,
+        };
+      }
     } else {
       // Empty contents as they'll be replaced by applying the template
       while (element.firstChild) {
@@ -146,22 +149,25 @@ function extractValuesFromTemplates(
 ) {
   const ret = [];
 
+  if (!xTemplates) {
+    return [];
+  }
+
   for (let i = 0; i < xTemplates.length; i++) {
-    const xTemplate = xTemplates[i];
+    const xTemplate = xTemplates[i] as ExtendedHTMLElement;
     const newState = getValues(element, xTemplate);
     const xEachContainers = xTemplate.querySelectorAll("[x-each]");
 
     for (let j = 0; j < xEachContainers.length; j++) {
-      const xEachContainer = xEachContainers[j];
+      const xEachContainer = xEachContainers[j] as ExtendedHTMLElement;
 
       // Pick only elements that have the x-each as their parent.
       // The gotcha here is that since the element itself is x-each,
       // closest() matches to itself so you should traverse starting from
       // the immediate parent.
-      if (xEachContainer.parentElement.closest("[x-each]") === element) {
-        const k = xEachContainer
-          .getAttribute("x-each")
-          .split("state.value.")[1];
+      if (xEachContainer.parentElement?.closest("[x-each]") === element) {
+        const xEachValue = xEachContainer.getAttribute("x-each") || "";
+        const k = xEachValue.split("state.value.")[1];
 
         const v = extractValuesFromTemplates(
           xEachContainer,
@@ -202,7 +208,7 @@ function getValues(
 
     // Pick only elements that have the x-each as their parent
     if (xValue.closest("[x-each]") === element) {
-      const xProperty = xValue.getAttribute("x");
+      const xProperty = xValue.getAttribute("x") || "";
       const v = xValue.textContent;
 
       if (xProperty === "state.value") {
