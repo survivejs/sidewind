@@ -130,8 +130,18 @@ function eachDirective({
           }
         }
 
+        // TODO: Handle x-each
+
         element.state.push(newState);
       }
+
+      // Find the closest state container and update its internal state
+      const parentStateElement = element.closest("[x-state]");
+      const parentKey = expression.split("state.")[1];
+      parentStateElement.state = {
+        ...parentStateElement.state,
+        [parentKey]: element.state,
+      };
     } else {
       // Empty contents as they'll be replaced by applying the template
       while (element.firstChild) {
