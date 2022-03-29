@@ -49,9 +49,10 @@ function evaluateDirective(
   }
 
   function evaluateOne(element: ExtendedHTMLElement) {
-    if (element.closest("[x-template]")) {
+    // TODO: Work out the correct way to do this check (related to closestEach)
+    /*if (element.closest("[x-template]")) {
       return;
-    }
+    }*/
 
     const closestEach = name !== "x-each" && element.closest("[x-each]");
 

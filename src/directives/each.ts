@@ -45,10 +45,12 @@ function eachDirective({
 
     let child = element.firstElementChild as ExtendedHTMLElement;
 
-    state.forEach((value: any) => {
+    state.forEach((value: unknown) => {
       for (let i = 0; i < amountOfTemplates; i++) {
         if (child) {
+          // TODO: This might be safe to remove
           child.setAttribute("x-state", "");
+
           // The actual state is stored to the object
           child.state = { value, level };
 
@@ -75,6 +77,9 @@ function eachDirective({
           .forEach(renderTemplate);
       }
     }
+
+    // Set the changed state
+    element.state = state;
   } else {
     const hasParentEach = !!element.closest("[x-has-each]");
 
@@ -105,13 +110,7 @@ function eachDirective({
     element.setAttribute("x-has-each", "");
 
     if (element.hasAttribute("x-ssr")) {
-      // TODO: Capture state now
-      // 1. Go through each template
-      // 2. Pick x (but not inside x-each) and x-each (set x-ssr for these?)
-      // When picking x, skip state.value prefix and pick remaining field name
-      // Value should be element textContent
-
-      element.state = extractValuesFromTemplates(element, xTemplates);
+      element.state = extractValuesFromTemplates(element, xTemplates, level);
 
       // Find the closest state container and update its internal state
       const parentStateElement: ExtendedHTMLElement | null =
@@ -145,7 +144,8 @@ function getTemplates(element: ExtendedHTMLElement) {
 
 function extractValuesFromTemplates(
   element: ExtendedHTMLElement,
-  xTemplates: ExtendedHTMLElement["templates"]
+  xTemplates: ExtendedHTMLElement["templates"],
+  level: number
 ) {
   const ret = [];
 
@@ -157,6 +157,10 @@ function extractValuesFromTemplates(
     const xTemplate = xTemplates[i] as ExtendedHTMLElement;
     const newState = getValues(element, xTemplate);
     const xEachContainers = xTemplate.querySelectorAll("[x-each]");
+
+    // The element should be a state container itself so that children can
+    // access its data.
+    xTemplate.setAttribute("x-state", "");
 
     for (let j = 0; j < xEachContainers.length; j++) {
       const xEachContainer = xEachContainers[j] as ExtendedHTMLElement;
@@ -171,7 +175,8 @@ function extractValuesFromTemplates(
 
         const v = extractValuesFromTemplates(
           xEachContainer,
-          getTemplates(xEachContainer)
+          getTemplates(xEachContainer),
+          level + 1
         );
 
         if (k) {
@@ -183,6 +188,9 @@ function extractValuesFromTemplates(
             // @ts-ignore How to type this?
             newState[k] = v;
           }
+
+          // The actual state is stored to the object
+          xTemplate.state = { value: v, level };
         }
       }
     }
@@ -243,7 +251,8 @@ function getTemplateRenderer(
       // Remote template mark
       templateClone.removeAttribute("x-template");
 
-      // The element should be a state container itself
+      // The element should be a state container itself so that children can
+      // access its data.
       templateClone.setAttribute("x-state", "");
 
       // Mark as a former template so that recursion (x-recurse) can find it
