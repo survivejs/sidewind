@@ -82,7 +82,8 @@ function eachDirective({
     // In case state is derived from another x-each, use getState(element) here.
     element.state = hasParentEach ? elementState.state : state;
 
-    let templates = element.querySelectorAll(":scope > *[x-template]");
+    const xTemplates = getTemplates(element);
+    let templates = xTemplates;
 
     if (!templates.length) {
       console.error("x-each - x-template was not found", element);
@@ -103,26 +104,134 @@ function eachDirective({
     element.setAttribute("_x-init", "1");
     element.setAttribute("x-has-each", "");
 
-    // Empty contents as they'll be replaced by applying the template
-    while (element.firstChild) {
-      element.lastChild && element.removeChild(element.lastChild);
+    if (element.hasAttribute("x-ssr")) {
+      // TODO: Capture state now
+      // 1. Go through each template
+      // 2. Pick x (but not inside x-each) and x-each (set x-ssr for these?)
+      // When picking x, skip state.value prefix and pick remaining field name
+      // Value should be element textContent
+
+      element.state = extractValuesFromTemplates(element, xTemplates);
+
+      // Find the closest state container and update its internal state
+      const parentStateElement: ExtendedHTMLElement | null =
+        element.closest("[x-state]");
+      if (parentStateElement) {
+        const parentKey = expression.split("state.")[1];
+        parentStateElement.state = {
+          ...parentStateElement.state,
+          [parentKey]: element.state,
+        };
+      }
+    } else {
+      // Empty contents as they'll be replaced by applying the template
+      while (element.firstChild) {
+        element.lastChild && element.removeChild(element.lastChild);
+      }
+
+      const renderTemplate = getTemplateRenderer(element, templates, level);
+
+      state.forEach(renderTemplate);
     }
-
-    const renderTemplate = getTemplateRenderer(element, templates, level);
-
-    state.forEach(renderTemplate);
   }
 
   evaluateDirectives(directives, element);
 }
 eachDirective.evaluateFrom = "top";
 
+function getTemplates(element: ExtendedHTMLElement) {
+  return element.querySelectorAll(":scope > *[x-template]");
+}
+
+function extractValuesFromTemplates(
+  element: ExtendedHTMLElement,
+  xTemplates: ExtendedHTMLElement["templates"]
+) {
+  const ret = [];
+
+  if (!xTemplates) {
+    return [];
+  }
+
+  for (let i = 0; i < xTemplates.length; i++) {
+    const xTemplate = xTemplates[i] as ExtendedHTMLElement;
+    const newState = getValues(element, xTemplate);
+    const xEachContainers = xTemplate.querySelectorAll("[x-each]");
+
+    for (let j = 0; j < xEachContainers.length; j++) {
+      const xEachContainer = xEachContainers[j] as ExtendedHTMLElement;
+
+      // Pick only elements that have the x-each as their parent.
+      // The gotcha here is that since the element itself is x-each,
+      // closest() matches to itself so you should traverse starting from
+      // the immediate parent.
+      if (xEachContainer.parentElement?.closest("[x-each]") === element) {
+        const xEachValue = xEachContainer.getAttribute("x-each") || "";
+        const k = xEachValue.split("state.value.")[1];
+
+        const v = extractValuesFromTemplates(
+          xEachContainer,
+          getTemplates(xEachContainer)
+        );
+
+        if (k) {
+          // TODO: Can unpacking be avoided for arrays?
+          if (Array.isArray(v)) {
+            // @ts-ignore How to type this?
+            newState[k] = v.map((i) => i[0]);
+          } else {
+            // @ts-ignore How to type this?
+            newState[k] = v;
+          }
+        }
+      }
+    }
+
+    ret.push(newState);
+  }
+
+  return ret;
+}
+
+function getValues(
+  element: ExtendedHTMLElement,
+  xTemplate: ExtendedHTMLElement
+) {
+  const xValues = xTemplate.hasAttribute("x")
+    ? [xTemplate]
+    : xTemplate.querySelectorAll("[x]");
+  const newObjectState: Record<string, unknown> = {};
+  const newArrayState = [];
+
+  for (let j = 0; j < xValues.length; j++) {
+    const xValue = xValues[j];
+
+    // Pick only elements that have the x-each as their parent
+    if (xValue.closest("[x-each]") === element) {
+      const xProperty = xValue.getAttribute("x") || "";
+      const v = xValue.textContent;
+
+      if (xProperty === "state.value") {
+        newArrayState.push(v);
+      } else {
+        const k = xProperty.split("state.value.")[1];
+
+        if (k) {
+          newObjectState[k] = v;
+        }
+      }
+    }
+  }
+
+  return newArrayState.length > 0 ? newArrayState : newObjectState;
+}
+
 function getTemplateRenderer(
   element: ExtendedHTMLElement,
   templates: ExtendedHTMLElement["templates"],
   level: number
 ) {
-  const renderTemplate = (value: any) => {
+  const renderTemplate = (value: unknown) => {
     if (!templates) {
       return;
     }

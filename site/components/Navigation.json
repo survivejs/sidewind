@@ -43,6 +43,13 @@
   },
   {
     "element": "Link",
+    "children": "SSR",
+    "attributes": {
+      "href": "/ssr/"
+    }
+  },
+  {
+    "element": "Link",
     "children": "Examples",
     "attributes": {
       "href": "/examples/"
