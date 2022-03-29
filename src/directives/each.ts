@@ -10,7 +10,7 @@ function eachDirective({
   directives,
 }: DirectiveParameters) {
   const elementState = getState(element);
-  const state = evaluate(expression, elementState) || [];
+  let state = evaluate(expression, elementState) || [];
 
   if (!Array.isArray(state)) {
     console.error(
@@ -48,9 +48,6 @@ function eachDirective({
     state.forEach((value: unknown) => {
       for (let i = 0; i < amountOfTemplates; i++) {
         if (child) {
-          // TODO: This might be safe to remove
-          child.setAttribute("x-state", "");
-
           // The actual state is stored to the object
           child.state = { value, level };
 
@@ -122,16 +119,22 @@ function eachDirective({
           [parentKey]: element.state,
         };
       }
-    } else {
-      // Empty contents as they'll be replaced by applying the template
-      while (element.firstChild) {
-        element.lastChild && element.removeChild(element.lastChild);
-      }
 
-      const renderTemplate = getTemplateRenderer(element, templates, level);
+      // Now that the state has been captured, go back to normal flow
+      element.removeAttribute("x-ssr");
 
-      state.forEach(renderTemplate);
+      // Use the state now
+      state = element.state;
     }
+
+    // Empty contents as they'll be replaced by applying the template
+    while (element.firstChild) {
+      element.lastChild && element.removeChild(element.lastChild);
+    }
+
+    const renderTemplate = getTemplateRenderer(element, templates, level);
+
+    state.forEach(renderTemplate);
   }
 
   evaluateDirectives(directives, element);
