@@ -113,23 +113,7 @@ function eachDirective({
 
       for (let i = 0; i < xTemplates.length; i++) {
         const xTemplate = xTemplates[i];
-        const xValues = xTemplate.querySelectorAll("[x]");
-        const newState: Record<string, unknown> = {};
-
-        for (let j = 0; j < xValues.length; j++) {
-          const xValue = xValues[j];
-
-          // Pick only elements that have the x-each as their parent
-          if (xValue.closest("[x-each]") === element) {
-            const k = xValue.getAttribute("x").split("state.value.")[1];
-            const v = xValue.textContent;
-
-            if (k) {
-              newState[k] = v;
-            }
-          }
-        }
-
+        const newState = getValues(element, xTemplate);
         const xEachContainers = xTemplate.querySelectorAll("[x-each]");
 
         for (let j = 0; j < xEachContainers.length; j++) {
@@ -180,6 +164,30 @@ function eachDirective({
   evaluateDirectives(directives, element);
 }
 eachDirective.evaluateFrom = "top";
+
+function getValues(
+  element: ExtendedHTMLElement,
+  xTemplate: ExtendedHTMLElement
+) {
+  const xValues = xTemplate.querySelectorAll("[x]");
+  const newState: Record<string, unknown> = {};
+
+  for (let j = 0; j < xValues.length; j++) {
+    const xValue = xValues[j];
+
+    // Pick only elements that have the x-each as their parent
+    if (xValue.closest("[x-each]") === element) {
+      const k = xValue.getAttribute("x").split("state.value.")[1];
+      const v = xValue.textContent;
+
+      if (k) {
+        newState[k] = v;
+      }
+    }
+  }
+
+  return newState;
+}
 
 function getTemplateRenderer(
   element: ExtendedHTMLElement,
