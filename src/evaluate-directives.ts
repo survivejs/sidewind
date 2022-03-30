@@ -55,8 +55,13 @@ function evaluateDirective(
 
     const closestEach = name !== "x-each" && element.closest("[x-each]");
 
+    // TODO: Simplify this logic somehow
     // If scope isn't ready, skip until a later evaluation
-    if (closestEach && !closestEach.getAttribute("_x-init")) {
+    if (
+      name !== "x-ssr" &&
+      closestEach &&
+      !closestEach.getAttribute("_x-init")
+    ) {
       return;
     }
 

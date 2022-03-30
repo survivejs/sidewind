@@ -6,5 +6,6 @@ export { default as intersectDirective } from "./intersect";
 export { default as intervalDirective } from "./interval";
 export { default as recurseDirective } from "./recurse";
 export { default as promiseDirective } from "./promise";
+export { default as ssrDirective } from "./ssr";
 export { default as stateDirective } from "./state";
 export { default as valueDirective } from "./value";
