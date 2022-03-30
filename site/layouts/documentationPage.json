@@ -25,11 +25,7 @@
       },
       "children": [
         {
-          "element": "h1",
-          "__children": "match.data.title"
-        },
-        {
-          "element": "p",
+          "element": "div",
           "inputProperty": "match.content",
           "transformWith": ["markdown"],
           "__children": "content"
