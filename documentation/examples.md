@@ -1,5 +1,7 @@
 ---
 slug: "examples"
+title: "Examples"
+description: "Check these examples to understand what to achieve with Sidewind"
 ---
 
 # Examples

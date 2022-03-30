@@ -1,5 +1,7 @@
 ---
 slug: "state"
+title: "State"
+description: "State is the most basic building block of Sidewind"
 ---
 
 # State

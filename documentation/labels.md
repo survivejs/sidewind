@@ -1,5 +1,7 @@
 ---
 slug: "labels"
+title: "Labels"
+description: "Labels give easy access to parent state"
 ---
 
 # Labels

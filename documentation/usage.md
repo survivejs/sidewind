@@ -1,5 +1,7 @@
 ---
 slug: "usage"
+title: "Usage"
+description: "Follow these instructions to use Sidewind"
 ---
 
 # Usage

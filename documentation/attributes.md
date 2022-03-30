@@ -1,5 +1,7 @@
 ---
 slug: "attributes"
+title: "Attributes"
+description: "Sidewind allows binding data to HTML attributes"
 ---
 
 # Attributes

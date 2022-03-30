@@ -1,5 +1,7 @@
 ---
 slug: "ssr"
+title: "SSR"
+description: "Sidewind is able to hydrate its state from HTML markup"
 ---
 
 # Server-side rendering (SSR)

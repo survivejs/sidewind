@@ -1,5 +1,7 @@
 ---
 slug: "recursion"
+title: "Recursion"
+description: "Sidewind supports rendering of recursive data structures"
 ---
 
 # Recursion

@@ -1,5 +1,7 @@
 ---
 slug: "iteration"
+title: "Iteration"
+description: "Sidewind supports rendering list-style data"
 ---
 
 # Iteration
