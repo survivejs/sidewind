@@ -10,6 +10,7 @@ import {
   intersectDirective,
   recurseDirective,
   promiseDirective,
+  ssrDirective,
   stateDirective,
   valueDirective,
 } from "./directives";
@@ -25,6 +26,7 @@ declare global {
 function evaluateAllDirectives() {
   evaluateDirectives([
     { name: "x-state", directive: stateDirective },
+    { name: "x-ssr", directive: ssrDirective },
     { name: "x-each", directive: eachDirective },
     { name: "x-attr", directive: attributeDirective },
     { name: "x", directive: valueDirective },

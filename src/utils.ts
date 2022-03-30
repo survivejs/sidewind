@@ -1,4 +1,5 @@
-import { BindState } from "./types";
+import type { BindState, ExtendedHTMLElement } from "./types";
+import getParents from "./get-parents";
 
 function get(object: BindState, keyString: string) {
   const keys = keyString.split(".");
@@ -9,6 +10,17 @@ function get(object: BindState, keyString: string) {
   });
 
   return ret;
+}
+
+function getLevel(element: ExtendedHTMLElement) {
+  return (
+    getParents(element, "x-recurse").length +
+    (element.hasAttribute("x-recurse") ? 1 : 0)
+  );
+}
+
+function getTemplates(element: ExtendedHTMLElement) {
+  return element.querySelectorAll(":scope > *[x-template]");
 }
 
 function getValues(data: BindState, getter: string | null): BindState {
@@ -29,4 +41,4 @@ function getValues(data: BindState, getter: string | null): BindState {
   };
 }
 
-export { get, getValues };
+export { get, getLevel, getTemplates, getValues };
