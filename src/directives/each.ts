@@ -60,16 +60,15 @@ function eachDirective({
 
     // Create missing nodes
     if (amountOfExtraNodes > 0) {
-      for (let i = 0; i < amountOfExtraNodes / amountOfTemplates; i++) {
-        const renderTemplate = getTemplateRenderer(
-          element,
-          element.templates,
-          level
-        );
+      const renderTemplate = getTemplateRenderer(
+        element,
+        element.templates,
+        level
+      );
+      const missingState = state.slice(amountOfChildren / amountOfTemplates);
 
-        state
-          .slice(amountOfChildren / amountOfTemplates)
-          .forEach(renderTemplate);
+      for (let i = 0; i < amountOfExtraNodes / amountOfTemplates; i++) {
+        renderTemplate(missingState[i]);
       }
     }
 
