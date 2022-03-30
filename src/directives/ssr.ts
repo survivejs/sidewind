@@ -14,6 +14,13 @@ function ssrDirective({ element }: DirectiveParameters) {
 
   if (parentStateElement) {
     const expression = element.getAttribute("x-each");
+
+    if (!expression) {
+      console.error("x-ssr - adjacent x-each was not found");
+
+      return;
+    }
+
     const parentKey = expression.split("state.")[1];
 
     parentStateElement.state = {
