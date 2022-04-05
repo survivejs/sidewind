@@ -56,6 +56,8 @@ function setState(
     }
   } else {
     const state = stateContainer.state;
+
+    // @ts-ignore Figure out how to type this
     const evaluatedValue = isFunction(newValue) ? newValue(state) : newValue;
     const updatedState = isObject(evaluatedValue)
       ? Object.assign({}, state, evaluatedValue)
@@ -70,7 +72,7 @@ function setState(
   }
 }
 
-function isFunction(obj: any) {
+function isFunction(obj: unknown) {
   return typeof obj === "function";
 }
 
