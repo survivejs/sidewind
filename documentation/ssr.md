@@ -58,3 +58,30 @@ Note that this doesn't work with complex expressions for now and only direct val
   <div x="JSON.stringify(state.todos, null, 2)"></div>
 </div>
 ```
+
+## Hydrating nested objects
+
+`x-ssr` is able to reconstruct nested objects as well:
+
+```html
+<div x-state="{ todos: [] }" class="flex flex-col gap-2">
+  <div>
+    <ul class="list-disc list-inside" x-each="state.todos" x-ssr>
+      <li x-template>
+        <span x="state.value.text">Wash dishes</span>
+        <ul class="list-decimal list-inside ml-2" x-each="state.value.entity.tags">
+          <li x-template x="state.value">chore</li>
+        </ul>
+      </li>
+      <li x-template>
+        <span x="state.value.text">Eat vegetables</span>
+        <ul class="list-decimal list-inside ml-2" x-each="state.value.entity.tags">
+          <li x-template x="state.value">green</li>
+          <li x-template x="state.value">food</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <div x="JSON.stringify(state.todos, null, 2)"></div>
+</div>
+```

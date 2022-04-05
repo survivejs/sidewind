@@ -41,4 +41,9 @@ function getValues(data: BindState, getter: string | null): BindState {
   };
 }
 
-export { get, getLevel, getTemplates, getValues };
+function isObject(obj: unknown) {
+  // @ts-ignore nodeName is ok check to do
+  return typeof obj === "object" && obj && !obj.nodeName;
+}
+
+export { get, getLevel, getTemplates, getValues, isObject };

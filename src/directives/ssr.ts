@@ -1,4 +1,4 @@
-import { getLevel, getTemplates } from "../utils";
+import { getLevel, getTemplates, isObject } from "../utils";
 import type { DirectiveParameters, ExtendedHTMLElement } from "../types";
 
 function ssrDirective({ element }: DirectiveParameters) {
@@ -65,24 +65,23 @@ function extractValuesFromTemplates(
         const xEachValue = xEachContainer.getAttribute("x-each") || "";
         const k = xEachValue.split("state.value.")[1];
 
-        const v = extractValuesFromTemplates(
-          xEachContainer,
-          getTemplates(xEachContainer),
-          level + 1
-        );
-
         if (k) {
+          const kParts = k.split(".");
+          const v = extractValuesFromTemplates(
+            xEachContainer,
+            getTemplates(xEachContainer),
+            level + 1
+          );
+
           // TODO: Can unpacking be avoided for arrays?
-          if (Array.isArray(v)) {
-            // @ts-ignore How to type this?
-            newState[k] = v.map((i) => i[0]);
-          } else {
-            // @ts-ignore How to type this?
-            newState[k] = v;
-          }
+          // @ts-ignore How to type this?
+          const value = Array.isArray(v) ? v.map((i) => i[0]) : v;
+
+          // @ts-ignore How to type this?
+          set(newState, kParts, value);
 
           // The actual state is stored to the object
-          xTemplate.state = { value: v, level };
+          xTemplate.state = { value, level };
         }
       }
     }
@@ -91,6 +90,25 @@ function extractValuesFromTemplates(
   }
 
   return ret;
+}
+
+function set(o: Record<string, unknown>, keys: string[], value: unknown) {
+  let previousO = o;
+
+  keys.forEach((k, i) => {
+    // Set the value to the last part
+    if (i === keys.length - 1) {
+      previousO[k] = value;
+    } else {
+      // Construct objects if they don't exist yet
+      if (!isObject(o[k])) {
+        o[k] = {};
+      }
+
+      // @ts-ignore Figure out how to type this
+      previousO = o[k];
+    }
+  });
 }
 
 function getValues(

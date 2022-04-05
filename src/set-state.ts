@@ -1,8 +1,9 @@
 import { ExtendedHTMLElement } from "./types";
 import getParents from "./get-parents";
+import { isObject } from "./utils";
 
 function setState(
-  newValue: any,
+  newValue: unknown,
   {
     element,
     parent,
@@ -71,10 +72,6 @@ function setState(
 
 function isFunction(obj: any) {
   return typeof obj === "function";
-}
-
-function isObject(obj: any) {
-  return typeof obj === "object" && obj && !obj.nodeName;
 }
 
 export default setState;
