@@ -6,14 +6,15 @@ import {
   cloakDirective,
   closestDirective,
   eachDirective,
-  intervalDirective,
   intersectDirective,
-  recurseDirective,
+  intervalDirective,
   promiseDirective,
+  recurseDirective,
   ssrDirective,
   stateDirective,
   valueDirective,
 } from "./directives";
+import { ExtendedHTMLElement } from "./types";
 
 declare global {
   interface Window {
@@ -23,7 +24,7 @@ declare global {
   }
 }
 
-function evaluateAllDirectives() {
+function evaluateAllDirectives(parent?: ExtendedHTMLElement) {
   evaluateDirectives([
     { name: "x-state", directive: stateDirective },
     { name: "x-ssr", directive: ssrDirective },
@@ -36,10 +37,10 @@ function evaluateAllDirectives() {
     { name: "x-promise", directive: promiseDirective },
     { name: "x-interval", directive: intervalDirective },
     { name: "x-intersect", directive: intersectDirective },
-  ]);
+  ], parent);
 }
 
-window.addEventListener("load", evaluateAllDirectives);
+window.addEventListener("load", () => evaluateAllDirectives());
 
 window.evaluateAllDirectives = evaluateAllDirectives;
 window.getState = getState;
