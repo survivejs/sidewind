@@ -22,7 +22,7 @@ Doing this will activate all included directives and expose the following API in
 
 - `getState(element: HTMLElement)` - Returns state found in the parents of the given element
 - `setState(State | (state: State) => State, { element?: HTMLElement, parent?: string } )` - Sets state in the given element. If parent is given, then the state will be applied based on the label (see `x-label`).
-- `evaluateAllDirectives()` - Evaluates all directives installed to the system. This can be useful if you are integrating Sidewind to an external system and want to trigger evaluation on load for example.
+- `evaluateAllDirectives(element?: HTMLElement)` - Evaluates all directives installed to the system. This can be useful if you are integrating Sidewind to an external system and want to trigger evaluation on load for example. For usage with limited contexts, such as Web Components, it's possible to pass an element to it. Otherwise it will evaluate against document body by default.
 
 By design, Sidewind is modular and it's possible it will be packaged in a different way in the future so you get only the functionality you want. There's also room for tooling here as it's possible to write a preprocessor that can figure out the right imports based on use per page.
 
