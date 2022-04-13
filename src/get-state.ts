@@ -1,18 +1,22 @@
 import { BindState, ExtendedHTMLElement } from "./types";
 import getParents from "./get-parents";
 
-function getState(element: ExtendedHTMLElement) {
+function getState<State = Record<string, unknown>>(
+  element: ExtendedHTMLElement,
+): State | undefined {
   const closestStateContainer = element.closest(
-    "[x-state]"
+    "[x-state]",
   ) as ExtendedHTMLElement;
 
   if (!closestStateContainer) {
-    return { state: {} };
+    return;
   }
 
-  const { state }: { state: BindState } = closestStateContainer;
+  // @ts-ignore How to type this?
+  const { state }: { state: State } = closestStateContainer;
   const labeledState = getLabeledState(element, "x-label");
 
+  // @ts-ignore How to type this? Likely labels need more definition
   return Object.assign({}, labeledState, { state });
 }
 
@@ -20,7 +24,7 @@ function getLabeledState(element: ExtendedHTMLElement, labelKey: string) {
   const labeledStateContainers = getParents(element, labelKey);
   const ret: BindState = {};
 
-  for (let i = labeledStateContainers.length; i--; ) {
+  for (let i = labeledStateContainers.length; i--;) {
     const labeledStateContainer = labeledStateContainers[
       i
     ] as ExtendedHTMLElement;

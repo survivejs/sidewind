@@ -2,15 +2,18 @@ import evaluate from "./evaluate";
 import getState from "./get-state";
 import setState from "./set-state";
 
-type BindState = { [id: string]: any };
-type State = { [id: string]: any } | string;
+type BindState = Record<string, unknown>;
+type State = BindState | string;
+
+// TODO: Most likely this type should vanish and HTMLElement should be
+// extended instead
 type ExtendedHTMLElement = HTMLElement & {
-  content: any;
+  content: unknown;
   isRecursive?: boolean;
   state: BindState;
   observer: MutationObserver;
   templates?: NodeList;
-  value: any;
+  value: unknown;
 };
 type Directive = {
   name: string;
@@ -19,11 +22,11 @@ type Directive = {
 type DirectiveParameters = {
   directives: Directive[];
   element: ExtendedHTMLElement;
-  expression: any;
+  expression: unknown;
   evaluate: typeof evaluate;
   evaluateDirectives: (
     directives: Directive[],
-    element: ExtendedHTMLElement
+    element: ExtendedHTMLElement,
   ) => void;
   getState: typeof getState;
   setState: typeof setState;
@@ -40,10 +43,10 @@ interface DirectiveFunction {
 
 export {
   BindState,
-  State,
-  ExtendedHTMLElement,
-  EvaluateFrom,
   Directive,
-  DirectiveParameters,
   DirectiveFunction,
+  DirectiveParameters,
+  EvaluateFrom,
+  ExtendedHTMLElement,
+  State,
 };

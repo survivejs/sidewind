@@ -40,6 +40,7 @@ function evaluateAllDirectives(parent?: ExtendedHTMLElement) {
   ], parent);
 }
 
+// TODO: Consider using self over window here to support web workers
 window.addEventListener("load", () => evaluateAllDirectives());
 
 window.evaluateAllDirectives = evaluateAllDirectives;

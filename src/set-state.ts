@@ -2,15 +2,15 @@ import { ExtendedHTMLElement } from "./types";
 import getParents from "./get-parents";
 import { isObject } from "./utils";
 
-function setState(
-  newValue: unknown,
+function setState<State = unknown, Parent extends string = string>(
+  newValue: State,
   {
     element,
     parent,
   }: {
     element?: ExtendedHTMLElement;
-    parent?: string;
-  } = {}
+    parent?: Parent;
+  } = {},
 ) {
   if (!element) {
     element = window.event && (window.event.target as ExtendedHTMLElement);
@@ -20,7 +20,7 @@ function setState(
     }
   }
 
-  let stateContainer = element.hasAttribute("x-state")
+  const stateContainer = element.hasAttribute("x-state")
     ? element
     : (element.closest("[x-state]") as ExtendedHTMLElement);
 
@@ -32,7 +32,7 @@ function setState(
     const labelName = "x-label";
     const labeledStateContainers = getParents(element, labelName);
     const matchingParents = labeledStateContainers.filter(
-      (elem) => elem.getAttribute(labelName) === parent
+      (elem: ExtendedHTMLElement) => elem.getAttribute(labelName) === parent,
     );
 
     if (matchingParents.length) {
@@ -51,7 +51,7 @@ function setState(
         "for",
         element,
         "using",
-        labelName
+        labelName,
       );
     }
   } else {
