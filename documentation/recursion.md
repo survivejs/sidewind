@@ -111,12 +111,12 @@ To allow rendering more complex structures, `x-recurse` allows you to define whi
   <div>
     <ul x-each="state.tree">
       <li x-template x-attr class="flex flex-col gap-2" @class="state.level > 0 && 'ml-2'">
-        <div class="flex flex-row gap-2">
+        <div x-if="state.value.element" class="flex flex-row gap-2">
           <h2 class="font-bold">Element</h2>
           <span x="state.value.element"></span>
         </div>
-        <div>
-        <h2 class="font-bold">Props</h2>
+        <div x-if="state.value.props">
+          <h2 class="font-bold">Props</h2>
           <ul x-each="Object.entries(state.value.props)">
             <li x-template>
               <span x="state.value[0]"></span>
@@ -124,8 +124,8 @@ To allow rendering more complex structures, `x-recurse` allows you to define whi
             </li>
           </ul>
         </div>
-        <div>
-        <h2 class="font-bold">Children</h2>
+        <div x-if="state.value.children">
+          <h2 class="font-bold">Children</h2>
           <ul x-each="state.value.children">
             <li x-template>
               <div class="flex flex-row gap-2">
@@ -142,5 +142,4 @@ To allow rendering more complex structures, `x-recurse` allows you to define whi
 </div>
 ```
 
-TODO: hide Props if there's no data
-TODO: hide Children if there's no data
+// TODO: Implement x-if
