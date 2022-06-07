@@ -29,12 +29,12 @@ function evaluateAllDirectives(parent?: ExtendedHTMLElement) {
   evaluateDirectives(
     [
       { name: "x-state", directive: stateDirective },
+      { name: "x-cloak", directive: cloakDirective },
       { name: "x-if", directive: ifDirective },
       { name: "x-ssr", directive: ssrDirective },
       { name: "x-each", directive: eachDirective },
       { name: "x-attr", directive: attributeDirective },
       { name: "x", directive: valueDirective },
-      { name: "x-cloak", directive: cloakDirective },
       { name: "x-closest", directive: closestDirective },
       { name: "x-recurse", directive: recurseDirective },
       { name: "x-promise", directive: promiseDirective },
