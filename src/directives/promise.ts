@@ -6,6 +6,7 @@ function promiseDirective({
   evaluate,
   setState,
 }: DirectiveParameters) {
+  // @ts-ignore TODO: Fix the type
   const { state } = evaluate(expression);
 
   Promise.all(Object.values(state))

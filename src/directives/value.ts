@@ -8,6 +8,7 @@ function valueDirective({
   evaluateDirectives,
   directives,
 }: DirectiveParameters) {
+  // @ts-ignore TODO: Fix the type
   const state = evaluate(expression, getState(element));
 
   if (element.localName === "input") {

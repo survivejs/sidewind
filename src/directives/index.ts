@@ -2,6 +2,7 @@ export { default as attributeDirective } from "./attribute";
 export { default as cloakDirective } from "./cloak";
 export { default as closestDirective } from "./closest";
 export { default as eachDirective } from "./each";
+export { default as ifDirective } from "./if";
 export { default as intersectDirective } from "./intersect";
 export { default as intervalDirective } from "./interval";
 export { default as recurseDirective } from "./recurse";

@@ -9,9 +9,11 @@ function closestDirective({
   evaluate,
   setState,
 }: DirectiveParameters) {
+  // @ts-ignore TODO: Fix the type
   const { state } = evaluate(expression);
   const key = Object.keys(state)[0];
   const evaluateValue = () =>
+    // @ts-ignore TODO: Fix the type
     evaluateClosestValue(element, evaluate(expression).state, key, setState);
 
   window.addEventListener("scroll", evaluateValue);
@@ -25,6 +27,7 @@ function evaluateClosestValue(
   key: string,
   setState: DirectiveParameters["setState"]
 ) {
+  // @ts-ignore TODO: Fix the type
   const elements = Array.from(getValues(closestState, key)[key]).map(
     (value) => {
       const element = value as HTMLElement;

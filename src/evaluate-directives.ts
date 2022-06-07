@@ -4,6 +4,7 @@ import {
   EvaluateFrom,
   ExtendedHTMLElement,
 } from "./types";
+import getParents from "./get-parents";
 import evaluate from "./evaluate";
 import getState from "./get-state";
 import setState from "./set-state";
@@ -50,6 +51,12 @@ function evaluateDirective(
 
   function evaluateOne(element: ExtendedHTMLElement) {
     if (element.closest("[x-template]")) {
+      return;
+    }
+
+    // x-if logic
+    const hiddenParents = getParents(element, "hidden");
+    if (hiddenParents.length > 0) {
       return;
     }
 

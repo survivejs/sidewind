@@ -2,6 +2,7 @@ import { getLevel, getTemplates, isObject } from "../utils";
 import type { DirectiveParameters, ExtendedHTMLElement } from "../types";
 
 function ssrDirective({ element }: DirectiveParameters) {
+  // @ts-ignore TODO: Fix the type
   element.state = extractValuesFromTemplates(
     element,
     getTemplates(element),

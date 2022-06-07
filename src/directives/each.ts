@@ -10,6 +10,7 @@ function eachDirective({
   directives,
 }: DirectiveParameters) {
   const elementState = getState(element);
+  // @ts-ignore TODO: Fix the type
   const state = evaluate(expression, elementState) || [];
 
   if (!Array.isArray(state)) {
@@ -22,6 +23,7 @@ function eachDirective({
     return;
   }
 
+  // @ts-ignore TODO: Fix the type. Probably some type above is wrong
   if (state === element.state) {
     return;
   }
@@ -73,12 +75,14 @@ function eachDirective({
     }
 
     // Set the changed state
+    // @ts-ignore TODO: Fix the type
     element.state = state;
   } else {
     const hasParentEach = !!element.closest("[x-has-each]");
 
     // Stash state so it can be compared later to avoid work.
     // In case state is derived from another x-each, use getState(element) here.
+    // @ts-ignore TODO: Fix the type
     element.state = hasParentEach ? elementState.state : state;
 
     let templates = getTemplates(element);

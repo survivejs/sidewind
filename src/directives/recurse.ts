@@ -9,9 +9,15 @@ function recurseDirective({
   evaluateDirectives,
   directives,
 }: DirectiveParameters) {
+  // @ts-ignore TODO: Fix the type
   const state = evaluate(expression, getState(element));
+  let parentIndex = 0;
+  let value = expression;
 
-  if (!Array.isArray(state)) {
+  if (state.parentIndex && state.value) {
+    parentIndex = state.parentIndex;
+    value = state.value;
+  } else if (!Array.isArray(state)) {
     return;
   }
 
@@ -22,7 +28,7 @@ function recurseDirective({
   }
 
   const parents = getParents(element, "_x-template");
-  const template = parents[0];
+  const template = parents[parentIndex];
 
   if (!template) {
     console.error("x-recurse - Parent x-template was not found");
@@ -34,7 +40,9 @@ function recurseDirective({
   templateClone.setAttribute("x-template", "");
 
   element.appendChild(templateClone);
-  element.setAttribute("x-each", expression);
+
+  // @ts-ignore TODO: Fix the type
+  element.setAttribute("x-each", value);
 
   // Evaluate against parent since the element itself contains x-each
   evaluateDirectives(directives, element.parentElement as ExtendedHTMLElement);
