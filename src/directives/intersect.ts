@@ -8,6 +8,7 @@ function intersectDirective({
   evaluate,
   setState,
 }: DirectiveParameters) {
+  // @ts-ignore TODO: Fix the type
   const { options = {} } = evaluate(expression);
 
   let triggered = false;
@@ -27,6 +28,8 @@ function intersectDirective({
       }
 
       triggered = true;
+
+      // @ts-ignore TODO: Fix the type
       setState(evaluate(expression).state, { element });
 
       // Evaluate directives from the element parent to allow setting state to

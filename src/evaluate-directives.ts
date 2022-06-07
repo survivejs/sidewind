@@ -3,11 +3,11 @@ import {
   DirectiveFunction,
   EvaluateFrom,
   ExtendedHTMLElement,
-} from "./types.ts";
-import getParents from "./get-parents.ts";
-import evaluate from "./evaluate.ts";
-import getState from "./get-state.ts";
-import setState from "./set-state.ts";
+} from "./types";
+import getParents from "./get-parents";
+import evaluate from "./evaluate";
+import getState from "./get-state";
+import setState from "./set-state";
 
 function evaluateDirectives(
   directives: Directive[],

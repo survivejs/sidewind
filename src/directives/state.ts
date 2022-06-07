@@ -13,6 +13,7 @@ function stateDirective({
   // x-each is a special case as it maintains state directly. Potentially
   // this could be changed to break the coupling.
   if (expression || typeof element.state === "undefined") {
+    // @ts-ignore TODO: Fix the type
     element.state = evaluate(expression, getState(element));
   }
 

@@ -9,6 +9,7 @@ function recurseDirective({
   evaluateDirectives,
   directives,
 }: DirectiveParameters) {
+  // @ts-ignore TODO: Fix the type
   const state = evaluate(expression, getState(element));
   let parentIndex = 0;
   let value = expression;
@@ -39,6 +40,8 @@ function recurseDirective({
   templateClone.setAttribute("x-template", "");
 
   element.appendChild(templateClone);
+
+  // @ts-ignore TODO: Fix the type
   element.setAttribute("x-each", value);
 
   // Evaluate against parent since the element itself contains x-each

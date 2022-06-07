@@ -6,6 +6,7 @@ function get(object: BindState, keyString: string) {
   let ret = object;
 
   keys.forEach((key) => {
+    // @ts-ignore TODO: Improve the type here
     ret = ret[key];
   });
 
