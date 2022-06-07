@@ -37,6 +37,21 @@ State can be a complex object:
 
 > [The calculator example](#calculator) takes this idea further and shows how to handle user interaction.
 
+## `x-if`
+
+Sometimes it makes sense to hide entire fragments of a HTML structure. That's where `x-if` comes in:
+
+```html
+<div>
+  <section x-state="true" x-if="state">I am visible</section>
+  <section x-state="false" x-if="state">I am hidden</section>
+  <section x-state="{ amount: 1000 }">
+    <div x-if="state.amount > 500">I am visible</div>
+    <div x-if="state.amount < 500">I am hidden</div>
+  </section>
+</div>
+```
+
 ## `x-cloak`
 
 `x-cloak` has been designed let you hide interactive content until Sidewind has loaded to avoid displaying markup that's not ready. Consider the example below:

@@ -6,6 +6,7 @@ import {
   cloakDirective,
   closestDirective,
   eachDirective,
+  ifDirective,
   intersectDirective,
   intervalDirective,
   promiseDirective,
@@ -25,24 +26,27 @@ declare global {
 }
 
 function evaluateAllDirectives(parent?: ExtendedHTMLElement) {
-  evaluateDirectives([
-    { name: "x-state", directive: stateDirective },
-    { name: "x-ssr", directive: ssrDirective },
-    { name: "x-each", directive: eachDirective },
-    { name: "x-attr", directive: attributeDirective },
-    { name: "x", directive: valueDirective },
-    { name: "x-cloak", directive: cloakDirective },
-    { name: "x-closest", directive: closestDirective },
-    { name: "x-recurse", directive: recurseDirective },
-    { name: "x-promise", directive: promiseDirective },
-    { name: "x-interval", directive: intervalDirective },
-    { name: "x-intersect", directive: intersectDirective },
-  ], parent);
+  evaluateDirectives(
+    [
+      { name: "x-state", directive: stateDirective },
+      { name: "x-if", directive: ifDirective },
+      { name: "x-ssr", directive: ssrDirective },
+      { name: "x-each", directive: eachDirective },
+      { name: "x-attr", directive: attributeDirective },
+      { name: "x", directive: valueDirective },
+      { name: "x-cloak", directive: cloakDirective },
+      { name: "x-closest", directive: closestDirective },
+      { name: "x-recurse", directive: recurseDirective },
+      { name: "x-promise", directive: promiseDirective },
+      { name: "x-interval", directive: intervalDirective },
+      { name: "x-intersect", directive: intersectDirective },
+    ],
+    parent
+  );
 }
 
-// TODO: Consider using self over window here to support web workers
-window.addEventListener("load", () => evaluateAllDirectives());
+self.addEventListener("load", () => evaluateAllDirectives());
 
-window.evaluateAllDirectives = evaluateAllDirectives;
-window.getState = getState;
-window.setState = setState;
+self.evaluateAllDirectives = evaluateAllDirectives;
+self.getState = getState;
+self.setState = setState;

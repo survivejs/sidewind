@@ -90,14 +90,12 @@ To allow rendering more complex structures, `x-recurse` allows you to define whi
       {
         element: 'BaseLayout',
         props: {
-          content: [
+          '##content': [
             {
               element: 'header',
-              props: {},
               children: [
                 {
                   element: 'h1',
-                  props: {},
                   children: 'demo'
                 }
               ]
@@ -126,8 +124,8 @@ To allow rendering more complex structures, `x-recurse` allows you to define whi
         </div>
         <div x-if="state.value.children">
           <h2 class="font-bold">Children</h2>
-          <ul x-each="state.value.children">
-            <li x-template>
+          <ul x-each="Array.isArray(state.value.children) ? state.value.children : [state.value.children]">
+            <li x-template x-attr @class="state.level > 0 && 'ml-2'">
               <div class="flex flex-row gap-2">
                 <h3 class="font-bold">Element</h3>
                 <span x="state.value.element"></span>
@@ -141,5 +139,3 @@ To allow rendering more complex structures, `x-recurse` allows you to define whi
   </div>
 </div>
 ```
-
-// TODO: Implement x-if

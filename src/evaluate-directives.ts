@@ -3,10 +3,11 @@ import {
   DirectiveFunction,
   EvaluateFrom,
   ExtendedHTMLElement,
-} from "./types";
-import evaluate from "./evaluate";
-import getState from "./get-state";
-import setState from "./set-state";
+} from "./types.ts";
+import getParents from "./get-parents.ts";
+import evaluate from "./evaluate.ts";
+import getState from "./get-state.ts";
+import setState from "./set-state.ts";
 
 function evaluateDirectives(
   directives: Directive[],
@@ -50,6 +51,12 @@ function evaluateDirective(
 
   function evaluateOne(element: ExtendedHTMLElement) {
     if (element.closest("[x-template]")) {
+      return;
+    }
+
+    // x-if logic
+    const hiddenParents = getParents(element, "hidden");
+    if (hiddenParents.length > 0) {
       return;
     }
 
