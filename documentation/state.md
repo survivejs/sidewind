@@ -25,6 +25,16 @@ The state can be manipulated using a global `setState`:
 </section>
 ```
 
+## Async evaluation
+
+`x` supports promises. This is useful for complex evaluations:
+
+```html
+<section x-state="{ input: 'demo' }">
+  <div class="prose mb-2">Value: <span x="complexOperation(state.input)"></span></div>
+</section>
+```
+
 ## Complex objects
 
 State can be a complex object:

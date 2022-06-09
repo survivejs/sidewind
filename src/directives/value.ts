@@ -1,15 +1,14 @@
-import { DirectiveParameters } from "../types";
+import { BindState, DirectiveParameters } from "../types";
 
-function valueDirective({
+async function valueDirective({
   element,
   expression,
-  evaluate,
   getState,
   evaluateDirectives,
   directives,
 }: DirectiveParameters) {
   // @ts-ignore TODO: Fix the type
-  const state = evaluate(expression, getState(element));
+  const state = await asyncEvaluate(expression, getState(element));
 
   if (element.localName === "input") {
     element.value = state;
@@ -22,6 +21,21 @@ function valueDirective({
     if (closestState) {
       evaluateDirectives(directives, element);
     }
+  }
+}
+
+function asyncEvaluate(expression: string, value: BindState = {}) {
+  try {
+    return Promise.resolve(
+      Function.apply(
+        null,
+        Object.keys(value).concat(`return ${expression}`)
+      )(...Object.values(value))
+    );
+  } catch (err) {
+    console.error("Failed to evaluate", expression, value, err);
+
+    return undefined;
   }
 }
 

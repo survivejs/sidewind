@@ -34,8 +34,15 @@ function bothClicked(element) {
   setState({ value: "someone" }, { element, parent: "child" });
 }
 
+function complexOperation(input: string) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(input + "demo"), 500);
+  });
+}
+
 declare global {
   interface Window {
+    complexOperation: typeof complexOperation;
     highlight: typeof highlight;
     hiClicked: typeof hiClicked;
     morningClicked: typeof morningClicked;
@@ -44,6 +51,7 @@ declare global {
   }
 }
 
+window.complexOperation = complexOperation;
 window.highlight = highlight;
 window.hiClicked = hiClicked;
 window.morningClicked = morningClicked;
