@@ -27,3 +27,35 @@ Doing this will activate all included directives and expose the following API in
 By design, Sidewind is modular and it's possible it will be packaged in a different way in the future so you get only the functionality you want. There's also room for tooling here as it's possible to write a preprocessor that can figure out the right imports based on use per page.
 
 > All directives of the system have been implemented as plugins. For now, it's best to examine the framework source to see how it all goes together.
+
+### `getState`
+
+```html
+<div class="flex flex-col gap-2">
+  <section>
+    <button class="btn btn-blue" x-label="parent" x-state="{ name: 'Hello' }" onclick="console.log(getState(this))" x="'Set state to self (' + parent.name + ')'"></button>
+  </section>
+  <section x-label="parent" x-state="{ name: 'Hello' }">
+    <div x="parent.name"></div>
+    <button class="btn btn-blue" onclick="console.log(getState(this))">
+      Get state from parent
+    </button>
+  </section>
+</div>
+```
+
+### `setState`
+
+```html
+<div class="flex flex-col gap-2">
+  <section>
+    <button class="btn btn-blue" x-label="parent" x-state="{ name: 'Hello' }" onclick="setState({ name: 'Bar' }, { element: this, parent: 'parent' })" x="'Set state to self (' + parent.name + ')'"></button>
+  </section>
+  <section x-label="parent" x-state="{ name: 'Hello' }">
+    <div x="parent.name"></div>
+    <button class="btn btn-blue" onclick="setState({ name: 'Bar' }, { element: this, parent: 'parent' })">
+      Set state to parent
+    </button>
+  </section>
+</div>
+```

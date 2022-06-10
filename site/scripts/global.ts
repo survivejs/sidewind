@@ -10,9 +10,6 @@ setup(twindSetup);
 HighlightJS.registerLanguage("js", highlightJS);
 HighlightJS.registerLanguage("html", highlightXML);
 
-// @ts-ignore This comes from sidewind
-const setState = window.setState;
-
 function highlight(language, str) {
   return HighlightJS.highlight(str, { language }).value;
 }
