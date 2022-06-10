@@ -1,4 +1,4 @@
-**Sidewind** is a light (~8k minified) state management solution designed to work together with utility CSS based frameworks, such as [Tailwind.css](https://tailwindcss.com).
+**Sidewind** is a light (~16k minified) state management solution designed to work together with utility CSS based frameworks, such as [Tailwind.css](https://tailwindcss.com).
 
 ## Why Sidewind?
 
