@@ -52,12 +52,25 @@ State can be a complex object:
 Sometimes it makes sense to hide entire fragments of a HTML structure. That's where `x-if` comes in:
 
 ```html
-<div>
-  <section x-state="true" x-if="state">I am visible</section>
-  <section x-state="false" x-if="state">I am hidden</section>
-  <section x-state="{ amount: 1000 }">
-    <div x-if="state.amount > 500">I am visible</div>
-    <div x-if="state.amount < 500">I am hidden</div>
+<div class="flex flex-col gap-2">
+  <section>
+    <h2 class="font-bold">x-if with x-state</h2>
+    <div x-state="true" x-if="state">I am visible</div>
+    <div x-state="false" x-if="state">I am hidden</div>
+  </section>
+  <section>
+    <h2 class="font-bold">x-if with nesting</h2>
+    <div x-state="{ amount: 1000 }">
+      <div x-if="state.amount > 500">I am visible</div>
+      <div x-if="state.amount < 500">I am hidden</div>
+    </div>
+  </section>
+  <section>
+    <h2 class="font-bold">x-if with array evaluation</h2>
+    <div x-state="{ items: [1, 2, 3] }">
+      <div x-if="Array.isArray(state.items)">I am visible</div>
+      <div x-if="!Array.isArray(state.items)">I am hidden</div>
+    </div>
   </section>
 </div>
 ```
