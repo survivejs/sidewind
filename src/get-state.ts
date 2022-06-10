@@ -2,11 +2,11 @@ import { BindState, ExtendedHTMLElement } from "./types";
 import getParents from "./get-parents";
 
 function getState<State = Record<string, unknown>>(
-  element: ExtendedHTMLElement,
+  element: ExtendedHTMLElement
 ): State | undefined {
-  const closestStateContainer = element.closest(
-    "[x-state]",
-  ) as ExtendedHTMLElement;
+  const closestStateContainer = element.hasAttribute("x-state")
+    ? element
+    : (element.closest("[x-state]") as ExtendedHTMLElement);
 
   if (!closestStateContainer) {
     return;
@@ -21,10 +21,12 @@ function getState<State = Record<string, unknown>>(
 }
 
 function getLabeledState(element: ExtendedHTMLElement, labelKey: string) {
-  const labeledStateContainers = getParents(element, labelKey);
+  const labeledStateContainers = getParents(element, labelKey).concat(
+    element.hasAttribute("x-label") ? element : []
+  );
   const ret: BindState = {};
 
-  for (let i = labeledStateContainers.length; i--;) {
+  for (let i = labeledStateContainers.length; i--; ) {
     const labeledStateContainer = labeledStateContainers[
       i
     ] as ExtendedHTMLElement;
