@@ -1,3 +1,4 @@
+import valueDirective from "./value";
 import { DirectiveParameters, ExtendedHTMLElement } from "../types";
 
 function stateDirective({
@@ -23,14 +24,18 @@ function stateDirective({
 
   element.observer = new MutationObserver((mutations) => {
     const { target } = mutations[0];
+    const hasStateItself = target.hasAttribute("x-state");
 
     // @ts-ignore
     const updatedTarget = target.attributes.getNamedItem("x-updated").value;
     const closestStateContainer = updatedTarget
       ? (target as ExtendedHTMLElement).closest(`[x-label="${updatedTarget}"]`)
+      : hasStateItself
+      ? target
       : (target as ExtendedHTMLElement).closest(`[x-state]`);
 
-    if (!updatedTarget && closestStateContainer !== element) {
+    if (!closestStateContainer) {
+      console.warn("x-state - No state container was found", updatedTarget);
       return;
     }
 
@@ -39,8 +44,20 @@ function stateDirective({
       ({ directive }) => !directive.skipEvaluation
     );
 
-    // @ts-ignore
-    evaluateDirectives(directivesWithoutSkipping, closestStateContainer);
+    // Handle case where x-state has value as well separately
+    // as evaluateDirectives doesn't evaluate parent itself
+    // to avoid recursion.
+    if (hasStateItself && target.hasAttribute("x")) {
+      valueDirective({
+        element: closestStateContainer,
+        expression: closestStateContainer.getAttribute("x"),
+        getState,
+        evaluateDirectives,
+        directives: directivesWithoutSkipping,
+      });
+    } else {
+      evaluateDirectives(directivesWithoutSkipping, closestStateContainer);
+    }
   });
 
   element.observer.observe(element, {

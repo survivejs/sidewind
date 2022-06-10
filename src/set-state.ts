@@ -10,7 +10,7 @@ function setState<State = unknown, Parent extends string = string>(
   }: {
     element?: ExtendedHTMLElement;
     parent?: Parent;
-  } = {},
+  } = {}
 ) {
   if (!element) {
     element = window.event && (window.event.target as ExtendedHTMLElement);
@@ -30,9 +30,11 @@ function setState<State = unknown, Parent extends string = string>(
 
   if (parent) {
     const labelName = "x-label";
-    const labeledStateContainers = getParents(element, labelName);
+    const labeledStateContainers = getParents(element, labelName).concat(
+      element.hasAttribute("x-label") ? element : []
+    );
     const matchingParents = labeledStateContainers.filter(
-      (elem: ExtendedHTMLElement) => elem.getAttribute(labelName) === parent,
+      (elem: ExtendedHTMLElement) => elem.getAttribute(labelName) === parent
     );
 
     if (matchingParents.length) {
@@ -51,7 +53,7 @@ function setState<State = unknown, Parent extends string = string>(
         "for",
         element,
         "using",
-        labelName,
+        labelName
       );
     }
   } else {
