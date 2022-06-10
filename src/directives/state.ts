@@ -24,6 +24,7 @@ function stateDirective({
 
   element.observer = new MutationObserver((mutations) => {
     const { target } = mutations[0];
+    // @ts-ignore
     const hasStateItself = target.hasAttribute("x-state");
 
     // @ts-ignore
@@ -47,15 +48,20 @@ function stateDirective({
     // Handle case where x-state has value as well separately
     // as evaluateDirectives doesn't evaluate parent itself
     // to avoid recursion.
+    // @ts-ignore
     if (hasStateItself && target.hasAttribute("x")) {
+      // @ts-ignore
       valueDirective({
+        // @ts-ignore
         element: closestStateContainer,
+        // @ts-ignore
         expression: closestStateContainer.getAttribute("x"),
         getState,
         evaluateDirectives,
         directives: directivesWithoutSkipping,
       });
     } else {
+      // @ts-ignore
       evaluateDirectives(directivesWithoutSkipping, closestStateContainer);
     }
   });
