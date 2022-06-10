@@ -33,7 +33,7 @@ By design, Sidewind is modular and it's possible it will be packaged in a differ
 ```html
 <div class="flex flex-col gap-2">
   <section>
-    <button class="btn btn-blue" x-label="parent" x-state="{ name: 'Hello' }" onclick="console.log(getState(this))" x="'Set state to self (' + parent.name + ')'"></button>
+    <button class="btn btn-blue" x-label="parent" x-state="{ name: 'Hello' }" onclick="console.log(getState(this))" x="'Get state from self (' + parent.name + ')'"></button>
   </section>
   <section x-label="parent" x-state="{ name: 'Hello' }">
     <div x="parent.name"></div>
