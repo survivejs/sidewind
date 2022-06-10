@@ -74,11 +74,11 @@ The examples below combine directives to produce complex user interfaces and to 
     </div>
   </nav>
   <div class="bg-gray-100 p-2">
-    <div x-attr @class="state === 'animals' ? '' : 'hidden'">Animals tab</div>
-    <div x-attr @class="state === 'languages' ? '' : 'hidden'">
+    <div x-if="state === 'animals'">Animals tab</div>
+    <div x-if="state === 'languages'">
       Languages tab
     </div>
-    <div x-attr @class="state === 'colors' ? '' : 'hidden'">Colors tab</div>
+    <div x-if="state === 'colors'">Colors tab</div>
   </div>
 </section>
 ```
@@ -140,7 +140,7 @@ The examples below combine directives to produce complex user interfaces and to 
       <span>Junior Engineer</span>
       <span x="state ? '-' : '+'" />
     </div>
-    <div x-attr class="py-2 text-gray-600" @class="!state && 'hidden'">
+    <div class="py-2 text-gray-600" x-if="state">
       Junior engineer description
     </div>
   </div>
@@ -153,7 +153,7 @@ The examples below combine directives to produce complex user interfaces and to 
       <span>Senior Engineer</span>
       <span x="state ? '-' : '+'" />
     </div>
-    <div x-attr class="py-2 text-gray-600" @class="!state && 'hidden'">
+    <div class="py-2 text-gray-600" x-if="state">
       Senior engineer description
     </div>
   </div>
