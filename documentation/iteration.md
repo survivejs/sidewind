@@ -16,13 +16,14 @@ There are several utilities to allow iteration of arrays and then mapping those 
 
 ```html
 <div
+  class="flex flex-col gap-2"
   x-state="{
     todos: [
       { text: 'Wash dishes' }, { text: 'Eat carrots' }
     ]
   }"
 >
-  <div class="mb-2">
+  <div>
     <ul class="list-disc list-inside" x-each="state.todos">
       <li x-template x="state.value.text"></li>
     </ul>
@@ -37,6 +38,7 @@ Each child of the template has access to the state of the current item.
 
 ```html
 <div
+  class="flex flex-col gap-2"
   x-state="{
     todos: [
       { type: 'Chore', text: 'Wash dishes' },
@@ -44,7 +46,7 @@ Each child of the template has access to the state of the current item.
     ]
   }"
 >
-  <div class="mb-2">
+  <div>
     <ul class="list-disc list-inside" x-each="state.todos">
       <li x-template>
         <span x="state.value.type"></span> -
@@ -62,6 +64,7 @@ Same goes for sibling items. Note how multiple templates are grouped together.
 
 ```html
 <div
+  class="flex flex-col gap-2"
   x-state="{
     todos: [
       { type: 'Chore', text: 'Wash dishes' },
@@ -69,7 +72,7 @@ Same goes for sibling items. Note how multiple templates are grouped together.
     ]
   }"
 >
-  <div class="mb-2">
+  <div>
     <ul class="list-disc list-inside" x-each="state.todos">
       <li x-template="group" x="state.value.type"></li>
       <li x-template="group" x="state.value.text"></li>
@@ -91,6 +94,7 @@ Iterated items can also have inputs while focus is retained on edit.
 
 ```html
 <div
+  class="flex flex-col gap-2"
   x-state="{
     title: 'Demo',
     description: 'x-each demo'
@@ -100,7 +104,7 @@ Iterated items can also have inputs while focus is retained on edit.
     [event.target.dataset.field]: event.target.value
   }), { element: this })"
 >
-  <div class="mb-2">
+  <div>
     <ul class="list-disc list-inside" x-each="Object.entries(state)">
       <li x-template>
         <label>
@@ -133,7 +137,7 @@ Iterated items can also have inputs while focus is retained on edit.
     ]
   }"
 >
-  <div class="mb-2">
+  <div>
     <ul class="list-disc list-inside" x-each="state.todos">
       <li
         x-template
@@ -144,7 +148,7 @@ Iterated items can also have inputs while focus is retained on edit.
     </ul>
   </div>
   <div x="JSON.stringify(state.todos, null, 2)"></div>
-  <div class="flex gap-2">
+  <div class="flex flex-row gap-2">
     <button
       class="btn btn-blue"
       onclick="setState(({ todos }) => ({ todos: [{ ...todos[0], selected: true }].concat(todos.slice(1)) }))"
@@ -258,6 +262,7 @@ It's possible to render lists inside lists.
 
 ```html
 <div
+  class="flex flex-col gap-2"
   x-state="{
     dataSources: [
       {
@@ -269,7 +274,7 @@ It's possible to render lists inside lists.
     ]
   }"
 >
-  <div class="mb-2">
+  <div>
     <ul class="list-disc list-inside" x-each="state.dataSources">
       <li x-template="group" x="state.value.id + ' : ' + state.value.operation"></li>
       <li x-template="group" x="JSON.stringify(state, null, 2)"></li>
@@ -291,6 +296,7 @@ It's possible to render lists inside lists.
 
 ```html
 <div
+  class="flex flex-col gap-2"
   x-state="{
     dataSources: [
       {
@@ -309,7 +315,7 @@ It's possible to render lists inside lists.
     ]
   }"
 >
-  <div class="mb-2">
+  <div>
     <ul class="list-disc list-inside" x-each="state.dataSources">
         <li x-template="group" x="state.value.id"></li>
         <li x-template="group" x="JSON.stringify(state, null, 2)"></li>
@@ -345,6 +351,7 @@ It's possible to render lists inside lists.
 
 ```html
 <div
+  class="flex flex-col gap-2"
   x-state="{
     dataSources: [
       {
@@ -359,7 +366,7 @@ It's possible to render lists inside lists.
     ]
   }"
 >
-  <div class="mb-2">
+  <div>
     <ul class="list-disc list-inside" x-each="state.dataSources">
       <li x-template="group" x="state.value.id"></li>
       <li x-template="group" x="JSON.stringify(state, null, 2)"></li>

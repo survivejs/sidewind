@@ -19,8 +19,8 @@ State management is the most basic feature of Sidewind and most features rely on
 The state can be manipulated using a global `setState`:
 
 ```html
-<section x-state="false">
-  <div class="prose mb-2">Value: <span x="state"></span></div>
+<section class="flex flex-col gap-2" x-state="false">
+  <div>Value: <span x="state"></span></div>
   <button class="btn btn-blue" onclick="setState(v => !v)">Toggle value</button>
 </section>
 ```
@@ -30,8 +30,8 @@ The state can be manipulated using a global `setState`:
 `x` supports promises. This is useful for complex evaluations:
 
 ```html
-<section x-state="{ input: 'demo' }">
-  <div class="prose mb-2">Value: <span x="complexOperation(state.input)"></span></div>
+<section class="flex flex-col gap-2" x-state="{ input: 'demo' }">
+  <div>Value: <span x="complexOperation(state.input)"></span></div>
 </section>
 ```
 

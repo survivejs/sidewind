@@ -96,7 +96,7 @@ The labeled data is available at `x-each` as well:
     ]
   }"
   >
-    <div class="mb-2">
+    <div class="flex flex-col gap-2">
       <ul class="list-disc list-inside" x-each="state.todos">
         <li x-template x="parent.message + ': ' + state.value.text"></li>
       </ul>

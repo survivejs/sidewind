@@ -11,14 +11,14 @@ The examples below combine directives to produce complex user interfaces and to 
 ## Calculator
 
 ```html
-<article
-  class="flex flex-col md:flex-row justify-between md:max-w-md"
+<section
+  class="flex flex-col gap-2 md:flex-row justify-between md:max-w-md"
   x-state="{
     amount: 1000,
     interest: 1.2
   }"
 >
-  <div class="mb-2">
+  <div>
     <label for="amount">Amount</label>
     <input
       id="amount"
@@ -27,7 +27,7 @@ The examples below combine directives to produce complex user interfaces and to 
       x="state.amount"
     />
   </div>
-  <div class="mb-2">
+  <div>
     <label for="interest">Interest</label>
     <input
       id="interest"
@@ -40,7 +40,7 @@ The examples below combine directives to produce complex user interfaces and to 
   <div>
     Total: <span x="Math.round(state.amount * state.interest * 100) / 100" />
   </div>
-</article>
+</section>
 ```
 
 ## Tabs
@@ -131,8 +131,8 @@ The examples below combine directives to produce complex user interfaces and to 
 ## Accordion
 
 ```html
-<section>
-  <div class="mb-2" x-state="false">
+<section class="flex flex-col gap-2">
+  <div x-state="false">
     <div
       class="flex flex-row justify-between cursor-pointer"
       onclick="setState(visible => !visible)"
@@ -144,7 +144,6 @@ The examples below combine directives to produce complex user interfaces and to 
       Junior engineer description
     </div>
   </div>
-  <hr class="my-2" />
   <div x-state="false">
     <div
       class="flex flex-row justify-between cursor-pointer"
