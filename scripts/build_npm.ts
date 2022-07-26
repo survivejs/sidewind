@@ -6,6 +6,7 @@ await build({
   entryPoints: ["./mod.ts"],
   outDir: "./npm",
   test: false,
+  scriptModule: "umd",
   shims: {
     deno: true,
   },
