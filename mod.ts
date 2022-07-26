@@ -1,6 +1,7 @@
-import getState from "./get-state";
-import setState from "./set-state";
-import evaluateDirectives from "./evaluate-directives";
+/// <reference lib="dom" />
+import getState from "./src/get-state.ts";
+import setState from "./src/set-state.ts";
+import evaluateDirectives from "./src/evaluate-directives.ts";
 import {
   attributeDirective,
   cloakDirective,
@@ -14,8 +15,8 @@ import {
   ssrDirective,
   stateDirective,
   valueDirective,
-} from "./directives";
-import { ExtendedHTMLElement } from "./types";
+} from "./src/directives/index.ts";
+import { ExtendedHTMLElement } from "./types.ts";
 
 declare global {
   interface Window {

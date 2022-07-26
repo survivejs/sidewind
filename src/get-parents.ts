@@ -1,12 +1,12 @@
-import { ExtendedHTMLElement } from "./types";
+import type { ExtendedHTMLElement } from "../types.ts";
 
 function getParents(
   element: ExtendedHTMLElement,
-  attribute: string,
+  attribute: string
 ): ExtendedHTMLElement[] {
   const ret = [];
-  let parent: ExtendedHTMLElement | null = element
-    .parentElement as ExtendedHTMLElement;
+  let parent: ExtendedHTMLElement | null =
+    element.parentElement as ExtendedHTMLElement;
 
   while (true) {
     if (!parent) {

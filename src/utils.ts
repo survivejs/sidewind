@@ -1,5 +1,5 @@
-import type { BindState, ExtendedHTMLElement } from "./types";
-import getParents from "./get-parents";
+import type { BindState, ExtendedHTMLElement } from "../types.ts";
+import getParents from "./get-parents.ts";
 
 function get(object: BindState, keyString: string) {
   const keys = keyString.split(".");

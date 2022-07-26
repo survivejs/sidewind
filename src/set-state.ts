@@ -1,6 +1,6 @@
-import { ExtendedHTMLElement } from "./types";
-import getParents from "./get-parents";
-import { isObject } from "./utils";
+import type { ExtendedHTMLElement } from "../types.ts";
+import getParents from "./get-parents.ts";
+import { isObject } from "./utils.ts";
 
 function setState<State = unknown, Parent extends string = string>(
   newValue: State,

@@ -1,5 +1,5 @@
-import valueDirective from "./value";
-import { DirectiveParameters, ExtendedHTMLElement } from "../types";
+import valueDirective from "./value.ts";
+import type { DirectiveParameters, ExtendedHTMLElement } from "../../types.ts";
 
 function stateDirective({
   element,

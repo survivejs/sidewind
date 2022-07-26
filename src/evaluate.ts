@@ -1,5 +1,5 @@
 /* eslint no-new-func: 0 */
-import { BindState } from "./types";
+import type { BindState } from "../types.ts";
 
 function evaluate(expression: string, value: BindState = {}) {
   try {

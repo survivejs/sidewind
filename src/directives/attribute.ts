@@ -1,4 +1,4 @@
-import { DirectiveParameters, ExtendedHTMLElement } from "../types";
+import type { DirectiveParameters, ExtendedHTMLElement } from "../../types.ts";
 
 const X_INITIAL_CLASS = "x-initial-class";
 

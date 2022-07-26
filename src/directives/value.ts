@@ -1,4 +1,4 @@
-import { BindState, DirectiveParameters } from "../types";
+import type { BindState, DirectiveParameters } from "../../types.ts";
 
 async function valueDirective({
   element,

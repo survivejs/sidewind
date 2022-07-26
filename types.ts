@@ -1,6 +1,6 @@
-import evaluate from "./evaluate";
-import getState from "./get-state";
-import setState from "./set-state";
+import evaluate from "./src/evaluate.ts";
+import getState from "./src/get-state.ts";
+import setState from "./src/set-state.ts";
 
 type BindState = Record<string, unknown>;
 type State = BindState | string;
@@ -26,7 +26,7 @@ type DirectiveParameters = {
   evaluate: typeof evaluate;
   evaluateDirectives: (
     directives: Directive[],
-    element: ExtendedHTMLElement,
+    element: ExtendedHTMLElement
   ) => void;
   getState: typeof getState;
   setState: typeof setState;
@@ -41,7 +41,7 @@ interface DirectiveFunction {
   evaluateFrom?: EvaluateFrom;
 }
 
-export {
+export type {
   BindState,
   Directive,
   DirectiveFunction,
