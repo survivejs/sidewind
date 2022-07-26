@@ -23,6 +23,9 @@ await build({
     homepage: "https://sidewind.js.org/",
     keywords: ["tailwind", "state", "state-management"],
   },
+  compilerOptions: {
+    lib: ["es2021", "dom"],
+  },
 });
 
 // post build steps
