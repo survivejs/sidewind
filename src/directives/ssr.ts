@@ -112,10 +112,7 @@ function set(o: Record<string, unknown>, keys: string[], value: unknown) {
   });
 }
 
-function getValues(
-  element: ExtendedHTMLElement,
-  xTemplate: ExtendedHTMLElement
-) {
+function getValues(element: HTMLElement, xTemplate: HTMLElement) {
   const xValues = xTemplate.hasAttribute("x")
     ? [xTemplate]
     : xTemplate.querySelectorAll("[x]");

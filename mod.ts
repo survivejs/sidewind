@@ -51,3 +51,5 @@ self.addEventListener("load", () => evaluateAllDirectives());
 self.evaluateAllDirectives = evaluateAllDirectives;
 self.getState = getState;
 self.setState = setState;
+
+export { getState, setState, evaluateAllDirectives };
