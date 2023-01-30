@@ -1,7 +1,7 @@
-import HighlightJS from "https://unpkg.com/@highlightjs/cdn-assets@11.3.1/es/core.min.js";
+import HighlightJS from "https://unpkg.com/@highlightjs/cdn-assets@11.7.0/es/core.min.js";
 import { setup } from "https://cdn.skypack.dev/twind@0.16.16/shim?min";
-import highlightJS from "https://unpkg.com/highlight.js@11.3.1/es/languages/javascript";
-import highlightXML from "https://unpkg.com/highlight.js@11.3.1/es/languages/xml";
+import highlightJS from "https://unpkg.com/highlight.js@11.7.0/es/languages/javascript";
+import highlightXML from "https://unpkg.com/highlight.js@11.7.0/es/languages/xml.js";
 import twindSetup from "../twindSetup.ts";
 import "../../src/index.ts";
 
