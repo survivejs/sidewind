@@ -1,4 +1,5 @@
 .DS_Store
+npm
 node_modules
 .cache
 dist

@@ -1,5 +1,5 @@
-import { DirectiveParameters, ExtendedHTMLElement } from "../types";
-import getParents from "../get-parents";
+import getParents from "../get-parents.ts";
+import type { DirectiveParameters, ExtendedHTMLElement } from "../../types.ts";
 
 function recurseDirective({
   element,

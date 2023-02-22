@@ -1,5 +1,9 @@
-import { BindState, DirectiveParameters, ExtendedHTMLElement } from "../types";
-import { getValues } from "../utils";
+import { getValues } from "../utils.ts";
+import type {
+  BindState,
+  DirectiveParameters,
+  ExtendedHTMLElement,
+} from "../../types.ts";
 
 // TODO: Communicate somehow this should be evaluated after value directive
 // -> dependency declaration

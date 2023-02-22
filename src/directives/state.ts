@@ -1,5 +1,5 @@
-import valueDirective from "./value";
-import { DirectiveParameters, ExtendedHTMLElement } from "../types";
+import valueDirective from "./value.ts";
+import type { DirectiveParameters } from "../../types.ts";
 
 function stateDirective({
   element,
@@ -30,10 +30,10 @@ function stateDirective({
     // @ts-ignore
     const updatedTarget = target.attributes.getNamedItem("x-updated").value;
     const closestStateContainer = updatedTarget
-      ? (target as ExtendedHTMLElement).closest(`[x-label="${updatedTarget}"]`)
+      ? (target as HTMLElement).closest(`[x-label="${updatedTarget}"]`)
       : hasStateItself
       ? target
-      : (target as ExtendedHTMLElement).closest(`[x-state]`);
+      : (target as HTMLElement).closest(`[x-state]`);
 
     if (!closestStateContainer) {
       console.warn("x-state - No state container was found", updatedTarget);

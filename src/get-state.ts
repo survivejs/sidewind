@@ -1,12 +1,12 @@
-import { BindState, ExtendedHTMLElement } from "./types";
-import getParents from "./get-parents";
+import type { BindState, ExtendedHTMLElement } from "../types.ts";
+import getParents from "./get-parents.ts";
 
 function getState<State = Record<string, unknown>>(
-  element: ExtendedHTMLElement
+  element: HTMLElement
 ): State | undefined {
   const closestStateContainer = element.hasAttribute("x-state")
     ? element
-    : (element.closest("[x-state]") as ExtendedHTMLElement);
+    : element.closest("[x-state]");
 
   if (!closestStateContainer) {
     return;
@@ -20,7 +20,7 @@ function getState<State = Record<string, unknown>>(
   return Object.assign({}, labeledState, { state });
 }
 
-function getLabeledState(element: ExtendedHTMLElement, labelKey: string) {
+function getLabeledState(element: HTMLElement, labelKey: string) {
   const labeledStateContainers = getParents(element, labelKey).concat(
     element.hasAttribute("x-label") ? element : []
   );

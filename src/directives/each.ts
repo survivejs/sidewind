@@ -1,5 +1,5 @@
-import { getLevel, getTemplates } from "../utils";
-import type { DirectiveParameters, ExtendedHTMLElement } from "../types";
+import { getLevel, getTemplates } from "../utils.ts";
+import type { DirectiveParameters, ExtendedHTMLElement } from "../../types.ts";
 
 function eachDirective({
   element,

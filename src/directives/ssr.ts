@@ -1,5 +1,5 @@
-import { getLevel, getTemplates, isObject } from "../utils";
-import type { DirectiveParameters, ExtendedHTMLElement } from "../types";
+import { getLevel, getTemplates, isObject } from "../utils.ts";
+import type { DirectiveParameters, ExtendedHTMLElement } from "../../types.ts";
 
 function ssrDirective({ element }: DirectiveParameters) {
   // @ts-ignore TODO: Fix the type
@@ -112,10 +112,7 @@ function set(o: Record<string, unknown>, keys: string[], value: unknown) {
   });
 }
 
-function getValues(
-  element: ExtendedHTMLElement,
-  xTemplate: ExtendedHTMLElement
-) {
+function getValues(element: HTMLElement, xTemplate: HTMLElement) {
   const xValues = xTemplate.hasAttribute("x")
     ? [xTemplate]
     : xTemplate.querySelectorAll("[x]");

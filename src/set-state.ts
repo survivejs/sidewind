@@ -1,6 +1,6 @@
-import { ExtendedHTMLElement } from "./types";
-import getParents from "./get-parents";
-import { isObject } from "./utils";
+import type { ExtendedHTMLElement } from "../types.ts";
+import getParents from "./get-parents.ts";
+import { isObject } from "./utils.ts";
 
 function setState<State = unknown, Parent extends string = string>(
   newValue: State,
@@ -8,7 +8,7 @@ function setState<State = unknown, Parent extends string = string>(
     element,
     parent,
   }: {
-    element?: ExtendedHTMLElement;
+    element?: HTMLElement;
     parent?: Parent;
   } = {}
 ) {
@@ -20,9 +20,11 @@ function setState<State = unknown, Parent extends string = string>(
     }
   }
 
-  const stateContainer = element.hasAttribute("x-state")
-    ? element
-    : (element.closest("[x-state]") as ExtendedHTMLElement);
+  const stateContainer = (
+    element.hasAttribute("x-state")
+      ? element
+      : (element.closest("[x-state]") as ExtendedHTMLElement)
+  ) as ExtendedHTMLElement;
 
   if (!stateContainer) {
     return;
@@ -34,7 +36,7 @@ function setState<State = unknown, Parent extends string = string>(
       element.hasAttribute("x-label") ? element : []
     );
     const matchingParents = labeledStateContainers.filter(
-      (elem: ExtendedHTMLElement) => elem.getAttribute(labelName) === parent
+      (elem: HTMLElement) => elem.getAttribute(labelName) === parent
     );
 
     if (matchingParents.length) {
@@ -43,7 +45,7 @@ function setState<State = unknown, Parent extends string = string>(
       // Signal to the state container that state was updated with a parent
       element.setAttribute("x-updated", parent);
 
-      setState(newValue, { element: matchingParent as ExtendedHTMLElement });
+      setState(newValue, { element: matchingParent });
     } else {
       console.warn(
         "Failed to find matching parents for",

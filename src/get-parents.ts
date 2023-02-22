@@ -1,12 +1,6 @@
-import { ExtendedHTMLElement } from "./types";
-
-function getParents(
-  element: ExtendedHTMLElement,
-  attribute: string,
-): ExtendedHTMLElement[] {
+function getParents(element: HTMLElement, attribute: string): HTMLElement[] {
   const ret = [];
-  let parent: ExtendedHTMLElement | null = element
-    .parentElement as ExtendedHTMLElement;
+  let parent: HTMLElement | null = element.parentElement;
 
   while (true) {
     if (!parent) {
@@ -17,7 +11,7 @@ function getParents(
       ret.push(parent);
     }
 
-    parent = parent.parentElement as ExtendedHTMLElement;
+    parent = parent.parentElement;
   }
 
   return ret;
