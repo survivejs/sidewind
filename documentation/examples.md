@@ -32,8 +32,7 @@ The examples below combine directives to produce complex user interfaces and to 
     <input
       id="interest"
       type="text"
-      oninput="setState({ interest: this.value
-    })"
+      oninput="setState({ interest: this.value })"
       x="state.interest"
     />
   </div>
