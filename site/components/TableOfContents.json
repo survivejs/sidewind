@@ -2,8 +2,8 @@
   "type": "nav",
   "attributes": {
     "x-label": "parent",
-    "x-state": "{ closest: {}, headings: Array.from(document.querySelectorAll('#main h2, h3')) }",
-    "x-closest": "{ state: { closest: document.querySelectorAll('#main h2, h3') } }"
+    "x-state": "{ closest: {}, headings: Array.from(document.querySelectorAll('main h2, h3')) }",
+    "x-closest": "{ state: { closest: document.querySelectorAll('main h2, h3') } }"
   },
   "children": [
     {
@@ -21,10 +21,19 @@
             {
               "type": "a",
               "attributes": {
-                "x": "state.value.textContent",
                 "x-attr": "",
+                "x": "state.value.textContent",
                 "@href": "state.value.parentElement?.attributes.href?.value",
-                "@class": "[state.value.textContent === parent.closest.textContent && 'underline', state.tagName === 'H3' && 'ml-2']"
+                "@class": {
+                  "utility": "concat",
+                  "parameters": [
+                    "[state.value.textContent === parent.closest.textContent && '",
+                    { "utility": "tw", "parameters": ["underline"] },
+                    "', state.tagName === 'H3' && '",
+                    { "utility": "tw", "parameters": ["ml-2"] },
+                    "']"
+                  ]
+                }
               }
             }
           ]

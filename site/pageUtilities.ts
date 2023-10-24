@@ -1,4 +1,5 @@
 import md from "./transforms/markdown.ts";
+import { tw as twind } from "https://esm.sh/@twind/core@1.1.1";
 import type { Context } from "https://deno.land/x/gustwind@v0.39.4/breezewind/types.ts";
 import type { Routes } from "https://deno.land/x/gustwind@v0.39.4/types.ts";
 
@@ -24,6 +25,10 @@ function init({ routes }: { routes: Routes }) {
     );
   }
 
+  function tw(_: Context, input: string) {
+    return twind(input);
+  }
+
   function validateUrl(_: Context, url: string) {
     if (!url) {
       return;
@@ -43,7 +48,7 @@ function init({ routes }: { routes: Routes }) {
     throw new Error(`Failed to find matching url for "${url}"`);
   }
 
-  return { processMarkdown, trim, validateUrl };
+  return { processMarkdown, trim, tw, validateUrl };
 }
 
 export { init };
