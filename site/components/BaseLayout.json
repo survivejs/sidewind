@@ -1,0 +1,67 @@
+[
+  {
+    "type": "!DOCTYPE",
+    "attributes": {
+      "html": ""
+    },
+    "closingCharacter": ""
+  },
+  {
+    "type": "html",
+    "attributes": {
+      "lang": {
+        "utility": "get",
+        "parameters": ["context", "language"]
+      }
+    },
+    "children": [
+      {
+        "type": "head",
+        "children": [
+          {
+            "type": "MetaFields"
+          }
+        ]
+      },
+      {
+        "type": "body",
+        "children": [
+          {
+            "type": "MainNavigation"
+          },
+          {
+            "visibleIf": [{
+              "utility": "get",
+              "parameters": ["props", "showToc"]
+            }],
+            "type": "aside",
+            "class": "fixed top-16 pl-4 hidden lg:inline",
+            "children": [
+              {
+                "type": "TableOfContents"
+              }
+            ]
+          },
+          {
+            "type": "main",
+            "children": {
+              "utility": "render",
+              "parameters": [
+                {
+                  "utility": "get",
+                  "parameters": ["props", "content"]
+                }
+              ]
+            }
+          },
+          {
+            "type": "MainFooter"
+          },
+          {
+            "type": "Scripts"
+          }
+        ]
+      }
+    ]
+  }
+]

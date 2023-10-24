@@ -7,29 +7,39 @@
     "layout": "siteIndex",
     "dataSources": [
       {
-        "id": "readme",
-        "operation": "file",
-        "input": "./README.md",
-        "transformWith": ["markdown"]
+        "name": "readme",
+        "operation": "processMarkdown",
+        "parameters": ["./README.md"]
       }
     ],
+    "scripts": [{ "name": "global" }],
     "expand": {
       "dataSources": [
         {
-          "id": "documentation",
+          "name": "documentation",
           "operation": "indexMarkdown",
-          "input": "./documentation"
+          "parameters": ["./documentation"]
         }
       ],
       "matchBy": {
-        "dataSource": "documentation",
-        "collection": "content",
+        "dataSource":         {
+          "name": "document",
+          "operation": "indexMarkdown",
+          "parameters": ["./documentation"]
+        },
         "slug": "data.slug"
       },
+      "scripts": [{ "name": "global" }],
       "layout": "documentationPage",
       "meta": {
-        "__title": "match.data.title",
-        "__description": "match.data.description"
+        "title": {
+          "utility": "get",
+          "parameters": ["context", "document.data.title"]
+        },
+        "description": {
+          "utility": "get",
+          "parameters": ["context", "document.data.description"]
+        }
       }
     }
   }

@@ -1,32 +1,32 @@
 import HighlightJS from "https://unpkg.com/@highlightjs/cdn-assets@11.7.0/es/core.min.js";
-import { setup } from "https://cdn.skypack.dev/twind@0.16.16/shim?min";
 import highlightJS from "https://unpkg.com/highlight.js@11.7.0/es/languages/javascript";
 import highlightXML from "https://unpkg.com/highlight.js@11.7.0/es/languages/xml.js";
+import { install } from "https://cdn.skypack.dev/@twind/core@1.1.1?min";
 import twindSetup from "../twindSetup.ts";
 import "../../src/index.ts";
 
-setup(twindSetup);
+install(twindSetup);
 
 HighlightJS.registerLanguage("js", highlightJS);
 HighlightJS.registerLanguage("html", highlightXML);
 
-function highlight(language, str) {
+function highlight(language: string, str: string) {
   return HighlightJS.highlight(str, { language }).value;
 }
 
-function hiClicked(element) {
+function hiClicked(element: HTMLElement) {
   setState({ name: "Hi" }, { element, parent: "parent" });
 }
 
-function morningClicked(element) {
+function morningClicked(element: HTMLElement) {
   setState({ name: "Morning" }, { element, parent: "parent" });
 }
 
-function goodbyeClicked(element) {
+function goodbyeClicked(element: HTMLElement) {
   setState({ name: "Goodbye" }, { element, parent: "parent" });
 }
 
-function bothClicked(element) {
+function bothClicked(element: HTMLElement) {
   setState({ name: "Goodbye" }, { element, parent: "parent" });
   setState({ value: "someone" }, { element, parent: "child" });
 }

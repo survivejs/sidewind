@@ -1,65 +1,65 @@
 [
   {
-    "element": "Link",
-    "children": "State",
-    "attributes": {
-      "href": "/state/"
+    "type": "Link",
+    "props": {
+      "children": "State",
+      "href": "state"
     }
   },
   {
-    "element": "Link",
-    "children": "Attributes",
-    "attributes": {
-      "href": "/attributes/"
+    "type": "Link",
+    "props": {
+      "children": "Attributes",
+      "href": "attributes"
     }
   },
   {
-    "element": "Link",
-    "children": "Sources",
-    "attributes": {
-      "href": "/sources/"
+    "type": "Link",
+    "props": {
+      "children": "Sources",
+      "href": "sources"
     }
   },
   {
-    "element": "Link",
-    "children": "Iteration",
-    "attributes": {
-      "href": "/iteration/"
+    "type": "Link",
+    "props": {
+      "children": "Iteration",
+      "href": "iteration"
     }
   },
   {
-    "element": "Link",
-    "children": "Labels",
-    "attributes": {
-      "href": "/labels/"
+    "type": "Link",
+    "props": {
+      "children": "Labels",
+      "href": "labels"
     }
   },
   {
-    "element": "Link",
-    "children": "Recursion",
-    "attributes": {
-      "href": "/recursion/"
+    "type": "Link",
+    "props": {
+      "children": "Recursion",
+      "href": "recursion"
     }
   },
   {
-    "element": "Link",
-    "children": "SSR",
-    "attributes": {
-      "href": "/ssr/"
+    "type": "Link",
+    "props": {
+      "children": "SSR",
+      "href": "ssr"
     }
   },
   {
-    "element": "Link",
-    "children": "Examples",
-    "attributes": {
-      "href": "/examples/"
+    "type": "Link",
+    "props": {
+      "children": "Examples",
+      "href": "examples"
     }
   },
   {
-    "element": "Link",
-    "children": "Usage",
-    "attributes": {
-      "href": "/usage/"
+    "type": "Link",
+    "props": {
+      "children": "Usage",
+      "href": "usage"
     }
   }
 ]
