@@ -1,11 +1,15 @@
 {
-  "__children": [
-    {
-      "element": "script",
-      "attributes": {
-        "__type": "type",
-        "__src": "src"
+  "foreach": [{ "utility": "get", "parameters": ["context", "scripts"] }, {
+    "type": "script",
+    "attributes": {
+      "type": {
+        "utility": "get",
+        "parameters": ["props", "type"]
+      },
+      "src": {
+        "utility": "get",
+        "parameters": ["props", "src"]
       }
     }
-  ]
+  }]
 }

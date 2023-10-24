@@ -1,5 +1,5 @@
 {
-  "element": "nav",
+  "type": "nav",
   "attributes": {
     "x-label": "parent",
     "x-state": "{ closest: {}, headings: Array.from(document.querySelectorAll('#main h2, h3')) }",
@@ -7,19 +7,19 @@
   },
   "children": [
     {
-      "element": "ul",
+      "type": "ul",
       "attributes": {
         "x-each": "state.headings"
       },
       "children": [
         {
-          "element": "li",
+          "type": "li",
           "attributes": {
             "x-template": ""
           },
           "children": [
             {
-              "element": "a",
+              "type": "a",
               "attributes": {
                 "x": "state.value.textContent",
                 "x-attr": "",

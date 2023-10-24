@@ -1,25 +1,53 @@
 {
-  "head": [
-    {
-      "element": "MetaFields"
-    }
-  ],
-  "body": [
-    {
-      "element": "MainNavigation"
-    },
-    {
-      "element": "div",
-      "class": "md:mx-auto my-8 px-4 md:px-0 w-full lg:max-w-3xl prose lg:prose-xl",
-      "__bind": "readme",
-      "__children": "content"
-    },
-    {
-      "element": "MainFooter"
-    },
-    {
-      "element": "Scripts",
-      "__bind": "scripts"
-    }
-  ]
+  "type": "BaseLayout",
+  "props": {
+    "content": [
+      {
+        "type": "header",
+        "class": "bg-gradient-to-br from-purple-200 to-emerald-100 py-8",
+        "children": [
+          {
+            "type": "div",
+            "class": "sm:mx-auto px-4 py-4 sm:py-8 max-w-3xl flex",
+            "children": [
+              {
+                "type": "div",
+                "class": "flex flex-col gap-8",
+                "children": [
+                  {
+                    "type": "h1",
+                    "class": "text-4xl md:text-8xl",
+                    "children": [
+                      {
+                        "type": "span",
+                        "class": "whitespace-nowrap pr-4",
+                        "children": "💨"
+                      },
+                      {
+                        "type": "span",
+                        "children": "Sidewind"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "h2",
+                    "class": "text-xl md:text-4xl font-extralight",
+                    "children": "Tailwind but for state"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "div",
+        "class": "md:mx-auto my-8 px-4 md:px-0 w-full lg:max-w-3xl prose lg:prose-xl",
+        "children": {
+          "utility": "get",
+          "parameters": ["context", "readme.content"]
+        }
+      }
+    ]
+  }
 }

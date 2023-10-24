@@ -1,6 +1,6 @@
 [
   {
-    "element": "link",
+    "type": "link",
     "attributes": {
       "rel": "icon",
       "href": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💨</text></svg>"
@@ -8,7 +8,7 @@
   },
   {
     "_reference": "https://web.dev/defer-non-critical-css/",
-    "element": "link",
+    "type": "link",
     "attributes": {
       "rel": "preload",
       "href": "https://cdn.jsdelivr.net/gh/highlightjs/highlight.js@11.3.1/src/styles/github-dark.min.css",
@@ -17,10 +17,10 @@
     }
   },
   {
-    "element": "noscript",
+    "type": "noscript",
     "children": [
       {
-        "element": "link",
+        "type": "link",
         "attributes": {
           "rel": "stylesheet",
           "href": "https://cdn.jsdelivr.net/gh/highlightjs/highlight.js@11.3.1/src/styles/github-dark.min.css"
@@ -29,14 +29,17 @@
     ]
   },
   {
-    "element": "meta",
+    "type": "meta",
     "attributes": {
       "name": "pagepath",
-      "__content": "meta.pagePath"
+      "content": {
+        "utility": "get",
+        "parameters": ["context", "pagePath"]
+      }
     }
   },
   {
-    "element": "meta",
+    "type": "meta",
     "attributes": {
       "charset": "UTF-8",
       "name": "viewport",
@@ -44,63 +47,90 @@
     }
   },
   {
-    "element": "meta",
+    "type": "meta",
     "attributes": {
       "name": "og:site_name",
-      "__content": "meta.siteName"
+      "content": {
+        "utility": "get",
+        "parameters": ["context", "meta.siteName"]
+      }
     }
   },
   {
-    "element": "meta",
+    "type": "meta",
     "attributes": {
       "name": "twitter:site",
-      "__content": "meta.siteName"
+      "content": {
+        "utility": "get",
+        "parameters": ["context", "meta.siteName"]
+      }
     }
   },
   {
-    "element": "meta",
+    "type": "meta",
     "attributes": {
       "name": "og:title",
-      "__content": "meta.title"
+      "content": {
+        "utility": "get",
+        "parameters": ["context", "meta.title"]
+      }
     }
   },
   {
-    "element": "meta",
+    "type": "meta",
     "attributes": {
       "name": "twitter:title",
-      "__content": "meta.title"
+      "content": {
+        "utility": "get",
+        "parameters": ["context", "meta.title"]
+      }
     }
   },
   {
-    "element": "meta",
+    "type": "meta",
     "attributes": {
       "name": "description",
-      "__content": "meta.description"
+      "content": {
+        "utility": "get",
+        "parameters": ["context", "meta.description"]
+      }
     }
   },
   {
-    "element": "meta",
+    "type": "meta",
     "attributes": {
       "name": "og:description",
-      "__content": "meta.description"
+      "content": {
+        "utility": "get",
+        "parameters": ["context", "meta.description"]
+      }
     }
   },
   {
-    "element": "meta",
+    "type": "meta",
     "attributes": {
       "name": "twitter:description",
-      "__content": "meta.description"
+      "content": {
+        "utility": "get",
+        "parameters": ["context", "meta.description"]
+      }
     }
   },
   {
-    "element": "meta",
+    "type": "meta",
     "attributes": {
       "name": "built",
-      "__content": "meta.built"
+      "content": {
+        "utility": "get",
+        "parameters": ["context", "meta.built"]
+      }
     }
   },
   {
-    "element": "title",
-    "__children": "meta.title"
+    "type": "title",
+    "children": {
+      "utility": "get",
+      "parameters": ["context", "meta.title"]
+    }
   }
 ]
