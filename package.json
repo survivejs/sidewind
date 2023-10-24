@@ -22,7 +22,7 @@
   "homepage": "https://sidewind.js.org/",
   "scripts": {
     "build": "tsdx build --format umd",
-    "install_gustwind": "deno install -A --unstable --no-check -f https://deno.land/x/gustwind@v0.39.10/cli.ts",
+    "install_gustwind": "deno install -A --unstable --no-check -f https://deno.land/x/gustwind@v0.39.11/cli.ts",
     "site:build": "deno task build",
     "vercel:build": "deno task build",
     "start": "deno task start",

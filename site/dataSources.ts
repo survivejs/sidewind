@@ -1,4 +1,4 @@
-import { indexMarkdown } from "https://deno.land/x/gustwind@v0.39.10/site/dataSources.ts";
+import { indexMarkdown } from "https://deno.land/x/gustwind@v0.39.11/site/dataSources.ts";
 import markdown from "./transforms/markdown.ts";
 
 async function processMarkdown(filename: string) {
