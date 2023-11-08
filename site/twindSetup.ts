@@ -9,4 +9,6 @@ export default {
     "btn-blue": `bg-blue-500 hover:bg-blue-700 text-white`,
     "btn-muted": `font-light text-gray-500`,
   },
+  // Avoid hashing class names so it's easier to debug
+  hash: false,
 };
