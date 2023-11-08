@@ -1,0 +1,29 @@
+<div class="sticky top sm:p-4 bg-white">
+  <input class="hidden peer" id="nav__toggle" type="checkbox" />
+  <label
+    class="sm:hidden p-2 pointer-events-all absolute right-0 w-10 h-10 rounded-full bg-white flex z-50"
+    for="nav__toggle"
+  >
+    <span class="w-4 h-4 leading-4 m-auto">☰</span>
+  </label>
+  <nav
+    class="absolute p-4 sm:p-0 sm:relative bg-white w-full transition-all -translate-y-full sm:translate-y-0 peer-checked:translate-y-0 font-thin"
+  >
+    <div class="flex flex-col gap-8">
+      <div class="sm:w-full flex flex-col sm:flex-row sm:justify-between gap-4">
+        <div class="grid sm:flex sm:flex-row sm:flex-wrap gap-4 sm:ml-auto">
+          <a href="/"><span class="scale-150 whitespace-nowrap">💨</span></a>
+          <Navigation />
+        </div>
+        <div class="grid sm:flex sm:flex-row gap-4 sm:ml-auto">
+          <SiteLink href="https://github.com/survivejs/sidewind"
+            >GitHub</SiteLink
+          >
+        </div>
+      </div>
+      <div class="mx-auto">
+        <PageFind />
+      </div>
+    </div>
+  </nav>
+</div>

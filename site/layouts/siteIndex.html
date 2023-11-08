@@ -1,0 +1,21 @@
+<BaseLayout>
+  <slot name="content">
+    <header class="bg-gradient-to-br from-purple-200 to-emerald-100 py-8">
+      <div class="sm:mx-auto px-4 py-4 sm:py-8 max-w-3xl flex">
+        <div class="flex flex-col gap-8">
+          <h1 class="text-4xl md:text-8xl">
+            <span class="whitespace-nowrap pr-4">💨</span>
+            <span>Sidewind</span>
+          </h1>
+          <h2 class="text-xl md:text-4xl font-extralight">
+            Tailwind but for state
+          </h2>
+        </div>
+      </div>
+    </header>
+    <div
+      class="md:mx-auto my-8 px-4 md:px-0 w-full lg:max-w-3xl prose lg:prose-xl"
+      &children="(get context readme)"
+    ></div>
+  </slot>
+</BaseLayout>

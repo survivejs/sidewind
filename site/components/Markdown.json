@@ -1,8 +1,0 @@
-{
-  "type": { "utility": "get", "parameters": ["props", "type"] },
-  "class": { "utility": "get", "parameters": ["props", "class"] },
-  "children": {
-    "utility": "processMarkdown",
-    "parameters": [{ "utility": "get", "parameters": ["props", "inputText"] }]
-  }
-}

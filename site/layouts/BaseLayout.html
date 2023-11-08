@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html &lang="(get context language)">
+  <head>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💨</text></svg>"
+    />
+    <link
+      __reference="https://web.dev/defer-non-critical-css/"
+      rel="preload"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/highlight.js@11.9.0/src/styles/github-dark.min.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript
+      ><link
+        rel="stylesheet"
+        hrf="https://cdn.jsdelivr.net/gh/highlightjs/highlight.js@11.9.0/src/styles/github-dark.min.css"
+    /></noscript>
+    <MetaFields />
+  </head>
+  <body>
+    <MainNavigation />
+    <aside
+      class="fixed top-16 pl-4 hidden lg:inline"
+      &children="(render (get props aside))"
+    ></aside>
+    <main &children="(render (get props content))"></main>
+    <MainFooter />
+    <Scripts />
+  </body>
+</html>
