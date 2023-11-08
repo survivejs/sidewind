@@ -18,14 +18,14 @@
         {
           "name": "documentation",
           "operation": "indexMarkdown",
-          "parameters": ["./documentation"]
+          "parameters": ["./documentation", { "skipFirstLine": true }]
         }
       ],
       "matchBy": {
-        "dataSource":         {
+        "dataSource": {
           "name": "document",
           "operation": "indexMarkdown",
-          "parameters": ["./documentation"]
+          "parameters": ["./documentation", { "skipFirstLine": true }]
         },
         "slug": "data.slug"
       },
