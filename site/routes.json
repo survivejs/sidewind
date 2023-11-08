@@ -9,7 +9,7 @@
       {
         "name": "readme",
         "operation": "processMarkdown",
-        "parameters": ["./README.md"]
+        "parameters": ["./README.md", { "skipFirstLine": true }]
       }
     ],
     "scripts": [{ "name": "global" }],

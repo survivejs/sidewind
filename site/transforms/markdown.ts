@@ -1,8 +1,8 @@
 import { marked } from "https://unpkg.com/marked@4.0.0/lib/marked.esm.js";
 import { install, tw } from "https://esm.sh/@twind/core@1.1.1"; // 1.1.3 doesn't work!
-import highlight from "https://unpkg.com/@highlightjs/cdn-assets@11.3.1/es/core.min.js";
-import highlightJS from "https://unpkg.com/highlight.js@11.3.1/es/languages/javascript";
-import highlightXML from "https://unpkg.com/highlight.js@11.3.1/es/languages/xml";
+import highlight from "https://unpkg.com/@highlightjs/cdn-assets@11.9.0/es/core.min.js";
+import highlightJS from "https://unpkg.com/highlight.js@11.9.0/es/languages/javascript";
+import highlightXML from "https://unpkg.com/highlight.js@11.9.0/es/languages/xml";
 import { Html5Entities } from "https://deno.land/x/html_entities@v1.0/mod.js";
 import twindSetup from '../twindSetup.ts'
 
@@ -46,9 +46,8 @@ function transformMarkdown(input: string) {
         text: string,
         level: number,
         raw: string,
-        slugger: { slug: (s: string) => string },
       ) {
-        const slug = slugger.slug(raw);
+        const slug = slugify(raw);
 
         tableOfContents.push({ slug, level, text });
 
@@ -163,6 +162,13 @@ function renderEditor(input: string) {
     )
   }" x="state.code">${example}</div>
 </section>`;
+}
+
+function slugify(idBase: string) {
+  return idBase
+    .toLowerCase()
+    .replace(/`/g, "")
+    .replace(/[^\w]+/g, "-");
 }
 
 export default transformMarkdown;
