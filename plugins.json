@@ -13,7 +13,14 @@
         {
           "loader": "html",
           "path": "https://deno.land/x/gustwind@v${GUSTWIND_VERSION}/site/components",
-          "selection": ["Markdown", "MetaFields", "SiteLink", "Scripts", "TableOfContents"]
+          "selection": [
+            "Markdown",
+            "MetaFields",
+            "PageFind",
+            "SiteLink",
+            "Scripts",
+            "TableOfContents"
+          ]
         },
         { "loader": "html", "path": "./site/components" },
         { "loader": "html", "path": "./site/layouts" }
