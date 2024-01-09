@@ -47,7 +47,7 @@ function transformMarkdown(input: string) {
 
         tableOfContents.push({ slug, level, text });
 
-        const classes = {
+        const classes: Record<number, string> = {
           1: "inline-block underline text-gray-900 font-extrabold leading-3 text-3xl mt-0 mb-8",
           2: "inline-block underline text-gray-900 font-bold leading-4 text-xl mt-4 mb-2",
           3: "inline-block underline text-gray-900 font-semibold leading-5 text-lg mt-1 mb-1",
