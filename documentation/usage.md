@@ -3,9 +3,6 @@ slug: "usage"
 title: "Usage"
 description: "Follow these instructions to use Sidewind"
 ---
-
-# Usage
-
 The easiest way to use Sidewind, is to consume the bundle that includes all functionality. There are versions of Sidewind designed for this purpose - `tailwind/sidewind.umd.development.js` and `sidewind.umd.production.min.js`. Both include everything and runs the script above.
 
 **Example:**

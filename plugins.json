@@ -7,6 +7,12 @@
     }
   },
   {
+    "path": "https://deno.land/x/gustwind@v${GUSTWIND_VERSION}/plugins/meta/mod.ts",
+    "options": {
+      "inputPath": "./site/meta.json"
+    }
+  },
+  {
     "path": "https://deno.land/x/gustwind@v${GUSTWIND_VERSION}/plugins/breezewind-renderer/mod.ts",
     "options": {
       "componentLoaders": [

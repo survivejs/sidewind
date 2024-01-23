@@ -3,9 +3,6 @@ slug: "recursion"
 title: "Recursion"
 description: "Sidewind supports rendering of recursive data structures"
 ---
-
-# Recursion
-
 To allow operating on a tree-style data that's nested by its nature, a recursion helper is included.
 
 ## `x-recurse`

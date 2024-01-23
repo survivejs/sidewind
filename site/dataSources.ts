@@ -1,7 +1,10 @@
-import { parse } from "https://deno.land/x/frontmatter@v0.1.4/mod.ts";
-import { dir } from "https://deno.land/x/gustwind@v0.39.11/utilities/fs.ts";
+import {
+  extract,
+  test,
+} from "https://deno.land/std@0.207.0/front_matter/yaml.ts";
+import { parse } from "https://deno.land/std@0.207.0/yaml/parse.ts";
 import markdown from "./transforms/markdown.ts";
-import type { LoadApi } from "https://deno.land/x/gustwind@v0.52.3/types.ts";
+import type { LoadApi } from "https://deno.land/x/gustwind@v0.59.6/types.ts";
 
 type MarkdownWithFrontmatter = {
   data: {
@@ -16,13 +19,16 @@ type MarkdownWithFrontmatter = {
 function init({ load }: { load: LoadApi }) {
   async function processMarkdown(
     filename: string,
-    o?: { skipFirstLine: boolean }
+    o?: { parseHeadmatter: boolean; skipFirstLine: boolean }
   ) {
-    const lines = await load.textFile(filename);
-    // Markdown also parses toc but it's not needed for now
-    const { content } = await parseMarkdown(lines, o);
+    if (o?.parseHeadmatter) {
+      const headmatter = await parseHeadmatter(filename);
 
-    return content;
+      return { ...headmatter, ...(await parseMarkdown(headmatter.content)) };
+    }
+
+    // Markdown also parses toc but it's not needed for now
+    return parseMarkdown(await load.textFile(filename), o);
   }
 
   function parseMarkdown(lines: string, o?: { skipFirstLine: boolean }) {
@@ -31,29 +37,37 @@ function init({ load }: { load: LoadApi }) {
     );
   }
 
-  async function indexMarkdown(
-    directory: string,
-    o?: { skipFirstLine: boolean }
-  ) {
-    const files = await dir({ path: directory, extension: ".md" });
+  async function indexMarkdown(directory: string) {
+    const files = await load.dir({
+      path: directory,
+      extension: ".md",
+      type: "",
+    });
 
     return Promise.all(
-      files.map(({ path }) =>
-        Deno.readTextFile(path).then((d) => parseHeadmatter(d, o))
-      )
+      files.map(async ({ path }) => ({
+        ...(await parseHeadmatter(path)),
+        path,
+      }))
     );
   }
 
-  function parseHeadmatter(
-    s: string,
+  async function parseHeadmatter(
+    path: string,
     o?: { skipFirstLine: boolean }
-  ): MarkdownWithFrontmatter {
-    const ret = parse(s);
+  ): Promise<MarkdownWithFrontmatter> {
+    const file = await load.textFile(path);
 
-    return {
-      ...ret,
-      content: parseMarkdown(ret.content, o).content,
-    } as MarkdownWithFrontmatter;
+    if (test(file)) {
+      const { frontMatter, body: content } = extract(file);
+
+      return {
+        data: parse(frontMatter) as MarkdownWithFrontmatter["data"],
+        content: parseMarkdown(content, o).content,
+      };
+    }
+
+    throw new Error(`path ${path} did not contain a headmatter`);
   }
 
   return { indexMarkdown, processMarkdown };

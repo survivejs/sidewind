@@ -3,9 +3,6 @@ slug: "iteration"
 title: "Iteration"
 description: "Sidewind supports rendering list-style data"
 ---
-
-# Iteration
-
 There are several utilities to allow iteration of arrays and then mapping those to HTML elements.
 
 ## `x-each` and `x-template`

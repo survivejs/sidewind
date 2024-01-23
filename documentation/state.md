@@ -3,9 +3,6 @@ slug: "state"
 title: "State"
 description: "State is the most basic building block of Sidewind"
 ---
-
-# State
-
 State management is the most basic feature of Sidewind and most features rely on it. At the simplest level, you can use it to define simple UIs that derive values from the user input.
 
 ## `x-state` and `x`

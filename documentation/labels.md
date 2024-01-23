@@ -3,9 +3,6 @@ slug: "labels"
 title: "Labels"
 description: "Labels give easy access to parent state"
 ---
-
-# Labels
-
 To allow more complex access across different data stores, labels are supported. In other words, you can name state containers and then access them where you need. The feature is comparable to React context and the use case is similar.
 
 ## `x-label`

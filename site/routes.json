@@ -14,19 +14,19 @@
     ],
     "scripts": [{ "name": "global" }],
     "expand": {
-      "dataSources": [
-        {
-          "name": "documentation",
-          "operation": "indexMarkdown",
-          "parameters": ["./documentation", { "skipFirstLine": true }]
-        }
-      ],
       "matchBy": {
-        "dataSource": {
-          "name": "document",
+        "indexer": {
           "operation": "indexMarkdown",
-          "parameters": ["./documentation", { "skipFirstLine": true }]
+          "parameters": ["./documentation"]
         },
+        "dataSources": [
+          {
+            "name": "document",
+            "operation": "processMarkdown",
+            "firstParameter": "path",
+            "parameters": [{ "parseHeadmatter": true }]
+          }
+        ],
         "slug": "data.slug"
       },
       "scripts": [{ "name": "global" }],

@@ -3,9 +3,6 @@ slug: "sources"
 title: "Sources"
 description: "Sources allow you to model reactive streams of data"
 ---
-
-# Sources
-
 Sources wrap browser state within a reactive stream that's then mapped to a state internally.
 
 ## `x-closest`

@@ -3,9 +3,6 @@ slug: "attributes"
 title: "Attributes"
 description: "Sidewind allows binding data to HTML attributes"
 ---
-
-# Attributes
-
 To allow binding state to HTML element attributes, a couple of helpers are provided.
 
 ## `x-attr`

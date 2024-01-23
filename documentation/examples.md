@@ -3,9 +3,6 @@ slug: "examples"
 title: "Examples"
 description: "Check these examples to understand what to achieve with Sidewind"
 ---
-
-# Examples
-
 The examples below combine directives to produce complex user interfaces and to handle specific use cases.
 
 ## Calculator

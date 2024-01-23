@@ -1,11 +1,8 @@
 ---
 slug: "ssr"
-title: "SSR"
+title: "Server-side rendering (SSR)"
 description: "Sidewind is able to hydrate its state from HTML markup"
 ---
-
-# Server-side rendering (SSR)
-
 `x-each` supports SSR out of the box (better SEO without JS enabled). When `x-ssr` is set, Sidewind will read its state from the markup thereby resuming execution. In other words, Sidewind implements a simple form of resumability.
 
 Note that this doesn't work with complex expressions for now and only direct value lookup is supported as it's possible to figure out object keys and values based on that. Also template groups aren't supported yet.
