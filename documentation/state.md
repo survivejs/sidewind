@@ -44,6 +44,20 @@ State can be a complex object:
 
 > [The calculator example](#calculator) takes this idea further and shows how to handle user interaction.
 
+## Access to globals
+
+Evaluators have access to the window and document objects:
+
+```html
+<article x-state="{ url: (new window.URL(document.location)).href }">
+  Total: <span x="state.url" />
+</article>
+```
+
+```html
+<div x="(new window.URL(document.location)).href"></div>
+```
+
 ## `x-if`
 
 Sometimes it makes sense to hide entire fragments of a HTML structure. That's where `x-if` comes in:
