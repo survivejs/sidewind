@@ -1,8 +1,8 @@
-import { marked } from "https://unpkg.com/marked@4.0.0/lib/marked.esm.js";
+import { marked } from "https://cdn.jsdelivr.net/npm/marked@4.0.0/lib/marked.esm.js";
 import { install, tw } from "https://esm.sh/@twind/core@1.1.1"; // 1.1.3 doesn't work!
-import highlight from "https://unpkg.com/@highlightjs/cdn-assets@11.9.0/es/core.min.js";
-import highlightJS from "https://unpkg.com/highlight.js@11.9.0/es/languages/javascript";
-import highlightXML from "https://unpkg.com/highlight.js@11.9.0/es/languages/xml";
+import highlight from "https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11.9.0/es/core.min.js";
+import highlightJS from "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/es/languages/javascript.js";
+import highlightXML from "https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/es/languages/xml.js";
 import { Html5Entities } from "https://deno.land/x/html_entities@v1.0/mod.js";
 import twindSetup from "../twindSetup.ts";
 
