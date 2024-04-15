@@ -16,6 +16,7 @@ function closestDirective({
     // @ts-ignore TODO: Fix the type
     evaluateClosestValue(
       element,
+      // @ts-ignore TODO: Fix the type
       evaluate(expression, {}, element).state,
       key,
       setState

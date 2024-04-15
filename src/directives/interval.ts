@@ -10,6 +10,7 @@ function intervalDirective({
   const { options = {} } = evaluate(expression, {}, element);
   // @ts-ignore TODO: Fix the type
   const evaluateValue = () =>
+    // @ts-ignore TODO: Fix the type
     setState(evaluate(expression, {}, element).state, { element });
 
   setInterval(evaluateValue, options.delay || 1000);
