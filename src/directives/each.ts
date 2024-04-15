@@ -11,7 +11,7 @@ function eachDirective({
 }: DirectiveParameters) {
   const elementState = getState(element);
   // @ts-ignore TODO: Fix the type
-  const state = evaluate(expression, elementState) || [];
+  const state = evaluate(expression, elementState, element) || [];
 
   if (!Array.isArray(state)) {
     console.error(

@@ -16,7 +16,7 @@ function attributeDirective({
       setAttribute(
         element,
         attributeName.slice(1),
-        evaluate(attribute.value, getState(element))
+        evaluate(attribute.value, getState(element), element)
       );
     }
   });

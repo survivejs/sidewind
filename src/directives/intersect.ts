@@ -9,7 +9,7 @@ function intersectDirective({
   setState,
 }: DirectiveParameters) {
   // @ts-ignore TODO: Fix the type
-  const { options = {} } = evaluate(expression);
+  const { options = {} } = evaluate(expression, {}, element);
 
   let triggered = false;
   const observer = new IntersectionObserver(
@@ -30,7 +30,7 @@ function intersectDirective({
       triggered = true;
 
       // @ts-ignore TODO: Fix the type
-      setState(evaluate(expression).state, { element });
+      setState(evaluate(expression).state, { element }, element);
 
       // Evaluate directives from the element parent to allow setting state to
       // x-intersected element itself.

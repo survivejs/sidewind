@@ -15,7 +15,7 @@ function stateDirective({
   // this could be changed to break the coupling.
   if (expression || typeof element.state === "undefined") {
     // @ts-ignore TODO: Fix the type
-    element.state = evaluate(expression, getState(element));
+    element.state = evaluate(expression, getState(element), element);
   }
 
   if (element.observer) {

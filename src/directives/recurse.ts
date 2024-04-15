@@ -10,7 +10,7 @@ function recurseDirective({
   directives,
 }: DirectiveParameters) {
   // @ts-ignore TODO: Fix the type
-  const state = evaluate(expression, getState(element));
+  const state = evaluate(expression, getState(element), element);
   let parentIndex = 0;
   let value = expression;
 

@@ -57,3 +57,12 @@ Default classes are retained as this allows more compact syntax with a fallback:
 </section>
 ```
 
+## Element access
+
+Attributes have access to the element itself through `element`:
+
+```html
+<div x-attr @title="element.textContent">Title should be foobar now</div>
+```
+
+Note that `this` points to `Window` should you need it. The same functionality is available to all evaluations.

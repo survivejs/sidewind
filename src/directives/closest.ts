@@ -10,11 +10,16 @@ function closestDirective({
   setState,
 }: DirectiveParameters) {
   // @ts-ignore TODO: Fix the type
-  const { state } = evaluate(expression);
+  const { state } = evaluate(expression, {}, element);
   const key = Object.keys(state)[0];
   const evaluateValue = () =>
     // @ts-ignore TODO: Fix the type
-    evaluateClosestValue(element, evaluate(expression).state, key, setState);
+    evaluateClosestValue(
+      element,
+      evaluate(expression, {}, element).state,
+      key,
+      setState
+    );
 
   window.addEventListener("scroll", evaluateValue);
 
