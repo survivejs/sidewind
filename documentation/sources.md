@@ -20,6 +20,29 @@ Sources wrap browser state within a reactive stream that's then mapped to a stat
 </div>
 ```
 
+## `x-scroll`
+
+`x-scroll` gives you access to the scrolling state of the viewport:
+
+```html
+<div
+  x-state="{ scrollX: 0, scrollY: 0, scrollWidth: 0, scrollHeight: 0 }"
+  x-scroll="{
+    state: {
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+      scrollWidth: document.body.scrollWidth,
+      scrollHeight: document.body.scrollHeight
+    }
+  }"
+>
+  Scroll X: <span x="state.scrollX"></span>
+  Scroll Y: <span x="state.scrollY"></span>
+  Scroll Width: <span x="state.scrollWidth"></span>
+  Scroll Height: <span x="state.scrollHeight"></span>
+</div>
+```
+
 ## `x-intersect`
 
 `x-intersect` triggers when the element is visible at the viewport. See [IntersectionObserver documentation](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver) for available options.
