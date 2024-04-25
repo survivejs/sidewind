@@ -8,9 +8,6 @@ function scrollDirective({
   evaluate,
   setState,
 }: DirectiveParameters) {
-  // @ts-ignore TODO: Fix the type
-  const { state } = evaluate(expression, {}, element);
-  const key = Object.keys(state)[0];
   const evaluateValue = () =>
     // @ts-ignore TODO: Fix the type
     evaluateScroll(
