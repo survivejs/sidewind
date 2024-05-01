@@ -1,4 +1,5 @@
-import { BindState, DirectiveParameters } from "../types";
+import { asyncEvaluate } from "../async-evaluate";
+import { DirectiveParameters } from "../types";
 
 async function valueDirective({
   element,
@@ -21,21 +22,6 @@ async function valueDirective({
     if (closestState) {
       evaluateDirectives(directives, element);
     }
-  }
-}
-
-function asyncEvaluate(expression: string, value: BindState = {}) {
-  try {
-    return Promise.resolve(
-      Function.apply(
-        null,
-        Object.keys(value).concat(`return ${expression}`)
-      )(...Object.values(value))
-    );
-  } catch (err) {
-    console.error("Failed to evaluate", expression, value, err);
-
-    return undefined;
   }
 }
 
