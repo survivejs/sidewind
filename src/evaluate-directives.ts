@@ -9,19 +9,21 @@ import evaluate from "./evaluate";
 import getState from "./get-state";
 import setState from "./set-state";
 
-function evaluateDirectives(
+async function evaluateDirectives(
   directives: Directive[],
   parent?: ExtendedHTMLElement
 ) {
-  directives.forEach(({ name, directive }) =>
-    evaluateDirective(
+  // Evaluate directives in series while resolving their values to avoid
+  // race conditions.
+  for await (const { name, directive } of directives) {
+    await evaluateDirective(
       directives,
       name,
       directive,
       parent,
       directive.evaluateFrom
-    )
-  );
+    );
+  }
 }
 
 function evaluateDirective(
