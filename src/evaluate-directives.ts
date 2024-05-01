@@ -13,12 +13,6 @@ function evaluateDirectives(
   directives: Directive[],
   parent?: ExtendedHTMLElement
 ) {
-  directives.forEach(
-    ({ directive }) =>
-      typeof directive.init === "function" &&
-      directive.init(parent || (document.body as ExtendedHTMLElement))
-  );
-
   directives.forEach(({ name, directive }) =>
     evaluateDirective(
       directives,
