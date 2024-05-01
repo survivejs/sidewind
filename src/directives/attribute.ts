@@ -1,25 +1,24 @@
+import { asyncEvaluate } from "../async-evaluate";
 import { DirectiveParameters, ExtendedHTMLElement } from "../types";
 
 const X_INITIAL_CLASS = "x-initial-class";
 
-function attributeDirective({
-  element,
-  evaluate,
-  getState,
-}: DirectiveParameters) {
+function attributeDirective({ element, getState }: DirectiveParameters) {
   const attributes = Array.from(element.attributes);
 
-  attributes.forEach((attribute) => {
-    const attributeName = attribute.nodeName;
+  return Promise.all(
+    attributes.map(async (attribute) => {
+      // @ts-ignore TODO: Fix the type
+      const attributeName = attribute.nodeName;
 
-    if (attributeName.startsWith("@")) {
-      setAttribute(
-        element,
-        attributeName.slice(1),
-        evaluate(attribute.value, getState(element), element)
-      );
-    }
-  });
+      if (attributeName.startsWith("@")) {
+        // @ts-ignore TODO: Fix the type
+        const state = await asyncEvaluate(attribute.value, getState(element));
+
+        setAttribute(element, attributeName.slice(1), state);
+      }
+    })
+  );
 }
 
 function setAttribute(
