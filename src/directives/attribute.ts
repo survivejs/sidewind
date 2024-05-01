@@ -12,8 +12,12 @@ function attributeDirective({ element, getState }: DirectiveParameters) {
       const attributeName = attribute.nodeName;
 
       if (attributeName.startsWith("@")) {
-        // @ts-ignore TODO: Fix the type
-        const state = await asyncEvaluate(attribute.value, getState(element));
+        const state = await asyncEvaluate(
+          // @ts-ignore TODO: Fix the type
+          attribute.value,
+          getState(element),
+          element
+        );
 
         setAttribute(element, attributeName.slice(1), state);
       }

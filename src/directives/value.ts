@@ -9,7 +9,7 @@ async function valueDirective({
   directives,
 }: DirectiveParameters) {
   // @ts-ignore TODO: Fix the type
-  const state = await asyncEvaluate(expression, getState(element));
+  const state = await asyncEvaluate(expression, getState(element), element);
 
   if (element.localName === "input") {
     element.value = state;

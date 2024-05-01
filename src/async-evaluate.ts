@@ -1,7 +1,13 @@
 import { BindState } from "./types";
 
-function asyncEvaluate(expression: string, value: BindState = {}) {
+function asyncEvaluate(
+  expression: string,
+  value: BindState = {},
+  element: unknown
+) {
   try {
+    value.element = element;
+
     return Promise.resolve(
       Function.apply(
         null,
