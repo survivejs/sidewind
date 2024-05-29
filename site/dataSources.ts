@@ -24,7 +24,7 @@ function init({ load }: { load: LoadApi }) {
     if (o?.parseHeadmatter) {
       const headmatter = await parseHeadmatter(filename);
 
-      return { ...headmatter, ...(await parseMarkdown(headmatter.content)) };
+      return { ...headmatter, ...parseMarkdown(headmatter.content) };
     }
 
     // Markdown also parses toc but it's not needed for now
