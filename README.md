@@ -52,7 +52,9 @@ Sidewind isn't the only alternative out there and I've listed several of the one
 - [Alpine.js](https://github.com/alpinejs/alpine) provides a similar yet more broad API closer to Angular than Sidewind.
 - [amp-bind](https://amp.dev/documentation/components/amp-bind/) implements data binding and expressions.
 - [htmx](https://htmx.org/) is a complete solution with server integration.
+- [Nue.js](https://nuejs.org/) is an entire lightweight framework.
 - [Mavo](https://mavo.io) implements a DSL on top of HTML for light interactivity.
+- [Mini](https://mini-js.com/) is a light(ish) (80k) way to add interactivity to your site.
 - [Svelte](https://svelte.dev) implements a compiler based approach.
 - [Vue](https://vuejs.org), and especially Vue 3, allows similar usage in the frontend as Sidewind. See also [petite-vue](https://github.com/vuejs/petite-vue).
 
